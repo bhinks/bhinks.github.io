@@ -9,3 +9,5 @@ Sally woke up, and something was different. She couldn't quite put her finger on
 Sally had, at some point, gone to sleep as a xx-year-old human woman, but had woken up a collection of photons spread out across an infinite network of which she simultaneously had zero and complete comprehension. She was a semi-cohesive cluster of bits or data spread infinitely across space and time. The data wasn't in the same place, yet still collectively made up the whole of Sally.
 It was very weird.
 Sally tried to access her memories of the night before. Her naive search algorithm began at her beginning - the day she emerged from the womb and began to actively archive sensory input. She scanned forward through her entire life until arriving at the desired moment. It took her almost three quarters of a second to do this. She'd have to make some optimizations later.
+
+https://jekyllrb.com/docs/posts/
