@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -64,13 +65,28 @@
         loadJSON(function(response) {
         // Parse JSON string into object
             var players = JSON.parse(response);
-            console.log(players);
+            //console.log(players);
+
+            for (var player in players) {
+                $(".player_tables").append(
+                    "<table border='1'>" +
+                    "<tr><th>Player</th><th>You Killed</th><th>Killed You</th></tr>" +
+                    "<tr><td>Test</td><td>10</td><td>3</td></tr>" +
+                    "</table>"
+                );
+            }
+
         });
     }
 
     init();
     
 </script>
+
+<div class="player_tables">
+
+</div>
+
 
 
     <footer>

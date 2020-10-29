@@ -237,8 +237,6 @@ for x in f:
                                             "weapon": "Lava", 
                                             "date": date, 
                                             "map": game_map})
-    else:
-        print(x)
 
 for player in players.keys():
     if "duration" not in players[player]["sessions"][-1].keys():
