@@ -25,26 +25,26 @@ for x in f:
     elif " ate " in x:
         player2 = grams[4][0:-2]
         players[grams[2]]["deaths"].append({ "player": player2, 
-                                            "weapon": "Rocker Launcher", 
+                                            "weapon": "Rocket Launcher", 
                                             "date": date, 
                                             "map": game_map})
         players[player2]["kills"].append({ "player": grams[2], 
-                                            "weapon": "Rocker Launcher", 
+                                            "weapon": "Rocket Launcher", 
                                             "date": date, 
                                             "map": game_map})
     elif " almost dodged " in x:
         player2 = grams[5][0:-2]
         players[grams[2]]["deaths"].append({ "player": player2, 
-                                            "weapon": "Rocker Launcher", 
+                                            "weapon": "Rocket Launcher", 
                                             "date": date, 
                                             "map": game_map})
         players[player2]["kills"].append({ "player": grams[2], 
-                                            "weapon": "Rocker Launcher", 
+                                            "weapon": "Rocket Launcher", 
                                             "date": date, 
                                             "map": game_map})
     elif " blew h" in x:
         players[grams[2]]["suicides"].append({ "player": grams[2], 
-                                            "weapon": "Rocker Launcher", 
+                                            "weapon": "Rocket Launcher", 
                                             "date": date, 
                                             "map": game_map})
     elif " was railed " in x:
