@@ -67,13 +67,21 @@
             var players = JSON.parse(response);
             //console.log(players);
 
-            for (var player in players) {
+            for (let [name, player] of Object.entries(players)) {
                 $(".player_tables").append(
+                    "<h2>" + name + "</h2>" +
                     "<table border='1'>" +
-                    "<tr><th>Player</th><th>You Killed</th><th>Killed You</th></tr>" +
-                    "<tr><td>Test</td><td>10</td><td>3</td></tr>" +
-                    "</table>"
+                    "<tr><th>Player</th><th>You Killed</th><th>Killed You</th></tr><tbody id='" + name + "-table'>"
                 );
+
+                for (let [opp_name, opp] of Object.entries(player["opponents"])) {
+                    $("#" + opp_name + "-table").append(
+                        "<tr><td>" + opp_name + "</td>" +
+                        "<td>" + opp["kills"] + "</td>" +
+                        "<td>" + opp["deaths"] + "</td></tr>"
+                    );
+                }
+                $(".player_tables").append("</tbody></table>");
             }
 
         });
