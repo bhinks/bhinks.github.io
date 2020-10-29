@@ -256,14 +256,12 @@ for player in players.keys():
     players[player]["total_minutes"] = minutes
     for killed in players[player]["kills"]:
         if killed["player"] not in players[player]["opponents"].keys():
-            players[player]["opponents"][killed["player"]]["kills"] = 1
-        else:
-            players[player]["opponents"][killed["player"]]["kills"] += 1
+            players[player]["opponents"][killed["player"]] = { "kills": 0, "deaths": 0}
+        players[player]["opponents"][killed["player"]]["kills"] += 1
     for died in players[player]["deaths"]:
         if died["player"] not in players[player]["opponents"].keys():
-            players[player]["opponents"][died["player"]]["deaths"] = 1
-        else:
-            players[player]["opponents"][died["player"]]["deaths"] += 1
+            players[player]["opponents"][died["player"]] = { "kills": 0, "deaths": 0}
+        players[player]["opponents"][died["player"]]["deaths"] += 1
 
 
 # for each player:
