@@ -13,7 +13,7 @@ for x in f:
         game_map = grams[-1]
     elif " connected" in x:
         if grams[2] not in players.keys():
-            players[grams[2]] = { "kills": [], "deaths": [], "suicides": [], "sessions": [] }
+            players[grams[2]] = { "kills": [], "deaths": [], "suicides": [], "sessions": [], "opponents": [], "weapons": [] }
         players[grams[2]]["sessions"].append({ "start": time})
     elif " disconnected" in x:
         if grams[2] in players.keys():
@@ -254,20 +254,28 @@ for player in players.keys():
     for session in players[player]["sessions"]:
         minutes += session["duration"]
     players[player]["total_minutes"] = minutes
-    # for killed in players[player]["kills"]:
-    #     players[player]["opponents"]
+    for killed in players[player]["kills"]:
+        if killed["player"] not in players[player]["opponents"].keys():
+            players[player]["opponents"][killed["player"]]["kills"] = 1
+        else:
+            players[player]["opponents"][killed["player"]]["kills"] += 1
+    for died in players[player]["deaths"]:
+        if died["player"] not in players[player]["opponents"].keys():
+            players[player]["opponents"][died["player"]]["deaths"] = 1
+        else:
+            players[player]["opponents"][died["player"]]["deaths"] += 1
 
 
-for each player:
-    total kills by player
-    total deaths by player
-    total kills by weapon
-    total deaths by weapon
+# for each player:
+#     total kills by player
+#     total deaths by player
+#     total kills by weapon
+#     total deaths by weapon
 
-for each weapon
-    total kills
-    most kills
-    most deaths
+# for each weapon
+#     total kills
+#     most kills
+#     most deaths
 
 
 with open("assets/stats.json", "w") as f:
