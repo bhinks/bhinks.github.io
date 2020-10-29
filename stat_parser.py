@@ -13,7 +13,7 @@ for x in f:
         game_map = grams[-1]
     elif " connected" in x:
         if grams[2] not in players.keys():
-            players[grams[2]] = { "kills": [], "deaths": [], "suicides": [], "sessions": [], "opponents": [], "weapons": [] }
+            players[grams[2]] = { "kills": [], "deaths": [], "suicides": [], "sessions": [], "opponents": {}, "weapons": {} }
         players[grams[2]]["sessions"].append({ "start": time})
     elif " disconnected" in x:
         if grams[2] in players.keys():
