@@ -1,0 +1,173 @@
+[2020-10-28 16:13] Logging console to logs/console.log
+[2020-10-28 16:13] Closing console log.
+[2020-10-28 16:13] Logging console to logs/console.log
+[2020-10-28 16:13] Execing q2srv.cfg
+[2020-10-28 16:13] Loaded game library from ./baseq2/gamex86_64.so
+[2020-10-28 16:13] ==== InitGame ====
+[2020-10-28 16:13] ------- Server Initialization -------
+[2020-10-28 16:13] SpawnServer: q2dm1
+[2020-10-28 16:13] 0 entities inhibited
+[2020-10-28 16:13] 0 teams with 0 entities
+[2020-10-28 16:13] -------------------------------------
+[2020-10-28 16:13] ====== Q2PRO initialized ======
+[2020-10-28 16:13] 
+[2020-10-28 16:13] q2proded r1862~4e94673, Oct 26 2020
+[2020-10-28 16:13] https://github.com/skullernet/q2pro
+[2020-10-28 16:13] 
+[2020-10-28 16:13] ninjabot[DLB] connected
+[2020-10-28 16:13] ninjabot[DLB][76.181.238.25:50819]: q2pro r1861~5917c5f Feb 17 2020 Win32 x86
+[2020-10-28 16:13] ninjabot[DLB] entered the game
+[2020-10-28 16:17] ninjabot[DLB][76.181.238.25:50819] disconnected
+[2020-10-28 16:17] ninjabot[DLB] disconnected
+[2020-10-28 16:23] Timelimit hit.
+[2020-10-28 16:32] ninjabot[DLB] connected
+[2020-10-28 16:32] ninjabot[DLB][76.181.238.25:62632]: q2pro r1861~5917c5f Feb 17 2020 Win32 x86
+[2020-10-28 16:32] ninjabot[DLB] entered the game
+[2020-10-28 16:32] ------- Server Initialization -------
+[2020-10-28 16:32] SpawnServer: q2dm2
+[2020-10-28 16:32] 0 entities inhibited
+[2020-10-28 16:32] 1 teams with 2 entities
+[2020-10-28 16:32] -------------------------------------
+[2020-10-28 16:32] ninjabot[DLB] entered the game
+[2020-10-28 16:32] ninjabot[DLB][76.181.238.25:62632] disconnected
+[2020-10-28 16:32] ninjabot[DLB] disconnected
+[2020-10-28 16:42] Timelimit hit.
+[2020-10-28 16:48] ninjabot[DLB] connected
+[2020-10-28 16:48] ninjabot[DLB][76.181.238.25:57243]: q2pro r1861~5917c5f Feb 17 2020 Win32 x86
+[2020-10-28 16:48] ninjabot[DLB] entered the game
+[2020-10-28 16:48] ------- Server Initialization -------
+[2020-10-28 16:48] SpawnServer: rocketcourt
+[2020-10-28 16:48] 0 entities inhibited
+[2020-10-28 16:48] 0 teams with 0 entities
+[2020-10-28 16:48] -------------------------------------
+[2020-10-28 16:48] ninjabot[DLB] entered the game
+[2020-10-28 16:49] Grawlix[DLB] connected
+[2020-10-28 16:49] Grawlix[DLB][75.118.29.93:63811]: q2pro r1844~51bdb22 Oct  5 2019 Win64 x86_64
+[2020-10-28 16:51] Grawlix[DLB] entered the game
+[2020-10-28 16:51] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2020-10-28 16:51] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2020-10-28 16:51] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2020-10-28 16:52] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2020-10-28 16:52] Grawlix[DLB] blew himself up.
+[2020-10-28 16:52] 7334 connected
+[2020-10-28 16:52] 7334[75.118.89.104:57030]: q2pro r1504~924ff39 Dec  3 2014 Win32 x86
+[2020-10-28 16:52] 7334 entered the game
+[2020-10-28 16:52] 7334 almost dodged Grawlix[DLB]'s rocket
+[2020-10-28 16:52] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2020-10-28 16:52] 7334 almost dodged Grawlix[DLB]'s rocket
+[2020-10-28 16:53] 7334 ate Grawlix[DLB]'s rocket
+[2020-10-28 16:53] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2020-10-28 16:53] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2020-10-28 16:54] Grawlix[DLB] ate 7334's rocket
+[2020-10-28 16:54] 7334 almost dodged ninjabot[DLB]'s rocket
+[2020-10-28 16:54] Grawlix[DLB] ate 7334's rocket
+[2020-10-28 16:54] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2020-10-28 16:54] ninjabot[DLB] blew himself up.
+[2020-10-28 16:55] ninjabot[DLB] almost dodged 7334's rocket
+[2020-10-28 16:55] Grawlix[DLB] almost dodged 7334's rocket
+[2020-10-28 16:55] 7334 blew himself up.
+[2020-10-28 16:55] 7334 ate ninjabot[DLB]'s rocket
+[2020-10-28 16:55] ninjabot[DLB] blew himself up.
+[2020-10-28 16:55] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2020-10-28 16:55] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2020-10-28 16:56] 7334 ate ninjabot[DLB]'s rocket
+[2020-10-28 16:56] ninjabot[DLB] ate 7334's rocket
+[2020-10-28 16:56] 7334 almost dodged Grawlix[DLB]'s rocket
+[2020-10-28 16:56] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2020-10-28 16:56] 7334 almost dodged Grawlix[DLB]'s rocket
+[2020-10-28 16:56] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2020-10-28 16:57] 7334 ate ninjabot[DLB]'s rocket
+[2020-10-28 16:57] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2020-10-28 16:57] ninjabot[DLB] almost dodged 7334's rocket
+[2020-10-28 16:57] Grawlix[DLB] almost dodged 7334's rocket
+[2020-10-28 16:57] ninjabot[DLB] almost dodged 7334's rocket
+[2020-10-28 16:58] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2020-10-28 16:58] ninjabot[DLB] ate 7334's rocket
+[2020-10-28 16:58] 7334 ate ninjabot[DLB]'s rocket
+[2020-10-28 16:58] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2020-10-28 16:58] 7334 almost dodged ninjabot[DLB]'s rocket
+[2020-10-28 16:58] Timelimit hit.
+[2020-10-28 16:58] ------- Server Initialization -------
+[2020-10-28 16:58] SpawnServer: aeroq2
+[2020-10-28 16:58] ED_ParseEdict: mangle is not a field
+[2020-10-28 16:58] info_intermission doesn't have a spawn function
+[2020-10-28 16:58] 0 entities inhibited
+[2020-10-28 16:58] 0 teams with 0 entities
+[2020-10-28 16:58] -------------------------------------
+[2020-10-28 16:58] ninjabot[DLB] entered the game
+[2020-10-28 16:58] Grawlix[DLB] entered the game
+[2020-10-28 16:58] 7334 entered the game
+[2020-10-28 16:58] ninjabot[DLB] was railed by Grawlix[DLB]
+[2020-10-28 16:59] Grawlix[DLB] ate 7334's rocket
+[2020-10-28 16:59] 7334 was melted by ninjabot[DLB]'s hyperblaster
+[2020-10-28 16:59] 7334 was blown away by ninjabot[DLB]'s super shotgun
+[2020-10-28 16:59] ninjabot[DLB] was shredded by 7334's shrapnel
+[2020-10-28 16:59] 7334 was blown away by ninjabot[DLB]'s super shotgun
+[2020-10-28 16:59] ninjabot[DLB] was railed by Grawlix[DLB]
+[2020-10-28 17:00] 7334 blew himself up.
+[2020-10-28 17:00] 7334 was railed by Grawlix[DLB]
+[2020-10-28 17:00] Grawlix[DLB] was melted by 7334's hyperblaster
+[2020-10-28 17:00] Grawlix[DLB] was melted by 7334's hyperblaster
+[2020-10-28 17:01] ninjabot[DLB] was melted by 7334's hyperblaster
+[2020-10-28 17:01] Grawlix[DLB] was melted by 7334's hyperblaster
+[2020-10-28 17:01] ninjabot[DLB] tried to put the pin back in.
+[2020-10-28 17:02] Grawlix[DLB] was blown away by ninjabot[DLB]'s super shotgun
+[2020-10-28 17:02] ninjabot[DLB] was railed by 7334
+[2020-10-28 17:02] ninjabot[DLB] was railed by 7334
+[2020-10-28 17:02] 7334 ate Grawlix[DLB]'s rocket
+[2020-10-28 17:03] Grawlix[DLB] almost dodged 7334's rocket
+[2020-10-28 17:03] ninjabot[DLB] ate 7334's rocket
+[2020-10-28 17:03] 7334 was shredded by Grawlix[DLB]'s shrapnel
+[2020-10-28 17:03] Grawlix[DLB] blew himself up.
+[2020-10-28 17:03] 7334 was melted by ninjabot[DLB]'s hyperblaster
+[2020-10-28 17:03] 7334 was railed by Grawlix[DLB]
+[2020-10-28 17:04] 7334 was railed by Grawlix[DLB]
+[2020-10-28 17:04] 7334 was railed by Grawlix[DLB]
+[2020-10-28 17:05] ninjabot[DLB] was cut in half by 7334's chaingun
+[2020-10-28 17:05] 7334 ate Grawlix[DLB]'s rocket
+[2020-10-28 17:05] Grawlix[DLB] was popped by ninjabot[DLB]'s grenade
+[2020-10-28 17:06] 7334 was blown away by ninjabot[DLB]'s super shotgun
+[2020-10-28 17:06] Grawlix[DLB] was blown away by ninjabot[DLB]'s super shotgun
+[2020-10-28 17:06] 7334 was blown away by ninjabot[DLB]'s super shotgun
+[2020-10-28 17:06] 7334 was railed by ninjabot[DLB]
+[2020-10-28 17:06] 7334 almost dodged Grawlix[DLB]'s rocket
+[2020-10-28 17:07] Grawlix[DLB] was railed by ninjabot[DLB]
+[2020-10-28 17:07] 7334 was railed by ninjabot[DLB]
+[2020-10-28 17:07] 7334 was railed by Grawlix[DLB]
+[2020-10-28 17:07] ninjabot[DLB] was railed by Grawlix[DLB]
+[2020-10-28 17:07] 7334 was railed by Grawlix[DLB]
+[2020-10-28 17:08] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2020-10-28 17:08] Timelimit hit.
+[2020-10-28 17:08] ------- Server Initialization -------
+[2020-10-28 17:08] SpawnServer: ztn2dm1
+[2020-10-28 17:08] ED_ParseField: couldn't parse 'skyaxis'
+[2020-10-28 17:08] 0 entities inhibited
+[2020-10-28 17:08] 0 teams with 0 entities
+[2020-10-28 17:08] -------------------------------------
+[2020-10-28 17:08] ninjabot[DLB] entered the game
+[2020-10-28 17:08] Grawlix[DLB] entered the game
+[2020-10-28 17:08] 7334 entered the game
+[2020-10-28 17:08] Grawlix[DLB][75.118.29.93:63811] disconnected
+[2020-10-28 17:08] Grawlix[DLB] disconnected
+[2020-10-28 17:08] ninjabot[DLB][76.181.238.25:57243] disconnected
+[2020-10-28 17:08] ninjabot[DLB] disconnected
+[2020-10-28 17:13] 7334[75.118.89.104:57030] disconnected
+[2020-10-28 17:13] 7334 disconnected
+[2020-10-28 17:13] 7334 connected
+[2020-10-28 17:13] 7334[75.118.89.104:57030]: q2pro r1504~924ff39 Dec  3 2014 Win32 x86
+[2020-10-28 17:13] 7334 entered the game
+[2020-10-28 17:15] 7334[75.118.89.104:57030] disconnected
+[2020-10-28 17:15] 7334 disconnected
+[2020-10-28 17:18] Timelimit hit.
+[2020-10-29 00:20] Grawlix[DLB] connected
+[2020-10-29 00:20] Grawlix[DLB][75.118.29.93:55447]: q2pro r1844~51bdb22 Oct  5 2019 Win64 x86_64
+[2020-10-29 00:20] Grawlix[DLB] entered the game
+[2020-10-29 00:20] ------- Server Initialization -------
+[2020-10-29 00:20] SpawnServer: q2dm7
+[2020-10-29 00:20] 0 entities inhibited
+[2020-10-29 00:20] 0 teams with 0 entities
+[2020-10-29 00:20] -------------------------------------
+[2020-10-29 00:20] Grawlix[DLB] entered the game
+[2020-10-29 00:27] Grawlix[DLB][75.118.29.93:55447] disconnected
+[2020-10-29 00:27] Grawlix[DLB] disconnected
+[2020-10-29 00:30] Timelimit hit.
