@@ -13,7 +13,7 @@ for x in f:
         game_map = grams[-1]
     elif " connected" in x:
         if grams[2] not in players.keys():
-            players[grams[2]] = { "kills": [], "deaths": [], "sessions": [] }
+            players[grams[2]] = { "kills": [], "deaths": [], "suicides": [], "sessions": [] }
         players[grams[2]]["sessions"].append({ "start": time})
     elif " disconnected" in x:
         if grams[2] in players.keys():
@@ -43,7 +43,7 @@ for x in f:
                                             "date": date, 
                                             "map": game_map})
     elif " blew h" in x:
-        players[grams[2]]["deaths"].append({ "player": grams[2], 
+        players[grams[2]]["suicides"].append({ "player": grams[2], 
                                             "weapon": "Rocker Launcher", 
                                             "date": date, 
                                             "map": game_map})
@@ -198,47 +198,42 @@ for x in f:
                                             "date": date, 
                                             "map": game_map})
     elif " tried to put the pin " in x:
-        players[grams[2]]["deaths"].append({ "player": grams[2], 
+        players[grams[2]]["suicides"].append({ "player": grams[2], 
                                             "weapon": "Hand Grenade", 
                                             "date": date, 
                                             "map": game_map})
     elif " tripped on h" in x:
-        players[grams[2]]["deaths"].append({ "player": grams[2], 
+        players[grams[2]]["suicides"].append({ "player": grams[2], 
                                             "weapon": "Grenade", 
                                             "date": date, 
                                             "map": game_map})
     elif " should have used a smaller " in x:
-        players[grams[2]]["deaths"].append({ "player": grams[2], 
+        players[grams[2]]["suicides"].append({ "player": grams[2], 
                                             "weapon": "BFG", 
                                             "date": date, 
                                             "map": game_map})
     elif " melted" in x:
-        players[grams[2]]["deaths"].append({ "player": grams[2], 
-                                            "weapon": "Acid", 
-                                            "date": date, 
-                                            "map": game_map})
-    elif " melted" in x:
-        players[grams[2]]["deaths"].append({ "player": grams[2], 
+        players[grams[2]]["suicides"].append({ "player": grams[2], 
                                             "weapon": "Acid", 
                                             "date": date, 
                                             "map": game_map})
     elif " cratered" in x:
-        players[grams[2]]["deaths"].append({ "player": grams[2], 
+        players[grams[2]]["suicides"].append({ "player": grams[2], 
                                             "weapon": "Fall", 
                                             "date": date, 
                                             "map": game_map})
     elif " was squished" in x:
-        players[grams[2]]["deaths"].append({ "player": grams[2], 
+        players[grams[2]]["suicides"].append({ "player": grams[2], 
                                             "weapon": "Crush", 
                                             "date": date, 
                                             "map": game_map})
     elif " sank like a rock" in x:
-        players[grams[2]]["deaths"].append({ "player": grams[2], 
+        players[grams[2]]["suicides"].append({ "player": grams[2], 
                                             "weapon": "Water", 
                                             "date": date, 
                                             "map": game_map})
     elif " does a backflip" in x:
-        players[grams[2]]["deaths"].append({ "player": grams[2], 
+        players[grams[2]]["suicides"].append({ "player": grams[2], 
                                             "weapon": "Lava", 
                                             "date": date, 
                                             "map": game_map})
@@ -252,6 +247,27 @@ for player in players.keys():
         diff = end - start
         minutes = diff.total_seconds() / 60
         players[player]["sessions"][-1]["duration"] = minutes
+    players[player]["total_kills"] = len(players[player]["kills"])
+    players[player]["total_deaths"] = len(players[player]["kills"])
+    players[player]["total_suicides"] = len(players[player]["suicides"])
+    minutes = 0
+    for session in players[player]["sessions"]:
+        minutes += session["duration"]
+    players[player]["total_minutes"] = minutes
+    # for killed in players[player]["kills"]:
+    #     players[player]["opponents"]
+
+
+for each player:
+    total kills by player
+    total deaths by player
+    total kills by weapon
+    total deaths by weapon
+
+for each weapon
+    total kills
+    most kills
+    most deaths
 
 
 with open("assets/stats.json", "w") as f:
