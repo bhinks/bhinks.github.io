@@ -72,13 +72,13 @@
                 $(".player_tables").append(
                     "<h2>" + name + "</h2>" +
                     "<table border='1'>" +
-                    "<tr><th>Player</th><th>You Killed</th><th>Killed You</th></tr><tbody id='" + name + "-table'>"
+                    "<tr><th>Player</th><th>You Killed</th><th>Killed You</th></tr><tbody id='" + name.replace('[','').replace(']','') + "-table'>"
                 );
 
                 for (let [opp_name, opp] of Object.entries(player["opponents"])) {
                     console.log(opp_name);
                     console.log(opp);
-                    $("#" + name + "-table").append(
+                    $("#" + name.replace('[','').replace(']','') + "-table").append(
                         "<tr><td>" + opp_name + "</td>" +
                         "<td>" + opp["kills"] + "</td>" +
                         "<td>" + opp["deaths"] + "</td></tr>"
