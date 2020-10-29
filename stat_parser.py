@@ -246,7 +246,7 @@ for player in players.keys():
         minutes = diff.total_seconds() / 60
         players[player]["sessions"][-1]["duration"] = minutes
     players[player]["total_kills"] = len(players[player]["kills"])
-    players[player]["total_deaths"] = len(players[player]["kills"])
+    players[player]["total_deaths"] = len(players[player]["deaths"])
     players[player]["total_suicides"] = len(players[player]["suicides"])
     minutes = 0
     for session in players[player]["sessions"]:
