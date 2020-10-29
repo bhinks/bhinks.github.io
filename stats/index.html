@@ -68,6 +68,7 @@
             //console.log(players);
 
             for (let [name, player] of Object.entries(players)) {
+                console.log(player);
                 $(".player_tables").append(
                     "<h2>" + name + "</h2>" +
                     "<table border='1'>" +
@@ -75,6 +76,8 @@
                 );
 
                 for (let [opp_name, opp] of Object.entries(player["opponents"])) {
+                    console.log(opp_name);
+                    console.log(opp);
                     $("#" + opp_name + "-table").append(
                         "<tr><td>" + opp_name + "</td>" +
                         "<td>" + opp["kills"] + "</td>" +

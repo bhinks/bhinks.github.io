@@ -256,20 +256,20 @@ for player in players.keys():
         if killed["player"] not in players[player]["opponents"].keys():
             players[player]["opponents"][killed["player"]] = { "kills": 0, "deaths": 0}
         if killed["weapon"] not in players[player]["weapons"].keys():
-            players[player]["opponents"][killed["weapon"]] = { "kills": 0, "deaths": 0}
+            players[player]["weapons"][killed["weapon"]] = { "kills": 0, "deaths": 0}
         players[player]["opponents"][killed["player"]]["kills"] += 1
-        players[player]["opponents"][killed["weapon"]]["kills"] += 1
+        players[player]["weapons"][killed["weapon"]]["kills"] += 1
     for died in players[player]["deaths"]:
         if died["player"] not in players[player]["opponents"].keys():
             players[player]["opponents"][died["player"]] = { "kills": 0, "deaths": 0}
         if died["weapon"] not in players[player]["weapons"].keys():
-            players[player]["opponents"][died["weapon"]] = { "kills": 0, "deaths": 0}
+            players[player]["weapons"][died["weapon"]] = { "kills": 0, "deaths": 0}
         players[player]["opponents"][died["player"]]["deaths"] += 1
-        players[player]["opponents"][died["weapon"]]["deaths"] += 1
+        players[player]["weapons"][died["weapon"]]["deaths"] += 1
     for died in players[player]["suicides"]:
         if died["weapon"] not in players[player]["weapons"].keys():
-            players[player]["opponents"][died["weapon"]] = { "kills": 0, "deaths": 0}
-        players[player]["opponents"][died["weapon"]]["deaths"] += 1
+            players[player]["weapons"][died["weapon"]] = { "kills": 0, "deaths": 0}
+        players[player]["weapons"][died["weapon"]]["deaths"] += 1
 
 
 
