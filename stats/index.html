@@ -68,20 +68,32 @@
             //console.log(players);
 
             for (let [name, player] of Object.entries(players)) {
-                console.log(player);
                 $(".player_tables").append(
-                    "<h2>" + name + "</h2>" +
+                    "<h2>" + name + " Opponents</h2>" +
                     "<table border='1'>" +
-                    "<tr><th>Player</th><th>You Killed</th><th>Killed You</th></tr><tbody id='" + name.replace('[','').replace(']','') + "-table'>"
+                    "<tr><th>Player</th><th>You Killed</th><th>Killed You</th></tr><tbody id='" + name.replace('[','').replace(']','') + "-otable'>"
                 );
 
                 for (let [opp_name, opp] of Object.entries(player["opponents"])) {
-                    console.log(opp_name);
-                    console.log(opp);
-                    $("#" + name.replace('[','').replace(']','') + "-table").append(
+                    $("#" + name.replace('[','').replace(']','') + "-otable").append(
                         "<tr><td>" + opp_name + "</td>" +
                         "<td>" + opp["kills"] + "</td>" +
                         "<td>" + opp["deaths"] + "</td></tr>"
+                    );
+                }
+                $(".player_tables").append("</tbody></table>");
+
+                $(".player_tables").append(
+                    "<h2>" + name + " Weapons</h2>" +
+                    "<table border='1'>" +
+                    "<tr><th>Weapon</th><th>Killed With</th><th>Killed By</th></tr><tbody id='" + name.replace('[','').replace(']','') + "-wtable'>"
+                );
+
+                for (let [weap_name, weap] of Object.entries(player["weapons"])) {
+                    $("#" + name.replace('[','').replace(']','') + "-wtable").append(
+                        "<tr><td>" + weap_name + "</td>" +
+                        "<td>" + weap["kills"] + "</td>" +
+                        "<td>" + weap["deaths"] + "</td></tr>"
                     );
                 }
                 $(".player_tables").append("</tbody></table>");
