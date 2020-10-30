@@ -149,7 +149,7 @@
                         format: '1,000'
                     },
                     yAxis: {
-                        title: 'Opponent'
+                        title: 'Opponents'
                     },
                     xAxis: {
                         title: 'Frags',
@@ -168,7 +168,7 @@
                         format: '1,000'
                     },
                     yAxis: {
-                        title: 'Weapon'
+                        title: 'Weapons'
                     },
                     xAxis: {
                         title: 'Frags',
@@ -180,13 +180,71 @@
                     }
                 };
                 var theme = {
+                    chart: {
+                        fontFamily: 'Roboto Mono',
+                        background: {
+                            color: '#282A36',
+                            opacity: 1
+                        }
+                    },
+                    title: {
+                        fontSize: 20,
+                        fontFamily: 'Verdana',
+                        fontWeight: 'bold',
+                        color: '#DDD'
+                    },
+                    xAxis: {
+                        title: {
+                            fontSize: 14,
+                            fontFamily: 'Verdana',
+                            fontWeight: 'bold',
+                            color: '#DDD'
+                        },
+                        label: {
+                            fontSize: 14,
+                            fontFamily: 'Verdana',
+                            fontWeight: 'bold',
+                            color: '#DDD'
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            fontSize: 14,
+                            fontFamily: 'Verdana',
+                            fontWeight: 'bold',
+                            color: '#DDD'
+                        },
+                        label: {
+                            fontSize: 14,
+                            fontFamily: 'Verdana',
+                            fontWeight: 'bold',
+                            color: '#DDD'
+                        }
+                    },
+                    plot: {
+                        lineColor: '#DDD'
+                    },
                     series: {
-                        colors: [
-                            '#83b14e', '#458a3f', '#295ba0', '#2a4175', '#289399',
-                            '#289399', '#617178', '#8a9a9a', '#516f7d', '#dddddd'
-                        ]
+                        colors: ['#2ed573', '#fb660a'],
+                        label: {
+                            fontSize: 14,
+                            fontFamily: 'Verdana',
+                            fontWeight: 'bold',
+                            color: '#DDD'
+                        }
+                    },
+                    legend: {
+                        label: {
+                            fontSize: 14,
+                            fontFamily: 'Verdana',
+                            fontWeight: 'bold',
+                            color: '#DDD'
+                        }
                     }
                 };
+                tui.chart.registerTheme('newTheme', theme);
+                opp_options.theme = "newTheme";
+                weap_options.theme = "newTheme";
                 tui.chart.barChart(opp_container, opp_data, opp_options);
                 tui.chart.barChart(weap_container, weap_data, weap_options);
 
