@@ -120,21 +120,21 @@ for x in f:
     elif " was popped " in x:
         player2 = grams[6][0:-2]
         players[grams[2]]["deaths"].append({ "player": player2, 
-                                            "weapon": "Grenade", 
+                                            "weapon": "Grenade Launcher", 
                                             "date": date, 
                                             "map": game_map})
         players[player2]["kills"].append({ "player": grams[2], 
-                                            "weapon": "Grenade", 
+                                            "weapon": "Grenade Launcher", 
                                             "date": date, 
                                             "map": game_map})
     elif " was shredded " in x:
         player2 = grams[6][0:-2]
         players[grams[2]]["deaths"].append({ "player": player2, 
-                                            "weapon": "Grenade", 
+                                            "weapon": "Grenade Launcher", 
                                             "date": date, 
                                             "map": game_map})
         players[player2]["kills"].append({ "player": grams[2], 
-                                            "weapon": "Grenade", 
+                                            "weapon": "Grenade Launcher", 
                                             "date": date, 
                                             "map": game_map})
     elif " saw the pretty lights " in x:
@@ -170,21 +170,21 @@ for x in f:
     elif " didn't see " in x:
         player2 = grams[5][0:-2]
         players[grams[2]]["deaths"].append({ "player": player2, 
-                                            "weapon": "Hand Grenade", 
+                                            "weapon": "Handgrenade", 
                                             "date": date, 
                                             "map": game_map})
         players[player2]["kills"].append({ "player": grams[2], 
-                                            "weapon": "Hand Grenade", 
+                                            "weapon": "Handgrenade", 
                                             "date": date, 
                                             "map": game_map})
     elif " caught " in x:
         player2 = grams[4][0:-2]
         players[grams[2]]["deaths"].append({ "player": player2, 
-                                            "weapon": "Hand Grenade", 
+                                            "weapon": "Handgrenade", 
                                             "date": date, 
                                             "map": game_map})
         players[player2]["kills"].append({ "player": grams[2], 
-                                            "weapon": "Hand Grenade", 
+                                            "weapon": "Handgrenade", 
                                             "date": date, 
                                             "map": game_map})
     elif " tried to invade " in x:
@@ -199,12 +199,12 @@ for x in f:
                                             "map": game_map})
     elif " tried to put the pin " in x:
         players[grams[2]]["suicides"].append({ "player": grams[2], 
-                                            "weapon": "Hand Grenade", 
+                                            "weapon": "Handgrenade", 
                                             "date": date, 
                                             "map": game_map})
     elif " tripped on h" in x:
         players[grams[2]]["suicides"].append({ "player": grams[2], 
-                                            "weapon": "Grenade", 
+                                            "weapon": "Grenade Launcher", 
                                             "date": date, 
                                             "map": game_map})
     elif " should have used a smaller " in x:
