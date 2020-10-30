@@ -826,3 +826,6 @@ FATAL: tty_fatal_error: write() failed: Input/output error
 [2020-10-30 02:04] P-chan connected
 [2020-10-30 02:04] P-chan[65.24.215.26:59911]: q2pro r1504~924ff39 Dec  3 2014 Win32 x86
 [2020-10-30 02:04] P-chan entered the game
+[2020-10-30 02:05] P-chan[65.24.215.26:59911] disconnected
+[2020-10-30 02:05] P-chan disconnected
+[2020-10-30 02:06] Timelimit hit.

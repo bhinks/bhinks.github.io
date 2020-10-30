@@ -15,6 +15,8 @@
   </title>
   <link rel="stylesheet" href="/assets/css/main.css">
   <script type="text/javascript" src=""></script>
+  <link rel="stylesheet" href="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.css">
+  <script src="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.js"></script>
 
   <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>OMG!stats | OMG!ninjabot</title>
@@ -70,10 +72,47 @@
 
             for (let [name, player] of Object.entries(players)) {
                 $(".player_tables").append(
-                    "<h2>" + name + " Opponents</h2>" +
-                    "<table border='1'>" +
-                    "<tr><th>Player</th><th>You Killed</th><th>Killed You</th></tr><tbody id='" + name.replace('[','').replace(']','') + "-otable'>"
+                    "<h2>" + name + "'s Opponents</h2>" +
+                    "<div id='" + name.replace('[','').replace(']','') + "-ochart'></div>"
                 );
+                var container = document.getElementById(name.replace('[','').replace(']','') + "-ochart");
+                var data = {
+                    series: player["opponents"]
+                };
+                var options = {
+                    chart: {
+                        width: 1160,
+                        height: 650,
+                        title: name + "'s Opponents",
+                        format: '1,000'
+                    },
+                    yAxis: {
+                        title: 'Opponent'
+                    },
+                    xAxis: {
+                        title: 'Frags',
+                        min: 0,
+                        max: 9000
+                    },
+                    series: {
+                        showLabel: true
+                    }
+                };
+                var theme = {
+                    series: {
+                        colors: [
+                            '#83b14e', '#458a3f', '#295ba0', '#2a4175', '#289399',
+                            '#289399', '#617178', '#8a9a9a', '#516f7d', '#dddddd'
+                        ]
+                    }
+                };
+                tui.chart.barChart(container, data, options);
+
+
+
+
+
+
 
                 for (let [opp_name, opp] of Object.entries(player["opponents"])) {
                     $("#" + name.replace('[','').replace(']','') + "-otable").append(
@@ -98,6 +137,7 @@
                     );
                 }
                 $(".player_tables").append("</tbody></table>");
+                
             }
 
         });
