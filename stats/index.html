@@ -76,25 +76,38 @@
                     "<div id='" + name.replace('[','').replace(']','') + "-ochart'></div>"
                 );
                 var container = document.getElementById(name.replace('[','').replace(']','') + "-ochart");
+                // var data = {
+                //     categories: [],
+                //     series: [
+                //         {
+                //             name: "Killed",
+                //             data: []
+                //         },
+                //         {
+                //             name: "Killed By",
+                //             data: []
+                //         }
+
+                //     ]
+                // };
+                // for (let [opp_name, opp] of Object.entries(player["opponents"])) {
+                //     data["categories"].push(opp_name);
+                //     data["series"][0]["data"].push(opp["kills"]);
+                //     data["series"][1]["data"].push(opp["deaths"]);
+                // }
                 var data = {
-                    categories: [],
+                    categories: ['June', 'July', 'Aug', 'Sep', 'Oct', 'Nov'],
                     series: [
                         {
-                            name: "Killed",
-                            data: []
+                            name: 'Budget',
+                            data: [5000, 3000, 5000, 7000, 6000, 4000]
                         },
                         {
-                            name: "Killed By",
-                            data: []
+                            name: 'Income',
+                            data: [8000, 1000, 7000, 2000, 5000, 3000]
                         }
-
                     ]
                 };
-                for (let [opp_name, opp] of Object.entries(player["opponents"])) {
-                    data["categories"].push(opp_name);
-                    data["series"][0]["data"].push(opp["kills"]);
-                    data["series"][1]["data"].push(opp["deaths"]);
-                }
                 console.log(data);
                 var options = {
                     chart: {
