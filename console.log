@@ -829,3 +829,15 @@ FATAL: tty_fatal_error: write() failed: Input/output error
 [2020-10-30 02:05] P-chan[65.24.215.26:59911] disconnected
 [2020-10-30 02:05] P-chan disconnected
 [2020-10-30 02:06] Timelimit hit.
+[2020-10-30 13:52] Grawlix[DLB] connected
+[2020-10-30 13:52] Grawlix[DLB][75.118.29.93:59606]: q2pro r1844~51bdb22 Oct  5 2019 Win64 x86_64
+[2020-10-30 13:52] Grawlix[DLB] entered the game
+[2020-10-30 13:52] ------- Server Initialization -------
+[2020-10-30 13:52] SpawnServer: q2dm1
+[2020-10-30 13:52] 0 entities inhibited
+[2020-10-30 13:52] 0 teams with 0 entities
+[2020-10-30 13:52] -------------------------------------
+[2020-10-30 13:52] Grawlix[DLB] entered the game
+[2020-10-30 13:56] Grawlix[DLB][75.118.29.93:59606] disconnected
+[2020-10-30 13:56] Grawlix[DLB] disconnected
+[2020-10-30 14:02] Timelimit hit.

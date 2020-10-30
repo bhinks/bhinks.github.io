@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <script src="/assets/jquery-ui.js"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -14,10 +15,11 @@
     OMG!stats - OMG!ninjabot
   </title>
   <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/jquery-ui.css">
   <script type="text/javascript" src=""></script>
   <link rel="stylesheet" href="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.css">
   <script src="https://uicdn.toast.com/tui.chart/latest/tui-chart-all.js"></script>
-
+  
   <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>OMG!stats | OMG!ninjabot</title>
 <meta name="generator" content="Jekyll v3.8.7" />
@@ -71,21 +73,39 @@
             //console.log(players);
 
             for (let [name, player] of Object.entries(players)) {
-
-                $(".player_tables").append(
-                    "<h2>" + name + "'s Stats</h2>" +
+                $("#tab_labels").append(
+                    "<li><a href='#" + name + "-tab'>" + name + "</a></li>"
+                );
+                $("#player_tables").append(
+                    "<div id='" + name + "-tab'>" +
                     "<table border='1'>" +
-                    "<tr><th>Total Kills</th><td>" + player["total_kills"] + "</td></tr>" +
-                    "<tr><th>Total Deaths</th><td>" + player["total_deaths"] + "</td></tr>" +
-                    "<tr><th>Total Suicides</th><td>" + player["total_suicides"] + "</td></tr>" +
-                    "<tr><th>Minutes Played</th><td>" + player["total_minutes"] + "</td></tr>" +
-                    "<tr><th>Kills Per Hour</th><td>" + player["total_kills"] / (player["total_minutes"] / 60 ) + "</td></tr>" +
-                    "<tr><th>Deaths Per Hour</th><td>" + player["total_deaths"] / (player["total_minutes"] / 60 ) + "</td></tr>" +
-                    "<tr><th>Overall KDR</th><td>" + player["total_kills"] / player["total_deaths"] + "</td></tr>" +
+                    "<tr><th>Total Kills</th><th>Total Deaths</th><th>Total Suicides</th><th>Minutes Played</th><th>Kills Per Hour</th>" +
+                    "<th>Deaths Per Hour</th><th>Overall KDR</th></tr>" +
+                    "<tr><td>" + player["total_kills"] + "</td>" +
+                    "<td>" + player["total_deaths"] + "</td>" +
+                    "<td>" + player["total_suicides"] + "</td>" +
+                    "<td>" + player["total_minutes"] + "</td>" +
+                    "<td>" + (player["total_kills"] / (player["total_minutes"] / 60 )).toFixed(2) + "</td>" +
+                    "<td>" + (player["total_deaths"] / (player["total_minutes"] / 60 )).toFixed(2) + "</td>" +
+                    "<td>" + (player["total_kills"] / player["total_deaths"]).toFixed(2) + "</td></tr>" +
                     "</table>" +
                     "<div id='" + name.replace('[','').replace(']','') + "-ochart'></div>" +
-                    "<div id='" + name.replace('[','').replace(']','') + "-wchart'></div>"
+                    "<div id='" + name.replace('[','').replace(']','') + "-wchart'></div></div>"
                 );
+                // $("#player_tables").append(
+                //     "<div id='" + name + "-tab'>" +
+                //     "<table border='1'>" +
+                //     "<tr><th>Total Kills</th><td>" + player["total_kills"] + "</td></tr>" +
+                //     "<tr><th>Total Deaths</th><td>" + player["total_deaths"] + "</td></tr>" +
+                //     "<tr><th>Total Suicides</th><td>" + player["total_suicides"] + "</td></tr>" +
+                //     "<tr><th>Minutes Played</th><td>" + player["total_minutes"] + "</td></tr>" +
+                //     "<tr><th>Kills Per Hour</th><td>" + player["total_kills"] / (player["total_minutes"] / 60 ) + "</td></tr>" +
+                //     "<tr><th>Deaths Per Hour</th><td>" + player["total_deaths"] / (player["total_minutes"] / 60 ) + "</td></tr>" +
+                //     "<tr><th>Overall KDR</th><td>" + player["total_kills"] / player["total_deaths"] + "</td></tr>" +
+                //     "</table>" +
+                //     "<div id='" + name.replace('[','').replace(']','') + "-ochart'></div>" +
+                //     "<div id='" + name.replace('[','').replace(']','') + "-wchart'></div></div>"
+                // );
                 var opp_container = document.getElementById(name.replace('[','').replace(']','') + "-ochart");
                 var weap_container = document.getElementById(name.replace('[','').replace(']','') + "-wchart");
 
@@ -247,9 +267,9 @@
                 weap_options.theme = "newTheme";
                 tui.chart.barChart(opp_container, opp_data, opp_options);
                 tui.chart.barChart(weap_container, weap_data, weap_options);
-
+                
             }
-
+            $( "#player_tables" ).tabs();
         });
     }
 
@@ -257,7 +277,9 @@
     
 </script>
 
-<div class="player_tables">
+<div id="player_tables" class="menu">
+    <ul id="tab_labels">
+    </ul>
 
 </div>
 
