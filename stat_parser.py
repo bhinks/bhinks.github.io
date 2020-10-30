@@ -232,7 +232,7 @@ for x in f:
                                             "weapon": "Water", 
                                             "date": date, 
                                             "map": game_map})
-    elif " did a backflip" in x:
+    elif " does a back flip" in x:
         players[grams[2]]["suicides"].append({ "player": grams[2], 
                                             "weapon": "Lava", 
                                             "date": date, 
