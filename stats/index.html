@@ -78,14 +78,22 @@
                 var container = document.getElementById(name.replace('[','').replace(']','') + "-ochart");
                 var data = {
                     categories: [],
-                    series: []
+                    series: [
+                        {
+                            name: "Killed",
+                            data: []
+                        },
+                        {
+                            name: "Killed By",
+                            data: []
+                        }
+
+                    ]
                 };
                 for (let [opp_name, opp] of Object.entries(player["opponents"])) {
-                    data["categories"].append(opp_name);
-                    data["series"].append({
-                        "kills": opp["kills"],
-                        "deaths": opp["deaths"]
-                    });
+                    data["categories"].push(opp_name);
+                    data["series"][0]["data"].push(opp["kills"]);
+                    data["series"][1]["data"].push(opp["deaths"]);
                 }
                 var options = {
                     chart: {
