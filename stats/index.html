@@ -77,8 +77,16 @@
                 );
                 var container = document.getElementById(name.replace('[','').replace(']','') + "-ochart");
                 var data = {
-                    series: player["opponents"]
+                    categories: [],
+                    series: []
                 };
+                for (let [opp_name, opp] of Object.entries(player["opponents"])) {
+                    data["categories"].append(opp_name);
+                    data["series"].append({
+                        "kills": opp["kills"],
+                        "deaths": opp["deaths"]
+                    });
+                }
                 var options = {
                     chart: {
                         width: 1160,
