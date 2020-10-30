@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/assets/css/main.css">
   <script type="text/javascript" src=""></script>
   <link rel="stylesheet" href="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.css">
-  <script src="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.js"></script>
+  <script src="https://uicdn.toast.com/tui.chart/latest/tui-chart-all.js"></script>
 
   <!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>OMG!stats | OMG!ninjabot</title>
@@ -71,49 +71,81 @@
             //console.log(players);
 
             for (let [name, player] of Object.entries(players)) {
-                $(".player_tables").append(
-                    "<h2>" + name + "'s Opponents</h2>" +
-                    "<div id='" + name.replace('[','').replace(']','') + "-ochart'></div>"
-                );
-                var container = document.getElementById(name.replace('[','').replace(']','') + "-ochart");
-                // var data = {
-                //     categories: [],
-                //     series: [
-                //         {
-                //             name: "Killed",
-                //             data: []
-                //         },
-                //         {
-                //             name: "Killed By",
-                //             data: []
-                //         }
 
-                //     ]
-                // };
-                // for (let [opp_name, opp] of Object.entries(player["opponents"])) {
-                //     data["categories"].push(opp_name);
-                //     data["series"][0]["data"].push(opp["kills"]);
-                //     data["series"][1]["data"].push(opp["deaths"]);
-                // }
-                var data = {
-                    categories: ['June', 'July', 'Aug', 'Sep', 'Oct', 'Nov'],
+                $(".player_tables").append(
+                    "<h2>" + name + "'s Stats</h2>" +
+                    "<table border='1'>" +
+                    "<tr><th>Total Kills</th><td>" + player["total_kills"] + "</td></tr>" +
+                    "<tr><th>Total Deaths</th><td>" + player["total_deaths"] + "</td></tr>" +
+                    "<tr><th>Total Suicides</th><td>" + player["total_suicides"] + "</td></tr>" +
+                    "<tr><th>Minutes Played</th><td>" + player["total_minutes"] + "</td></tr>" +
+                    "<tr><th>Kills Per Hour</th><td>" + player["total_kills"] / (player["total_minutes"] / 60 ) + "</td></tr>" +
+                    "<tr><th>Deaths Per Hour</th><td>" + player["total_deaths"] / (player["total_minutes"] / 60 ) + "</td></tr>" +
+                    "<tr><th>Overall KDR</th><td>" + player["total_kills"] / player["total_deaths"] + "</td></tr>" +
+                    "</table>" +
+                    "<div id='" + name.replace('[','').replace(']','') + "-ochart'></div>" +
+                    "<div id='" + name.replace('[','').replace(']','') + "-wchart'></div>"
+                );
+                var opp_container = document.getElementById(name.replace('[','').replace(']','') + "-ochart");
+                var weap_container = document.getElementById(name.replace('[','').replace(']','') + "-wchart");
+
+                var opp_data = {
+                    categories: [],
                     series: [
                         {
-                            name: 'Budget',
-                            data: [5000, 3000, 5000, 7000, 6000, 4000]
+                            name: "Killed",
+                            data: []
                         },
                         {
-                            name: 'Income',
-                            data: [8000, 1000, 7000, 2000, 5000, 3000]
+                            name: "Killed By",
+                            data: []
                         }
+
                     ]
                 };
-                console.log(data);
-                var options = {
+                var weap_data = {
+                    categories: [],
+                    series: [
+                        {
+                            name: "Killed With",
+                            data: []
+                        },
+                        {
+                            name: "Killed By",
+                            data: []
+                        }
+
+                    ]
+                };
+                var biggest = 10;
+                for (let [opp_name, opp] of Object.entries(player["opponents"])) {
+                    opp_data["categories"].push(opp_name);
+                    opp_data["series"][0]["data"].push(opp["kills"]);
+                    opp_data["series"][1]["data"].push(opp["deaths"]);
+                    if (opp["kills"] > biggest) { 
+                        biggest = opp["kills"];
+                    }
+                    if (opp["deaths"] > biggest) { 
+                        biggest = opp["deaths"];
+                    }
+                }
+                for (let [weap_name, weap] of Object.entries(player["weapons"])) {
+                    weap_data["categories"].push(weap_name);
+                    weap_data["series"][0]["data"].push(weap["kills"]);
+                    weap_data["series"][1]["data"].push(weap["deaths"]);
+                    if (weap["kills"] > biggest) { 
+                        biggest = weap["kills"];
+                    }
+                    if (weap["deaths"] > biggest) { 
+                        biggest = weap["deaths"];
+                    }
+                }
+
+                var opp_options = {
                     chart: {
                         width: 1160,
                         height: 650,
-                        title: name + "'s Opponents",
+                        title: name,
                         format: '1,000'
                     },
                     yAxis: {
@@ -122,7 +154,26 @@
                     xAxis: {
                         title: 'Frags',
                         min: 0,
-                        max: 9000
+                        max: biggest + 5
+                    },
+                    series: {
+                        showLabel: true
+                    }
+                };
+                var weap_options = {
+                    chart: {
+                        width: 1160,
+                        height: 650,
+                        title: name,
+                        format: '1,000'
+                    },
+                    yAxis: {
+                        title: 'Weapon'
+                    },
+                    xAxis: {
+                        title: 'Frags',
+                        min: 0,
+                        max: biggest + 5
                     },
                     series: {
                         showLabel: true
@@ -136,38 +187,9 @@
                         ]
                     }
                 };
-                tui.chart.barChart(container, data, options);
+                tui.chart.barChart(opp_container, opp_data, opp_options);
+                tui.chart.barChart(weap_container, weap_data, weap_options);
 
-
-
-
-
-
-
-                for (let [opp_name, opp] of Object.entries(player["opponents"])) {
-                    $("#" + name.replace('[','').replace(']','') + "-otable").append(
-                        "<tr><td>" + opp_name + "</td>" +
-                        "<td>" + opp["kills"] + "</td>" +
-                        "<td>" + opp["deaths"] + "</td></tr>"
-                    );
-                }
-                $(".player_tables").append("</tbody></table>");
-
-                $(".player_tables").append(
-                    "<h2>" + name + " Weapons</h2>" +
-                    "<table border='1'>" +
-                    "<tr><th>Weapon</th><th>Killed With</th><th>Killed By</th></tr><tbody id='" + name.replace('[','').replace(']','') + "-wtable'>"
-                );
-
-                for (let [weap_name, weap] of Object.entries(player["weapons"])) {
-                    $("#" + name.replace('[','').replace(']','') + "-wtable").append(
-                        "<tr><td>" + weap_name + "</td>" +
-                        "<td>" + weap["kills"] + "</td>" +
-                        "<td>" + weap["deaths"] + "</td></tr>"
-                    );
-                }
-                $(".player_tables").append("</tbody></table>");
-                
             }
 
         });
