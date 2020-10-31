@@ -841,3 +841,15 @@ FATAL: tty_fatal_error: write() failed: Input/output error
 [2020-10-30 13:56] Grawlix[DLB][75.118.29.93:59606] disconnected
 [2020-10-30 13:56] Grawlix[DLB] disconnected
 [2020-10-30 14:02] Timelimit hit.
+[2020-10-30 23:45] Grawlix[DLB] connected
+[2020-10-30 23:45] Grawlix[DLB][75.118.29.93:64138]: q2pro r1844~51bdb22 Oct  5 2019 Win64 x86_64
+[2020-10-30 23:45] Grawlix[DLB] entered the game
+[2020-10-30 23:45] ------- Server Initialization -------
+[2020-10-30 23:45] SpawnServer: q2dm2
+[2020-10-30 23:45] 0 entities inhibited
+[2020-10-30 23:45] 1 teams with 2 entities
+[2020-10-30 23:45] -------------------------------------
+[2020-10-30 23:45] Grawlix[DLB] entered the game
+[2020-10-30 23:46] Grawlix[DLB][75.118.29.93:64138] disconnected
+[2020-10-30 23:46] Grawlix[DLB] disconnected
+[2020-10-30 23:55] Timelimit hit.
