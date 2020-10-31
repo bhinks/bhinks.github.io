@@ -237,6 +237,36 @@ for x in f:
                                             "weapon": "Lava", 
                                             "date": date, 
                                             "map": game_map})
+records = {
+    "weapons": {
+        "Blaster": {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Shotgun":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Super Shotgun":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Machinegun":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Chaingun":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Handgrenade":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Grenade Launcher":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Rocket Launcher":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Hyperblaster":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Railgun":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "BFG":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0}
+    },
+    "maps": {
+        "q2dm1": {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "q2dm2":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "rocketcourt":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "aeroq2":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "ztn2dm1":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "ztn2dm5":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "q2dm8":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "match1":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "q2dm3":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "ztn2dm2":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "ztn2dm3":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "q2dm1mirrored":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "ztn2dm4":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0}
+    }
+}
 
 for player in players.keys():
     if "duration" not in players[player]["sessions"][-1].keys():
@@ -245,31 +275,45 @@ for player in players.keys():
         diff = end - start
         minutes = diff.total_seconds() / 60
         players[player]["sessions"][-1]["duration"] = minutes
+
     players[player]["total_kills"] = len(players[player]["kills"])
     players[player]["total_deaths"] = len(players[player]["deaths"])
     players[player]["total_suicides"] = len(players[player]["suicides"])
+    
     minutes = 0
     for session in players[player]["sessions"]:
         minutes += session["duration"]
     players[player]["total_minutes"] = minutes
+    
     for killed in players[player]["kills"]:
         if killed["player"] not in players[player]["opponents"].keys():
             players[player]["opponents"][killed["player"]] = { "kills": 0, "deaths": 0}
         if killed["weapon"] not in players[player]["weapons"].keys():
             players[player]["weapons"][killed["weapon"]] = { "kills": 0, "deaths": 0}
+        if killed["map"] not in players[player]["maps"].keys():
+            players[player]["maps"][killed["map"]] = { "kills": 0, "deaths": 0}
         players[player]["opponents"][killed["player"]]["kills"] += 1
         players[player]["weapons"][killed["weapon"]]["kills"] += 1
+        players[player]["maps"][killed["map"]]["kills"] += 1
+    
     for died in players[player]["deaths"]:
         if died["player"] not in players[player]["opponents"].keys():
             players[player]["opponents"][died["player"]] = { "kills": 0, "deaths": 0}
         if died["weapon"] not in players[player]["weapons"].keys():
             players[player]["weapons"][died["weapon"]] = { "kills": 0, "deaths": 0}
+        if died["map"] not in players[player]["maps"].keys():
+            players[player]["maps"][died["map"]] = { "kills": 0, "deaths": 0}
         players[player]["opponents"][died["player"]]["deaths"] += 1
         players[player]["weapons"][died["weapon"]]["deaths"] += 1
+        players[player]["maps"][died["map"]]["deaths"] += 1
+    
     for died in players[player]["suicides"]:
         if died["weapon"] not in players[player]["weapons"].keys():
             players[player]["weapons"][died["weapon"]] = { "kills": 0, "deaths": 0}
+        if died["map"] not in players[player]["maps"].keys():
+            players[player]["maps"][died["map"]] = { "kills": 0, "deaths": 0}
         players[player]["weapons"][died["weapon"]]["deaths"] += 1
+        players[player]["maps"][died["map"]]["deaths"] += 1
 
 
 

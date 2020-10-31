@@ -90,24 +90,13 @@
                     "<td>" + (player["total_kills"] / player["total_deaths"]).toFixed(2) + "</td></tr>" +
                     "</table>" +
                     "<div id='" + name.replace('[','').replace(']','') + "-ochart'></div>" +
-                    "<div id='" + name.replace('[','').replace(']','') + "-wchart'></div></div>"
+                    "<div id='" + name.replace('[','').replace(']','') + "-mchart'></div>" +
+                    "<div id='" + name.replace('[','').replace(']','') + "-wchart'></div></div>" 
                 );
-                // $("#player_tables").append(
-                //     "<div id='" + name + "-tab'>" +
-                //     "<table border='1'>" +
-                //     "<tr><th>Total Kills</th><td>" + player["total_kills"] + "</td></tr>" +
-                //     "<tr><th>Total Deaths</th><td>" + player["total_deaths"] + "</td></tr>" +
-                //     "<tr><th>Total Suicides</th><td>" + player["total_suicides"] + "</td></tr>" +
-                //     "<tr><th>Minutes Played</th><td>" + player["total_minutes"] + "</td></tr>" +
-                //     "<tr><th>Kills Per Hour</th><td>" + player["total_kills"] / (player["total_minutes"] / 60 ) + "</td></tr>" +
-                //     "<tr><th>Deaths Per Hour</th><td>" + player["total_deaths"] / (player["total_minutes"] / 60 ) + "</td></tr>" +
-                //     "<tr><th>Overall KDR</th><td>" + player["total_kills"] / player["total_deaths"] + "</td></tr>" +
-                //     "</table>" +
-                //     "<div id='" + name.replace('[','').replace(']','') + "-ochart'></div>" +
-                //     "<div id='" + name.replace('[','').replace(']','') + "-wchart'></div></div>"
-                // );
+
                 var opp_container = document.getElementById(name.replace('[','').replace(']','') + "-ochart");
                 var weap_container = document.getElementById(name.replace('[','').replace(']','') + "-wchart");
+                var map_container = document.getElementById(name.replace('[','').replace(']','') + "-mchart");
 
                 var opp_data = {
                     categories: [],
@@ -117,7 +106,7 @@
                             data: []
                         },
                         {
-                            name: "Killed By",
+                            name: "Died By",
                             data: []
                         }
 
@@ -131,7 +120,21 @@
                             data: []
                         },
                         {
-                            name: "Killed By",
+                            name: "Died By",
+                            data: []
+                        }
+
+                    ]
+                };
+                var map_data = {
+                    categories: [],
+                    series: [
+                        {
+                            name: "Killed On",
+                            data: []
+                        },
+                        {
+                            name: "Died On",
                             data: []
                         }
 
@@ -160,22 +163,19 @@
                         biggest = weap["deaths"];
                     }
                 }
-
-                var opp_options = {
-                    chart: {
-                        width: 1100,
-                        height: 500,
-                        format: '1,000'
-                    },
-                    xAxis: {
-                        min: 0,
-                        max: biggest + 5
-                    },
-                    series: {
-                        showLabel: true
+                for (let [map_name, gamemap] of Object.entries(player["maps"])) {
+                    map_data["categories"].push(map_name);
+                    map_data["series"][0]["data"].push(gamemap["kills"]);
+                    map_data["series"][1]["data"].push(gamemap["deaths"]);
+                    if (gamemap["kills"] > biggest) { 
+                        biggest = gamemap["kills"];
                     }
-                };
-                var weap_options = {
+                    if (gamemap["deaths"] > biggest) { 
+                        biggest = gamemap["deaths"];
+                    }
+                }
+
+                var options = {
                     chart: {
                         width: 1100,
                         height: 500,
@@ -254,9 +254,9 @@
                 };
                 tui.chart.registerTheme('newTheme', theme);
                 opp_options.theme = "newTheme";
-                weap_options.theme = "newTheme";
-                tui.chart.barChart(opp_container, opp_data, opp_options);
-                tui.chart.barChart(weap_container, weap_data, weap_options);
+                tui.chart.barChart(opp_container, opp_data, options);
+                tui.chart.barChart(weap_container, weap_data, options);
+                tui.chart.barChart(map_container, map_data, options);
                 
             }
             $( "#player_tables" ).tabs();
