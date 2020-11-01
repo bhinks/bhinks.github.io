@@ -265,7 +265,15 @@ records = {
         "ztn2dm3":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
         "q2dm1mirrored":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
         "ztn2dm4":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0}
+    },
+    "overall": {
+        "most_kills": { "player": "", "count": ""},
+        "most_deaths": { "player": "", "count": ""},
+        "most_suicides": { "player": "", "count": ""},
+        "highest_kdr": { "player": "", "count": ""},
+        "highest_kph": { "player": "", "count": ""}
     }
+
 }
 
 for player in players.keys():
@@ -277,13 +285,18 @@ for player in players.keys():
         players[player]["sessions"][-1]["duration"] = minutes
 
     players[player]["total_kills"] = len(players[player]["kills"])
-    players[player]["total_deaths"] = len(players[player]["deaths"])
+    players[player]["total_deaths"] = len(players[player]["deaths"]) + len(players[player]["suicides"])
     players[player]["total_suicides"] = len(players[player]["suicides"])
     
     minutes = 0
     for session in players[player]["sessions"]:
         minutes += session["duration"]
     players[player]["total_minutes"] = minutes
+
+    players[player]["total_kdr"] = format((players[player]["total_kills"] / players[player]["total_deaths"]), '.2f')
+    players[player]["total_kph"] = format((players[player]["total_kills"] / (players[player]["total_minutes"] / 60 ), '.2f'))
+    players[player]["total_dph"] = format((players[player]["total_deaths"] / (players[player]["total_minutes"] / 60 ), '.2f'))
+
     
     for killed in players[player]["kills"]:
         if killed["player"] not in players[player]["opponents"].keys():

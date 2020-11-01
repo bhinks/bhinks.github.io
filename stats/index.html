@@ -85,9 +85,9 @@
                     "<td>" + player["total_deaths"] + "</td>" +
                     "<td>" + player["total_suicides"] + "</td>" +
                     "<td>" + player["total_minutes"] + "</td>" +
-                    "<td>" + (player["total_kills"] / (player["total_minutes"] / 60 )).toFixed(2) + "</td>" +
-                    "<td>" + (player["total_deaths"] / (player["total_minutes"] / 60 )).toFixed(2) + "</td>" +
-                    "<td>" + (player["total_kills"] / player["total_deaths"]).toFixed(2) + "</td></tr>" +
+                    "<td>" + player["total_kph"] + "</td>" +
+                    "<td>" + player["total_dph"] + "</td>" +
+                    "<td>" + player["total_kdr"] + "</td></tr>" +
                     "</table>" +
                     "<div id='" + name.replace('[','').replace(']','') + "-ochart'></div>" +
                     "<div id='" + name.replace('[','').replace(']','') + "-mchart'></div>" +
