@@ -296,22 +296,20 @@ for player in players.keys():
     players[player]["total_kph"] = format((players[player]["total_kills"] / (players[player]["total_minutes"] / 60 )), '.2f')
     players[player]["total_dph"] = format((players[player]["total_deaths"] / (players[player]["total_minutes"] / 60 )), '.2f')
 
-    print(player[players]["total_kills"]);
-    print(records["overall"]["most_kills"]["count"]);
-    if player[players]["total_kills"] >= records["overall"]["most_kills"]["count"]:
-        records["overall"]["most_kills"]["count"] = player[players]["total_kills"]
+    if players[player]["total_kills"] >= records["overall"]["most_kills"]["count"]:
+        records["overall"]["most_kills"]["count"] = players[player]["total_kills"]
         records["overall"]["most_kills"]["player"] = player
-    if player[players]["total_deaths"] >= records["overall"]["most_deaths"]["count"]:
-        records["overall"]["most_deaths"]["count"] = player[players]["total_deaths"]
+    if players[player]["total_deaths"] >= records["overall"]["most_deaths"]["count"]:
+        records["overall"]["most_deaths"]["count"] = players[player]["total_deaths"]
         records["overall"]["most_deaths"]["player"] = player
-    if player[players]["total_suicides"] >= records["overall"]["most_suicides"]["count"]:
-        records["overall"]["most_suicides"]["count"] = player[players]["total_suicides"]
+    if players[player]["total_suicides"] >= records["overall"]["most_suicides"]["count"]:
+        records["overall"]["most_suicides"]["count"] = players[player]["total_suicides"]
         records["overall"]["most_suicides"]["player"] = player
-    if player[players]["total_kdr"] >= records["overall"]["highest_kdr"]["count"]:
-        records["overall"]["highest_kdr"]["count"] = player[players]["total_kdr"]
+    if players[player]["total_kdr"] >= records["overall"]["highest_kdr"]["count"]:
+        records["overall"]["highest_kdr"]["count"] = players[player]["total_kdr"]
         records["overall"]["highest_kdr"]["player"] = player
-    if player[players]["total_kph"] >= records["overall"]["highest_kph"]["count"]:
-        records["overall"]["highest_kph"]["count"] = player[players]["total_kph"]
+    if players[player]["total_kph"] >= records["overall"]["highest_kph"]["count"]:
+        records["overall"]["highest_kph"]["count"] = players[player]["total_kph"]
         records["overall"]["highest_kph"]["player"] = player
 
     for killed in players[player]["kills"]:
