@@ -69,10 +69,23 @@
     function init() {
         loadJSON(function(response) {
         // Parse JSON string into object
-            var players = JSON.parse(response);
+            var stat_data = JSON.parse(response);
+            var players = stat_data["players"]
+            var records = stat_data["records"]
             //console.log(players);
+            $("#record_tables").append(
+                "<table border='1'>" +
+                "<tr><th>Most Kills</th><th>Most Deaths</th><th>Most Suicides</th><th>Highest KDR</th><th>Highest KPH</th></tr>" +
+                "<tr><td>" + records["most_kills"] + "</td>" +
+                "<td>" + records["most_deaths"] + "</td>" +
+                "<td>" + records["most_suicides"] + "</td>" +
+                "<td>" + records["highest_kdr"] + "</td>" +
+                "<td>" + records["highest_kph"] + "</td></tr>" +
+                "</table><br/>" 
+            );
 
             for (let [name, player] of Object.entries(players)) {
+                
                 $("#tab_labels").append(
                     "<li><a href='#" + name + "-tab'>" + name + "</a></li>"
                 );
@@ -266,6 +279,9 @@
     init();
     
 </script>
+
+<div id="record_tables">
+</div>
 
 <div id="player_tables" class="menu">
     <ul id="tab_labels">
