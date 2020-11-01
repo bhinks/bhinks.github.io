@@ -249,7 +249,12 @@ records = {
         "Rocket Launcher":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
         "Hyperblaster":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
         "Railgun":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
-        "BFG":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0}
+        "BFG":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Acid":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Lava":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Crush":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Fall":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "Water":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
     },
     "maps": {
         "q2dm1": {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
