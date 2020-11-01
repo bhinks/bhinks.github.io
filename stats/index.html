@@ -70,8 +70,8 @@
         loadJSON(function(response) {
         // Parse JSON string into object
             var stat_data = JSON.parse(response);
-            var players = stat_data["players"]
-            var records = stat_data["records"]
+            var players = stat_data["players"];
+            var records = stat_data["records"];
             //console.log(players);
             $("#record_tables").append(
                 "<table border='1'>" +
