@@ -305,10 +305,10 @@ for player in players.keys():
     if players[player]["total_suicides"] >= records["overall"]["most_suicides"]["count"]:
         records["overall"]["most_suicides"]["count"] = players[player]["total_suicides"]
         records["overall"]["most_suicides"]["player"] = player
-    if players[player]["total_kdr"] >= float(records["overall"]["highest_kdr"]["count"]):
+    if float(players[player]["total_kdr"]) >= float(records["overall"]["highest_kdr"]["count"]):
         records["overall"]["highest_kdr"]["count"] = players[player]["total_kdr"]
         records["overall"]["highest_kdr"]["player"] = player
-    if players[player]["total_kph"] >= float(records["overall"]["highest_kph"]["count"]):
+    if float(players[player]["total_kph"]) >= float(records["overall"]["highest_kph"]["count"]):
         records["overall"]["highest_kph"]["count"] = players[player]["total_kph"]
         records["overall"]["highest_kph"]["player"] = player
 
