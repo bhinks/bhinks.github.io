@@ -294,8 +294,8 @@ for player in players.keys():
     players[player]["total_minutes"] = minutes
 
     players[player]["total_kdr"] = format((players[player]["total_kills"] / players[player]["total_deaths"]), '.2f')
-    players[player]["total_kph"] = format((players[player]["total_kills"] / (players[player]["total_minutes"] / 60 ), '.2f'))
-    players[player]["total_dph"] = format((players[player]["total_deaths"] / (players[player]["total_minutes"] / 60 ), '.2f'))
+    players[player]["total_kph"] = format((players[player]["total_kills"] / (players[player]["total_minutes"] / 60 )), '.2f')
+    players[player]["total_dph"] = format((players[player]["total_deaths"] / (players[player]["total_minutes"] / 60 )), '.2f')
 
     if player[players]["total_kills"] >= records["overall"]["most_kills"]["count"]:
         records["overall"]["most_kills"]["count"] = player[players]["total_kills"]
