@@ -347,7 +347,7 @@ for player in players.keys():
         players[player]["maps"][died["map"]]["deaths"] += 1
         if players[player]["weapons"][died["weapon"]]["deaths"] > records["weapons"][died["weapon"]]["deaths_count"]:
             records["weapons"][died["weapon"]]["deaths_player"] = player
-            records["weapons"][died["weapon"]]["deaths_count"] = players[player]["weapons"][died["weapon"]]["kills"]
+            records["weapons"][died["weapon"]]["deaths_count"] = players[player]["weapons"][died["weapon"]]["deaths"]
         if players[player]["maps"][died["map"]]["deaths"] > records["maps"][died["map"]]["deaths_count"]:
             records["maps"][died["map"]]["deaths_player"] = player
             records["maps"][died["map"]]["deaths_count"] = players[player]["maps"][died["map"]]["deaths"]
@@ -361,7 +361,7 @@ for player in players.keys():
         players[player]["maps"][died["map"]]["deaths"] += 1
         if players[player]["weapons"][died["weapon"]]["deaths"] > records["weapons"][died["weapon"]]["deaths_count"]:
             records["weapons"][died["weapon"]]["deaths_player"] = player
-            records["weapons"][died["weapon"]]["deaths_count"] = players[player]["weapons"][died["weapon"]]["kills"]
+            records["weapons"][died["weapon"]]["deaths_count"] = players[player]["weapons"][died["weapon"]]["deaths"]
         if players[player]["maps"][died["map"]]["deaths"] > records["maps"][died["map"]]["deaths_count"]:
             records["maps"][died["map"]]["deaths_player"] = player
             records["maps"][died["map"]]["deaths_count"] = players[player]["maps"][died["map"]]["deaths"]
