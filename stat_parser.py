@@ -257,6 +257,7 @@ records = {
         "rocketcourt":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
         "aeroq2":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
         "ztn2dm1":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
+        "q2dm7":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
         "ztn2dm5":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
         "q2dm8":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
         "match1":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0},
@@ -322,6 +323,10 @@ for player in players.keys():
         players[player]["opponents"][killed["player"]]["kills"] += 1
         players[player]["weapons"][killed["weapon"]]["kills"] += 1
         players[player]["maps"][killed["map"]]["kills"] += 1
+        if players[player]["weapons"][killed["weapon"]]["kills"] > records["overall"]["weapons"][killed["weapon"]]["kills_count"]:
+            records["overall"]["weapons"][killed["weapon"]]["kills_player"] = player
+        if players[player]["weapons"][killed["weapon"]]["kills"] > records["overall"]["maps"][killed["map"]]["kills_count"]:
+            records["overall"]["maps"][killed["map"]]["kills_player"] = player
     
     for died in players[player]["deaths"]:
         if died["player"] not in players[player]["opponents"].keys():
@@ -333,6 +338,10 @@ for player in players.keys():
         players[player]["opponents"][died["player"]]["deaths"] += 1
         players[player]["weapons"][died["weapon"]]["deaths"] += 1
         players[player]["maps"][died["map"]]["deaths"] += 1
+        if players[player]["weapons"][died["weapon"]]["deaths"] > records["overall"]["weapons"][died["weapon"]["deaths_count"]:
+            records["overall"]["weapons"][died["weapon"]]["deaths_player"] = player
+        if players[player]["maps"][died["map"]]["deaths"] > records["overall"]["maps"][died["map"]]["deaths_count"]:
+            records["overall"]["maps"][died["map"]]["deaths_player"] = player
     
     for died in players[player]["suicides"]:
         if died["weapon"] not in players[player]["weapons"].keys():
@@ -341,7 +350,10 @@ for player in players.keys():
             players[player]["maps"][died["map"]] = { "kills": 0, "deaths": 0}
         players[player]["weapons"][died["weapon"]]["deaths"] += 1
         players[player]["maps"][died["map"]]["deaths"] += 1
-
+        if players[player]["weapons"][died["weapon"]]["deaths"] > records["overall"]["weapons"][died["weapon"]["deaths_count"]:
+            records["overall"]["weapons"][died["weapon"]["deaths_player"] = player
+        if players[player]["maps"][died["map"]]["deaths"] > records["overall"]["maps"][died["map"]["deaths_count"]:
+            records["overall"]["maps"][died["map"]["deaths_player"] = player
 
 
 with open("assets/stats.json", "w") as f:

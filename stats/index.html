@@ -76,12 +76,28 @@
             $("#record_tables").append(
                 "<table border='1'>" +
                 "<tr><th>Most Kills</th><th>Most Deaths</th><th>Most Suicides</th><th>Highest KDR</th><th>Highest KPH</th></tr>" +
-                "<tr><td>" + records["overall"]["most_kills"]["player"] + "(" + records["overall"]["most_kills"]["count"] + ")</td>" +
-                "<td>" + records["overall"]["most_deaths"]["player"] + "(" + records["overall"]["most_deaths"]["count"] + ")</td>" +
-                "<td>" + records["overall"]["most_suicides"]["player"] + "(" + records["overall"]["most_suicides"]["count"] + ")</td>" +
-                "<td>" + records["overall"]["highest_kdr"]["player"] + "(" + records["overall"]["highest_kdr"]["count"] + ")</td>" +
-                "<td>" + records["overall"]["highest_kph"]["player"] + "(" + records["overall"]["highest_kph"]["count"] + ")</td></tr>" +
+                "<tr><td>" + records["overall"]["most_kills"]["player"] + "<br/>(" + records["overall"]["most_kills"]["count"] + ")</td>" +
+                "<td>" + records["overall"]["most_deaths"]["player"] + "<br/>(" + records["overall"]["most_deaths"]["count"] + ")</td>" +
+                "<td>" + records["overall"]["most_suicides"]["player"] + "<br/>(" + records["overall"]["most_suicides"]["count"] + ")</td>" +
+                "<td>" + records["overall"]["highest_kdr"]["player"] + "<br/>(" + records["overall"]["highest_kdr"]["count"] + ")</td>" +
+                "<td>" + records["overall"]["highest_kph"]["player"] + "<br/>(" + records["overall"]["highest_kph"]["count"] + ")</td></tr>" +
                 "</table><br/>" 
+            );
+
+            $("#record_tables").append(
+                "<table border='1'>" +
+                "<tr><th></th><th>Blaster</th><th>Shotgun</th><th>Super Shotgun</th><th>Machinegun</th><th>Chaingun</th><th>Handgrenade</th><th>Grenade Launcher</th><th>Rocket Launcher</th><th>Hyperblaster</th><th>Railgun</th><th>BFG</th></tr>" +
+                "<tr><td>Kills</td>" +
+                "</tr><tr><td>Deaths</td>" +
+                "</tr></table><br/>" 
+            );
+
+            $("#record_tables").append(
+                "<table border='1'>" +
+                "<tr><th></th><th>q2dm1</th><th>q2dm2</th><th>rocketcourt</th><th>aeroq2</th><th>ztn2dm1</th><th>q2dm7</th><th>ztn2dm5</th><th>q2dm8</th><th>match1</th><th>q2dm3</th><th>ztn2dm2</th><th>ztn2dm3</th><th>q2dm1mirrored</th><th>ztn2dm4</th></tr>" +
+                "<tr><td>Kills</td>" +
+                "</tr><tr><td>Deaths</td>" +
+                "</tr></table><br/>" 
             );
 
             for (let [name, player] of Object.entries(players)) {
