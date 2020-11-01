@@ -330,8 +330,10 @@ for player in players.keys():
         players[player]["maps"][killed["map"]]["kills"] += 1
         if players[player]["weapons"][killed["weapon"]]["kills"] > records["weapons"][killed["weapon"]]["kills_count"]:
             records["weapons"][killed["weapon"]]["kills_player"] = player
-        if players[player]["weapons"][killed["weapon"]]["kills"] > records["maps"][killed["map"]]["kills_count"]:
+            records["weapons"][killed["weapon"]]["kills_count"] = players[player]["weapons"][killed["weapon"]]["kills"]
+        if players[player]["maps"][killed["map"]]["kills"] > records["maps"][killed["map"]]["kills_count"]:
             records["maps"][killed["map"]]["kills_player"] = player
+            records["maps"][killed["map"]]["kills_count"] = players[player]["maps"][killed["map"]]["kills"]
     
     for died in players[player]["deaths"]:
         if died["player"] not in players[player]["opponents"].keys():
@@ -345,8 +347,10 @@ for player in players.keys():
         players[player]["maps"][died["map"]]["deaths"] += 1
         if players[player]["weapons"][died["weapon"]]["deaths"] > records["weapons"][died["weapon"]]["deaths_count"]:
             records["weapons"][died["weapon"]]["deaths_player"] = player
+            records["weapons"][died["weapon"]]["deaths_count"] = players[player]["weapons"][died["weapon"]]["kills"]
         if players[player]["maps"][died["map"]]["deaths"] > records["maps"][died["map"]]["deaths_count"]:
             records["maps"][died["map"]]["deaths_player"] = player
+            records["maps"][died["map"]]["deaths_count"] = players[player]["maps"][died["map"]]["kills"]
     
     for died in players[player]["suicides"]:
         if died["weapon"] not in players[player]["weapons"].keys():
@@ -357,8 +361,10 @@ for player in players.keys():
         players[player]["maps"][died["map"]]["deaths"] += 1
         if players[player]["weapons"][died["weapon"]]["deaths"] > records["weapons"][died["weapon"]]["deaths_count"]:
             records["weapons"][died["weapon"]]["deaths_player"] = player
+            records["weapons"][died["weapon"]]["deaths_count"] = players[player]["weapons"][died["weapon"]]["kills"]
         if players[player]["maps"][died["map"]]["deaths"] > records["maps"][died["map"]]["deaths_count"]:
             records["maps"][died["map"]]["deaths_player"] = player
+            records["maps"][died["map"]]["deaths_count"] = players[player]["maps"][died["map"]]["kills"]
 
 
 with open("assets/stats.json", "w") as f:
