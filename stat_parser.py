@@ -267,11 +267,11 @@ records = {
         "ztn2dm4":  {"kills_player": "", "kills_count": 0, "deaths_player": "", "deaths_count": 0}
     },
     "overall": {
-        "most_kills": { "player": "", "count": ""},
-        "most_deaths": { "player": "", "count": ""},
-        "most_suicides": { "player": "", "count": ""},
-        "highest_kdr": { "player": "", "count": ""},
-        "highest_kph": { "player": "", "count": ""}
+        "most_kills": { "player": "", "count": 0},
+        "most_deaths": { "player": "", "count": 0},
+        "most_suicides": { "player": "", "count": 0},
+        "highest_kdr": { "player": "", "count": 0},
+        "highest_kph": { "player": "", "count": 0}
     }
 
 }
