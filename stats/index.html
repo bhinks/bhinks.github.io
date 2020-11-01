@@ -76,11 +76,11 @@
             $("#record_tables").append(
                 "<table border='1'>" +
                 "<tr><th>Most Kills</th><th>Most Deaths</th><th>Most Suicides</th><th>Highest KDR</th><th>Highest KPH</th></tr>" +
-                "<tr><td>" + records["most_kills"] + "</td>" +
-                "<td>" + records["most_deaths"] + "</td>" +
-                "<td>" + records["most_suicides"] + "</td>" +
-                "<td>" + records["highest_kdr"] + "</td>" +
-                "<td>" + records["highest_kph"] + "</td></tr>" +
+                "<tr><td>" + records["most_kills"]["player"] + "(" + records["most_kills"]["count"] + ")</td>" +
+                "<td>" + records["most_deaths"]["player"] + "(" + records["most_deaths"]["count"] + ")</td>" +
+                "<td>" + records["most_suicides"]["player"] + "(" + records["most_suicides"]["count"] + ")</td>" +
+                "<td>" + records["highest_kdr"]["player"] + "(" + records["highest_kdr"]["count"] + ")</td>" +
+                "<td>" + records["highest_kph"]["player"] + "(" + records["highest_kph"]["count"] + ")</td></tr>" +
                 "</table><br/>" 
             );
 
