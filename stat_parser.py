@@ -298,7 +298,10 @@ for player in players.keys():
         minutes += session["duration"]
     players[player]["total_minutes"] = minutes
 
-    players[player]["total_kdr"] = format((players[player]["total_kills"] / players[player]["total_deaths"]), '.2f')
+    if players[player]["total_deaths"] == 0:
+        players[player]["total_kdr"] = format(players[player]["total_kills"], '.2f')
+    else:
+        players[player]["total_kdr"] = format((players[player]["total_kills"] / players[player]["total_deaths"]), '.2f')    
     players[player]["total_kph"] = format((players[player]["total_kills"] / (players[player]["total_minutes"] / 60 )), '.2f')
     players[player]["total_dph"] = format((players[player]["total_deaths"] / (players[player]["total_minutes"] / 60 )), '.2f')
 
