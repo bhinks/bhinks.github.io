@@ -853,3 +853,34 @@ FATAL: tty_fatal_error: write() failed: Input/output error
 [2020-10-30 23:46] Grawlix[DLB][75.118.29.93:64138] disconnected
 [2020-10-30 23:46] Grawlix[DLB] disconnected
 [2020-10-30 23:55] Timelimit hit.
+[2020-11-02 22:50] watchout stoney connected
+[2020-11-02 22:50] watchout stoney[24.89.212.183:27901]: 3.20 x86 Oct 16 1998 Win32 RELEASE
+[2020-11-02 22:51] watchout stoney entered the game
+[2020-11-02 22:51] ------- Server Initialization -------
+[2020-11-02 22:51] SpawnServer: rocketcourt
+[2020-11-02 22:51] 0 entities inhibited
+[2020-11-02 22:51] 0 teams with 0 entities
+[2020-11-02 22:51] -------------------------------------
+[2020-11-02 22:51] watchout stoney entered the game
+[2020-11-02 22:57] watchout stoney[24.89.212.183:27901] disconnected
+[2020-11-02 22:57] watchout stoney disconnected
+[2020-11-02 23:00] watchout stoney connected
+[2020-11-02 23:00] watchout stoney[24.89.212.183:27901]: 3.20 x86 Oct 16 1998 Win32 RELEASE
+[2020-11-02 23:00] watchout stoney entered the game
+[2020-11-02 23:00] watchout stoney[24.89.212.183:27901] disconnected
+[2020-11-02 23:00] watchout stoney disconnected
+[2020-11-02 23:01] Timelimit hit.
+[2020-11-02 23:02] watchout stoney connected
+[2020-11-02 23:02] watchout stoney[24.89.212.183:27901]: 3.20 x86 Oct 16 1998 Win32 RELEASE
+[2020-11-02 23:02] watchout stoney entered the game
+[2020-11-02 23:02] ------- Server Initialization -------
+[2020-11-02 23:02] SpawnServer: aeroq2
+[2020-11-02 23:02] ED_ParseEdict: mangle is not a field
+[2020-11-02 23:02] info_intermission doesn't have a spawn function
+[2020-11-02 23:02] 0 entities inhibited
+[2020-11-02 23:02] 0 teams with 0 entities
+[2020-11-02 23:02] -------------------------------------
+[2020-11-02 23:03] watchout stoney entered the game
+[2020-11-02 23:05] watchout stoney[24.89.212.183:27901] disconnected
+[2020-11-02 23:05] watchout stoney disconnected
+[2020-11-02 23:12] Timelimit hit.
