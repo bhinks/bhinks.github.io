@@ -884,3 +884,519 @@ FATAL: tty_fatal_error: write() failed: Input/output error
 [2020-11-02 23:05] watchout stoney[24.89.212.183:27901] disconnected
 [2020-11-02 23:05] watchout stoney disconnected
 [2020-11-02 23:12] Timelimit hit.
+[2021-02-05 20:58] ninjabot[DLB] connected
+[2021-02-05 20:58] ninjabot[DLB][76.181.238.25:50991]: q2pro r1861~5917c5f Feb 17 2020 Win32 x86
+[2021-02-05 20:58] ninjabot[DLB] entered the game
+[2021-02-05 20:58] ------- Server Initialization -------
+[2021-02-05 20:58] SpawnServer: ztn2dm1
+[2021-02-05 20:58] ED_ParseField: couldn't parse 'skyaxis'
+[2021-02-05 20:58] 0 entities inhibited
+[2021-02-05 20:58] 0 teams with 0 entities
+[2021-02-05 20:58] -------------------------------------
+[2021-02-05 20:58] ninjabot[DLB] entered the game
+[2021-02-05 21:02] ninjabot[DLB][76.181.238.25:50991] disconnected
+[2021-02-05 21:02] ninjabot[DLB] disconnected
+[2021-02-05 21:08] Timelimit hit.
+[2021-03-26 18:26] ninjabot[DLB] connected
+[2021-03-26 18:26] ninjabot[DLB][76.181.238.25:49314]: q2pro r1861~5917c5f Feb 17 2020 Win32 x86
+[2021-03-26 18:26] ninjabot[DLB] entered the game
+[2021-03-26 18:26] ------- Server Initialization -------
+[2021-03-26 18:26] SpawnServer: q2dm7
+[2021-03-26 18:26] 0 entities inhibited
+[2021-03-26 18:26] 0 teams with 0 entities
+[2021-03-26 18:26] -------------------------------------
+[2021-03-26 18:26] ninjabot[DLB] entered the game
+[2021-03-26 18:26] ninjabot[DLB][76.181.238.25:49314] disconnected
+[2021-03-26 18:26] ninjabot[DLB] disconnected
+[2021-03-26 18:36] Timelimit hit.
+[2021-03-27 00:05] Grawlix[DLB] connected
+[2021-03-27 00:05] Grawlix[DLB][38.98.166.50:53384]: q2pro r1844~51bdb22 Oct  5 2019 Win64 x86_64
+[2021-03-27 00:05] Grawlix[DLB] entered the game
+[2021-03-27 00:05] ------- Server Initialization -------
+[2021-03-27 00:05] SpawnServer: ztn2dm5
+[2021-03-27 00:05] 0 entities inhibited
+[2021-03-27 00:05] 0 teams with 0 entities
+[2021-03-27 00:05] -------------------------------------
+[2021-03-27 00:05] Grawlix[DLB] entered the game
+[2021-03-27 00:12] Grawlix[DLB]: mapname 
+[2021-03-27 00:12] Grawlix[DLB]: mapname 
+[2021-03-27 00:12] Grawlix[DLB]: .mapname 
+[2021-03-27 00:12] Grawlix[DLB]: what is the name of this map, Siri?
+[2021-03-27 00:15] Timelimit hit.
+[2021-03-27 00:15] ------- Server Initialization -------
+[2021-03-27 00:15] SpawnServer: q2dm8
+[2021-03-27 00:15] 0 entities inhibited
+[2021-03-27 00:15] 2 teams with 5 entities
+[2021-03-27 00:15] -------------------------------------
+[2021-03-27 00:15] Grawlix[DLB] entered the game
+[2021-03-27 00:15] Grawlix[DLB][38.98.166.50:53384] disconnected
+[2021-03-27 00:15] Grawlix[DLB] disconnected
+[2021-03-27 00:25] Timelimit hit.
+[2021-03-27 00:32] ninjabot[DLB] connected
+[2021-03-27 00:32] Grawlix[DLB] connected
+[2021-03-27 00:32] ninjabot[DLB][76.181.238.25:51903]: q2pro r1861~5917c5f Feb 17 2020 Win32 x86
+[2021-03-27 00:32] ninjabot[DLB] entered the game
+[2021-03-27 00:32] Grawlix[DLB][75.118.29.93:52871]: q2pro r1844~51bdb22 Oct  5 2019 Win64 x86_64
+[2021-03-27 00:32] Grawlix[DLB] entered the game
+[2021-03-27 00:32] ------- Server Initialization -------
+[2021-03-27 00:32] SpawnServer: match1
+[2021-03-27 00:32] 0 entities inhibited
+[2021-03-27 00:32] 0 teams with 0 entities
+[2021-03-27 00:32] -------------------------------------
+[2021-03-27 00:32] Grawlix[DLB] entered the game
+[2021-03-27 00:32] ninjabot[DLB] entered the game
+[2021-03-27 00:32] Grawlix[DLB] was cut in half by ninjabot[DLB]'s chaingun
+[2021-03-27 00:33] Grawlix[DLB] does a back flip into the lava.
+[2021-03-27 00:34] ninjabot[DLB] does a back flip into the lava.
+[2021-03-27 00:34] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 00:34] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 00:35] ninjabot[DLB] was blown away by Grawlix[DLB]'s super shotgun
+[2021-03-27 00:36] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 00:36] Grawlix[DLB] does a back flip into the lava.
+[2021-03-27 00:37] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 00:37] ninjabot[DLB] was melted by Grawlix[DLB]'s hyperblaster
+[2021-03-27 00:37] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 00:37] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 00:38] Grawlix[DLB] does a back flip into the lava.
+[2021-03-27 00:39] ninjabot[DLB] does a back flip into the lava.
+[2021-03-27 00:39] ninjabot[DLB] was cut in half by Grawlix[DLB]'s chaingun
+[2021-03-27 00:41] ninjabot[DLB] does a back flip into the lava.
+[2021-03-27 00:42] Timelimit hit.
+[2021-03-27 00:42] ------- Server Initialization -------
+[2021-03-27 00:42] SpawnServer: q2dm3
+[2021-03-27 00:42] 0 entities inhibited
+[2021-03-27 00:42] 1 teams with 2 entities
+[2021-03-27 00:42] -------------------------------------
+[2021-03-27 00:42] ninjabot[DLB] entered the game
+[2021-03-27 00:42] Grawlix[DLB] entered the game
+[2021-03-27 00:43] Grawlix[DLB] does a back flip into the lava.
+[2021-03-27 00:43] Grawlix[DLB] was melted by ninjabot[DLB]'s hyperblaster
+[2021-03-27 00:44] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 00:44] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 00:45] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 00:45] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 00:46] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 00:47] Grawlix[DLB] was squished.
+[2021-03-27 00:47] Grawlix[DLB] does a back flip into the lava.
+[2021-03-27 00:47] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 00:47] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 00:49] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 00:49] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 00:51] Grawlix[DLB] was melted by ninjabot[DLB]'s hyperblaster
+[2021-03-27 00:51] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 00:51] Grawlix[DLB] does a back flip into the lava.
+[2021-03-27 00:52] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 00:52] Timelimit hit.
+[2021-03-27 00:52] ------- Server Initialization -------
+[2021-03-27 00:52] SpawnServer: ztn2dm2
+[2021-03-27 00:52] 0 entities inhibited
+[2021-03-27 00:52] 0 teams with 0 entities
+[2021-03-27 00:52] -------------------------------------
+[2021-03-27 00:52] Grawlix[DLB] entered the game
+[2021-03-27 00:52] ninjabot[DLB] entered the game
+[2021-03-27 00:52] ninjabot[DLB][76.181.238.25:51903] disconnected
+[2021-03-27 00:52] ninjabot[DLB] disconnected
+[2021-03-27 00:53] Grawlix[DLB][75.118.29.93:52871] disconnected
+[2021-03-27 00:53] Grawlix[DLB] disconnected
+[2021-03-27 00:53] Grawlix[DLB] connected
+[2021-03-27 00:53] Grawlix[DLB][75.118.29.93:52871]: q2pro r1844~51bdb22 Oct  5 2019 Win64 x86_64
+[2021-03-27 00:53] Grawlix[DLB] entered the game
+[2021-03-27 00:53] ninjabot[DLB] connected
+[2021-03-27 00:53] ninjabot[DLB][76.181.238.25:51903]: q2pro r1861~5917c5f Feb 17 2020 Win32 x86
+[2021-03-27 00:53] ninjabot[DLB] entered the game
+[2021-03-27 00:54] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 00:54] ninjabot[DLB] was melted by Grawlix[DLB]'s hyperblaster
+[2021-03-27 00:54] ninjabot[DLB] was melted by Grawlix[DLB]'s hyperblaster
+[2021-03-27 00:56] Grawlix[DLB] was blown away by ninjabot[DLB]'s super shotgun
+[2021-03-27 00:56] Grawlix[DLB] was shredded by ninjabot[DLB]'s shrapnel
+[2021-03-27 00:56] Grawlix[DLB] was shredded by ninjabot[DLB]'s shrapnel
+[2021-03-27 00:57] ninjabot[DLB] was blown away by Grawlix[DLB]'s super shotgun
+[2021-03-27 00:57] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 00:58] ninjabot[DLB] was blown away by Grawlix[DLB]'s super shotgun
+[2021-03-27 01:00] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:01] ninjabot[DLB] tripped on his own grenade.
+[2021-03-27 01:02] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 01:02] Timelimit hit.
+[2021-03-27 01:02] ------- Server Initialization -------
+[2021-03-27 01:02] SpawnServer: ztn2dm3
+[2021-03-27 01:02] 0 entities inhibited
+[2021-03-27 01:02] 0 teams with 0 entities
+[2021-03-27 01:02] -------------------------------------
+[2021-03-27 01:02] Grawlix[DLB] entered the game
+[2021-03-27 01:02] ninjabot[DLB] entered the game
+[2021-03-27 01:03] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:03] ninjabot[DLB] was blown away by Grawlix[DLB]'s super shotgun
+[2021-03-27 01:03] ninjabot[DLB] was blown away by Grawlix[DLB]'s super shotgun
+[2021-03-27 01:05] ninjabot[DLB] was cut in half by Grawlix[DLB]'s chaingun
+[2021-03-27 01:05] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:05] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 01:07] Grawlix[DLB] was popped by ninjabot[DLB]'s grenade
+[2021-03-27 01:07] Grawlix[DLB] was popped by ninjabot[DLB]'s grenade
+[2021-03-27 01:07] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:08] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:08] ninjabot[DLB] was blown away by Grawlix[DLB]'s super shotgun
+[2021-03-27 01:10] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 01:11] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 01:11] Grawlix[DLB] was blown away by ninjabot[DLB]'s super shotgun
+[2021-03-27 01:12] Timelimit hit.
+[2021-03-27 01:12] ------- Server Initialization -------
+[2021-03-27 01:12] SpawnServer: q2dm1mirrored
+[2021-03-27 01:12] 0 entities inhibited
+[2021-03-27 01:12] 0 teams with 0 entities
+[2021-03-27 01:12] -------------------------------------
+[2021-03-27 01:12] Grawlix[DLB] entered the game
+[2021-03-27 01:12] ninjabot[DLB] entered the game
+[2021-03-27 01:13] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 01:14] Grawlix[DLB] was cut in half by ninjabot[DLB]'s chaingun
+[2021-03-27 01:14] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:15] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 01:15] Grawlix[DLB] was blasted by ninjabot[DLB]
+[2021-03-27 01:16] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 01:16] Grawlix[DLB] was blown away by ninjabot[DLB]'s super shotgun
+[2021-03-27 01:16] Grawlix[DLB] was railed by ninjabot[DLB]
+[2021-03-27 01:17] Grawlix[DLB] was railed by ninjabot[DLB]
+[2021-03-27 01:18] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 01:18] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:18] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 01:19] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:19] Grawlix[DLB] was melted by ninjabot[DLB]'s hyperblaster
+[2021-03-27 01:20] Grawlix[DLB] was melted by ninjabot[DLB]'s hyperblaster
+[2021-03-27 01:20] Grawlix[DLB] was melted by ninjabot[DLB]'s hyperblaster
+[2021-03-27 01:20] Grawlix[DLB] was melted by ninjabot[DLB]'s hyperblaster
+[2021-03-27 01:21] ninjabot[DLB] was machinegunned by Grawlix[DLB]
+[2021-03-27 01:21] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 01:21] Grawlix[DLB] didn't see ninjabot[DLB]'s handgrenade
+[2021-03-27 01:21] ninjabot[DLB] was gunned down by Grawlix[DLB]
+[2021-03-27 01:22] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 01:22] Timelimit hit.
+[2021-03-27 01:22] ------- Server Initialization -------
+[2021-03-27 01:22] SpawnServer: ztn2dm4
+[2021-03-27 01:22] 2 entities inhibited
+[2021-03-27 01:22] 0 teams with 0 entities
+[2021-03-27 01:22] -------------------------------------
+[2021-03-27 01:22] Grawlix[DLB] entered the game
+[2021-03-27 01:22] ninjabot[DLB] entered the game
+[2021-03-27 01:22] Grawlix[DLB] tripped on his own grenade.
+[2021-03-27 01:23] Grawlix[DLB] melted.
+[2021-03-27 01:24] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 01:24] ninjabot[DLB] didn't see Grawlix[DLB]'s handgrenade
+[2021-03-27 01:24] Grawlix[DLB] melted.
+[2021-03-27 01:25] ninjabot[DLB] was blown away by Grawlix[DLB]'s super shotgun
+[2021-03-27 01:25] Grawlix[DLB] was railed by ninjabot[DLB]
+[2021-03-27 01:26] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:26] ninjabot[DLB] tripped on his own grenade.
+[2021-03-27 01:27] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:27] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 01:29] ninjabot[DLB] was cut in half by Grawlix[DLB]'s chaingun
+[2021-03-27 01:29] ninjabot[DLB] was blown away by Grawlix[DLB]'s super shotgun
+[2021-03-27 01:29] Grawlix[DLB] didn't see ninjabot[DLB]'s handgrenade
+[2021-03-27 01:31] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:31] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:32] ninjabot[DLB] melted.
+[2021-03-27 01:32] Timelimit hit.
+[2021-03-27 01:32] ------- Server Initialization -------
+[2021-03-27 01:32] SpawnServer: q2dm1
+[2021-03-27 01:32] 0 entities inhibited
+[2021-03-27 01:32] 0 teams with 0 entities
+[2021-03-27 01:32] -------------------------------------
+[2021-03-27 01:32] Grawlix[DLB] entered the game
+[2021-03-27 01:32] ninjabot[DLB] entered the game
+[2021-03-27 01:35] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:36] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 01:36] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 01:37] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 01:37] Grawlix[DLB] was railed by ninjabot[DLB]
+[2021-03-27 01:38] Grawlix[DLB] was railed by ninjabot[DLB]
+[2021-03-27 01:38] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:38] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:39] ninjabot[DLB] cratered.
+[2021-03-27 01:40] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:40] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:41] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 01:42] ninjabot[DLB] was melted by Grawlix[DLB]'s hyperblaster
+[2021-03-27 01:42] Timelimit hit.
+[2021-03-27 01:43] ------- Server Initialization -------
+[2021-03-27 01:43] SpawnServer: q2dm2
+[2021-03-27 01:43] 0 entities inhibited
+[2021-03-27 01:43] 1 teams with 2 entities
+[2021-03-27 01:43] -------------------------------------
+[2021-03-27 01:43] Grawlix[DLB] entered the game
+[2021-03-27 01:43] ninjabot[DLB] entered the game
+[2021-03-27 01:43] ninjabot[DLB] was blown away by Grawlix[DLB]'s super shotgun
+[2021-03-27 01:44] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 01:45] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:45] Grawlix[DLB] couldn't hide from ninjabot[DLB]'s BFG
+[2021-03-27 01:45] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:46] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 01:47] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 01:48] Grawlix[DLB] was railed by ninjabot[DLB]
+[2021-03-27 01:48] Grawlix[DLB] was cut in half by ninjabot[DLB]'s chaingun
+[2021-03-27 01:50] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:52] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 01:52] ninjabot[DLB] blew himself up.
+[2021-03-27 01:53] Timelimit hit.
+[2021-03-27 01:53] ------- Server Initialization -------
+[2021-03-27 01:53] SpawnServer: rocketcourt
+[2021-03-27 01:53] 0 entities inhibited
+[2021-03-27 01:53] 0 teams with 0 entities
+[2021-03-27 01:53] -------------------------------------
+[2021-03-27 01:53] Grawlix[DLB] entered the game
+[2021-03-27 01:53] ninjabot[DLB] entered the game
+[2021-03-27 01:53] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:53] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 01:53] ninjabot[DLB] blew himself up.
+[2021-03-27 01:54] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 01:54] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:54] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:54] ninjabot[DLB] blew himself up.
+[2021-03-27 01:55] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 01:56] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 01:56] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 01:56] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 01:56] ninjabot[DLB] blew himself up.
+[2021-03-27 01:57] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 01:57] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 01:57] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 01:58] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 01:58] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:59] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 01:59] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:59] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 01:59] Grawlix[DLB] was blasted by ninjabot[DLB]
+[2021-03-27 02:00] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 02:00] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 02:00] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 02:00] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 02:00] ninjabot[DLB] blew himself up.
+[2021-03-27 02:01] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 02:01] ninjabot[DLB] caught Grawlix[DLB]'s handgrenade
+[2021-03-27 02:01] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 02:02] Grawlix[DLB] almost dodged ninjabot[DLB]'s rocket
+[2021-03-27 02:02] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 02:03] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 02:03] Timelimit hit.
+[2021-03-27 02:03] ------- Server Initialization -------
+[2021-03-27 02:03] SpawnServer: aeroq2
+[2021-03-27 02:03] ED_ParseEdict: mangle is not a field
+[2021-03-27 02:03] info_intermission doesn't have a spawn function
+[2021-03-27 02:03] 0 entities inhibited
+[2021-03-27 02:03] 0 teams with 0 entities
+[2021-03-27 02:03] -------------------------------------
+[2021-03-27 02:03] Grawlix[DLB] entered the game
+[2021-03-27 02:03] ninjabot[DLB] entered the game
+[2021-03-27 02:04] ninjabot[DLB] blew himself up.
+[2021-03-27 02:05] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 02:05] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 02:06] Grawlix[DLB] was railed by ninjabot[DLB]
+[2021-03-27 02:06] Grawlix[DLB] was railed by ninjabot[DLB]
+[2021-03-27 02:06] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 02:06] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 02:07] Grawlix[DLB] was railed by ninjabot[DLB]
+[2021-03-27 02:08] ninjabot[DLB] was melted by Grawlix[DLB]'s hyperblaster
+[2021-03-27 02:08] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 02:08] ninjabot[DLB] was blown away by Grawlix[DLB]'s super shotgun
+[2021-03-27 02:09] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 02:09] ninjabot[DLB] was railed by Grawlix[DLB]
+[2021-03-27 02:09] Grawlix[DLB] was blown away by ninjabot[DLB]'s super shotgun
+[2021-03-27 02:10] Grawlix[DLB] was blown away by ninjabot[DLB]'s super shotgun
+[2021-03-27 02:10] Grawlix[DLB] was blown away by ninjabot[DLB]'s super shotgun
+[2021-03-27 02:10] Grawlix[DLB] was blown away by ninjabot[DLB]'s super shotgun
+[2021-03-27 02:11] ninjabot[DLB] almost dodged Grawlix[DLB]'s rocket
+[2021-03-27 02:11] ninjabot[DLB] ate Grawlix[DLB]'s rocket
+[2021-03-27 02:12] Grawlix[DLB] ate ninjabot[DLB]'s rocket
+[2021-03-27 02:13] ninjabot[DLB] was blown away by Grawlix[DLB]'s super shotgun
+[2021-03-27 02:13] Timelimit hit.
+[2021-03-27 02:13] ninjabot[DLB][76.181.238.25:51903] disconnected
+[2021-03-27 02:13] ninjabot[DLB] disconnected
+[2021-03-27 02:13] ------- Server Initialization -------
+[2021-03-27 02:13] SpawnServer: ztn2dm1
+[2021-03-27 02:13] ED_ParseField: couldn't parse 'skyaxis'
+[2021-03-27 02:13] 0 entities inhibited
+[2021-03-27 02:13] 0 teams with 0 entities
+[2021-03-27 02:13] -------------------------------------
+[2021-03-27 02:13] Grawlix[DLB] entered the game
+[2021-03-27 02:13] Grawlix[DLB][75.118.29.93:52871] disconnected
+[2021-03-27 02:13] Grawlix[DLB] disconnected
+[2021-03-27 02:23] Timelimit hit.
+[2021-05-03 23:17] 9137 connected
+[2021-05-03 23:17] 9137[76.181.238.25:57933]: q2pro r1504~924ff39 Dec  3 2014 Win32 x86
+[2021-05-03 23:17] 9137 entered the game
+[2021-05-03 23:17] ------- Server Initialization -------
+[2021-05-03 23:17] SpawnServer: q2dm7
+[2021-05-03 23:17] 0 entities inhibited
+[2021-05-03 23:17] 0 teams with 0 entities
+[2021-05-03 23:17] -------------------------------------
+[2021-05-03 23:17] 9137 entered the game
+[2021-05-03 23:18] 9137: hi
+[2021-05-03 23:19] 9137[76.181.238.25:57933] changed name to spartan
+[2021-05-03 23:20] ninjabot[DLB] connected
+[2021-05-03 23:20] ninjabot[DLB][76.181.238.25:50039]: q2pro r1861~5917c5f Feb 17 2020 Win32 x86
+[2021-05-03 23:20] ninjabot[DLB] entered the game
+[2021-05-03 23:20] spartan: hi there
+[2021-05-03 23:20] ninjabot[DLB]: hi
+[2021-05-03 23:20] ninjabot[DLB] was melted by spartan's hyperblaster
+[2021-05-03 23:21] ninjabot[DLB] ate spartan's rocket
+[2021-05-03 23:21] spartan melted.
+[2021-05-03 23:21] spartan was blown away by ninjabot[DLB]'s super shotgun
+[2021-05-03 23:21] ninjabot[DLB] was popped by spartan's grenade
+[2021-05-03 23:22] spartan was blown away by ninjabot[DLB]'s super shotgun
+[2021-05-03 23:23] spartan almost dodged ninjabot[DLB]'s rocket
+[2021-05-03 23:24] spartan ate ninjabot[DLB]'s rocket
+[2021-05-03 23:24] ninjabot[DLB] blew himself up.
+[2021-05-03 23:25] spartan was melted by ninjabot[DLB]'s hyperblaster
+[2021-05-03 23:25] ninjabot[DLB] melted.
+[2021-05-03 23:25] ninjabot[DLB] ate spartan's rocket
+[2021-05-03 23:25] ninjabot[DLB] was melted by spartan's hyperblaster
+[2021-05-03 23:25] spartan didn't see ninjabot[DLB]'s handgrenade
+[2021-05-03 23:26] spartan was popped by ninjabot[DLB]'s grenade
+[2021-05-03 23:26] ninjabot[DLB] was melted by spartan's hyperblaster
+[2021-05-03 23:26] spartan ate ninjabot[DLB]'s rocket
+[2021-05-03 23:27] spartan was melted by ninjabot[DLB]'s hyperblaster
+[2021-05-03 23:27] Timelimit hit.
+[2021-05-03 23:27] ninjabot[DLB]: gg
+[2021-05-03 23:27] ------- Server Initialization -------
+[2021-05-03 23:27] SpawnServer: ztn2dm5
+[2021-05-03 23:27] 0 entities inhibited
+[2021-05-03 23:27] 0 teams with 0 entities
+[2021-05-03 23:27] -------------------------------------
+[2021-05-03 23:27] ninjabot[DLB] entered the game
+[2021-05-03 23:27] spartan entered the game
+[2021-05-03 23:27] spartan: gg
+[2021-05-03 23:27] ninjabot[DLB]: want to keep playing?
+[2021-05-03 23:27] spartan: ok
+[2021-05-03 23:28] spartan was blown away by ninjabot[DLB]'s super shotgun
+[2021-05-03 23:28] spartan was blown away by ninjabot[DLB]'s super shotgun
+[2021-05-03 23:29] ninjabot[DLB] was cut in half by spartan's chaingun
+[2021-05-03 23:29] ninjabot[DLB] tripped on his own grenade.
+[2021-05-03 23:30] spartan almost dodged ninjabot[DLB]'s rocket
+[2021-05-03 23:30] ninjabot[DLB] was blown away by spartan's super shotgun
+[2021-05-03 23:30] spartan didn't see ninjabot[DLB]'s handgrenade
+[2021-05-03 23:31] spartan: i hide
+[2021-05-03 23:31] ninjabot[DLB] was blown away by spartan's super shotgun
+[2021-05-03 23:31] ninjabot[DLB] was railed by spartan
+[2021-05-03 23:32] spartan was blasted by ninjabot[DLB]
+[2021-05-03 23:32] spartan was railed by ninjabot[DLB]
+[2021-05-03 23:33] spartan was railed by ninjabot[DLB]
+[2021-05-03 23:33] spartan: you good but i godd as well
+[2021-05-03 23:34] ninjabot[DLB] was railed by spartan
+[2021-05-03 23:34] spartan was melted by ninjabot[DLB]'s hyperblaster
+[2021-05-03 23:34] spartan: i hiding
+[2021-05-03 23:35] spartan was railed by ninjabot[DLB]
+[2021-05-03 23:35] ninjabot[DLB]: found you
+[2021-05-03 23:35] spartan: good job
+[2021-05-03 23:36] spartan was railed by ninjabot[DLB]
+[2021-05-03 23:37] spartan: bean wants to play i think
+[2021-05-03 23:37] ninjabot[DLB] was melted by spartan's hyperblaster
+[2021-05-03 23:37] Timelimit hit.
+[2021-05-03 23:37] ------- Server Initialization -------
+[2021-05-03 23:37] SpawnServer: q2dm8
+[2021-05-03 23:37] 0 entities inhibited
+[2021-05-03 23:37] 2 teams with 5 entities
+[2021-05-03 23:37] -------------------------------------
+[2021-05-03 23:37] ninjabot[DLB] entered the game
+[2021-05-03 23:37] spartan entered the game
+[2021-05-03 23:39] evicorn connected
+[2021-05-03 23:39] evicorn[76.181.238.25:63308]: q2pro r1504~924ff39 Dec  3 2014 Win32 x86
+[2021-05-03 23:39] evicorn entered the game
+[2021-05-03 23:40] ninjabot[DLB] was gunned down by spartan
+[2021-05-03 23:40] evicorn was gunned down by spartan
+[2021-05-03 23:41] ninjabot[DLB] was machinegunned by evicorn
+[2021-05-03 23:41] spartan: wooooooooooooooooooooooooooooooooooo
+[2021-05-03 23:41] evicorn was machinegunned by spartan
+[2021-05-03 23:42] spartan ate ninjabot[DLB]'s rocket
+[2021-05-03 23:42] ninjabot[DLB] was cut in half by evicorn's chaingun
+[2021-05-03 23:42] evicorn almost dodged ninjabot[DLB]'s rocket
+[2021-05-03 23:43] ninjabot[DLB] was machinegunned by spartan
+[2021-05-03 23:43] ninjabot[DLB] was cut in half by spartan's chaingun
+[2021-05-03 23:44] spartan was blasted by ninjabot[DLB]
+[2021-05-03 23:44] evicorn was blasted by spartan
+[2021-05-03 23:44] spartan was gunned down by ninjabot[DLB]
+[2021-05-03 23:44] spartan: wowowowowowowoow lolololololololol
+[2021-05-03 23:44] spartan was blown away by ninjabot[DLB]'s super shotgun
+[2021-05-03 23:45] evicorn was squished.
+[2021-05-03 23:45] ninjabot[DLB] was blasted by evicorn
+[2021-05-03 23:45] ninjabot[DLB] was blown away by evicorn's super shotgun
+[2021-05-03 23:45] evicorn was blown away by spartan's super shotgun
+[2021-05-03 23:46] ninjabot[DLB] was popped by evicorn's grenade
+[2021-05-03 23:46] spartan was railed by ninjabot[DLB]
+[2021-05-03 23:47] Timelimit hit.
+[2021-05-03 23:47] ------- Server Initialization -------
+[2021-05-03 23:47] SpawnServer: match1
+[2021-05-03 23:47] 0 entities inhibited
+[2021-05-03 23:47] 0 teams with 0 entities
+[2021-05-03 23:47] -------------------------------------
+[2021-05-03 23:48] ninjabot[DLB] entered the game
+[2021-05-03 23:48] spartan entered the game
+[2021-05-03 23:48] evicorn entered the game
+[2021-05-03 23:48] spartan was cut in half by ninjabot[DLB]'s chaingun
+[2021-05-03 23:48] spartan ate ninjabot[DLB]'s rocket
+[2021-05-03 23:48] spartan ate ninjabot[DLB]'s rocket
+[2021-05-03 23:49] evicorn ate ninjabot[DLB]'s rocket
+[2021-05-03 23:49] spartan ate ninjabot[DLB]'s rocket
+[2021-05-03 23:49] ninjabot[DLB]: I AM THE DADDY
+[2021-05-03 23:49] spartan: no you are not lol
+[2021-05-03 23:50] ninjabot[DLB] was blown away by spartan's super shotgun
+[2021-05-03 23:50] ninjabot[DLB] was blown away by spartan's super shotgun
+[2021-05-03 23:50] spartan was railed by ninjabot[DLB]
+[2021-05-03 23:50] ninjabot[DLB] was blown away by evicorn's super shotgun
+[2021-05-03 23:50] spartan does a back flip into the lava.
+[2021-05-03 23:50] ninjabot[DLB] was cut in half by spartan's chaingun
+[2021-05-03 23:50] ninjabot[DLB] was railed by evicorn
+[2021-05-03 23:51] spartan was melted by ninjabot[DLB]'s hyperblaster
+[2021-05-03 23:51] evicorn does a back flip into the lava.
+[2021-05-03 23:51] ninjabot[DLB] ate spartan's rocket
+[2021-05-03 23:51] ninjabot[DLB]: is evie having fun?
+[2021-05-03 23:51] spartan: yeah\
+[2021-05-03 23:51] spartan was cut in half by ninjabot[DLB]'s chaingun
+[2021-05-03 23:52] spartan tripped on his own grenade.
+[2021-05-03 23:52] ninjabot[DLB] does a back flip into the lava.
+[2021-05-03 23:52] spartan was melted by ninjabot[DLB]'s hyperblaster
+[2021-05-03 23:52] spartan ate evicorn's rocket
+[2021-05-03 23:52] evicorn was railed by spartan
+[2021-05-03 23:52] spartan was melted by ninjabot[DLB]'s hyperblaster
+[2021-05-03 23:53] evicorn was popped by spartan's grenade
+[2021-05-03 23:53] spartan tripped on his own grenade.
+[2021-05-03 23:53] evicorn does a back flip into the lava.
+[2021-05-03 23:53] spartan was railed by ninjabot[DLB]
+[2021-05-03 23:53] spartan was railed by ninjabot[DLB]
+[2021-05-03 23:53] evicorn was railed by ninjabot[DLB]
+[2021-05-03 23:53] ninjabot[DLB]: got you both in one shot
+[2021-05-03 23:54] spartan: yeah good job me a poop
+[2021-05-03 23:54] evicorn: hi
+[2021-05-03 23:54] ninjabot[DLB] was machinegunned by spartan
+[2021-05-03 23:54] ninjabot[DLB] does a back flip into the lava.
+[2021-05-03 23:54] spartan ate ninjabot[DLB]'s rocket
+[2021-05-03 23:54] ninjabot[DLB] blew himself up.
+[2021-05-03 23:55] evicorn almost dodged ninjabot[DLB]'s rocket
+[2021-05-03 23:55] spartan ate ninjabot[DLB]'s rocket
+[2021-05-03 23:56] ninjabot[DLB] was railed by spartan
+[2021-05-03 23:56] spartan: hey dude
+[2021-05-03 23:56] evicorn: what the heck!!!!!!!\
+[2021-05-03 23:56] spartan was cut in half by ninjabot[DLB]'s chaingun
+[2021-05-03 23:56] ninjabot[DLB] ate evicorn's rocket
+[2021-05-03 23:56] evicorn blew himself up.
+[2021-05-03 23:56] spartan does a back flip into the lava.
+[2021-05-03 23:57] ninjabot[DLB] was blown away by evicorn's super shotgun
+[2021-05-03 23:57] spartan was melted by ninjabot[DLB]'s hyperblaster
+[2021-05-03 23:57] spartan was melted by ninjabot[DLB]'s hyperblaster
+[2021-05-03 23:57] ninjabot[DLB] was popped by spartan's grenade
+[2021-05-03 23:57] evicorn was blasted by ninjabot[DLB]
+[2021-05-03 23:57] spartan was cut in half by ninjabot[DLB]'s chaingun
+[2021-05-03 23:57] ninjabot[DLB] was blasted by evicorn
+[2021-05-03 23:57] Timelimit hit.
+[2021-05-03 23:58] ninjabot[DLB]: gg
+[2021-05-03 23:58] ------- Server Initialization -------
+[2021-05-03 23:58] SpawnServer: q2dm3
+[2021-05-03 23:58] 0 entities inhibited
+[2021-05-03 23:58] 1 teams with 2 entities
+[2021-05-03 23:58] -------------------------------------
+[2021-05-03 23:58] ninjabot[DLB][76.181.238.25:50039] disconnected
+[2021-05-03 23:58] ninjabot[DLB] disconnected
+[2021-05-03 23:58] spartan entered the game
+[2021-05-03 23:58] evicorn entered the game
+[2021-05-03 23:58] spartan: we want to play again
+[2021-05-03 23:58] spartan[76.181.238.25:57933] disconnected
+[2021-05-03 23:58] spartan disconnected
+[2021-05-03 23:58] evicorn[76.181.238.25:63308] disconnected
+[2021-05-03 23:58] evicorn disconnected
+[2021-05-04 00:08] Timelimit hit.
