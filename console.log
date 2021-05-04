@@ -1218,16 +1218,16 @@ FATAL: tty_fatal_error: write() failed: Input/output error
 [2021-03-27 02:13] Grawlix[DLB][75.118.29.93:52871] disconnected
 [2021-03-27 02:13] Grawlix[DLB] disconnected
 [2021-03-27 02:23] Timelimit hit.
-[2021-05-03 23:17] 9137 connected
-[2021-05-03 23:17] 9137[76.181.238.25:57933]: q2pro r1504~924ff39 Dec  3 2014 Win32 x86
-[2021-05-03 23:17] 9137 entered the game
+[2021-05-03 23:17] spartan connected
+[2021-05-03 23:17] spartan[76.181.238.25:57933]: q2pro r1504~924ff39 Dec  3 2014 Win32 x86
+[2021-05-03 23:17] spartan entered the game
 [2021-05-03 23:17] ------- Server Initialization -------
 [2021-05-03 23:17] SpawnServer: q2dm7
 [2021-05-03 23:17] 0 entities inhibited
 [2021-05-03 23:17] 0 teams with 0 entities
 [2021-05-03 23:17] -------------------------------------
-[2021-05-03 23:17] 9137 entered the game
-[2021-05-03 23:18] 9137: hi
+[2021-05-03 23:17] spartan entered the game
+[2021-05-03 23:18] spartan: hi
 [2021-05-03 23:19] 9137[76.181.238.25:57933] changed name to spartan
 [2021-05-03 23:20] ninjabot[DLB] connected
 [2021-05-03 23:20] ninjabot[DLB][76.181.238.25:50039]: q2pro r1861~5917c5f Feb 17 2020 Win32 x86
