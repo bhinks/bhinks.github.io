@@ -31,7 +31,7 @@
 <meta property="og:url" content="https://ninjabot.me/stats/" />
 <meta property="og:site_name" content="OMG!ninjabot" />
 <script type="application/ld+json">
-{"description":"A random output stream of questionable value.","@type":"WebPage","url":"https://ninjabot.me/stats/","headline":"OMG!stats","@context":"https://schema.org"}</script>
+{"url":"https://ninjabot.me/stats/","@type":"WebPage","headline":"OMG!stats","description":"A random output stream of questionable value.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -193,170 +193,172 @@
                     "<div id='" + name.replace('[','').replace(']','') + "-mchart'></div>" +
                     "<div id='" + name.replace('[','').replace(']','') + "-wchart'></div></div>" 
                 );
+                
+                if (player["total_kills"] > 0 || player["total_deaths"] > 0) {
+                    var opp_container = document.getElementById(name.replace('[','').replace(']','') + "-ochart");
+                    var weap_container = document.getElementById(name.replace('[','').replace(']','') + "-wchart");
+                    var map_container = document.getElementById(name.replace('[','').replace(']','') + "-mchart");
 
-                var opp_container = document.getElementById(name.replace('[','').replace(']','') + "-ochart");
-                var weap_container = document.getElementById(name.replace('[','').replace(']','') + "-wchart");
-                var map_container = document.getElementById(name.replace('[','').replace(']','') + "-mchart");
+                    var opp_data = {
+                        categories: [],
+                        series: [
+                            {
+                                name: "Killed",
+                                data: []
+                            },
+                            {
+                                name: "Died By",
+                                data: []
+                            }
 
-                var opp_data = {
-                    categories: [],
-                    series: [
-                        {
-                            name: "Killed",
-                            data: []
+                        ]
+                    };
+                    var weap_data = {
+                        categories: [],
+                        series: [
+                            {
+                                name: "Killed With",
+                                data: []
+                            },
+                            {
+                                name: "Died By",
+                                data: []
+                            }
+
+                        ]
+                    };
+                    var map_data = {
+                        categories: [],
+                        series: [
+                            {
+                                name: "Killed On",
+                                data: []
+                            },
+                            {
+                                name: "Died On",
+                                data: []
+                            }
+
+                        ]
+                    };
+                    var biggest = 10;
+                    for (let [opp_name, opp] of Object.entries(player["opponents"])) {
+                        opp_data["categories"].push(opp_name);
+                        opp_data["series"][0]["data"].push(opp["kills"]);
+                        opp_data["series"][1]["data"].push(opp["deaths"]);
+                        if (opp["kills"] > biggest) { 
+                            biggest = opp["kills"];
+                        }
+                        if (opp["deaths"] > biggest) { 
+                            biggest = opp["deaths"];
+                        }
+                    }
+                    for (let [weap_name, weap] of Object.entries(player["weapons"])) {
+                        weap_data["categories"].push(weap_name);
+                        weap_data["series"][0]["data"].push(weap["kills"]);
+                        weap_data["series"][1]["data"].push(weap["deaths"]);
+                        if (weap["kills"] > biggest) { 
+                            biggest = weap["kills"];
+                        }
+                        if (weap["deaths"] > biggest) { 
+                            biggest = weap["deaths"];
+                        }
+                    }
+                    for (let [map_name, gamemap] of Object.entries(player["maps"])) {
+                        map_data["categories"].push(map_name);
+                        map_data["series"][0]["data"].push(gamemap["kills"]);
+                        map_data["series"][1]["data"].push(gamemap["deaths"]);
+                        if (gamemap["kills"] > biggest) { 
+                            biggest = gamemap["kills"];
+                        }
+                        if (gamemap["deaths"] > biggest) { 
+                            biggest = gamemap["deaths"];
+                        }
+                    }
+
+                    var options = {
+                        chart: {
+                            width: 1100,
+                            height: 500,
+                            format: '1,000'
                         },
-                        {
-                            name: "Died By",
-                            data: []
-                        }
-
-                    ]
-                };
-                var weap_data = {
-                    categories: [],
-                    series: [
-                        {
-                            name: "Killed With",
-                            data: []
+                        xAxis: {
+                            min: 0,
+                            max: biggest + 5
                         },
-                        {
-                            name: "Died By",
-                            data: []
+                        series: {
+                            showLabel: true
                         }
-
-                    ]
-                };
-                var map_data = {
-                    categories: [],
-                    series: [
-                        {
-                            name: "Killed On",
-                            data: []
+                    };
+                    var theme = {
+                        chart: {
+                            fontFamily: 'Roboto Mono',
+                            background: {
+                                color: '#282A36',
+                                opacity: 1
+                            }
                         },
-                        {
-                            name: "Died On",
-                            data: []
-                        }
-
-                    ]
-                };
-                var biggest = 10;
-                for (let [opp_name, opp] of Object.entries(player["opponents"])) {
-                    opp_data["categories"].push(opp_name);
-                    opp_data["series"][0]["data"].push(opp["kills"]);
-                    opp_data["series"][1]["data"].push(opp["deaths"]);
-                    if (opp["kills"] > biggest) { 
-                        biggest = opp["kills"];
-                    }
-                    if (opp["deaths"] > biggest) { 
-                        biggest = opp["deaths"];
-                    }
-                }
-                for (let [weap_name, weap] of Object.entries(player["weapons"])) {
-                    weap_data["categories"].push(weap_name);
-                    weap_data["series"][0]["data"].push(weap["kills"]);
-                    weap_data["series"][1]["data"].push(weap["deaths"]);
-                    if (weap["kills"] > biggest) { 
-                        biggest = weap["kills"];
-                    }
-                    if (weap["deaths"] > biggest) { 
-                        biggest = weap["deaths"];
-                    }
-                }
-                for (let [map_name, gamemap] of Object.entries(player["maps"])) {
-                    map_data["categories"].push(map_name);
-                    map_data["series"][0]["data"].push(gamemap["kills"]);
-                    map_data["series"][1]["data"].push(gamemap["deaths"]);
-                    if (gamemap["kills"] > biggest) { 
-                        biggest = gamemap["kills"];
-                    }
-                    if (gamemap["deaths"] > biggest) { 
-                        biggest = gamemap["deaths"];
-                    }
-                }
-
-                var options = {
-                    chart: {
-                        width: 1100,
-                        height: 500,
-                        format: '1,000'
-                    },
-                    xAxis: {
-                        min: 0,
-                        max: biggest + 5
-                    },
-                    series: {
-                        showLabel: true
-                    }
-                };
-                var theme = {
-                    chart: {
-                        fontFamily: 'Roboto Mono',
-                        background: {
-                            color: '#282A36',
-                            opacity: 1
-                        }
-                    },
-                    title: {
-                        fontSize: 20,
-                        fontFamily: 'Verdana',
-                        fontWeight: 'bold',
-                        color: '#DDD'
-                    },
-                    xAxis: {
                         title: {
-                            fontSize: 14,
+                            fontSize: 20,
                             fontFamily: 'Verdana',
                             fontWeight: 'bold',
                             color: '#DDD'
                         },
-                        label: {
-                            fontSize: 14,
-                            fontFamily: 'Verdana',
-                            fontWeight: 'bold',
-                            color: '#DDD'
-                        }
-                    },
-                    yAxis: {
-                        title: {
-                            fontSize: 14,
-                            fontFamily: 'Verdana',
-                            fontWeight: 'bold',
-                            color: '#DDD'
+                        xAxis: {
+                            title: {
+                                fontSize: 14,
+                                fontFamily: 'Verdana',
+                                fontWeight: 'bold',
+                                color: '#DDD'
+                            },
+                            label: {
+                                fontSize: 14,
+                                fontFamily: 'Verdana',
+                                fontWeight: 'bold',
+                                color: '#DDD'
+                            }
                         },
-                        label: {
-                            fontSize: 14,
-                            fontFamily: 'Verdana',
-                            fontWeight: 'bold',
-                            color: '#DDD'
+                        yAxis: {
+                            title: {
+                                fontSize: 14,
+                                fontFamily: 'Verdana',
+                                fontWeight: 'bold',
+                                color: '#DDD'
+                            },
+                            label: {
+                                fontSize: 14,
+                                fontFamily: 'Verdana',
+                                fontWeight: 'bold',
+                                color: '#DDD'
+                            }
+                        },
+                        plot: {
+                            lineColor: '#DDD'
+                        },
+                        series: {
+                            colors: ['#2ed573', '#fb660a'],
+                            label: {
+                                fontSize: 14,
+                                fontFamily: 'Verdana',
+                                fontWeight: 'bold',
+                                color: '#DDD'
+                            }
+                        },
+                        legend: {
+                            label: {
+                                fontSize: 14,
+                                fontFamily: 'Verdana',
+                                fontWeight: 'bold',
+                                color: '#DDD'
+                            }
                         }
-                    },
-                    plot: {
-                        lineColor: '#DDD'
-                    },
-                    series: {
-                        colors: ['#2ed573', '#fb660a'],
-                        label: {
-                            fontSize: 14,
-                            fontFamily: 'Verdana',
-                            fontWeight: 'bold',
-                            color: '#DDD'
-                        }
-                    },
-                    legend: {
-                        label: {
-                            fontSize: 14,
-                            fontFamily: 'Verdana',
-                            fontWeight: 'bold',
-                            color: '#DDD'
-                        }
-                    }
-                };
-                tui.chart.registerTheme('newTheme', theme);
-                options.theme = "newTheme";
-                tui.chart.barChart(opp_container, opp_data, options);
-                tui.chart.barChart(weap_container, weap_data, options);
-                tui.chart.barChart(map_container, map_data, options);
+                    };
+                    tui.chart.registerTheme('newTheme', theme);
+                    options.theme = "newTheme";
+                    tui.chart.barChart(opp_container, opp_data, options);
+                    tui.chart.barChart(weap_container, weap_data, options);
+                    tui.chart.barChart(map_container, map_data, options);
+                }
                 
             }
             $( "#player_tables" ).tabs();

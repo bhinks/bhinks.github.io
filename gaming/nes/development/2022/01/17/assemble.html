@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+  <script src="/assets/jquery-ui.js"></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <title>
+    assemble - OMG!ninjabot
+  </title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/jquery-ui.css">
+  <script type="text/javascript" src=""></script>
+  <link rel="stylesheet" href="https://uicdn.toast.com/tui.chart/latest/tui-chart.min.css">
+  <script src="https://uicdn.toast.com/tui.chart/latest/tui-chart-all.js"></script>
+  
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>assemble | OMG!ninjabot</title>
+<meta name="generator" content="Jekyll v3.8.7" />
+<meta property="og:title" content="assemble" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="So I’ve made some pretty decent progress, I think, though at the same time I beginning to learn that I have a very long way to go before I can make a real full-featured game. The resource that gave me the biggest jump-start was definitely Famicom Party. Using that book as a resource, I was able to make significant progress on my vertical shooter, titled Space Fight. It helped that a vertical shooter was also used as the working example project in the book. This is where I’m at: I’ve got a scrolling background, working controller input, moving player and enemy sprites, collision detection, and some sprite animation when one of the ships explodes. I want to add sound effects and music next, then a title screen, then an actual level layout instead of infinitely-spawning single enemies. My code definitely needs a lot of refactoring; you can look at it and tell it was written by somebody with minimal knowledge of 6502 Assembly (or any low-level programming, for that matter). One thing that I need to figure out is how to manage many objects on the screen. Right now I can support a single enemy, a single bullet fired from the player’s ship, and a single explosion at a time. The way I’m tracking those objects and moving them around the screen is extremely manual. The way zero-paged memory management works on the NES leads me to believe that I can’t make generating these objects fully dynamic, but there must be a better way to do it than my current approach. Another thing I’m really curious about is how to maintain some static portion of the background while the rest is scrolling. I’d like to keep the infinitely-scrolling starfield in the background, but would also like to have a status bar at the top of the screen that displays the player’s life count and score. If I were to implement that right now I would be making use of sprites to fill in the status bar, but there must be a better way to do it since all the example tilesets I see for real NES games include the fonts as background graphics. I’m going to keep hacking away at this game until I feel happy with its playability, then I’ll probably move on to some form of beat ‘em up game. If you’re interested in watching my progress, you can find the code for the game here on GitHub." />
+<meta property="og:description" content="So I’ve made some pretty decent progress, I think, though at the same time I beginning to learn that I have a very long way to go before I can make a real full-featured game. The resource that gave me the biggest jump-start was definitely Famicom Party. Using that book as a resource, I was able to make significant progress on my vertical shooter, titled Space Fight. It helped that a vertical shooter was also used as the working example project in the book. This is where I’m at: I’ve got a scrolling background, working controller input, moving player and enemy sprites, collision detection, and some sprite animation when one of the ships explodes. I want to add sound effects and music next, then a title screen, then an actual level layout instead of infinitely-spawning single enemies. My code definitely needs a lot of refactoring; you can look at it and tell it was written by somebody with minimal knowledge of 6502 Assembly (or any low-level programming, for that matter). One thing that I need to figure out is how to manage many objects on the screen. Right now I can support a single enemy, a single bullet fired from the player’s ship, and a single explosion at a time. The way I’m tracking those objects and moving them around the screen is extremely manual. The way zero-paged memory management works on the NES leads me to believe that I can’t make generating these objects fully dynamic, but there must be a better way to do it than my current approach. Another thing I’m really curious about is how to maintain some static portion of the background while the rest is scrolling. I’d like to keep the infinitely-scrolling starfield in the background, but would also like to have a status bar at the top of the screen that displays the player’s life count and score. If I were to implement that right now I would be making use of sprites to fill in the status bar, but there must be a better way to do it since all the example tilesets I see for real NES games include the fonts as background graphics. I’m going to keep hacking away at this game until I feel happy with its playability, then I’ll probably move on to some form of beat ‘em up game. If you’re interested in watching my progress, you can find the code for the game here on GitHub." />
+<link rel="canonical" href="https://ninjabot.me/gaming/nes/development/2022/01/17/assemble.html" />
+<meta property="og:url" content="https://ninjabot.me/gaming/nes/development/2022/01/17/assemble.html" />
+<meta property="og:site_name" content="OMG!ninjabot" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-01-17T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://ninjabot.me/gaming/nes/development/2022/01/17/assemble.html","@type":"BlogPosting","headline":"assemble","dateModified":"2022-01-17T00:00:00-05:00","datePublished":"2022-01-17T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://ninjabot.me/gaming/nes/development/2022/01/17/assemble.html"},"description":"So I’ve made some pretty decent progress, I think, though at the same time I beginning to learn that I have a very long way to go before I can make a real full-featured game. The resource that gave me the biggest jump-start was definitely Famicom Party. Using that book as a resource, I was able to make significant progress on my vertical shooter, titled Space Fight. It helped that a vertical shooter was also used as the working example project in the book. This is where I’m at: I’ve got a scrolling background, working controller input, moving player and enemy sprites, collision detection, and some sprite animation when one of the ships explodes. I want to add sound effects and music next, then a title screen, then an actual level layout instead of infinitely-spawning single enemies. My code definitely needs a lot of refactoring; you can look at it and tell it was written by somebody with minimal knowledge of 6502 Assembly (or any low-level programming, for that matter). One thing that I need to figure out is how to manage many objects on the screen. Right now I can support a single enemy, a single bullet fired from the player’s ship, and a single explosion at a time. The way I’m tracking those objects and moving them around the screen is extremely manual. The way zero-paged memory management works on the NES leads me to believe that I can’t make generating these objects fully dynamic, but there must be a better way to do it than my current approach. Another thing I’m really curious about is how to maintain some static portion of the background while the rest is scrolling. I’d like to keep the infinitely-scrolling starfield in the background, but would also like to have a status bar at the top of the screen that displays the player’s life count and score. If I were to implement that right now I would be making use of sprites to fill in the status bar, but there must be a better way to do it since all the example tilesets I see for real NES games include the fonts as background graphics. I’m going to keep hacking away at this game until I feel happy with its playability, then I’ll probably move on to some form of beat ‘em up game. If you’re interested in watching my progress, you can find the code for the game here on GitHub.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+</head>
+
+
+  <body class="">
+
+    <header>
+  <div class="menu">
+    <ul>
+      <li class="page_title">assemble</li>
+<li><a href="/">/home</a></li>
+<li><a href="/about/">/about</a></li>
+<li><a href="/stats/">/stats</a></li>
+</ul>
+  </div>
+</header>
+
+
+    <h1></h1>
+
+<p>So I’ve made some pretty decent progress, I think, though at the same time I beginning to learn that I have a very long way to go before I can make a real full-featured game. The resource that gave me the biggest jump-start was definitely <a href="https://famicom.party/book/">Famicom Party</a>. Using that book as a resource, I was able to make significant progress on my vertical shooter, titled Space Fight. It helped that a vertical shooter was also used as the working example project in the book. This is where I’m at:</p>
+
+<p><img src="/assets/spacefight-1.png" alt="My first NES game"></p>
+
+<p>I’ve got a scrolling background, working controller input, moving player and enemy sprites, collision detection, and some sprite animation when one of the ships explodes. I want to add sound effects and music next, then a title screen, then an actual level layout instead of infinitely-spawning single enemies.</p>
+
+<p>My code definitely needs a lot of refactoring; you can look at it and tell it was written by somebody with minimal knowledge of 6502 Assembly (or any low-level programming, for that matter).</p>
+
+<p>One thing that I need to figure out is how to manage many objects on the screen. Right now I can support a single enemy, a single bullet fired from the player’s ship, and a single explosion at a time. The way I’m tracking those objects and moving them around the screen is extremely manual. The way zero-paged memory management works on the NES leads me to believe that I can’t make generating these objects fully dynamic, but there must be a better way to do it than my current approach.</p>
+
+<p>Another thing I’m really curious about is how to maintain some static portion of the background while the rest is scrolling. I’d like to keep the infinitely-scrolling starfield in the background, but would also like to have a status bar at the top of the screen that displays the player’s life count and score. If I were to implement that right now I would be making use of sprites to fill in the status bar, but there must be a better way to do it since all the example tilesets I see for real NES games include the fonts as background graphics.</p>
+
+<p>I’m going to keep hacking away at this game until I feel happy with its playability, then I’ll probably move on to some form of beat ‘em up game. If you’re interested in watching my progress, you can find the code for the game <a href="https://github.com/bhinks/spacefight">here on GitHub</a>.</p>
+
+
+
+    <footer>
+
+  OMG!ninjabot/
+  <br><br>
+   <img class="emoji" title=":octocat:" alt=":octocat:" src="https://github.githubassets.com/images/icons/emoji/octocat.png" height="20" width="20"> <a href="https://github.com/bhinks">@bhinks</a> 
+   <img class="emoji" title=":bird:" alt=":bird:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f426.png" height="20" width="20"> <a href="https://twitter.com/ninjabot">@ninjabot</a> 
+   <img class="emoji" title=":briefcase:" alt=":briefcase:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4bc.png" height="20" width="20"> <a href="https://www.linkedin.com/in/brenthinks/">@brenthinks</a> 
+   <img class="emoji" title=":video_game:" alt=":video_game:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f3ae.png" height="20" width="20"> <a href="https://steamcommunity.com/id/ninjabot/">@ninjabot</a> 
+
+
+</footer>
+
+
+  </body>
+</html>
