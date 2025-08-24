@@ -91,7 +91,7 @@
 
     <nav class="menu">
         <ul>
-            <li class="page_title">POST</li>
+            <li class="page_title"><span id="theme-toggle" class="theme-toggle">[GREEN MODE]</span></li>
             <li><a href="../../../../">home</a></li>
             <li><a href="/pages/about.html">about</a></li>
             <li><a href="/pages/stats.html">stats</a></li>
@@ -121,5 +121,44 @@
     <footer>
         <p>&copy; ninjabot. Terminal powered by <a href="https://getpelican.com/">Pelican</a></p>
     </footer>
+
+    <script>
+        // Three-way theme switcher functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // Theme definitions
+        const themes = ['green', 'amber', 'light'];
+        const themeLabels = {
+            'green': '[GREEN MODE]',
+            'amber': '[AMBER MODE]', 
+            'light': '[LIGHT MODE]'
+        };
+        
+        // Load saved theme or default to green
+        let currentTheme = localStorage.getItem('theme') || 'green';
+        
+        // Apply theme
+        function applyTheme(theme) {
+            if (theme === 'green') {
+                body.removeAttribute('data-theme');
+            } else {
+                body.setAttribute('data-theme', theme);
+            }
+            themeToggle.textContent = themeLabels[theme];
+            localStorage.setItem('theme', theme);
+            currentTheme = theme;
+        }
+        
+        // Initialize theme
+        applyTheme(currentTheme);
+        
+        // Cycle through themes on click
+        themeToggle.addEventListener('click', () => {
+            const currentIndex = themes.indexOf(currentTheme);
+            const nextIndex = (currentIndex + 1) % themes.length;
+            applyTheme(themes[nextIndex]);
+        });
+    </script>
 </body>
 </html>
