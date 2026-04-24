@@ -96,7 +96,7 @@
     </header>
     <div class="entry-content">
         <p>I've made some pretty decent progress, I think, though at the same time I'm beginning to learn that I have a very long way to go before I can make a real full-featured game. The resource that gave me the biggest jump-start was definitely <a href="https://famicom.party/book/">Famicom Party</a>. Using that book as a resource, I was able to make significant progress on my vertical shooter, titled Space Fight. It helped that a vertical shooter was also used as the working example project in the book. This is where I'm at:</p>
-<p><img alt="My first NES game" src="/assets/spacefight-1.png"></p>
+<p><img alt="My first NES game" src="/theme/images/spacefight-1.png"></p>
 <p>I've got a scrolling background, working controller input, moving player and enemy sprites, collision detection, and some sprite animation when one of the ships explodes. I want to add sound effects and music next, then a title screen, then an actual level layout instead of infinitely-spawning single enemies.</p>
 <p>My code definitely needs a lot of refactoring; you can look at it and tell it was written by somebody with minimal knowledge of 6502 Assembly (or any low-level programming, for that matter). </p>
 <p>One thing that I need to figure out is how to manage many objects on the screen. Right now I can support a single enemy, a single bullet fired from the player's ship, and a single explosion at a time. The way I'm tracking those objects and moving them around the screen is extremely manual. The way zero-page memory management works on the NES leads me to believe that I can't make generating these objects fully dynamic, but there must be a better way to do it than my current approach.</p>

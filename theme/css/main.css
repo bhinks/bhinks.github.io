@@ -1,5 +1,5 @@
 /* NEON TERMINAL THEME CSS */
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 /* Neon mode (default) - Cyberpunk neon aesthetic */
 :root {
@@ -246,7 +246,7 @@
 body {
   background-color: var(--bg-color);
   color: var(--main-color);
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Space Mono', monospace;
   margin: 20px auto;
   width: 90%;
   max-width: 1400px;
@@ -436,6 +436,7 @@ ul :not(.menu) > ul > li:before {
     0 0 10px var(--glow-primary),
     inset 0 0 20px var(--light-alt-color);
   transition: all 0.3s ease;
+  padding-right: 15px;
 }
 
 [data-theme="light"] .menu {
@@ -490,16 +491,6 @@ ul :not(.menu) > ul > li:before {
     0 0 10px var(--main-color);
 }
 
-.menu ul li.page_title:before {
-  content: "[";
-  color: var(--prompt-color);
-}
-
-.menu ul li.page_title:after {
-  content: "]";
-  color: var(--prompt-color);
-}
-
 /* TERMINAL STYLING - CYBERPUNK HEADER */
 .terminal-header {
   background: linear-gradient(180deg, var(--terminal-header-bg) 0%, var(--bg-color) 100%);
@@ -549,7 +540,7 @@ ul :not(.menu) > ul > li:before {
   text-align: center;
   color: var(--text-color);
   font-weight: bold;
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Space Mono', monospace;
   text-shadow: 0 0 5px var(--glow-primary);
   letter-spacing: 0.5px;
 }
@@ -671,7 +662,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 .ascii-ninja pre {
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Space Mono', monospace;
   font-size: 12px;
   line-height: 1.1;
   color: var(--glow-tertiary);
@@ -709,7 +700,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 .ascii-art {
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Space Mono', monospace;
   font-size: 10px;
   line-height: 1.2;
   color: var(--glow-primary);
@@ -738,7 +729,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 .ascii-robot pre {
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Space Mono', monospace;
   font-size: 12px;
   line-height: 1.1;
   color: var(--glow-secondary);
