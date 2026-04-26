@@ -617,13 +617,6 @@ ul :not(.menu) > ul > li:before {
     0 0 10px var(--glow-primary);
 }
 
-.entry-title:after {
-  content: "▋";
-  animation: cursor-blink 1s step-end infinite;
-  margin-left: 2px;
-  color: var(--command-color);
-}
-
 .entry-content {
   margin-left: 0;
   border-left: none;
