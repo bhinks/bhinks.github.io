@@ -989,6 +989,10 @@ ul :not(.menu) > ul > li:before {
     display: none;
   }
 
+  .terminal-status {
+    display: none;
+  }
+
   .terminal-header {
     padding: 8px 10px;
     margin: -10px -10px 15px -10px;
@@ -1009,7 +1013,7 @@ ul :not(.menu) > ul > li:before {
   }
 
   .ascii-art {
-    font-size: 6px;
+    font-size: 4px;
   }
 
   .ascii-header {
