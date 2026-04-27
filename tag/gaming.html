@@ -15,11 +15,11 @@
             <span class="status-text">ONLINE</span>
         </div>
         <div class="terminal-title">CYBERSPACE://OMGninjabot/connect.sh</div>
+        <div class="system-info">
+            <div class="system-status" id="system-status">SYS: INIT...</div>
+            <div class="network-status" id="network-status">NET: CONN...</div>
+        </div>
         <div style="clear: both;"></div>
-    </div>
-    <div class="system-info">
-        <div class="system-status" id="system-status">SYS: INITIALIZING...</div>
-        <div class="network-status" id="network-status">NET: CONNECTING...</div>
     </div>
 
     <header class="ascii-header">
@@ -315,9 +315,9 @@
                 });
             });
 
-            // Typing Effect on Entry Titles
+            // Typing Effect on Entry Titles (only on article pages, not index)
             const entryTitle = document.querySelector('.entry-title');
-            if (entryTitle && !entryTitle.dataset.typed) {
+            if (entryTitle && !entryTitle.dataset.typed && !entryTitle.querySelector('a')) {
                 const originalText = entryTitle.textContent;
                 entryTitle.textContent = '';
                 entryTitle.dataset.typed = 'true';
