@@ -946,15 +946,6 @@ ul :not(.menu) > ul > li:before {
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .ascii-ninja pre, .ascii-robot pre {
-    font-size: 8px;
-  }
-  
-  .ascii-art {
-    font-size: 6px;
-  }
-}
 
 /* RESPONSIVE DESIGN */
 
