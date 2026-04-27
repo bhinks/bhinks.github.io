@@ -591,7 +591,9 @@ ul :not(.menu) > ul > li:before {
   transition: all 0.3s ease;
   padding-right: 15px;
   position: relative;
-  z-index: 10;
+  z-index: 100;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 [data-theme="light"] .menu {
