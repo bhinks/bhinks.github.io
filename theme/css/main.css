@@ -241,6 +241,12 @@
   50%, 100% { opacity: 0; }
 }
 
+.typing-cursor {
+  color: var(--text-color);
+  text-shadow: 0 0 5px var(--text-color);
+  font-weight: bold;
+}
+
 @keyframes neon-flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
     text-shadow:
@@ -700,15 +706,15 @@ ul :not(.menu) > ul > li:before {
   font-size: 8px;
   flex: 0 0 auto;
   text-align: right;
-  color: var(--alt-color);
+  color: var(--text-color);
 }
 
 .system-status, .network-status {
   font-family: 'Space Mono', monospace;
   letter-spacing: 0.3px;
-  text-shadow: 0 0 2px var(--alt-color);
+  text-shadow: 0 0 3px var(--text-color);
   transition: all 0.3s ease;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .terminal-info {
@@ -947,13 +953,87 @@ ul :not(.menu) > ul > li:before {
   }
 }
 
-@media only screen and (max-width: 480px) {
-  .ascii-ninja pre, .ascii-robot pre {
+/* RESPONSIVE DESIGN */
+
+/* Tablet and below - hide ASCII art flanking images */
+@media only screen and (max-width: 900px) {
+  .ascii-ninja, .ascii-robot {
+    display: none;
+  }
+
+  .ascii-main {
+    flex: 1;
+  }
+
+  .ascii-art {
+    font-size: 8px;
+  }
+
+  .system-info {
+    font-size: 7px;
+  }
+}
+
+/* Mobile - further scaling */
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 10px;
+    margin: 10px auto;
+    width: 95%;
+  }
+
+  .terminal-header {
+    padding: 8px 10px;
+    margin: -10px -10px 15px -10px;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .terminal-title {
+    font-size: 9px;
+    flex: 1 1 100%;
+    order: 3;
+    margin-top: 5px;
+  }
+
+  .system-info {
+    font-size: 6px;
+    gap: 1px;
+  }
+
+  .ascii-art {
     font-size: 6px;
   }
-  
+
+  .ascii-header {
+    padding: 10px 0 15px 0;
+  }
+
+  .menu {
+    padding-right: 10px;
+  }
+
+  .menu ul li {
+    margin: 0 5px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 1em;
+  }
+}
+
+/* Very small mobile */
+@media only screen and (max-width: 400px) {
   .ascii-art {
     font-size: 4px;
+  }
+
+  .terminal-title {
+    font-size: 7px;
+  }
+
+  .menu ul li a {
+    font-size: 11px;
   }
 }
 

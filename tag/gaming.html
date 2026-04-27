@@ -315,23 +315,63 @@
                 });
             });
 
-            // Typing Effect on Entry Titles (only on article pages, not index)
+            // Typing Effect on Entry Titles and Content (only on article pages, not index)
             const entryTitle = document.querySelector('.entry-title');
-            if (entryTitle && !entryTitle.dataset.typed && !entryTitle.querySelector('a')) {
-                const originalText = entryTitle.textContent;
+            const entryContent = document.querySelector('.entry-content');
+
+            if (entryTitle && entryContent && !entryTitle.dataset.typed && !entryTitle.querySelector('a')) {
+                const titleText = entryTitle.textContent;
+                const contentText = entryContent.innerText;
+
                 entryTitle.textContent = '';
+                entryContent.style.display = 'none';
                 entryTitle.dataset.typed = 'true';
 
-                let i = 0;
-                function typeWriter() {
-                    if (i < originalText.length) {
-                        entryTitle.textContent += originalText.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 50);
+                // Create cursor element
+                const cursor = document.createElement('span');
+                cursor.className = 'typing-cursor';
+                cursor.textContent = '▋';
+                cursor.style.animation = 'cursor-blink 1s step-end infinite';
+                cursor.style.marginLeft = '2px';
+
+                // Type title first
+                let titleIndex = 0;
+                function typeTitle() {
+                    if (titleIndex < titleText.length) {
+                        entryTitle.textContent += titleText.charAt(titleIndex);
+                        titleIndex++;
+                        setTimeout(typeTitle, 50);
+                    } else {
+                        // Title done, now type content
+                        setTimeout(startContentTyping, 500);
                     }
                 }
 
-                setTimeout(typeWriter, 300);
+                // Type content
+                function startContentTyping() {
+                    entryContent.style.display = 'block';
+                    entryContent.innerHTML = '';
+                    entryContent.appendChild(cursor);
+
+                    let contentIndex = 0;
+                    const textNode = document.createTextNode('');
+                    entryContent.insertBefore(textNode, cursor);
+
+                    function typeContent() {
+                        if (contentIndex < contentText.length) {
+                            textNode.textContent += contentText.charAt(contentIndex);
+                            contentIndex++;
+                            setTimeout(typeContent, 15);
+                        } else {
+                            // Done typing, keep cursor
+                            cursor.style.animation = 'cursor-blink 1s step-end infinite';
+                        }
+                    }
+
+                    typeContent();
+                }
+
+                setTimeout(typeTitle, 300);
             }
         });
     </script>
