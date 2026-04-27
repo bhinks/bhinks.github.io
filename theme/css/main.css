@@ -927,34 +927,23 @@ ul :not(.menu) > ul > li:before {
   animation: rgb-split 0.2s infinite, glow-pulse 5s ease-in-out infinite;
 }
 
-/* Responsive design for epic header */
+/* RESPONSIVE DESIGN */
+
+/* Tablet and below - hide ASCII art flanking images */
 @media only screen and (max-width: 900px) {
   .ascii-container {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .ascii-ninja, .ascii-robot {
+    display: none;
     flex: none;
     margin: 10px 0;
   }
-  
+
   .ascii-ninja pre, .ascii-robot pre {
     font-size: 10px;
-  }
-  
-  .ascii-art {
-    font-size: 8px;
-  }
-}
-
-
-/* RESPONSIVE DESIGN */
-
-/* Tablet and below - hide ASCII art flanking images */
-@media only screen and (max-width: 900px) {
-  .ascii-ninja, .ascii-robot {
-    display: none;
   }
 
   .ascii-main {
@@ -962,7 +951,7 @@ ul :not(.menu) > ul > li:before {
   }
 
   .ascii-art {
-    font-size: 8px;
+    font-size: 8px !important;
   }
 
   .system-info {
@@ -1006,7 +995,7 @@ ul :not(.menu) > ul > li:before {
   }
 
   .ascii-art {
-    font-size: 3px;
+    font-size: 3px !important;
   }
 
   .ascii-header {
@@ -1029,7 +1018,7 @@ ul :not(.menu) > ul > li:before {
 /* Very small mobile */
 @media only screen and (max-width: 400px) {
   .ascii-art {
-    font-size: 2.5px;
+    font-size: 2.5px !important;
   }
 
   .terminal-title {
