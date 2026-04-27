@@ -639,17 +639,17 @@ body[data-theme="light"]::after {
 
 /* Green mode - Phosphor ghosting effect */
 body[data-theme="green"]::before {
-  content: '';
+  content: 'GREEN MODE TEST';
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 204, 0, 0.1) 100%);
-  animation: phosphor-fade 3s ease-in-out infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 100px;
+  color: rgba(0, 255, 0, 0.8);
+  text-shadow: 0 0 30px #00ff00;
   pointer-events: none;
-  z-index: 9999;
-  opacity: 0.15;
+  z-index: 99999;
+  animation: phosphor-fade 3s ease-in-out infinite;
 }
 
 @keyframes phosphor-fade {
