@@ -639,8 +639,17 @@ ul :not(.menu) > ul > li:before {
 
 /* Green mode - Phosphor ghosting effect */
 [data-theme="green"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 204, 0, 0.1) 100%);
   animation: phosphor-fade 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.15;
 }
 
 @keyframes phosphor-fade {
@@ -650,11 +659,26 @@ ul :not(.menu) > ul > li:before {
 
 /* Amber mode - Warm burn-in glow */
 [data-theme="amber"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(ellipse 800px 600px at center, rgba(255, 170, 0, 0.05) 0%, transparent 70%);
   animation: none;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.3;
 }
 
 [data-theme="amber"] body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   opacity: 0.08;
   background: repeating-linear-gradient(
     0deg,
@@ -662,10 +686,18 @@ ul :not(.menu) > ul > li:before {
     transparent 1px,
     transparent 2px
   );
+  pointer-events: none;
+  z-index: 9998;
 }
 
 /* Vaporwave - VHS tracking distortion */
 [data-theme="vaporwave"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background:
     repeating-linear-gradient(
       0deg,
@@ -680,6 +712,9 @@ ul :not(.menu) > ul > li:before {
       transparent 3px
     );
   animation: vhs-tracking 8s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.15;
 }
 
 @keyframes vhs-tracking {
@@ -699,6 +734,12 @@ ul :not(.menu) > ul > li:before {
 
 /* Outrun - Synthwave sunset grid */
 [data-theme="outrun"] body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background:
     repeating-linear-gradient(
       0deg,
@@ -717,10 +758,18 @@ ul :not(.menu) > ul > li:before {
   transform: perspective(500px) rotateX(60deg);
   transform-origin: bottom;
   opacity: 0.3;
+  pointer-events: none;
+  z-index: 9998;
 }
 
 /* Arasaka - Corporate data streams */
 [data-theme="arasaka"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: repeating-linear-gradient(
     90deg,
     transparent 0px,
@@ -729,6 +778,9 @@ ul :not(.menu) > ul > li:before {
     transparent 100px
   );
   animation: data-stream 20s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.2;
 }
 
 @keyframes data-stream {
@@ -738,6 +790,12 @@ ul :not(.menu) > ul > li:before {
 
 /* Neuromancer - Ice crystallization */
 [data-theme="neuromancer"] body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background:
     repeating-linear-gradient(
       45deg,
@@ -754,6 +812,9 @@ ul :not(.menu) > ul > li:before {
       transparent 60px
     );
   animation: ice-shimmer 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.1;
 }
 
 @keyframes ice-shimmer {
@@ -763,6 +824,12 @@ ul :not(.menu) > ul > li:before {
 
 /* Militech - Tactical grid overlay */
 [data-theme="militech"] body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background:
     repeating-linear-gradient(
       0deg,
@@ -779,10 +846,18 @@ ul :not(.menu) > ul > li:before {
       transparent 50px
     );
   opacity: 0.4;
+  pointer-events: none;
+  z-index: 9998;
 }
 
 /* 2077 - Holographic interference */
 [data-theme="2077"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: repeating-linear-gradient(
     0deg,
     rgba(252, 243, 0, 0.02) 0px,
@@ -791,6 +866,9 @@ ul :not(.menu) > ul > li:before {
     transparent 3px
   );
   animation: holo-glitch 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.15;
 }
 
 @keyframes holo-glitch {
