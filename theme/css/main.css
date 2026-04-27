@@ -985,6 +985,10 @@ ul :not(.menu) > ul > li:before {
     width: 95%;
   }
 
+  .system-info {
+    display: none;
+  }
+
   .terminal-header {
     padding: 8px 10px;
     margin: -10px -10px 15px -10px;
