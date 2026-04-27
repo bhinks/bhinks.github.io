@@ -639,22 +639,21 @@ body[data-theme="light"]::after {
 
 /* Green mode - Phosphor ghosting effect */
 body[data-theme="green"]::before {
-  content: 'GREEN MODE TEST';
+  content: '';
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 100px;
-  color: rgba(0, 255, 0, 0.8);
-  text-shadow: 0 0 30px #00ff00;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.15) 0%, transparent 60%);
+  animation: phosphor-fade 2s ease-in-out infinite;
   pointer-events: none;
-  z-index: 99999;
-  animation: phosphor-fade 3s ease-in-out infinite;
+  z-index: 9999;
 }
 
 @keyframes phosphor-fade {
-  0%, 100% { opacity: 0.15; }
-  50% { opacity: 0.25; }
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
 }
 
 /* Amber mode - Warm burn-in glow */
@@ -665,11 +664,10 @@ body[data-theme="amber"]::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(ellipse 800px 600px at center, rgba(255, 170, 0, 0.05) 0%, transparent 70%);
-  animation: none;
+  background: radial-gradient(ellipse 600px 500px at center, rgba(255, 170, 0, 0.2) 0%, transparent 70%);
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.3;
+  opacity: 0.6;
 }
 
 body[data-theme="amber"]::after {
@@ -679,15 +677,15 @@ body[data-theme="amber"]::after {
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.08;
   background: repeating-linear-gradient(
     0deg,
-    rgba(255, 170, 0, 0.1) 0px,
+    rgba(255, 170, 0, 0.15) 0px,
     transparent 1px,
-    transparent 2px
+    transparent 3px
   );
   pointer-events: none;
   z-index: 9998;
+  opacity: 0.3;
 }
 
 /* Vaporwave - VHS tracking distortion */
@@ -702,33 +700,32 @@ body[data-theme="vaporwave"]::before {
     repeating-linear-gradient(
       0deg,
       transparent 0px,
-      rgba(255, 113, 206, 0.03) 1px,
+      rgba(255, 113, 206, 0.15) 1px,
       transparent 2px,
-      transparent 6px
+      transparent 4px
     ),
     repeating-linear-gradient(
       90deg,
-      rgba(1, 205, 254, 0.02) 0px,
-      transparent 3px
+      rgba(1, 205, 254, 0.1) 0px,
+      transparent 5px
     );
-  animation: vhs-tracking 8s linear infinite;
+  animation: vhs-tracking 4s linear infinite;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.15;
 }
 
 @keyframes vhs-tracking {
   0%, 100% {
     transform: translateX(0);
-    opacity: 0.15;
+    opacity: 0.4;
   }
   25% {
-    transform: translateX(2px);
-    opacity: 0.2;
+    transform: translateX(3px);
+    opacity: 0.6;
   }
   75% {
-    transform: translateX(-2px);
-    opacity: 0.1;
+    transform: translateX(-3px);
+    opacity: 0.3;
   }
 }
 
@@ -736,28 +733,28 @@ body[data-theme="vaporwave"]::before {
 body[data-theme="outrun"]::after {
   content: '';
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 80%;
   background:
     repeating-linear-gradient(
       0deg,
       transparent 0px,
-      rgba(255, 0, 110, 0.1) 1px,
-      transparent 2px,
-      transparent 40px
+      rgba(255, 0, 110, 0.3) 2px,
+      transparent 3px,
+      transparent 30px
     ),
     repeating-linear-gradient(
       90deg,
       transparent 0px,
-      rgba(58, 134, 255, 0.05) 1px,
-      transparent 2px,
-      transparent 40px
+      rgba(58, 134, 255, 0.2) 2px,
+      transparent 3px,
+      transparent 30px
     );
-  transform: perspective(500px) rotateX(60deg);
+  transform: perspective(400px) rotateX(65deg);
   transform-origin: bottom;
-  opacity: 0.3;
+  opacity: 0.5;
   pointer-events: none;
   z-index: 9998;
 }
@@ -773,14 +770,14 @@ body[data-theme="arasaka"]::before {
   background: repeating-linear-gradient(
     90deg,
     transparent 0px,
-    rgba(255, 0, 64, 0.03) 1px,
-    transparent 2px,
-    transparent 100px
+    rgba(255, 0, 64, 0.15) 2px,
+    transparent 3px,
+    transparent 60px
   );
-  animation: data-stream 20s linear infinite;
+  animation: data-stream 15s linear infinite;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 @keyframes data-stream {
@@ -800,26 +797,25 @@ body[data-theme="neuromancer"]::after {
     repeating-linear-gradient(
       45deg,
       transparent 0px,
-      rgba(0, 212, 255, 0.02) 1px,
-      transparent 2px,
-      transparent 60px
+      rgba(0, 212, 255, 0.15) 2px,
+      transparent 3px,
+      transparent 40px
     ),
     repeating-linear-gradient(
       -45deg,
       transparent 0px,
-      rgba(202, 240, 248, 0.02) 1px,
-      transparent 2px,
-      transparent 60px
+      rgba(202, 240, 248, 0.12) 2px,
+      transparent 3px,
+      transparent 40px
     );
-  animation: ice-shimmer 4s ease-in-out infinite;
+  animation: ice-shimmer 3s ease-in-out infinite;
   pointer-events: none;
   z-index: 9998;
-  opacity: 0.1;
 }
 
 @keyframes ice-shimmer {
-  0%, 100% { opacity: 0.1; }
-  50% { opacity: 0.2; }
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.6; }
 }
 
 /* Militech - Tactical grid overlay */
@@ -834,18 +830,18 @@ body[data-theme="militech"]::after {
     repeating-linear-gradient(
       0deg,
       transparent 0px,
-      rgba(82, 183, 136, 0.05) 1px,
-      transparent 2px,
-      transparent 50px
+      rgba(82, 183, 136, 0.2) 2px,
+      transparent 3px,
+      transparent 40px
     ),
     repeating-linear-gradient(
       90deg,
       transparent 0px,
-      rgba(82, 183, 136, 0.05) 1px,
-      transparent 2px,
-      transparent 50px
+      rgba(82, 183, 136, 0.2) 2px,
+      transparent 3px,
+      transparent 40px
     );
-  opacity: 0.4;
+  opacity: 0.6;
   pointer-events: none;
   z-index: 9998;
 }
@@ -860,29 +856,28 @@ body[data-theme="2077"]::before {
   height: 100%;
   background: repeating-linear-gradient(
     0deg,
-    rgba(252, 243, 0, 0.02) 0px,
-    transparent 1px,
-    rgba(0, 240, 255, 0.02) 2px,
-    transparent 3px
+    rgba(252, 243, 0, 0.1) 0px,
+    transparent 2px,
+    rgba(0, 240, 255, 0.08) 4px,
+    transparent 6px
   );
-  animation: holo-glitch 5s ease-in-out infinite;
+  animation: holo-glitch 3s ease-in-out infinite;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.15;
 }
 
 @keyframes holo-glitch {
   0%, 100% {
     transform: translateY(0);
-    opacity: 0.15;
+    opacity: 0.4;
   }
   10% {
-    transform: translateY(2px);
-    opacity: 0.25;
+    transform: translateY(3px);
+    opacity: 0.7;
   }
   20% {
     transform: translateY(0);
-    opacity: 0.15;
+    opacity: 0.4;
   }
 }
 
