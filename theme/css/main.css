@@ -134,6 +134,63 @@
   --hover-glow: #ff1744;
 }
 
+/* Neuromancer mode - Ice blue with sharp whites */
+[data-theme="neuromancer"] {
+  --main-color: #00d4ff;
+  --bg-color: #000814;
+  --terminal-bg: #000814;
+  --text-color: #00d4ff;
+  --pop-color: #caf0f8;
+  --alt-color: #48cae4;
+  --light-alt-color: rgba(0, 212, 255, 0.3);
+  --prompt-color: #00d4ff;
+  --command-color: #ffffff;
+  --border-color: #00d4ff;
+  --terminal-header-bg: #001d3d;
+  --glow-primary: #00d4ff;
+  --glow-secondary: #caf0f8;
+  --glow-tertiary: #48cae4;
+  --hover-glow: #90e0ef;
+}
+
+/* Militech mode - Military green with red warnings */
+[data-theme="militech"] {
+  --main-color: #52b788;
+  --bg-color: #081c15;
+  --terminal-bg: #081c15;
+  --text-color: #52b788;
+  --pop-color: #ff0000;
+  --alt-color: #74c69d;
+  --light-alt-color: rgba(82, 183, 136, 0.3);
+  --prompt-color: #52b788;
+  --command-color: #d8f3dc;
+  --border-color: #52b788;
+  --terminal-header-bg: #1b4332;
+  --glow-primary: #52b788;
+  --glow-secondary: #ff0000;
+  --glow-tertiary: #74c69d;
+  --hover-glow: #ff0000;
+}
+
+/* 2077 mode - Cyberpunk 2077 yellow */
+[data-theme="2077"] {
+  --main-color: #fcf300;
+  --bg-color: #000000;
+  --terminal-bg: #000000;
+  --text-color: #fcf300;
+  --pop-color: #00f0ff;
+  --alt-color: #ffdd00;
+  --light-alt-color: rgba(252, 243, 0, 0.3);
+  --prompt-color: #fcf300;
+  --command-color: #ffffff;
+  --border-color: #fcf300;
+  --terminal-header-bg: #1a1a00;
+  --glow-primary: #fcf300;
+  --glow-secondary: #00f0ff;
+  --glow-tertiary: #ff00ff;
+  --hover-glow: #00f0ff;
+}
+
 /* ANIMATIONS */
 @keyframes scanlines {
   0% {
@@ -264,6 +321,17 @@ body {
   animation: flicker 5s infinite;
 }
 
+#matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
 /* CRT Scanlines effect - multiple moving lines */
 body::before {
   content: '';
@@ -316,6 +384,21 @@ h1, h2, h3, h4, h5, h6 {
     0 0 10px var(--pop-color),
     0 0 20px var(--pop-color);
   animation: glow-pulse 3s ease-in-out infinite;
+  transition: all 0.1s ease;
+}
+
+h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+  text-shadow:
+    0.03em 0 0 rgba(255, 0, 0, 0.75),
+    -0.03em -0.025em 0 rgba(0, 255, 0, 0.75),
+    0.025em 0.03em 0 rgba(0, 0, 255, 0.75),
+    0 0 10px var(--pop-color),
+    0 0 20px var(--pop-color);
+}
+
+.glitch-text {
+  position: relative;
+  animation: glitch 0.3s ease-in-out infinite;
 }
 
 p, ul, ol {
@@ -394,7 +477,61 @@ header p {
   margin: 0; 
 }
 
-img { 
+.entry-content img {
+  max-width: 60%;
+  height: auto;
+  cursor: pointer;
+  position: relative;
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px var(--glow-primary);
+}
+
+.entry-content img::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    rgba(255, 255, 255, 0.1) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.entry-content img.expanded {
+  max-width: 95%;
+  cursor: zoom-out;
+  z-index: 1000;
+  box-shadow: 0 0 50px var(--glow-primary);
+}
+
+.entry-content img:not(.expanded)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    var(--main-color) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  opacity: 0.3;
+  animation: scanlines 10s linear infinite;
+}
+
+img:not(.entry-content img) {
   max-width: 100%;
   height: auto;
 }
@@ -543,6 +680,24 @@ ul :not(.menu) > ul > li:before {
   font-family: 'Space Mono', monospace;
   text-shadow: 0 0 5px var(--glow-primary);
   letter-spacing: 0.5px;
+}
+
+.system-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  padding: 8px 15px;
+  margin: -20px -20px 15px -20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--alt-color);
+}
+
+.system-status, .network-status {
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 3px var(--alt-color);
+  transition: all 0.3s ease;
 }
 
 .terminal-info {

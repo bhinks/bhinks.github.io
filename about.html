@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <canvas id="matrix-rain"></canvas>
     <div class="terminal-header">
         <div class="terminal-status">
             <span class="status-indicator"></span>
@@ -15,6 +16,10 @@
         </div>
         <div class="terminal-title">CYBERSPACE://OMGninjabot/connect.sh</div>
         <div style="clear: both;"></div>
+    </div>
+    <div class="system-info">
+        <div class="system-status" id="system-status">SYS: INITIALIZING...</div>
+        <div class="network-status" id="network-status">NET: CONNECTING...</div>
     </div>
 
     <header class="ascii-header">
@@ -120,7 +125,7 @@
         const body = document.body;
 
         // Theme definitions
-        const themes = ['neon', 'green', 'amber', 'light', 'vaporwave', 'outrun', 'arasaka'];
+        const themes = ['neon', 'green', 'amber', 'light', 'vaporwave', 'outrun', 'arasaka', 'neuromancer', 'militech', '2077'];
         const themeLabels = {
             'neon': '[NEON MODE]',
             'green': '[GREEN MODE]',
@@ -128,7 +133,10 @@
             'light': '[LIGHT MODE]',
             'vaporwave': '[VAPORWAVE MODE]',
             'outrun': '[OUTRUN MODE]',
-            'arasaka': '[ARASAKA MODE]'
+            'arasaka': '[ARASAKA MODE]',
+            'neuromancer': '[NEUROMANCER MODE]',
+            'militech': '[MILITECH MODE]',
+            '2077': '[2077 MODE]'
         };
 
         // Load saved theme or default to neon
@@ -154,6 +162,133 @@
             const currentIndex = themes.indexOf(currentTheme);
             const nextIndex = (currentIndex + 1) % themes.length;
             applyTheme(themes[nextIndex]);
+        });
+
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const charArray = chars.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const mainColor = getComputedStyle(document.body).getPropertyValue('--main-color').trim();
+            ctx.fillStyle = mainColor;
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Random Glitch Effect on Terminal Title
+        const terminalTitle = document.querySelector('.terminal-title');
+        setInterval(() => {
+            if (Math.random() > 0.9) {
+                terminalTitle.classList.add('glitch-text');
+                setTimeout(() => terminalTitle.classList.remove('glitch-text'), 300);
+            }
+        }, 3000);
+
+        // Dynamic System Status
+        const systemMessages = [
+            'SYS: ALL SYSTEMS NOMINAL',
+            'SYS: DEFRAG COMPLETE',
+            'SYS: RUNNING DIAGNOSTICS',
+            'SYS: FIREWALL ACTIVE',
+            'SYS: ENCRYPTION ENABLED',
+            'SYS: MEMORY OPTIMIZED',
+            'SYS: CORES: 8 | LOAD: 42%',
+            'SYS: UPTIME: 47 DAYS',
+            'SYS: ICE PROTOCOLS ACTIVE',
+            'SYS: SCANNING FOR THREATS...',
+            'SYS: NO THREATS DETECTED'
+        ];
+
+        const systemStatus = document.getElementById('system-status');
+        let systemIndex = 0;
+
+        function updateSystemStatus() {
+            systemIndex = (systemIndex + 1) % systemMessages.length;
+            systemStatus.textContent = systemMessages[systemIndex];
+        }
+
+        setInterval(updateSystemStatus, 8000);
+        setTimeout(updateSystemStatus, 1500);
+
+        // Dynamic Network Status
+        const networkMessages = [
+            'NET: LATENCY: 12ms',
+            'NET: BANDWIDTH: 1.2GB/s',
+            'NET: CONNECTED: SECURE',
+            'NET: PACKETS: 0 DROPPED',
+            'NET: NODE: CYBERSPACE-7',
+            'NET: ENCRYPTION: AES-256',
+            'NET: VPN: ACTIVE',
+            'NET: PROXY: ENABLED',
+            'NET: UPLINK: STABLE'
+        ];
+
+        const networkStatus = document.getElementById('network-status');
+        let networkIndex = 0;
+
+        function updateNetworkStatus() {
+            networkIndex = (networkIndex + 1) % networkMessages.length;
+            networkStatus.textContent = networkMessages[networkIndex];
+        }
+
+        setInterval(updateNetworkStatus, 6000);
+        setTimeout(updateNetworkStatus, 2000);
+
+        // Image Click to Enlarge
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.entry-content img');
+            images.forEach(img => {
+                img.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+
+            // Typing Effect on Entry Titles
+            const entryTitle = document.querySelector('.entry-title');
+            if (entryTitle && !entryTitle.dataset.typed) {
+                const originalText = entryTitle.textContent;
+                entryTitle.textContent = '';
+                entryTitle.dataset.typed = 'true';
+
+                let i = 0;
+                function typeWriter() {
+                    if (i < originalText.length) {
+                        entryTitle.textContent += originalText.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                }
+
+                setTimeout(typeWriter, 300);
+            }
         });
     </script>
 </body>
