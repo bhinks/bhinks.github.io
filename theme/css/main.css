@@ -336,6 +336,9 @@ body {
   z-index: 1;
   opacity: 0.15;
   pointer-events: none;
+  /* Fade out in the center content area */
+  mask-image: radial-gradient(ellipse 800px 1200px at center, transparent 20%, black 60%);
+  -webkit-mask-image: radial-gradient(ellipse 800px 1200px at center, transparent 20%, black 60%);
 }
 
 /* CRT Scanlines effect - multiple moving lines */

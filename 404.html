@@ -306,10 +306,12 @@ The page you're looking for has been moved, deleted, or never existed.
 
             if (entryTitle && entryContent && !entryTitle.dataset.typed && !entryTitle.querySelector('a')) {
                 const titleText = entryTitle.textContent;
-                const contentText = entryContent.innerText;
+
+                // Clone the original content to preserve all HTML
+                const contentClone = entryContent.cloneNode(true);
 
                 entryTitle.textContent = '';
-                entryContent.style.display = 'none';
+                entryContent.style.visibility = 'hidden';
                 entryTitle.dataset.typed = 'true';
 
                 // Create cursor element
@@ -319,41 +321,97 @@ The page you're looking for has been moved, deleted, or never existed.
                 cursor.style.animation = 'cursor-blink 1s step-end infinite';
                 cursor.style.marginLeft = '2px';
 
-                // Type title first
+                // Type title first (12ms per char - 4x faster than 50ms)
                 let titleIndex = 0;
                 function typeTitle() {
                     if (titleIndex < titleText.length) {
                         entryTitle.textContent += titleText.charAt(titleIndex);
                         titleIndex++;
-                        setTimeout(typeTitle, 50);
+                        setTimeout(typeTitle, 12);
                     } else {
                         // Title done, now type content
-                        setTimeout(startContentTyping, 500);
+                        setTimeout(startContentTyping, 200);
                     }
                 }
 
-                // Type content
+                // Type content while preserving HTML structure
                 function startContentTyping() {
-                    entryContent.style.display = 'block';
+                    entryContent.style.visibility = 'visible';
                     entryContent.innerHTML = '';
-                    entryContent.appendChild(cursor);
 
-                    let contentIndex = 0;
-                    const textNode = document.createTextNode('');
-                    entryContent.insertBefore(textNode, cursor);
+                    // Collect all text nodes and their parent elements
+                    const textSegments = [];
 
-                    function typeContent() {
-                        if (contentIndex < contentText.length) {
-                            textNode.textContent += contentText.charAt(contentIndex);
-                            contentIndex++;
-                            setTimeout(typeContent, 15);
-                        } else {
-                            // Done typing, keep cursor
-                            cursor.style.animation = 'cursor-blink 1s step-end infinite';
+                    function collectTextNodes(node, parent) {
+                        if (node.nodeType === Node.TEXT_NODE) {
+                            const text = node.textContent;
+                            if (text.trim().length > 0 || text.length > 0) {
+                                textSegments.push({ text: text, parent: parent, originalNode: node });
+                            }
+                        } else if (node.nodeType === Node.ELEMENT_NODE) {
+                            // Clone the element structure but empty text nodes
+                            const clone = node.cloneNode(false);
+                            parent.appendChild(clone);
+
+                            for (let child of node.childNodes) {
+                                collectTextNodes(child, clone);
+                            }
                         }
                     }
 
-                    typeContent();
+                    // Build empty structure
+                    for (let child of contentClone.childNodes) {
+                        collectTextNodes(child, entryContent);
+                    }
+
+                    // Add cursor at the end
+                    entryContent.appendChild(cursor);
+
+                    // Now type out each text segment (4ms per char - 4x faster than 15ms)
+                    let segmentIndex = 0;
+                    let charIndex = 0;
+
+                    function typeNextChar() {
+                        if (segmentIndex >= textSegments.length) {
+                            // Done typing
+                            cursor.style.animation = 'cursor-blink 1s step-end infinite';
+                            return;
+                        }
+
+                        const segment = textSegments[segmentIndex];
+
+                        if (charIndex < segment.text.length) {
+                            // Find or create text node in parent
+                            let textNode = null;
+                            for (let child of segment.parent.childNodes) {
+                                if (child.nodeType === Node.TEXT_NODE) {
+                                    textNode = child;
+                                    break;
+                                }
+                            }
+                            if (!textNode) {
+                                textNode = document.createTextNode('');
+                                segment.parent.insertBefore(textNode, segment.parent.firstChild);
+                            }
+
+                            textNode.textContent += segment.text.charAt(charIndex);
+                            charIndex++;
+
+                            // Move cursor to follow typing
+                            if (segment.parent.parentNode) {
+                                segment.parent.parentNode.appendChild(cursor);
+                            }
+
+                            setTimeout(typeNextChar, 4);
+                        } else {
+                            // Move to next segment
+                            segmentIndex++;
+                            charIndex = 0;
+                            setTimeout(typeNextChar, 4);
+                        }
+                    }
+
+                    typeNextChar();
                 }
 
                 setTimeout(typeTitle, 300);
