@@ -58,23 +58,23 @@
   --hover-glow: #ffdd00;
 }
 
-/* Light mode */
+/* Snow Crash mode - Black and white bitmap virus aesthetic */
 [data-theme="light"] {
   --main-color: #000000;
-  --bg-color: #f5f5f5;
+  --bg-color: #ffffff;
   --terminal-bg: #ffffff;
   --text-color: #000000;
-  --pop-color: #003399;
-  --alt-color: #003399;
-  --light-alt-color: rgba(0, 51, 153, 0.3);
-  --prompt-color: #006600;
-  --command-color: #333333;
-  --border-color: #cccccc;
-  --terminal-header-bg: #e0e0e0;
-  --glow-primary: rgba(0, 51, 153, 0.3);
-  --glow-secondary: rgba(0, 102, 0, 0.3);
-  --glow-tertiary: rgba(0, 0, 0, 0.1);
-  --hover-glow: #003399;
+  --pop-color: #ff0033;
+  --alt-color: #ff0033;
+  --light-alt-color: rgba(255, 0, 51, 0.2);
+  --prompt-color: #ff0033;
+  --command-color: #000000;
+  --border-color: #000000;
+  --terminal-header-bg: #f0f0f0;
+  --glow-primary: rgba(255, 0, 51, 0.5);
+  --glow-secondary: rgba(0, 0, 0, 0.3);
+  --glow-tertiary: rgba(255, 0, 51, 0.3);
+  --hover-glow: #ff0033;
 }
 
 /* Vaporwave mode - Aesthetic pink/purple/cyan */
@@ -598,6 +598,43 @@ ul :not(.menu) > ul > li:before {
 
 [data-theme="light"] .menu {
   background: #ffffff;
+}
+
+/* Snow Crash - Bitmap virus static effect */
+[data-theme="light"] body::before {
+  opacity: 0.03;
+  background: repeating-linear-gradient(
+    0deg,
+    black 0px,
+    black 1px,
+    transparent 1px,
+    transparent 2px
+  ),
+  repeating-linear-gradient(
+    90deg,
+    black 0px,
+    black 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  background-size: 4px 4px;
+  animation: snow-crash-glitch 0.3s infinite;
+}
+
+[data-theme="light"] body::after {
+  opacity: 0.02;
+  background: repeating-linear-gradient(
+    45deg,
+    black 0px,
+    black 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+@keyframes snow-crash-glitch {
+  0%, 100% { opacity: 0.03; }
+  50% { opacity: 0.05; }
 }
 
 .menu ul {
