@@ -601,7 +601,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 /* Snow Crash - Bitmap virus static effect */
-[data-theme="light"] body::before {
+body[data-theme="light"]::before {
   opacity: 0.03;
   background: repeating-linear-gradient(
     0deg,
@@ -621,7 +621,7 @@ ul :not(.menu) > ul > li:before {
   animation: snow-crash-glitch 0.3s infinite;
 }
 
-[data-theme="light"] body::after {
+body[data-theme="light"]::after {
   opacity: 0.02;
   background: repeating-linear-gradient(
     45deg,
@@ -638,7 +638,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 /* Green mode - Phosphor ghosting effect */
-[data-theme="green"] body::before {
+body[data-theme="green"]::before {
   content: '';
   position: fixed;
   top: 0;
@@ -658,7 +658,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 /* Amber mode - Warm burn-in glow */
-[data-theme="amber"] body::before {
+body[data-theme="amber"]::before {
   content: '';
   position: fixed;
   top: 0;
@@ -672,7 +672,7 @@ ul :not(.menu) > ul > li:before {
   opacity: 0.3;
 }
 
-[data-theme="amber"] body::after {
+body[data-theme="amber"]::after {
   content: '';
   position: fixed;
   top: 0;
@@ -691,7 +691,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 /* Vaporwave - VHS tracking distortion */
-[data-theme="vaporwave"] body::before {
+body[data-theme="vaporwave"]::before {
   content: '';
   position: fixed;
   top: 0;
@@ -733,7 +733,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 /* Outrun - Synthwave sunset grid */
-[data-theme="outrun"] body::after {
+body[data-theme="outrun"]::after {
   content: '';
   position: fixed;
   top: 0;
@@ -763,7 +763,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 /* Arasaka - Corporate data streams */
-[data-theme="arasaka"] body::before {
+body[data-theme="arasaka"]::before {
   content: '';
   position: fixed;
   top: 0;
@@ -789,7 +789,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 /* Neuromancer - Ice crystallization */
-[data-theme="neuromancer"] body::after {
+body[data-theme="neuromancer"]::after {
   content: '';
   position: fixed;
   top: 0;
@@ -823,7 +823,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 /* Militech - Tactical grid overlay */
-[data-theme="militech"] body::after {
+body[data-theme="militech"]::after {
   content: '';
   position: fixed;
   top: 0;
@@ -851,7 +851,7 @@ ul :not(.menu) > ul > li:before {
 }
 
 /* 2077 - Holographic interference */
-[data-theme="2077"] body::before {
+body[data-theme="2077"]::before {
   content: '';
   position: fixed;
   top: 0;
