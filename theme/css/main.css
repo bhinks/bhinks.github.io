@@ -637,6 +637,177 @@ ul :not(.menu) > ul > li:before {
   50% { opacity: 0.05; }
 }
 
+/* Green mode - Phosphor ghosting effect */
+[data-theme="green"] body::before {
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 204, 0, 0.1) 100%);
+  animation: phosphor-fade 3s ease-in-out infinite;
+}
+
+@keyframes phosphor-fade {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.25; }
+}
+
+/* Amber mode - Warm burn-in glow */
+[data-theme="amber"] body::before {
+  background: radial-gradient(ellipse 800px 600px at center, rgba(255, 170, 0, 0.05) 0%, transparent 70%);
+  animation: none;
+}
+
+[data-theme="amber"] body::after {
+  opacity: 0.08;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 170, 0, 0.1) 0px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+/* Vaporwave - VHS tracking distortion */
+[data-theme="vaporwave"] body::before {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      rgba(255, 113, 206, 0.03) 1px,
+      transparent 2px,
+      transparent 6px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(1, 205, 254, 0.02) 0px,
+      transparent 3px
+    );
+  animation: vhs-tracking 8s linear infinite;
+}
+
+@keyframes vhs-tracking {
+  0%, 100% {
+    transform: translateX(0);
+    opacity: 0.15;
+  }
+  25% {
+    transform: translateX(2px);
+    opacity: 0.2;
+  }
+  75% {
+    transform: translateX(-2px);
+    opacity: 0.1;
+  }
+}
+
+/* Outrun - Synthwave sunset grid */
+[data-theme="outrun"] body::after {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      rgba(255, 0, 110, 0.1) 1px,
+      transparent 2px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      rgba(58, 134, 255, 0.05) 1px,
+      transparent 2px,
+      transparent 40px
+    );
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: bottom;
+  opacity: 0.3;
+}
+
+/* Arasaka - Corporate data streams */
+[data-theme="arasaka"] body::before {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    rgba(255, 0, 64, 0.03) 1px,
+    transparent 2px,
+    transparent 100px
+  );
+  animation: data-stream 20s linear infinite;
+}
+
+@keyframes data-stream {
+  0% { background-position: 0 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* Neuromancer - Ice crystallization */
+[data-theme="neuromancer"] body::after {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      rgba(0, 212, 255, 0.02) 1px,
+      transparent 2px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0px,
+      rgba(202, 240, 248, 0.02) 1px,
+      transparent 2px,
+      transparent 60px
+    );
+  animation: ice-shimmer 4s ease-in-out infinite;
+}
+
+@keyframes ice-shimmer {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.2; }
+}
+
+/* Militech - Tactical grid overlay */
+[data-theme="militech"] body::after {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      rgba(82, 183, 136, 0.05) 1px,
+      transparent 2px,
+      transparent 50px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      rgba(82, 183, 136, 0.05) 1px,
+      transparent 2px,
+      transparent 50px
+    );
+  opacity: 0.4;
+}
+
+/* 2077 - Holographic interference */
+[data-theme="2077"] body::before {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(252, 243, 0, 0.02) 0px,
+    transparent 1px,
+    rgba(0, 240, 255, 0.02) 2px,
+    transparent 3px
+  );
+  animation: holo-glitch 5s ease-in-out infinite;
+}
+
+@keyframes holo-glitch {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.15;
+  }
+  10% {
+    transform: translateY(2px);
+    opacity: 0.25;
+  }
+  20% {
+    transform: translateY(0);
+    opacity: 0.15;
+  }
+}
+
 .menu ul {
   margin-top: 12px;
   margin-bottom: 12px;
