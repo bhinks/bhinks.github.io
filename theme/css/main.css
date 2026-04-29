@@ -1087,9 +1087,62 @@ body[data-theme="2077"]::before {
   margin-bottom: 20px;
 }
 
-*::selection { 
-  background-color: var(--light-alt-color); 
-  color: black; 
+*::selection {
+  background-color: var(--light-alt-color);
+  color: black;
+}
+
+/* CODE BLOCKS AND INLINE CODE */
+code {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: var(--pop-color);
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 5px var(--glow-primary);
+}
+
+pre {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--text-color);
+  padding: 15px;
+  margin: 20px 0;
+  border: 2px solid var(--border-color);
+  border-radius: 5px;
+  overflow-x: auto;
+  box-shadow:
+    0 0 10px var(--glow-primary),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 10;
+}
+
+pre code {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  color: var(--text-color);
+}
+
+/* Light theme adjustments for code blocks */
+[data-theme="light"] code {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(255, 0, 51, 0.2);
+}
+
+[data-theme="light"] pre {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 10px rgba(255, 0, 51, 0.2),
+    inset 0 0 20px rgba(0, 0, 0, 0.02);
 }
 
 /* ASCII HEADER STYLING */
