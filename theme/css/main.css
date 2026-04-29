@@ -1104,7 +1104,8 @@ code {
   box-shadow: 0 0 5px var(--glow-primary);
 }
 
-pre {
+.entry-content pre,
+.post-content pre {
   font-family: 'Space Mono', monospace;
   font-size: 13px;
   line-height: 1.5;
@@ -1122,7 +1123,8 @@ pre {
   z-index: 10;
 }
 
-pre code {
+.entry-content pre code,
+.post-content pre code {
   background: none;
   border: none;
   box-shadow: none;
@@ -1137,7 +1139,8 @@ pre code {
   box-shadow: 0 0 5px rgba(255, 0, 51, 0.2);
 }
 
-[data-theme="light"] pre {
+[data-theme="light"] .entry-content pre,
+[data-theme="light"] .post-content pre {
   background-color: rgba(0, 0, 0, 0.03);
   border-color: rgba(0, 0, 0, 0.3);
   box-shadow:
@@ -1146,7 +1149,8 @@ pre code {
 }
 
 /* Amber theme - warmer background tint */
-[data-theme="amber"] pre {
+[data-theme="amber"] .entry-content pre,
+[data-theme="amber"] .post-content pre {
   background-color: rgba(0, 0, 0, 0.7);
   box-shadow:
     0 0 10px rgba(255, 170, 0, 0.4),
@@ -1154,7 +1158,8 @@ pre code {
 }
 
 /* Vaporwave theme - pink/purple tint */
-[data-theme="vaporwave"] pre {
+[data-theme="vaporwave"] .entry-content pre,
+[data-theme="vaporwave"] .post-content pre {
   background-color: rgba(1, 1, 43, 0.6);
   box-shadow:
     0 0 10px rgba(255, 113, 206, 0.3),
@@ -1162,7 +1167,8 @@ pre code {
 }
 
 /* Outrun theme - sunset gradient hint */
-[data-theme="outrun"] pre {
+[data-theme="outrun"] .entry-content pre,
+[data-theme="outrun"] .post-content pre {
   background-color: rgba(18, 4, 88, 0.6);
   box-shadow:
     0 0 10px rgba(255, 0, 110, 0.3),
@@ -1170,7 +1176,8 @@ pre code {
 }
 
 /* Arasaka theme - deep red tint */
-[data-theme="arasaka"] pre {
+[data-theme="arasaka"] .entry-content pre,
+[data-theme="arasaka"] .post-content pre {
   background-color: rgba(13, 2, 8, 0.7);
   box-shadow:
     0 0 10px rgba(255, 0, 64, 0.3),
@@ -1178,7 +1185,8 @@ pre code {
 }
 
 /* Neuromancer theme - ice blue tint */
-[data-theme="neuromancer"] pre {
+[data-theme="neuromancer"] .entry-content pre,
+[data-theme="neuromancer"] .post-content pre {
   background-color: rgba(0, 8, 20, 0.7);
   box-shadow:
     0 0 10px rgba(0, 212, 255, 0.3),
@@ -1186,7 +1194,8 @@ pre code {
 }
 
 /* Militech theme - military green tint */
-[data-theme="militech"] pre {
+[data-theme="militech"] .entry-content pre,
+[data-theme="militech"] .post-content pre {
   background-color: rgba(8, 28, 21, 0.7);
   box-shadow:
     0 0 10px rgba(82, 183, 136, 0.3),
@@ -1194,7 +1203,8 @@ pre code {
 }
 
 /* 2077 theme - yellow glow */
-[data-theme="2077"] pre {
+[data-theme="2077"] .entry-content pre,
+[data-theme="2077"] .post-content pre {
   background-color: rgba(0, 0, 0, 0.7);
   box-shadow:
     0 0 10px rgba(252, 243, 0, 0.3),
