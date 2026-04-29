@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>deck_interface - OMGninjabot</title>
+    <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+</head>
+
+<body>
+    <canvas id="matrix-rain"></canvas>
+    <div class="terminal-header">
+        <div class="terminal-status">
+            <span class="status-indicator"></span>
+            <span class="status-text">ONLINE</span>
+        </div>
+        <div class="terminal-title">CYBERSPACE://OMGninjabot/connect.sh</div>
+        <div class="system-info">
+            <div class="system-status" id="system-status">SYS: INIT...</div>
+            <div class="network-status" id="network-status">NET: CONN...</div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <header class="ascii-header">
+        <div class="ascii-container">
+            <div class="ascii-ninja">
+                <pre>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠤⠔⠒⠒⠦⠄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠚⠁⠀⠀⠀⠀⠀⠀⠀⠀⠉⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣠⣤⣤⡄⠀⠀⠀⠀⠀⣸⠁⠀⠀⣀⠀⠀⠀⠀⠀⠀⣀⠀⠀⢹⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠘⣏⣀⣤⣾⡄⠀⠀⠀⢠⡇⡰⠲⣯⣀⣀⡀⠀⠀⣀⣀⣤⠷⠲⡀⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢹⠯⣤⣞⣳⡀⠀⠀⢸⠀⣇⠀⠀⠀⠉⠉⢉⠉⢉⡉⠀⠀⠀⡇⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢷⠧⣴⣏⣇⠀⠀⢸⠀⢹⠒⣦⣤⣄⣀⣥⣖⣉⣤⣤⠔⢺⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠘⡟⢠⡴⣿⡆⠀⢸⠀⢸⡀⠙⢭⣽⣾⣀⣼⣿⣭⠝⠁⣸⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢱⡛⣲⠯⣽⡄⢸⠀⠏⢱⠴⠊⠁⠀⠀⠀⠈⠉⠲⣴⠙⠀⣸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢳⣳⣞⣷⣷⣸⡇⣞⠁⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⢹⠀⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣈⠿⣟⣫⢭⡟⠣⠸⣦⠀⠀⠀⠈⠉⠉⠀⠀⠀⢀⣾⢠⠛⣦⢄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣀⣴⠿⢤⣼⡃⠀⠈⢧⠀⠀⠳⡱⣄⠀⠀⠀⢀⣿⣿⣤⣿⠃⠀⢠⠇⠀⠀⡿⠤⠤⣤⣀⡀⠀⠀⠀⠀⠀⠀
+⠀⠀⢘⣿⠶⣄⠀⣿⣇⠀⠀⠀⠳⣀⠀⠈⠙⠓⠦⢤⣿⡟⣻⠟⠁⢀⡠⠃⠀⠀⣰⠃⠀⢀⠾⢿⣻⠀⠀⠀⠀⠀⠀
+⠀⢀⡾⠁⠀⠈⢧⣼⡟⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⢻⠁⠙⡇⠀⠈⠀⠀⠀⣰⠃⠀⢠⡏⠀⠀⠹⡆⠀⠀⠀⠀⠀
+⠀⢸⡇⠀⠀⠀⠈⣧⢣⠙⢦⠀⠀⠀⠀⠀⠀⠀⠀⡸⡞⠀⠛⣇⣀⠀⠀⠀⡴⠃⠀⠀⡞⠀⠀⠀⠀⣿⡄⠀⠀⠀⠀
+⢀⡟⢧⠀⠀⣀⠤⠾⡈⢆⠈⠙⢦⣀⠀⠀⠀⠀⢰⣧⣤⡦⠶⠧⠼⢤⣠⠞⠁⠀⠀⢸⠧⣄⡀⠀⠀⢸⠹⡄⠀⠀⠀
+⣼⠀⠘⡆⠊⡀⠀⠀⠙⣌⢢⡀⠀⠈⠙⢶⣒⡶⠋⠙⡌⢧⠀⠀⠀⠚⠳⡄⠀⠀⠀⣾⠎⠀⠙⠀⠀⠀⢧⢹⡀⠀⠀
+⡏⠀⠀⠀⡰⠀⠀⠀⠀⢸⣄⢑⣄⠀⢀⡠⢿⡱⡀⠀⡽⣸⣄⣷⠴⡄⢰⡇⠀⠀⢠⠃⠀⠀⠀⢰⠀⠀⠀⠉⢧⠀⠀
+⣧⢠⠀⠀⣇⣠⣤⠖⠋⠉⠁⠀⠀⠀⠀⠀⠈⢧⠑⣴⠃⡿⠤⡽⠒⠒⠋⠀⠀⠀⣾⠀⠀⠀⠀⠈⡆⠀⠀⠘⣼⡀⠀
+⢹⢸⠀⢀⣽⡇⢸⠀⠀⠀⠀⠀⠀⠀⢀⡠⠂⠀⠳⣌⣾⡦⣞⠁⠀⠀⠀⠀⠀⠀⢻⠀⠀⢀⣴⡚⠳⣄⠀⠀⠘⡇⠀
+⠀⢻⡇⠸⠁⢧⠀⢇⠀⠀⣀⡠⠴⠚⠉⠀⠀⠀⢠⠟⠉⠀⠀⠙⢦⡀⠀⠀⠀⢀⡸⠗⠉⠀⠀⠱⡀⠹⡉⠳⠄⢸⠀
+⠀⠈⡇⠀⠀⠈⢧⡈⢦⠀⠀⠀⠀⠀⠀⠀⢀⡴⢛⣟⡭⠿⠿⠿⢿⡿⡿⠖⠒⠉⠀⠀⠀⠀⠀⠀⢣⠀⡇⠀⠀⠘⡇
+⠀⠀⣷⠀⠀⠀⠈⠳⣄⠑⢄⡀⠀⣀⠤⢺⠿⢂⣎⡏⠀⠀⠀⠀⠀⢹⣽⡄⠀⣀⣀⣀⠀⣀⣀⡀⠸⠀⠀⠀⠀⢠⠇
+⠀⠀⠘⠷⣄⣀⣀⣀⣉⣷⠤⠽⠋⠁⢠⡧⠔⣻⡏⣇⠀⠀⠀⠀⠀⠀⡇⡇⠀⠀⠀⠀⠀⠀⠀⠀⢀⠃⠀⢀⡴⠋⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⡤⠚⠁⣴⣜⠦⣤⣤⣤⣤⣴⣧⢇⣀⡀⠀⠀⠀⢀⣀⣀⣼⣀⠟⠉⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⠢⠤⠤⠛⠉⠉⠉⠉⠉⠁⠁⠀⠀⠈⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⠀⠖⠒⠒⠒⠀⠀⠀⠀⠠⣀⠀⢀⠀⡀⠀⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</pre>
+            </div>
+
+            <div class="ascii-main">
+                <pre class="ascii-art">  ██████  ███    ███  ██████  ██
+ ██    ██ ████  ████ ██       ██
+ ██    ██ ██ ████ ██ ██   ███ ██
+ ██    ██ ██  ██  ██ ██    ██   
+  ██████  ██      ██  ██████  ██
+
+ ███    ██ ██ ███    ██      ██  █████  ██████   ██████  ████████
+ ████   ██ ██ ████   ██      ██ ██   ██ ██   ██ ██    ██    ██   
+ ██ ██  ██ ██ ██ ██  ██      ██ ███████ ██████  ██    ██    ██   
+ ██  ██ ██ ██ ██  ██ ██ ██   ██ ██   ██ ██   ██ ██    ██    ██   
+ ██   ████ ██ ██   ████  ██████ ██   ██ ██████   ██████     ██   </pre>
+            </div>
+
+            <div class="ascii-robot">
+                <pre>                          /[-])//  ___
+                     __ --\ `_/~--|  / \
+                   /_-/~~--~~ /~~~\\_\ /\
+                   |  |___|===|_-- | \ \ \
+ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\
+ ~\________|__/   / // \__ |  ||  / | |   | |
+          ,~-|~~~~~\--, | \|--|/~|||  |   | |
+          [3-|____---~~ _--'==;/ _,   |   |_|
+                      /   /\__|_/  \  \__/--/
+                     /---/_\  -___/ |  /,--|
+                     /  /\/~--|   | |  \///
+                    /  / |-__ \    |/
+                   |--/ /      |-- | \
+                  \^~~\\/\      \   \/- _
+                   \    |  \     |~~\~~| \
+                    \    \  \     \   \  | \
+                      \    \ |     \   \    \
+                       |~~|\/\|     \   \   |
+                      |   |/         \_--_- |\
+                      |  /            /   |/\/
+                       ~~             /  /
+                                     |__/</pre>
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li class="page_title"><span id="theme-toggle" class="theme-toggle">[NEON MODE]</span></li>
+            <li><a href="../../../../">home.sh</a></li>
+            <li><a href="/about.html">about.sh</a></li>
+            <li><a href="/quake2.html">quake2.sh</a></li>
+            <li><a href="/tag/cyberdeck.html">cyberdeck.sh</a></li>
+        </ul>
+        <div style="clear: both;"></div>
+    </nav>
+
+    <main>
+<article>
+    <header>
+        <h1 class="entry-title">deck_interface</h1>
+        <div class="entry-meta">
+            <time datetime="2026-04-29T00:00:00-04:00">Wed 29 April 2026</time>
+            in <a href="../../../../category/posts.html">posts</a>
+            - Tagged: 
+            <a href="../../../../tag/ai.html">ai</a>,             <a href="../../../../tag/development.html">development</a>,             <a href="../../../../tag/cyberdeck.html">cyberdeck</a>        </div>
+    </header>
+    <div class="entry-content">
+        <p>I've always had a soft spot for good text-driven experiences. I spend most of my workday in a terminal. I have fond memories of text adventures and MUDs. The beauty of a good text UI (TUI) is its simplicity; you aren't bombarded with more information than you can handle and you generally don't need to think too hard to get around. But it offers a closeness to raw data that I find very powerful. A text-based experience is a great fit for a relatively low-power device like a Raspberry Pi. And what better text-based experience is there than a game?</p>
+<p>When I started actual work on this cyberdeck project, I knew I wanted something interactive. I see so many builds that end up being nothing more than a Linux desktop running on custom-built hardware. The builds are often very interesting, but the function is boring. Having worked quite a bit with large language models (LLM) over the past few years, I became infatuated with the idea of building a device that could talk to me. I built out a basic set of prompts to create an AI personality that could be invoked from the deck. Looking at what I had built, it looked a lot like a template to create AI characters. So I made about a dozen more.</p>
+<p>This was a fun concept on paper, but got boring pretty quickly. A chat interface on its own isn't exciting, so I started building a game around it. The idea was to let the user accept missions (pre-made and/or randomly generated) and grant different capabilities to each of the AI personas (I call them "cores") that could aid in mission tasks. I'll go into more detail about the game elements in a later post, but for now I'd like to talk about the overall interface.</p>
+<h2>The TUI</h2>
+<p>The main window uses <code>curses</code> to provide the terminal experience. There is currently some jankiness I need to address with the way some output is routed, but each section has its own rules for handling I/O.</p>
+<p>The TUI is split into several tabs:
+- <strong>CON</strong>: The main console interface where commands and system output go
+- <strong>AICI</strong>: The AI Core Interface (name subject to change) is where chats with the AI cores live
+- <strong>FIXR</strong>: The board where missions are posted
+- <strong>BBS</strong>: General NPC chatter, sometimes mission-related
+- <strong>ID</strong>: Your user profile, including street cred, funds, and other stats</p>
+<p><img alt="Cyberdeck Console" src="/theme/images/con.png"></p>
+<p>The main console will be used for the majority of the hacking done in the game. This is where the user runs commands and gets system-level outputs. So far I've only built commands for running the deck itself: enable/disable hardware components, load or unload AI cores, etc.</p>
+<p><img alt="Cyberdeck Core Chat" src="/theme/images/aici.png"></p>
+<p>The AICI tab is the chat interface where you interact with the current AI core. Different cores will load in their own color schemes and prompt styles, so it is clear which you are using at a given moment. The AI cores can also run commands (if their config allows it) and that output will go to the console tab.</p>
+<p><img alt="Cyberdeck FIXR" src="/theme/images/fixr.png"></p>
+<p>The remaining tabs are still in development. I've made the most progress on FIXR, which is the system that allows the user to browse and accept contracts. There are a handful of gameplay elements already at work here, but those details are for a later post.</p>
+<h2>Hardware Interface</h2>
+<p>At this layer I am mostly managing displays. The device has three displays, one connected via mini-HDMI and two over GPIO. They each serve their own purpose to bring the fiction to life. The main LCD display is, obviously, serving the TUI. A small round LCD display is used to allow the AI cores to emote to the user, along with their text responses. Finally, a small e-ink panel is used to display some system information and other content at the AI core's discretion.</p>
+<p><img alt="Cyberdeck Displays" src="/theme/images/deck_current.jpg"></p>
+<p>I've also got an SD card reader that is used to "load" the different AI personalities. What I <em>really</em> wanted to use was a floppy drive, but I had difficulty getting the system to recognize when a new disk was inserted. I may revisit that later on, but for now the SD cards provide that same physical experience - like plugging a cartridge into a game console. The media only contains a single json file that specifies which core to load. It's completely unnecessary, but I think it adds a lot to the feel of this deck.</p>
+<p>There is a speaker attached to allow for some mission-related audio chatter and also to give a voice to the AI cores. I use <code>piper</code> to load in lightweight TTS models, depending on the active core. I initially also included a microphone for full voice communication, but I didn't like how that felt. The tactile keyboard experience felt much more desirable.</p>
+<p>Another component that I wanted to build in was support for physical switches. I have a covered switch for power, and a handful of others that will control things like screen brightness, muting speakers, and disabling wifi. I thought these would be one of the easier elements to implement, but I was wrong. More on that when I cover the build process in a later post.</p>
+<p><img alt="Cyberdeck Switches" src="/theme/images/switches.jpg"></p>
+<h2>Manager Layer</h2>
+<p>Central to the architecture of this software is the manager layer, where I put all the task-based modules. There are currently seven managers:
+- <strong>CoreManager</strong>: AI core loading and validation
+- <strong>CoreAuthenticator</strong>: USB drive monitoring and physical "authentication"
+- <strong>MemoryManager</strong>: Multi-tier memory with AI context condensation
+- <strong>ConversationManager</strong>: LLM API calls and response handling
+- <strong>TTSManager</strong>: Voice synthesis and profile management
+- <strong>DisplayManager</strong>: Round LCD and e-ink hardware coordination
+- <strong>HandoffManager</strong>: Switching between AI personalities mid-conversation</p>
+<p>The CoreAuthenticator was challenging to build. This is where I first attempted to integrate my floppy drive, but I had a lot of trouble dynamically detecting when a new disk was inserted. I abstracted the hardware interaction to the hardware/driver layer, allowing the CoreAuthenticator to work with virtually any USB data drive. When the media changes, the new AI core is loaded and the UI is updated to match that core's style settings:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Add callback for card insertion/removal events</span>
+<span class="k">def</span> <span class="nf">on_card_change</span><span class="p">(</span><span class="n">card_data</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">card_data</span><span class="p">:</span>
+        <span class="c1"># Card inserted - load the core</span>
+        <span class="n">core_id</span> <span class="o">=</span> <span class="n">card_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">terminal_ui</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;AI Core detected: </span><span class="si">{</span><span class="n">core_id</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;system&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Signal immediate UI update</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">ui_update_event</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
+        <span class="c1"># Automatically load the core from Core Drive</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">load_core</span><span class="p">(</span><span class="n">core_id</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">terminal_ui</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="s2">&quot;SYSTEM&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Core </span><span class="si">{</span><span class="n">core_id</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2"> loaded from Core Drive&quot;</span><span class="p">,</span> <span class="s2">&quot;success&quot;</span><span class="p">)</span>
+            <span class="c1"># Update terminal UI with new core config</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">terminal_ui</span><span class="o">.</span><span class="n">core_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">current_core</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">terminal_ui</span><span class="o">.</span><span class="n">prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">current_core</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;terminal_style&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;prompt&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Another thing I wanted to focus on at this layer was graceful degradation. I'm building this to run on the device I'm building, but I also want to be able to run the game in other environments. For this reason, I needed to handle situations where hardware elements like my GPIO displays weren't available.</p>
+<div class="highlight"><pre><span></span><code><span class="bp">self</span><span class="o">.</span><span class="n">_hardware_available</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">_hardware_error</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Get shared hardware resources</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">spi</span> <span class="o">=</span> <span class="n">hardware</span><span class="o">.</span><span class="n">get_spi_device</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">spi_bus</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">spi_device</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">spi_speed</span><span class="p">)</span>
+<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_hardware_available</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_hardware_error</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;SPI device </span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">spi_bus</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">spi_device</span><span class="si">}</span><span class="s2"> not available&quot;</span>
+
+<span class="c1"># Check if any required GPIO failed</span>
+<span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">rst_pin</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">rst_pin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_hardware_available</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_hardware_error</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;GPIO pin </span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">rst_pin</span><span class="si">}</span><span class="s2"> (RST) not available&quot;</span>
+
+<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hardware_available</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Display driver created: </span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">width</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">config</span><span class="o">.</span><span class="n">height</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Display driver created but hardware unavailable: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_hardware_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>So now when I'm finished with this project, I can release the code and allow anybody to run it on their own computers. I'll go into detail on the other managers in my next post, which will cover the AI core configuration and interactions. There are a lot more fun implementation details there, as that's where I've spent the majority of my development time.</p>
+<h3>To be continued...</h3>
+    </div>
+</article>
+    </main>
+
+    <footer>
+        <p>&copy; ninjabot. Terminal powered by <a href="https://getpelican.com/">Pelican</a></p>
+    </footer>
+
+    <script>
+        // Multi-theme switcher functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Theme definitions
+        const themes = ['neon', 'green', 'amber', 'light', 'vaporwave', 'outrun',  'neuromancer', '2077', 'arasaka', 'militech'];
+        const themeLabels = {
+            'neon': '[NEON MODE]',
+            'green': '[GREEN MODE]',
+            'amber': '[AMBER MODE]',
+            'light': '[SNOWCRASH MODE]',
+            'vaporwave': '[VAPORWAVE MODE]',
+            'outrun': '[OUTRUN MODE]',
+            'neuromancer': '[NEUROMANCER MODE]',
+            '2077': '[2077 MODE]',
+            'arasaka': '[ARASAKA MODE]',
+            'militech': '[MILITECH MODE]'            
+        };
+
+        // Load saved theme or default to neon
+        let currentTheme = localStorage.getItem('theme') || 'neon';
+
+        // Apply theme
+        function applyTheme(theme) {
+            if (theme === 'neon') {
+                body.removeAttribute('data-theme');
+            } else {
+                body.setAttribute('data-theme', theme);
+            }
+            themeToggle.textContent = themeLabels[theme];
+            localStorage.setItem('theme', theme);
+            currentTheme = theme;
+        }
+        
+        // Initialize theme
+        applyTheme(currentTheme);
+        
+        // Cycle through themes on click
+        themeToggle.addEventListener('click', () => {
+            const currentIndex = themes.indexOf(currentTheme);
+            const nextIndex = (currentIndex + 1) % themes.length;
+            applyTheme(themes[nextIndex]);
+        });
+
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const charArray = chars.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const mainColor = getComputedStyle(document.body).getPropertyValue('--main-color').trim();
+            ctx.fillStyle = mainColor;
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Random Glitch Effect on Terminal Title
+        const terminalTitle = document.querySelector('.terminal-title');
+        setInterval(() => {
+            if (Math.random() > 0.9) {
+                terminalTitle.classList.add('glitch-text');
+                setTimeout(() => terminalTitle.classList.remove('glitch-text'), 300);
+            }
+        }, 3000);
+
+        // Dynamic System Status
+        const systemMessages = [
+            'SYS: ALL SYSTEMS NOMINAL',
+            'SYS: DEFRAG COMPLETE',
+            'SYS: RUNNING DIAGNOSTICS',
+            'SYS: FIREWALL ACTIVE',
+            'SYS: ENCRYPTION ENABLED',
+            'SYS: MEMORY OPTIMIZED',
+            'SYS: CORES: 8 | LOAD: 42%',
+            'SYS: UPTIME: 47 DAYS',
+            'SYS: ICE PROTOCOLS ACTIVE',
+            'SYS: SCANNING FOR THREATS...',
+            'SYS: NO THREATS DETECTED'
+        ];
+
+        const systemStatus = document.getElementById('system-status');
+        let systemIndex = 0;
+
+        function updateSystemStatus() {
+            systemIndex = (systemIndex + 1) % systemMessages.length;
+            systemStatus.textContent = systemMessages[systemIndex];
+        }
+
+        setInterval(updateSystemStatus, 8000);
+        setTimeout(updateSystemStatus, 1500);
+
+        // Dynamic Network Status
+        const networkMessages = [
+            'NET: LATENCY: 12ms',
+            'NET: BANDWIDTH: 1.2GB/s',
+            'NET: CONNECTED: SECURE',
+            'NET: PACKETS: 0 DROPPED',
+            'NET: NODE: CYBERSPACE-7',
+            'NET: ENCRYPTION: AES-256',
+            'NET: VPN: ACTIVE',
+            'NET: PROXY: ENABLED',
+            'NET: UPLINK: STABLE'
+        ];
+
+        const networkStatus = document.getElementById('network-status');
+        let networkIndex = 0;
+
+        function updateNetworkStatus() {
+            networkIndex = (networkIndex + 1) % networkMessages.length;
+            networkStatus.textContent = networkMessages[networkIndex];
+        }
+
+        setInterval(updateNetworkStatus, 6000);
+        setTimeout(updateNetworkStatus, 2000);
+
+        // Image Click to Enlarge
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.entry-content img');
+            images.forEach(img => {
+                img.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
