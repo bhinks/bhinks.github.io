@@ -1145,6 +1145,62 @@ pre code {
     inset 0 0 20px rgba(0, 0, 0, 0.02);
 }
 
+/* Amber theme - warmer background tint */
+[data-theme="amber"] pre {
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow:
+    0 0 10px rgba(255, 170, 0, 0.4),
+    inset 0 0 20px rgba(255, 170, 0, 0.1);
+}
+
+/* Vaporwave theme - pink/purple tint */
+[data-theme="vaporwave"] pre {
+  background-color: rgba(1, 1, 43, 0.6);
+  box-shadow:
+    0 0 10px rgba(255, 113, 206, 0.3),
+    inset 0 0 20px rgba(185, 103, 255, 0.1);
+}
+
+/* Outrun theme - sunset gradient hint */
+[data-theme="outrun"] pre {
+  background-color: rgba(18, 4, 88, 0.6);
+  box-shadow:
+    0 0 10px rgba(255, 0, 110, 0.3),
+    inset 0 0 20px rgba(58, 134, 255, 0.1);
+}
+
+/* Arasaka theme - deep red tint */
+[data-theme="arasaka"] pre {
+  background-color: rgba(13, 2, 8, 0.7);
+  box-shadow:
+    0 0 10px rgba(255, 0, 64, 0.3),
+    inset 0 0 20px rgba(255, 0, 64, 0.05);
+}
+
+/* Neuromancer theme - ice blue tint */
+[data-theme="neuromancer"] pre {
+  background-color: rgba(0, 8, 20, 0.7);
+  box-shadow:
+    0 0 10px rgba(0, 212, 255, 0.3),
+    inset 0 0 20px rgba(0, 212, 255, 0.05);
+}
+
+/* Militech theme - military green tint */
+[data-theme="militech"] pre {
+  background-color: rgba(8, 28, 21, 0.7);
+  box-shadow:
+    0 0 10px rgba(82, 183, 136, 0.3),
+    inset 0 0 20px rgba(82, 183, 136, 0.05);
+}
+
+/* 2077 theme - yellow glow */
+[data-theme="2077"] pre {
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow:
+    0 0 10px rgba(252, 243, 0, 0.3),
+    inset 0 0 20px rgba(252, 243, 0, 0.05);
+}
+
 /* ASCII HEADER STYLING */
 .ascii-header {
   text-align: center;
