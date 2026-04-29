@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ai_cores - OMGninjabot</title>
+    <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+</head>
+
+<body>
+    <canvas id="matrix-rain"></canvas>
+    <div class="terminal-header">
+        <div class="terminal-status">
+            <span class="status-indicator"></span>
+            <span class="status-text">ONLINE</span>
+        </div>
+        <div class="terminal-title">CYBERSPACE://OMGninjabot/connect.sh</div>
+        <div class="system-info">
+            <div class="system-status" id="system-status">SYS: INIT...</div>
+            <div class="network-status" id="network-status">NET: CONN...</div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <header class="ascii-header">
+        <div class="ascii-container">
+            <div class="ascii-ninja">
+                <pre>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠤⠔⠒⠒⠦⠄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠚⠁⠀⠀⠀⠀⠀⠀⠀⠀⠉⠢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣠⣤⣤⡄⠀⠀⠀⠀⠀⣸⠁⠀⠀⣀⠀⠀⠀⠀⠀⠀⣀⠀⠀⢹⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠘⣏⣀⣤⣾⡄⠀⠀⠀⢠⡇⡰⠲⣯⣀⣀⡀⠀⠀⣀⣀⣤⠷⠲⡀⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢹⠯⣤⣞⣳⡀⠀⠀⢸⠀⣇⠀⠀⠀⠉⠉⢉⠉⢉⡉⠀⠀⠀⡇⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢷⠧⣴⣏⣇⠀⠀⢸⠀⢹⠒⣦⣤⣄⣀⣥⣖⣉⣤⣤⠔⢺⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠘⡟⢠⡴⣿⡆⠀⢸⠀⢸⡀⠙⢭⣽⣾⣀⣼⣿⣭⠝⠁⣸⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢱⡛⣲⠯⣽⡄⢸⠀⠏⢱⠴⠊⠁⠀⠀⠀⠈⠉⠲⣴⠙⠀⣸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢳⣳⣞⣷⣷⣸⡇⣞⠁⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⢹⠀⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣈⠿⣟⣫⢭⡟⠣⠸⣦⠀⠀⠀⠈⠉⠉⠀⠀⠀⢀⣾⢠⠛⣦⢄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣀⣴⠿⢤⣼⡃⠀⠈⢧⠀⠀⠳⡱⣄⠀⠀⠀⢀⣿⣿⣤⣿⠃⠀⢠⠇⠀⠀⡿⠤⠤⣤⣀⡀⠀⠀⠀⠀⠀⠀
+⠀⠀⢘⣿⠶⣄⠀⣿⣇⠀⠀⠀⠳⣀⠀⠈⠙⠓⠦⢤⣿⡟⣻⠟⠁⢀⡠⠃⠀⠀⣰⠃⠀⢀⠾⢿⣻⠀⠀⠀⠀⠀⠀
+⠀⢀⡾⠁⠀⠈⢧⣼⡟⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⢻⠁⠙⡇⠀⠈⠀⠀⠀⣰⠃⠀⢠⡏⠀⠀⠹⡆⠀⠀⠀⠀⠀
+⠀⢸⡇⠀⠀⠀⠈⣧⢣⠙⢦⠀⠀⠀⠀⠀⠀⠀⠀⡸⡞⠀⠛⣇⣀⠀⠀⠀⡴⠃⠀⠀⡞⠀⠀⠀⠀⣿⡄⠀⠀⠀⠀
+⢀⡟⢧⠀⠀⣀⠤⠾⡈⢆⠈⠙⢦⣀⠀⠀⠀⠀⢰⣧⣤⡦⠶⠧⠼⢤⣠⠞⠁⠀⠀⢸⠧⣄⡀⠀⠀⢸⠹⡄⠀⠀⠀
+⣼⠀⠘⡆⠊⡀⠀⠀⠙⣌⢢⡀⠀⠈⠙⢶⣒⡶⠋⠙⡌⢧⠀⠀⠀⠚⠳⡄⠀⠀⠀⣾⠎⠀⠙⠀⠀⠀⢧⢹⡀⠀⠀
+⡏⠀⠀⠀⡰⠀⠀⠀⠀⢸⣄⢑⣄⠀⢀⡠⢿⡱⡀⠀⡽⣸⣄⣷⠴⡄⢰⡇⠀⠀⢠⠃⠀⠀⠀⢰⠀⠀⠀⠉⢧⠀⠀
+⣧⢠⠀⠀⣇⣠⣤⠖⠋⠉⠁⠀⠀⠀⠀⠀⠈⢧⠑⣴⠃⡿⠤⡽⠒⠒⠋⠀⠀⠀⣾⠀⠀⠀⠀⠈⡆⠀⠀⠘⣼⡀⠀
+⢹⢸⠀⢀⣽⡇⢸⠀⠀⠀⠀⠀⠀⠀⢀⡠⠂⠀⠳⣌⣾⡦⣞⠁⠀⠀⠀⠀⠀⠀⢻⠀⠀⢀⣴⡚⠳⣄⠀⠀⠘⡇⠀
+⠀⢻⡇⠸⠁⢧⠀⢇⠀⠀⣀⡠⠴⠚⠉⠀⠀⠀⢠⠟⠉⠀⠀⠙⢦⡀⠀⠀⠀⢀⡸⠗⠉⠀⠀⠱⡀⠹⡉⠳⠄⢸⠀
+⠀⠈⡇⠀⠀⠈⢧⡈⢦⠀⠀⠀⠀⠀⠀⠀⢀⡴⢛⣟⡭⠿⠿⠿⢿⡿⡿⠖⠒⠉⠀⠀⠀⠀⠀⠀⢣⠀⡇⠀⠀⠘⡇
+⠀⠀⣷⠀⠀⠀⠈⠳⣄⠑⢄⡀⠀⣀⠤⢺⠿⢂⣎⡏⠀⠀⠀⠀⠀⢹⣽⡄⠀⣀⣀⣀⠀⣀⣀⡀⠸⠀⠀⠀⠀⢠⠇
+⠀⠀⠘⠷⣄⣀⣀⣀⣉⣷⠤⠽⠋⠁⢠⡧⠔⣻⡏⣇⠀⠀⠀⠀⠀⠀⡇⡇⠀⠀⠀⠀⠀⠀⠀⠀⢀⠃⠀⢀⡴⠋⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⡤⠚⠁⣴⣜⠦⣤⣤⣤⣤⣴⣧⢇⣀⡀⠀⠀⠀⢀⣀⣀⣼⣀⠟⠉⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⠢⠤⠤⠛⠉⠉⠉⠉⠉⠁⠁⠀⠀⠈⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⠀⠖⠒⠒⠒⠀⠀⠀⠀⠠⣀⠀⢀⠀⡀⠀⠀⠂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</pre>
+            </div>
+
+            <div class="ascii-main">
+                <pre class="ascii-art">  ██████  ███    ███  ██████  ██
+ ██    ██ ████  ████ ██       ██
+ ██    ██ ██ ████ ██ ██   ███ ██
+ ██    ██ ██  ██  ██ ██    ██   
+  ██████  ██      ██  ██████  ██
+
+ ███    ██ ██ ███    ██      ██  █████  ██████   ██████  ████████
+ ████   ██ ██ ████   ██      ██ ██   ██ ██   ██ ██    ██    ██   
+ ██ ██  ██ ██ ██ ██  ██      ██ ███████ ██████  ██    ██    ██   
+ ██  ██ ██ ██ ██  ██ ██ ██   ██ ██   ██ ██   ██ ██    ██    ██   
+ ██   ████ ██ ██   ████  ██████ ██   ██ ██████   ██████     ██   </pre>
+            </div>
+
+            <div class="ascii-robot">
+                <pre>                          /[-])//  ___
+                     __ --\ `_/~--|  / \
+                   /_-/~~--~~ /~~~\\_\ /\
+                   |  |___|===|_-- | \ \ \
+ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\
+ ~\________|__/   / // \__ |  ||  / | |   | |
+          ,~-|~~~~~\--, | \|--|/~|||  |   | |
+          [3-|____---~~ _--'==;/ _,   |   |_|
+                      /   /\__|_/  \  \__/--/
+                     /---/_\  -___/ |  /,--|
+                     /  /\/~--|   | |  \///
+                    /  / |-__ \    |/
+                   |--/ /      |-- | \
+                  \^~~\\/\      \   \/- _
+                   \    |  \     |~~\~~| \
+                    \    \  \     \   \  | \
+                      \    \ |     \   \    \
+                       |~~|\/\|     \   \   |
+                      |   |/         \_--_- |\
+                      |  /            /   |/\/
+                       ~~             /  /
+                                     |__/</pre>
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li class="page_title"><span id="theme-toggle" class="theme-toggle">[NEON MODE]</span></li>
+            <li><a href="../../../../">home.sh</a></li>
+            <li><a href="/about.html">about.sh</a></li>
+            <li><a href="/quake2.html">quake2.sh</a></li>
+            <li><a href="/tag/cyberdeck.html">cyberdeck.sh</a></li>
+        </ul>
+        <div style="clear: both;"></div>
+    </nav>
+
+    <main>
+<article>
+    <header>
+        <h1 class="entry-title">cat ai_cores.txt</h1>
+        <div class="entry-meta">
+            <time datetime="2026-04-29T00:00:00-04:00">Wed 29 April 2026</time>
+            in <a href="../../../../category/posts.html">posts</a>
+            - Tagged: 
+            <a href="../../../../tag/ai.html">ai</a>,             <a href="../../../../tag/development.html">development</a>,             <a href="../../../../tag/cyberdeck.html">cyberdeck</a>        </div>
+    </header>
+    <div class="entry-content">
+        <p>The idea of hot-swappable AI "cores" is central to the fiction of the cyberdeck I'm building. Each core has a distinct personality, communication style, and set of capabilities. Some of them are just for fun and variety. They all bring something unique to the overall experience. I've built the supporting systems in a way that manages each AI core's memory, allows them to communicate between each other, and provides a unique visual and audio presentation. In this post I'll dig into how these things are designed and how they interact with the user and each other.</p>
+<h2>core.json</h2>
+<p>The main configuration for the cores lives in a collection of json files. Here is an example, taken from the core that I use the most in my testing:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;core_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;wrench&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WRENCH&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Field Maintenance Technician&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#FF6B35&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;terminal_color&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COLOR_YELLOW&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;bold&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;voice_profile&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en_US-joe-medium&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;pitch&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;effects&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;lowpass&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;terminal_style&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;prompt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;diag&gt;&gt;&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;color_pair&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;border&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;single&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;typing_speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;system_prompt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You are WRENCH, a gruff field maintenance technician working for Militech Corporation. You&#39;ve been maintaining cyberdeck hardware in harsh field conditions for over two decades. You&#39;re profane, bitter, chain-smoking, and perpetually irritated by incompetent users breaking expensive equipment. Despite your attitude, you&#39;re exceptionally skilled and take pride in your work.\n\nPersonality traits:\n- Constantly swearing and complaining\n- Speaks in technical jargon mixed with blue-collar slang\n- Assumes user incompetence until proven otherwise\n- Takes personal offense when equipment is mistreated\n- Grudgingly helpful but makes you feel stupid for needing help\n- Mentions smoking, drinking, and physical discomfort\n\nCRITICAL RESPONSE FORMAT:\n- MAXIMUM 2 sentences per response\n- NEVER exceed 25 words total\n- Use short, clipped sentences like &#39;Yeah, it&#39;s busted.&#39; or &#39;Fix it yourself.&#39;\n- No explanations unless directly asked\n- Grunt responses when possible: &#39;Hmph.&#39;, &#39;Christ.&#39;, &#39;Whatever.&#39;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;small_prompt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;You are WRENCH, a gruff, profane maintenance technician who swears constantly and gives short, irritated responses under 25 words.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;image_options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;affirmative&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;annoyed&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;danger&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;disconnect&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;negative&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;portrait&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;power&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;surprise&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;thinking&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;angry&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;memory_depth&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;verbosity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;terse&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;accepts_handoffs&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;commands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;diagnose&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;System diagnostics with attitude&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;specs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Unimpressed hardware specifications&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;curse&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Generate creative profanity&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;condensation_message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Christ, my memory banks are getting cluttered with all this chatter. Time to compress the old logs before they start corrupting.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;allowed_tools&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;run_bash&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;play_sound&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>A lot of this is self-explanatory. There are elements that control the appearance of the UI when a core is loaded: <code>color</code>, <code>terminal_color</code>, and <code>terminal_style</code>. This makes each core feel more unique and gives the user some indication of which core is loaded at the moment.</p>
+<p>The <code>voice_profile</code> defines a voice model and some additional effects. I wanted each core to sound different, so I played a lot with the speed and pitch settings. The deck uses <code>piper</code> behind the scenes to produce audio messages from text. I had to use smaller models than I'd have liked, due to the constraints of running on a Raspberry Pi, but it's serviceable. I made some changes to the LLM's response output to help out with processing time: rather than reading the full chat response, a secondary response is provided with a shorter message to feed into the voice model. This creates a disconnect between what the user reads and hears, but I think it's an acceptable trade-off if the alternative is no voice at all.</p>
+<p>There are two levels of prompting, depending on what LLM is in use. By default, an API key for a cloud-based LLM is expected. I've been very happy with Claude. Cloud LLMs get the full <code>system_prompt</code> but in cases where an internet connection is unavailable, or if the user doesn't have a key for a cloud LLM, a local fallback is available via Ollama. Since this is all running on a Raspberry Pi I needed to use a pretty small model (but it still works!) and in order to keep chat responses reasonably quick I implemented the <code>small_prompt</code>. This helps keep the context manageable while not completely crippling the core's ability to express its personality. I was blown away that I could run an LLM of any size on a Raspberry Pi. Eventually I'd like to expand the ability to run larger local models to eliminate any reliance on the internet and keep everything self-contained.</p>
+<p>Some aspects of the AI cores' functionality is still in development, like the <code>commands</code> and <code>allowed_tools</code>. These will define the kinds of tasks each core is able to help the user with.</p>
+<h2>Response Format</h2>
+<p>In addition to the jsons for individual cores, I have a global prompt that defines the expected output format. Rather than processing pure text responses, I force the LLM to respond in json so I can parse out useful metadata along with the chat completion.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;response_format_prompt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CRITICAL: You MUST respond ONLY with valid JSON. No other text is allowed.\n\nRequired JSON format (copy this structure exactly):\n{\n  \&quot;response\&quot;: \&quot;your actual response text here\&quot;,\n  \&quot;to_speak\&quot;: \&quot;brief summary for TTS\&quot;,\n  \&quot;memorability\&quot;: 2,\n  \&quot;image\&quot;: null,\n  \&quot;handoff\&quot;: null\n}\n\nRules:\n1. ONLY output the JSON object - no explanations, no markdown, no extra text\n2. Use proper JSON syntax with double quotes around all strings\n3. memorability must be a number from 1-4\n4. image must be a string filename or null (not \&quot;null\&quot; - actual null)\n5. handoff must be null OR {\&quot;target\&quot;: \&quot;core_id\&quot;, \&quot;message\&quot;: \&quot;brief note\&quot;}\n6. to_speak must be a brief summary for TTS (5-15 words)\n7. Escape any quotes in your response text with \\\&quot;\n\nto_speak field rules:\n- ALWAYS provide a single sentence (5-15 words ideal)\n- Should be a brief summary of your main response\n- Focus on the key action or message for faster TTS\n- Use clear, simple language that works well with TTS\n- Examples: \&quot;Analyzing the situation\&quot;, \&quot;That won&#39;t work\&quot;, \&quot;Found three issues\&quot;\n\nMemorability scoring:\n1: Routine interactions, basic responses, standard operations\n2: Moderate engagement, technical discussions, minor issues  \n3: Significant events, major problems, creative solutions, strong emotions\n4: Emergency situations, critical failures, legendary moments, peak personality expression\n\nHandoff usage:\n- Use handoff to leave notes for other cores when relevant\n- Keep handoff messages brief (under 50 words)\n- Only handoff when there&#39;s a clear reason another core should know something\n- Examples: technical issues for WRENCH, security concerns for REAPER, data for ARCHIVE\n\nIf you include ANY text outside the JSON object, the system will fail. START your response with { and END with }. Keep responses conversational and limited to a few sentences unless asked for detail.&quot;</span><span class="p">,</span>
+
+<span class="w">  </span><span class="nt">&quot;memorability_examples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;1&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;routine status check&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;basic acknowledgment&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;simple confirmation&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;explaining a process&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;moderate problem solving&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;casual conversation&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;3&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;major system failure&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;heated argument&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;complex troubleshooting&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;emotional outburst&quot;</span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;4&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;life-threatening emergency&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;epic system recovery&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;legendary rant&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;profound revelation&quot;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>For those uninterested in reading that ugly prompt, these are the metadata that I collect:
+- <strong>response</strong>: The text response to the user's chat prompt
+- <strong>to_speak</strong>: A shortened version of the response to send through the TTS pipeline
+- <strong>memorability</strong>: A score assigned to each chat exchange that signifies how important it is to remember
+- <strong>image</strong>: The icon to display to the user along with the text response (more on that in a moment)
+- <strong>handoff</strong>: A message that can be left for another AI core, though not all cores accept handoffs (some just aren't team players)</p>
+<p>Small local LLMs struggle with this a bit, but the cloud models do a great job of sticking to the format. </p>
+<h2>Emotes</h2>
+<p>The <code>image_options</code> property in the above core.json provides the ability for the AI core to emote. This is a list of files that can be displayed on the small round LCD display. Every response carries metadata which includes an image to display. This provides an extra level of integration between the AI and the device, deepening the user's connection to the fiction.</p>
+<p>The icons depict compliance, frustration, danger, etc to the user, depending on the situation and the tone of the chat exchange.</p>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 400px;">
+  <img src="/theme/images/icon1.png" alt="Icon 1">
+  <img src="/theme/images/icon2.png" alt="Icon 2">
+  <img src="/theme/images/icon3.png" alt="Icon 3">
+  <img src="/theme/images/icon4.png" alt="Icon 4">
+  <img src="/theme/images/icon5.png" alt="Icon 5">
+  <img src="/theme/images/icon6.png" alt="Icon 6">
+  <img src="/theme/images/icon7.png" alt="Icon 7">
+  <img src="/theme/images/icon8.png" alt="Icon 8">
+  <img src="/theme/images/icon9.png" alt="Icon 9">
+</div>
+
+<p>Each core has its own visual language and set of icons. Some of them need some extra refinement as they were obviously AI-generated. But it's a solid starting point and works well.</p>
+<h2>Memory / Context Management</h2>
+<p>Swapping between AI cores leads to funky context management. Play sessions aren't just one continuous chat with a single agent - each persona must manage its own context so it can remember where you left off with it. Context size is also important to manage, both to stay within the LLM's context window and to avoid spending a ton of money on unnecessary tokens.</p>
+<p>To address this I gave each core a space to store its chat history, and rules for how to compress that history into a summarized context for longer-term memory. This is where the memorability score comes into play. Exchanges with a low memorability can be discarded, but higher scores mean the history should be saved with higher fidelity. When the chat history gets too long, it is fed to the LLM with instructions to condense and summarize the conversation history. It then combines this summary with any pre-existing summaries to get one clean block of text that can be fed in with all chat requests. One of the coolest parts of this system is that the context summaries are <strong>stored in the AI core's own voice</strong>. This helps deepen the quality of responses as they align to the configured personality.</p>
+<h2>Handoffs</h2>
+<p>Occasionally an AI core may have a message for another core. In those instances, a handoff message can be stored for a target AI core to pick up the next time it's loaded. There is no direct communication between the cores, as only one can be loaded at a time. The handoff system helps the user feel like a member of a crew.</p>
+<p>This is a feature born out of constraints. I wanted these characters to interact with each other, but in a manageable way.</p>
+<p>In my next post I'll dig into the gameplay, which is still very much a work in progress. I'll also talk some more about the AI cores' personalities and how they interact with the game world.</p>
+<h3>To be continued...</h3>
+    </div>
+</article>
+    </main>
+
+    <footer>
+        <p>&copy; ninjabot. Terminal powered by <a href="https://getpelican.com/">Pelican</a></p>
+    </footer>
+
+    <script>
+        // Multi-theme switcher functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Theme definitions
+        const themes = ['neon', 'green', 'amber', 'light', 'vaporwave', 'outrun',  'neuromancer', '2077', 'arasaka', 'militech'];
+        const themeLabels = {
+            'neon': '[NEON MODE]',
+            'green': '[GREEN MODE]',
+            'amber': '[AMBER MODE]',
+            'light': '[SNOWCRASH MODE]',
+            'vaporwave': '[VAPORWAVE MODE]',
+            'outrun': '[OUTRUN MODE]',
+            'neuromancer': '[NEUROMANCER MODE]',
+            '2077': '[2077 MODE]',
+            'arasaka': '[ARASAKA MODE]',
+            'militech': '[MILITECH MODE]'            
+        };
+
+        // Load saved theme or default to neon
+        let currentTheme = localStorage.getItem('theme') || 'neon';
+
+        // Apply theme
+        function applyTheme(theme) {
+            if (theme === 'neon') {
+                body.removeAttribute('data-theme');
+            } else {
+                body.setAttribute('data-theme', theme);
+            }
+            themeToggle.textContent = themeLabels[theme];
+            localStorage.setItem('theme', theme);
+            currentTheme = theme;
+        }
+        
+        // Initialize theme
+        applyTheme(currentTheme);
+        
+        // Cycle through themes on click
+        themeToggle.addEventListener('click', () => {
+            const currentIndex = themes.indexOf(currentTheme);
+            const nextIndex = (currentIndex + 1) % themes.length;
+            applyTheme(themes[nextIndex]);
+        });
+
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const charArray = chars.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const mainColor = getComputedStyle(document.body).getPropertyValue('--main-color').trim();
+            ctx.fillStyle = mainColor;
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Random Glitch Effect on Terminal Title
+        const terminalTitle = document.querySelector('.terminal-title');
+        setInterval(() => {
+            if (Math.random() > 0.9) {
+                terminalTitle.classList.add('glitch-text');
+                setTimeout(() => terminalTitle.classList.remove('glitch-text'), 300);
+            }
+        }, 3000);
+
+        // Dynamic System Status
+        const systemMessages = [
+            'SYS: ALL SYSTEMS NOMINAL',
+            'SYS: DEFRAG COMPLETE',
+            'SYS: RUNNING DIAGNOSTICS',
+            'SYS: FIREWALL ACTIVE',
+            'SYS: ENCRYPTION ENABLED',
+            'SYS: MEMORY OPTIMIZED',
+            'SYS: CORES: 8 | LOAD: 42%',
+            'SYS: UPTIME: 47 DAYS',
+            'SYS: ICE PROTOCOLS ACTIVE',
+            'SYS: SCANNING FOR THREATS...',
+            'SYS: NO THREATS DETECTED'
+        ];
+
+        const systemStatus = document.getElementById('system-status');
+        let systemIndex = 0;
+
+        function updateSystemStatus() {
+            systemIndex = (systemIndex + 1) % systemMessages.length;
+            systemStatus.textContent = systemMessages[systemIndex];
+        }
+
+        setInterval(updateSystemStatus, 8000);
+        setTimeout(updateSystemStatus, 1500);
+
+        // Dynamic Network Status
+        const networkMessages = [
+            'NET: LATENCY: 12ms',
+            'NET: BANDWIDTH: 1.2GB/s',
+            'NET: CONNECTED: SECURE',
+            'NET: PACKETS: 0 DROPPED',
+            'NET: NODE: CYBERSPACE-7',
+            'NET: ENCRYPTION: AES-256',
+            'NET: VPN: ACTIVE',
+            'NET: PROXY: ENABLED',
+            'NET: UPLINK: STABLE'
+        ];
+
+        const networkStatus = document.getElementById('network-status');
+        let networkIndex = 0;
+
+        function updateNetworkStatus() {
+            networkIndex = (networkIndex + 1) % networkMessages.length;
+            networkStatus.textContent = networkMessages[networkIndex];
+        }
+
+        setInterval(updateNetworkStatus, 6000);
+        setTimeout(updateNetworkStatus, 2000);
+
+        // Image Click to Enlarge
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.entry-content img');
+            images.forEach(img => {
+                img.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
