@@ -1202,13 +1202,7 @@ pre code {
 }
 
 /* SYNTAX HIGHLIGHTING - Cyberpunk Theme-Aware */
-.highlight pre {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  margin: 0;
-}
+/* Keep the pre box styling intact for highlighted code */
 
 /* Keywords - use main theme color */
 .highlight .k,   /* Keyword */
