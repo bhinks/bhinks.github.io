@@ -217,7 +217,15 @@
         themeToggle.addEventListener('click', () => {
             const currentIndex = themes.indexOf(currentTheme);
             const nextIndex = (currentIndex + 1) % themes.length;
-            applyTheme(themes[nextIndex]);
+            const nextTheme = themes[nextIndex];
+            applyTheme(nextTheme);
+            if (window.goatcounter && window.goatcounter.count) {
+                window.goatcounter.count({
+                    path: 'theme-switch:' + nextTheme,
+                    title: 'Theme switched to ' + nextTheme,
+                    event: true,
+                });
+            }
         });
 
         // Matrix Rain Effect
@@ -334,5 +342,8 @@
             });
         });
     </script>
+
+    <script data-goatcounter="https://omgninjabot.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
