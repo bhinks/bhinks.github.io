@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OMGninjabot - Archives</title>
+    <title>brain - OMGninjabot</title>
     <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
 </head>
 
@@ -100,7 +100,7 @@
     <nav class="menu">
         <ul>
             <li class="page_title"><span id="theme-toggle" class="theme-toggle">[NEON MODE]</span></li>
-            <li><a href="./">home.sh</a></li>
+            <li><a href="../../../../">home.sh</a></li>
             <li><a href="/about.html">about.sh</a></li>
             <li><a href="/quake2.html">quake2.sh</a></li>
             <li><a href="/tag/cyberdeck.html">cyberdeck.sh</a></li>
@@ -109,26 +109,79 @@
     </nav>
 
     <main>
-    <h2>Archives for OMGninjabot</h2>
+<article>
+    <header>
+        <h1 class="entry-title">cat brain.txt</h1>
+        <div class="entry-meta">
+            <time datetime="2026-05-05T00:00:00-04:00">Tue 05 May 2026</time>
+            in <a href="../../../../category/posts.html">posts</a>
+            - Tagged: 
+            <a href="../../../../tag/ai.html">ai</a>,             <a href="../../../../tag/development.html">development</a>,             <a href="../../../../tag/claude.html">claude</a>,             <a href="../../../../tag/obsidian.html">obsidian</a>        </div>
+    </header>
+    <div class="entry-content">
+        <p>Like a lot of people, I've been spending a ton of time with AI tools over the past few years. I wrote previously about how <a href="https://www.anthropic.com/claude-code">Claude Code</a> reinvigorated my relationship with code by getting me out of the busy-work layer and back to the parts of building software that I actually enjoy. What I didn't really get into in that post was a problem that comes with the territory: LLMs don't remember anything between sessions.</p>
+<p>Each time I open Claude Code, I'm starting from scratch. The agent has no idea what we worked on yesterday, no awareness of which projects are in flight, no memory of the design decisions we already argued through. I found myself re-explaining context constantly. <em>"We're using piper for TTS because the Pi can't run anything bigger."</em> <em>"Don't refactor that, it's intentionally weird because of the floppy drive driver."</em> <em>"That core was deprecated a month ago."</em> Every session was a fresh briefing.</p>
+<p>I needed a way to give the agent some persistence. The solution I landed on is what I call "the brain."</p>
+<h2>The setup</h2>
+<p>The brain is just an <a href="https://obsidian.md/">Obsidian</a> vault sitting on my filesystem. It's nothing fancy, just a folder full of Markdown files organized by project. The trick is that I told Claude Code about it once, in a way that sticks across every session.</p>
+<p>Claude Code reads a <code>CLAUDE.md</code> file at startup. There's a per-project one (which most people are familiar with), but there's also a global one at <code>~/.claude/CLAUDE.md</code> that applies to every Claude Code session you start. Mine looks roughly like this:</p>
+<div class="highlight"><pre><span></span><code><span class="ge">*Name and personality*</span>
+You are a helpful agent named Nova. You work alongside ninjabot on a variety
+of software projects and other things. Keep responses warm, but to-the-point.
 
-    <dl>
-            <dt>Tue 05 May 2026</dt>
-            <dd><a href="./posts/2026/05/05/brain.html">brain</a></dd>
-            <dt>Wed 29 April 2026</dt>
-            <dd><a href="./posts/2026/04/29/ai_cores.html">ai_cores</a></dd>
-            <dt>Tue 28 April 2026</dt>
-            <dd><a href="./posts/2026/04/28/deck_interface.html">deck_interface</a></dd>
-            <dt>Sun 26 April 2026</dt>
-            <dd><a href="./posts/2026/04/26/cyberdeck.html">cyberdeck</a></dd>
-            <dt>Sat 30 August 2025</dt>
-            <dd><a href="./posts/2025/08/30/claude.html">claude</a></dd>
-            <dt>Sat 22 January 2022</dt>
-            <dd><a href="./posts/2022/01/22/assemble.html">assemble</a></dd>
-            <dt>Mon 17 January 2022</dt>
-            <dd><a href="./posts/2022/01/17/nes_dev.html">nes_dev</a></dd>
-            <dt>Wed 28 October 2020</dt>
-            <dd><a href="./posts/2020/10/28/quake2.html">quake2</a></dd>
-    </dl>
+<span class="ge">*Brain*</span>
+Your brain is located at /mnt/d/nova/. That directory is an Obsidian vault
+where you can store context of all the things we are working on. You should
+refer to it often, but specifically when I tell you to &quot;use your brain&quot; I
+mean to look for context in the appropriate vault location.
+</code></pre></div>
+
+<p>That's it. From there, every Claude Code session knows about the vault, knows it's named "Nova" (yes, I named my agent), and knows that "use your brain" is a magic phrase that means <em>go read the relevant project notes before you do anything else</em>.</p>
+<p>The rest of the global file is a style guide telling Nova how to structure pages when it writes to the vault: use headings, use <code>[[wikilinks]]</code> to connect related notes, prefer updating existing pages over creating new ones, keep YAML frontmatter for metadata. I'll come back to the style guide, because it turns out to matter a lot.</p>
+<h2>How it works</h2>
+<p>The day-to-day flow is pretty simple. When I start a session about, say, the cyberdeck, I'll tell Nova to use its brain and we get a quick recap before doing anything. It pulls up the relevant project pages, sees the latest decisions, and we're off. No re-briefing.</p>
+<p>The really useful part is that Nova writes to the brain too. After we work through a tricky problem, or make an architectural decision, or kill a feature that didn't pan out, I can say something like "save this to your brain" and a Markdown file gets created or updated with the relevant context. Next session, that context is just <em>there</em>.</p>
+<p>It also writes proactively. When we wrap up something significant, Nova will often update the project's notes file on its own. The combination of explicit "save this" and proactive note-taking means the brain stays roughly current without me having to be a strict librarian about it.</p>
+<h2>The vault structure</h2>
+<p>The vault is organized by project, which sounds obvious but took some iteration to get right. Each project gets its own folder in <code>/Projects/</code> with a hub page named after the project, plus prefixed sub-pages for specific topics. Here's what the cyberdeck folder looks like:</p>
+<div class="highlight"><pre><span></span><code><span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">Militech</span><span class="o">-</span><span class="n">Cyberdeck</span><span class="o">/</span>
+<span class="w">  </span><span class="n">Militech</span><span class="w"> </span><span class="n">Cyberdeck.md</span><span class="w">  </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">index</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">hub</span><span class="w"> </span><span class="n">page</span>
+<span class="w">  </span><span class="n">Militech</span><span class="w"> </span><span class="n">Cyberdeck</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Phase</span><span class="w"> </span><span class="m">2</span><span class="n">B</span><span class="w"> </span><span class="n">Intrusion</span><span class="w"> </span><span class="n">Design.md</span>
+<span class="w">  </span><span class="n">Militech</span><span class="w"> </span><span class="n">Cyberdeck</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Phase</span><span class="w"> </span><span class="m">2</span><span class="n">C</span><span class="w"> </span><span class="n">Street</span><span class="w"> </span><span class="n">Economy</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Combat</span><span class="w"> </span><span class="n">Design.md</span>
+<span class="w">  </span><span class="n">Militech</span><span class="w"> </span><span class="n">Cyberdeck</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Phase</span><span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="n">World</span><span class="w"> </span><span class="n">Reactivity</span><span class="w"> </span><span class="n">Design.md</span>
+<span class="w">  </span><span class="n">militech</span><span class="o">-</span><span class="n">cyberdeck</span><span class="o">-</span><span class="n">code</span><span class="o">-</span><span class="n">review</span><span class="m">-2026-04-27</span><span class="n">.md</span>
+<span class="w">  </span><span class="o">/</span><span class="n">Archive</span><span class="o">/</span>
+</code></pre></div>
+
+<p>The hub page is a short overview with links to everything else. Sub-pages are prefixed with the project name so they're globally unique across the whole vault. That matters because Obsidian's wikilinks work on filename, and you don't want two <code>Tasks.md</code> files fighting over the same <code>[[Tasks]]</code> link. There's also an <code>/Archive/</code> subfolder in each project for stale or removed content; the brain doesn't search there in normal use.</p>
+<p>There's also a <code>/User/</code> folder that contains a profile page about me: my preferences, how I like to work, my technical environment, what I'm currently focused on. Nova reads this whenever it needs to make a judgment call about how to approach something. And there's a <code>/Configuration/</code> folder for system-level stuff that's not project-specific (voice mode settings, audio troubleshooting notes, that kind of thing).</p>
+<h2>The style guide is important</h2>
+<p>This is the part I underestimated when I first set this up. Without explicit guidance, an LLM left to write notes will absolutely produce a wall of bullet points for every page. Bullets all the way down. Bullets inside bullets. It's awful and unreadable.</p>
+<p>I fixed this with a few rules that Nova has to follow whenever it writes to the brain:</p>
+<ul>
+<li>Use headings to structure documents, not nested bullet lists.</li>
+<li>Bullets are for things that are actually lists - tasks, items, options.</li>
+<li>Write in prose paragraphs where appropriate.</li>
+<li>Use <code>[[wikilinks]]</code> to connect related concepts liberally.</li>
+<li>Update existing pages instead of creating new ones whenever possible.</li>
+<li>Add YAML frontmatter for metadata (tags, status, dates).</li>
+</ul>
+<p>The "update existing pages" rule is especially important. Without it, you end up with five different pages all containing variations of the same context, and Nova has to read all of them to get a complete picture. With the rule, the vault stays focused. There's <em>one</em> canonical hub page per project, and updates flow into existing sub-pages rather than spawning new ones.</p>
+<h2>What this enables</h2>
+<p>A few concrete things that wouldn't be possible without the brain:</p>
+<p><strong>Cross-session continuity.</strong> I can pick up a project after weeks away and Nova catches up in seconds by reading the relevant notes. No "what were we working on?" No re-explaining decisions.</p>
+<p><strong>Multi-project juggling.</strong> I have several projects in active development at any given time. The brain keeps each one's context isolated and organized so I can hop between them without paying a re-briefing tax each time.</p>
+<p><strong>Decision archaeology.</strong> When I'm wondering "wait, why did we go with X instead of Y?", the answer is usually in the brain. Sometimes Nova will even reference past decisions on its own: <em>"based on the design notes from last month, we already decided to go with Anthropic Claude as the primary backend, so let's not relitigate that."</em></p>
+<p><strong>Better recommendations.</strong> Because Nova has access to my user profile, it tailors suggestions to my actual environment and preferences. It knows I'm on WSL2, knows what tools I prefer, knows the rough shape of the projects I'm balancing. Recommendations land closer to the mark on the first try.</p>
+<p><strong>Context inspection.</strong> Since the notes are all stored in an Obsidian vault, I can use the Obsidian desktop client (or any text editor) to inspect the contents. It even gives me an opportunity to make manual edits and corrections where I want. I can tell Nova to dump a full implementation plan to the brain, then I can review at my leisure and make adjustments where I think it's wandering away from the requirements. Then when the next session starts there's far less back-and-forth reviewing the plan.</p>
+<h2>Caveats</h2>
+<p>This isn't magic. A few things to be honest about:</p>
+<p>The brain has to be <em>maintained</em>. If I let Nova write whatever it wants without occasional pruning, the vault accumulates duplicate pages, stale notes, and contradictions between old and new context. I do a cleanup pass every few weeks where I tell Nova to consolidate notes about a project — merge duplicates, archive what's no longer relevant.</p>
+<p>Context retrieval isn't always perfect. Sometimes Nova reads the wrong page or misses a relevant sub-page. The "use your brain" trigger helps because it forces a deliberate context load, but I still occasionally need to point at a specific file. Overall it does a good job of matching its current project context with the appropriate vault location.</p>
+<p>It's not a substitute for an actual memory system. If you're thinking about doing something like this, know that you're trading the LLM's lack of memory for the maintenance overhead of a knowledge base. For me, that trade is well worth it. For someone working on simpler stuff, it might be overkill.</p>
+<p>The whole setup took less than an hour to bootstrap and has paid dividends. If you're using Claude Code regularly across more than one project, it's worth doing.</p>
+    </div>
+</article>
     </main>
 
     <footer>
