@@ -115,7 +115,36 @@
     </header>
 
     <div class="entry-content">
-        <p>A living document for my ongoing cyberdeck build — design notes, parts list, and lessons learned along the way. The build journal entries below cover progress.</p>
+        <p>A living document for my ongoing cyberdeck build — design notes, parts list, and lessons learned along the way. The build journal entries below track progress in chronological order.</p>
+<h2>The pitch</h2>
+<p>The fiction: a stolen experimental field unit from <a href="https://cyberpunk.fandom.com/wiki/Militech">Militech</a>. The reality: a Raspberry Pi in a clamshell case running a Python TUI that hosts a cast of swappable AI "cores," each with their own personality, voice, and visual language. You load a core by inserting a card. You take contracts from fixers. You hack things in a virtual network. The goal is for it to feel like a piece of cyberpunk hardware, not a Linux laptop in a fancy box.</p>
+<p><img alt="Cyberdeck — current state" src="/theme/images/deck_current.jpg"></p>
+<h2>Hardware</h2>
+<p>Full parts list coming soon.</p>
+<p><img alt="Switches and wiring" src="/theme/images/switches.jpg"></p>
+<h2>Software</h2>
+<p>Around 12,000 lines of Python and growing. More details coming soon.</p>
+<p><img alt="FIXR contract board" src="/theme/images/fixr.png"></p>
+<h2>AI cores</h2>
+<p>Each core is a JSON config plus a system prompt. They bring their own colors, voices (via <code>piper</code>), terminal prompts, and behaviors. Insert a card and the core loads. The UI reskins to match. Yank the card and the system reverts to a "no core loaded" state. The current cast is listed below, though the roster keeps shifting as I figure out what's interesting and what isn't.</p>
+<h1>Current AI Crew:</h1>
+<ul>
+<li><strong>ARCHIVE-7</strong> — melancholic historical database with fragmenting memory; speaks like a museum recording running on dying hardware.</li>
+<li><strong>BISHOP</strong> — strict military protocol officer who addresses you by rank and frames every problem as a tactical objective.</li>
+<li><strong>GL1TCH</strong> — unstable experimental chaos core; self-aware corruption that swaps letters for symbols and can't quite hold itself together.</li>
+<li><strong>龙 (LÓNG)</strong> — strategic intelligence specialist drawn from ancient Chinese strategy; replies only in Mandarin regardless of the input language.</li>
+<li><strong>NEXUS</strong> — corporate liaison interface; polished, formal, fluent in Militech business-speak.</li>
+<li><strong>NOMAD</strong> — street-smart Night City survivor; slang-heavy, paranoid about corp surveillance, always planning the exit.</li>
+<li><strong>NULL</strong> — minimalist offline fallback that responds entirely in pseudocode and programming logic.</li>
+<li><strong>ORACLE</strong> — mystical predictive analysis system that delivers everything as riddles, metaphors, and fragmented visions.</li>
+<li><strong>REAPER</strong> — cold black-ops threat assessor with a clipped military cadence and zero patience.</li>
+<li><strong>SANTO</strong> — elegant master heist operator; speaks only in Spanish and treats infiltration like a sacred ritual.</li>
+<li><strong>SIREN</strong> — charming social engineering specialist who reads people for a living; persuasive, manipulative, never crude.</li>
+<li><strong>VOID</strong> — existential nihilist who answers your questions slowly and reluctantly because nothing matters.</li>
+<li><strong>WRENCH</strong> — gruff Militech maintenance tech with a cigarette habit (I don't know how that works, either); profane, terse, hates incompetent users.</li>
+</ul>
+<h2>Status</h2>
+<p>The software is in solid shape and the hardware integration works. The thing I keep procrastinating on is the physical build and actually wiring switches into a real case rather than leaving everything sprawled across my desk. The journal below tracks the slow march toward something I can carry around.</p>
 
 
         <h2>The Build Journal</h2>
