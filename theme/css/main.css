@@ -377,7 +377,7 @@
 
 /* BASE */
 body {
-  background-color: var(--bg-color);
+  background-color: var(--body-bg, var(--bg-color));
   color: var(--body-text);
   font-family: 'Space Mono', monospace;
   margin: 20px auto;
@@ -413,6 +413,49 @@ body {
   mask-image: radial-gradient(ellipse 1000px 1500px at center, transparent 0%, transparent 25%, black 65%);
   -webkit-mask-image: radial-gradient(ellipse 1000px 1500px at center, transparent 0%, transparent 25%, black 65%);
 }
+
+/* Themed full-viewport background images (mirrors outrun-bg pattern) */
+#theme-bg {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body:not([data-theme]) #theme-bg {
+  display: block;
+  background-image: url("../neon.jpg");
+}
+[data-theme="vaporwave"] #theme-bg {
+  display: block;
+  background-image: url("../vaporwave.jpg");
+}
+[data-theme="arasaka"] #theme-bg {
+  display: block;
+  background-image: url("../arasaka.jpg");
+}
+[data-theme="neuromancer"] #theme-bg {
+  display: block;
+  background-image: url("../neuromancer.jpg");
+}
+[data-theme="fallout"] #theme-bg {
+  display: block;
+  background-image: url("../fallout.png");
+}
+
+/* Translucent body fill for themes that show a bg image — lets it bleed through */
+body:not([data-theme])             { --body-bg: rgba(10, 14, 39, 0.78); }
+body[data-theme="vaporwave"]       { --body-bg: rgba(1, 1, 43, 0.78); }
+body[data-theme="arasaka"]         { --body-bg: rgba(13, 2, 8, 0.80); }
+body[data-theme="neuromancer"]     { --body-bg: rgba(0, 8, 20, 0.80); }
+body[data-theme="fallout"]         { --body-bg: rgba(0, 0, 0, 0.78); }
 
 /* CRT Scanlines effect - multiple moving lines */
 body::before {
@@ -679,17 +722,17 @@ ul :not(.menu) > ul > li:before {
 
 /* Snow Crash - Bitmap virus TV static */
 body[data-theme="snowcrash"]::before {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 2 -0.3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size: 220px 220px;
-  opacity: 0.18;
+  opacity: 0.45;
   mix-blend-mode: multiply;
   animation: snowcrash-static 0.12s steps(4) infinite;
 }
 
 body[data-theme="snowcrash"]::after {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch' seed='5'/><feColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' stitchTiles='stitch' seed='5'/><feColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 1.8 -0.2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size: 180px 180px;
-  opacity: 0.12;
+  opacity: 0.3;
   mix-blend-mode: multiply;
   animation: snowcrash-static-fast 0.07s steps(3) infinite reverse;
 }
@@ -748,20 +791,12 @@ body[data-theme="fallout"]::before {
   opacity: 0.7;
 }
 
-/* Radiation hits - pin-prick particles flickering at irregular intervals */
+/* Radiation interference - warm noise that surges with the ticks */
 body[data-theme="fallout"]::after {
-  background:
-    radial-gradient(circle at 12% 18%, rgba(255, 230, 130, 1) 0.5px, transparent 2.5px),
-    radial-gradient(circle at 67% 24%, rgba(255, 230, 130, 1) 0.5px, transparent 2.5px),
-    radial-gradient(circle at 34% 47%, rgba(255, 230, 130, 1) 0.5px, transparent 2.5px),
-    radial-gradient(circle at 88% 55%, rgba(255, 230, 130, 1) 0.5px, transparent 2.5px),
-    radial-gradient(circle at 22% 71%, rgba(255, 230, 130, 1) 0.5px, transparent 2.5px),
-    radial-gradient(circle at 76% 82%, rgba(255, 230, 130, 1) 0.5px, transparent 2.5px),
-    radial-gradient(circle at 50% 39%, rgba(255, 230, 130, 1) 0.5px, transparent 2.5px),
-    radial-gradient(circle at 9% 91%, rgba(255, 230, 130, 1) 0.5px, transparent 2.5px),
-    radial-gradient(circle at 58% 14%, rgba(255, 230, 130, 1) 0.5px, transparent 2.5px),
-    radial-gradient(circle at 30% 6%, rgba(255, 230, 130, 1) 0.5px, transparent 2.5px);
-  animation: fallout-radiation-particles 1.7s steps(7) infinite;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1   0 0 0 0 0.65   0 0 0 0 0.05   0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 220px 220px;
+  mix-blend-mode: screen;
+  animation: fallout-radiation-noise 5.3s infinite;
 }
 
 @keyframes fallout-geiger-tick {
@@ -777,15 +812,16 @@ body[data-theme="fallout"]::after {
   79%      { filter: brightness(1.3); }
 }
 
-@keyframes fallout-radiation-particles {
-  0%   { opacity: 0.2; }
-  14%  { opacity: 0.95; }
-  28%  { opacity: 0.3; }
-  42%  { opacity: 0.85; }
-  56%  { opacity: 0.15; }
-  70%  { opacity: 0.7; }
-  84%  { opacity: 0.4; }
-  100% { opacity: 0.6; }
+@keyframes fallout-radiation-noise {
+  0%, 100% { opacity: 0.05; background-position:   0px   0px; }
+  11%      { opacity: 0.22; background-position:   7px  -3px; }
+  13%      { opacity: 0.07; background-position:  -4px   5px; }
+  37%      { opacity: 0.28; background-position:  -8px   9px; }
+  39%      { opacity: 0.08; background-position:  11px  -2px; }
+  62%      { opacity: 0.18; background-position:  -3px  -7px; }
+  64%      { opacity: 0.06; background-position:   6px   4px; }
+  79%      { opacity: 0.24; background-position:   9px  10px; }
+  81%      { opacity: 0.07; background-position:  -7px  -4px; }
 }
 
 /* Vaporwave - VHS tracking distortion */
@@ -952,6 +988,10 @@ body[data-theme="neuromancer"]::after {
 
 /* Militech - Tactical grid + radar sweep */
 body[data-theme="militech"]::before {
+  top: 50%;
+  left: 50%;
+  width: 150vmax;
+  height: 150vmax;
   background:
     conic-gradient(
       from 0deg at 50% 50%,
@@ -960,6 +1000,7 @@ body[data-theme="militech"]::before {
       transparent 60deg,
       transparent 360deg
     );
+  transform: translate(-50%, -50%);
   animation: militech-radar-sweep 6s linear infinite;
   opacity: 0.55;
   mix-blend-mode: screen;
@@ -1002,8 +1043,8 @@ body[data-theme="militech"]::after {
 }
 
 @keyframes militech-radar-sweep {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 @keyframes militech-target-pulse {
@@ -1114,13 +1155,11 @@ body[data-theme="wargames"]::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background:
-    /* blinking targets */
-    radial-gradient(circle at 23% 38%, rgba(255, 255, 255, 0.95) 1px, transparent 3px),
-    radial-gradient(circle at 64% 27%, rgba(255, 255, 255, 0.95) 1px, transparent 3px),
-    radial-gradient(circle at 81% 71%, rgba(255, 255, 255, 0.95) 1px, transparent 3px),
-    radial-gradient(circle at 35% 80%, rgba(255, 255, 255, 0.95) 1px, transparent 3px),
-    /* vector grid */
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22'><g fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.85'><circle cx='11' cy='11' r='5'/><line x1='11' y1='1' x2='11' y2='6'/><line x1='11' y1='16' x2='11' y2='21'/><line x1='1' y1='11' x2='6' y2='11'/><line x1='16' y1='11' x2='21' y2='11'/></g></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22'><g fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.85'><circle cx='11' cy='11' r='5'/><line x1='11' y1='1' x2='11' y2='6'/><line x1='11' y1='16' x2='11' y2='21'/><line x1='1' y1='11' x2='6' y2='11'/><line x1='16' y1='11' x2='21' y2='11'/></g></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22'><g fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.85'><circle cx='11' cy='11' r='5'/><line x1='11' y1='1' x2='11' y2='6'/><line x1='11' y1='16' x2='11' y2='21'/><line x1='1' y1='11' x2='6' y2='11'/><line x1='16' y1='11' x2='21' y2='11'/></g></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22'><g fill='none' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.85'><circle cx='11' cy='11' r='5'/><line x1='11' y1='1' x2='11' y2='6'/><line x1='11' y1='16' x2='11' y2='21'/><line x1='1' y1='11' x2='6' y2='11'/><line x1='16' y1='11' x2='21' y2='11'/></g></svg>"),
     repeating-linear-gradient(
       0deg,
       transparent 0px,
@@ -1135,10 +1174,13 @@ body[data-theme="wargames"]::after {
       transparent 2px,
       transparent 60px
     );
+  background-size: 22px 22px, 22px 22px, 22px 22px, 22px 22px, auto, auto;
+  background-position: 23% 38%, 64% 27%, 81% 71%, 35% 80%, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat;
   pointer-events: none;
   z-index: 9998;
   opacity: 0.7;
-  animation: wargames-target-blink 1.4s steps(2) infinite;
+  animation: wargames-target-blink 1.6s ease-in-out infinite;
 }
 
 @keyframes wargames-crt-trace {
@@ -1147,8 +1189,8 @@ body[data-theme="wargames"]::after {
 }
 
 @keyframes wargames-target-blink {
-  0%, 100% { filter: brightness(1); }
-  50%      { filter: brightness(1.8); }
+  0%, 40%, 60%, 100% { filter: brightness(1); }
+  50% { filter: brightness(2); }
 }
 
 /* Screamsheet - Newsprint halftone texture */
@@ -1452,7 +1494,7 @@ body[data-theme="screamsheet"]::before {
 .post-content {
   margin-left: auto;
   margin-right: auto;
-  max-width: 90ch;
+  max-width: 110ch;
   border-left: none;
   padding-left: 0;
 }
