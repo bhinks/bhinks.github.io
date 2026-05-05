@@ -727,7 +727,13 @@ body[data-theme="matrix"]::before {
   -webkit-mask-image: radial-gradient(ellipse 1000px 1500px at center, transparent 0%, transparent 25%, black 65%);
 }
 
-/* Amber mode - Warm burn-in glow */
+/* Matrix - hide rain behind text area */
+[data-theme="matrix"] main,
+[data-theme="matrix"] footer {
+  background-color: var(--bg-color);
+}
+
+/* Fallout mode - Warm burn-in glow */
 body[data-theme="fallout"]::before {
   content: '';
   position: fixed;
@@ -818,7 +824,38 @@ body[data-theme="vaporwave"]::before {
 }
 
 [data-theme="outrun"] main {
-  background-color: var(--bg-color);
+  background-color: rgba(18, 4, 88, 0.85);
+}
+
+[data-theme="outrun"] footer {
+  background-color: rgba(18, 4, 88, 0.85);
+  position: relative;
+  z-index: 10;
+}
+
+[data-theme="outrun"] .ascii-header {
+  background-color: rgba(18, 4, 88, 0.5);
+}
+
+/* Redraw the body's outer frame on top of the video */
+body[data-theme="outrun"]::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  box-sizing: border-box;
+  width: auto;
+  height: auto;
+  background: none;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow:
+    0 0 20px var(--glow-primary),
+    0 0 40px var(--glow-secondary);
+  pointer-events: none;
+  z-index: 50;
 }
 
 [data-theme="outrun"] #matrix-rain {
