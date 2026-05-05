@@ -9,6 +9,9 @@
 
 <body>
     <canvas id="matrix-rain"></canvas>
+    <video id="outrun-bg" autoplay loop muted playsinline>
+        <source src="/theme/outrun.mp4" type="video/mp4">
+    </video>
     <div class="terminal-header">
         <div class="terminal-status">
             <span class="status-indicator"></span>
@@ -135,13 +138,15 @@
         const body = document.body;
 
         // Theme definitions
-        const themes = ['neon', 'green', 'amber', 'light', 'aperture', 'vaporwave', 'outrun',  'neuromancer', '2077', 'arasaka', 'militech'];
+        const themes = ['neon', 'matrix', 'fallout', 'snowcrash', 'screamsheet', 'aperture', 'wargames', 'vaporwave', 'outrun',  'neuromancer', '2077', 'arasaka', 'militech'];
         const themeLabels = {
             'neon': '[NEON MODE]',
-            'green': '[GREEN MODE]',
-            'amber': '[AMBER MODE]',
-            'light': '[SNOWCRASH MODE]',
+            'matrix': '[MATRIX MODE]',
+            'fallout': '[FALLOUT MODE]',
+            'snowcrash': '[SNOWCRASH MODE]',
+            'screamsheet': '[SCREAMSHEET MODE]',
             'aperture': '[APERTURE MODE]',
+            'wargames': '[WARGAMES MODE]',
             'vaporwave': '[VAPORWAVE MODE]',
             'outrun': '[OUTRUN MODE]',
             'neuromancer': '[NEUROMANCER MODE]',
@@ -150,8 +155,12 @@
             'militech': '[MILITECH MODE]'
         };
 
-        // Load saved theme or default to neon
+        // Load saved theme or default to neon. Migrate retired theme names.
         let currentTheme = localStorage.getItem('theme') || 'neon';
+        const themeMigrations = { 'green': 'matrix', 'amber': 'fallout', 'light': 'snowcrash' };
+        if (themeMigrations[currentTheme]) {
+            currentTheme = themeMigrations[currentTheme];
+        }
 
         // Apply theme
         function applyTheme(theme) {
@@ -190,7 +199,8 @@
 
         function drawMatrix() {
             // Skip drawing in themes that don't use the matrix rain effect
-            if (document.body.getAttribute('data-theme') === 'outrun') {
+            const theme = document.body.getAttribute('data-theme');
+            if (theme === 'outrun' || theme === 'wargames' || theme === 'screamsheet') {
                 return;
             }
 
