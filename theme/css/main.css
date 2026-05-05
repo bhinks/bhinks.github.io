@@ -823,18 +823,28 @@ body[data-theme="vaporwave"]::before {
   z-index: 1;
 }
 
-[data-theme="outrun"] main {
-  background-color: rgba(18, 4, 88, 0.85);
+/* Fill the entire wrapper with the bg color above the video */
+body[data-theme="outrun"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  background: rgba(18, 4, 88, 0.85);
+  background-image: none;
+  background-size: auto;
+  pointer-events: none;
+  z-index: 5;
+  animation: none;
+  opacity: 1;
 }
 
 [data-theme="outrun"] footer {
-  background-color: rgba(18, 4, 88, 0.85);
   position: relative;
   z-index: 10;
-}
-
-[data-theme="outrun"] .ascii-header {
-  background-color: rgba(18, 4, 88, 0.5);
 }
 
 /* Redraw the body's outer frame on top of the video */
