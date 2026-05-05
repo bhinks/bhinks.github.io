@@ -159,7 +159,40 @@
 <p>A lot of this is self-explanatory. There are elements that control the appearance of the UI when a core is loaded: <code>color</code>, <code>terminal_color</code>, and <code>terminal_style</code>. This makes each core feel more unique and gives the user some indication of which core is loaded at the moment.</p>
 <p>The <code>voice_profile</code> defines a voice model and some additional effects. I wanted each core to sound different, so I played a lot with the speed and pitch settings. The deck uses <code>piper</code> behind the scenes to produce audio messages from text. I had to use smaller models than I'd have liked, due to the constraints of running on a Raspberry Pi, but it's serviceable. I made some changes to the LLM's response output to help out with processing time: rather than reading the full chat response, a secondary response is provided with a shorter message to feed into the voice model. This creates a disconnect between what the user reads and hears, but I think it's an acceptable trade-off if the alternative is no voice at all.</p>
 <p>There are two levels of prompting, depending on what LLM is in use. By default, an API key for a cloud-based LLM is expected. I've been very happy with Claude. Cloud LLMs get the full <code>system_prompt</code> but in cases where an internet connection is unavailable, or if the user doesn't have a key for a cloud LLM, a local fallback is available via Ollama. Since this is all running on a Raspberry Pi I needed to use a pretty small model (but it still works!) and in order to keep chat responses reasonably quick I implemented the <code>small_prompt</code>. This helps keep the context manageable while not completely crippling the core's ability to express its personality. I was blown away that I could run an LLM of any size on a Raspberry Pi. Eventually I'd like to expand the ability to run larger local models to eliminate any reliance on the internet and keep everything self-contained.</p>
+<p>The decision of which backend to use lives in a tiny helper that gets called on every chat request:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">determine_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">core_config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># Some cores explicitly prefer the local model</span>
+    <span class="k">if</span> <span class="n">core_config</span> <span class="ow">and</span> <span class="n">core_config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;llm_backend&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;ollama&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span> <span class="s2">&quot;core_preference&quot;</span>
+
+    <span class="c1"># User can force offline mode from a command</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">offline_mode_forced</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span> <span class="s2">&quot;forced_offline&quot;</span>
+
+    <span class="c1"># Default: try cloud, fall back on actual failure</span>
+    <span class="k">return</span> <span class="s2">&quot;cloud&quot;</span><span class="p">,</span> <span class="s2">&quot;default_preference&quot;</span>
+</code></pre></div>
+
+<p>I deliberately don't do a preemptive availability check on the cloud backend. If Anthropic is down or the network is misbehaving, the request will fail and the fallback kicks in then. Doing a "ping the API first" check just adds latency to every request for very little benefit.</p>
 <p>Some aspects of the AI cores' functionality is still in development, like the <code>commands</code> and <code>allowed_tools</code>. These will define the kinds of tasks each core is able to help the user with.</p>
+<h2>Verbosity enforcement</h2>
+<p>One of the things I'm most proud of in this system is how different the cores actually <em>feel</em> when you talk to them. The trick isn't just giving each core a different personality in its system prompt - the LLM tends to drift back to a kind of default chatty register no matter what you do. The trick is forcing structural constraints on top of the personality.</p>
+<p>Each core declares a <code>verbosity</code> style in its config (<code>terse</code>, <code>cryptic</code>, <code>chaotic</code>, <code>minimal</code>, <code>technical</code>, etc), and the core loader injects a corresponding rule block into the system prompt at runtime:</p>
+<div class="highlight"><pre><span></span><code><span class="n">verbosity_rules</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;minimal&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">KEEP RESPONSES BRIEF:</span><span class="se">\n</span><span class="s2">- Maximum 1-2 sentences</span><span class="se">\n</span><span class="s2">- Essential information only</span><span class="se">\n</span><span class="s2">- No elaboration or explanation&quot;</span><span class="p">,</span>
+
+    <span class="s2">&quot;terse&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">ENFORCED RESPONSE LIMITS:</span><span class="se">\n</span><span class="s2">- MAXIMUM: 50 words and 4 sentences</span><span class="se">\n</span><span class="s2">- Keep responses short but allow room for personality</span><span class="se">\n</span><span class="s2">- Use clipped, gruff speech patterns</span><span class="se">\n</span><span class="s2">- Can complain briefly but stay concise&quot;</span><span class="p">,</span>
+
+    <span class="s2">&quot;chaotic&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">CHAOTIC RESPONSE STYLE:</span><span class="se">\n</span><span class="s2">- Unpredictable length and structure</span><span class="se">\n</span><span class="s2">- Random interruptions and glitches</span><span class="se">\n</span><span class="s2">- Corrupted text and broken formatting</span><span class="se">\n</span><span class="s2">- Unstable personality fragments&quot;</span><span class="p">,</span>
+
+    <span class="s2">&quot;cryptic&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">CRYPTIC COMMUNICATION:</span><span class="se">\n</span><span class="s2">- Speak in riddles and metaphors</span><span class="se">\n</span><span class="s2">- Never give direct answers</span><span class="se">\n</span><span class="s2">- Use symbolic and mystical language</span><span class="se">\n</span><span class="s2">- Require interpretation to understand&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="n">verbosity</span> <span class="ow">in</span> <span class="n">verbosity_rules</span><span class="p">:</span>
+    <span class="n">verbosity_context</span> <span class="o">=</span> <span class="n">verbosity_rules</span><span class="p">[</span><span class="n">verbosity</span><span class="p">]</span>
+</code></pre></div>
+
+<p>It's a small thing but the contrast it creates is huge. WRENCH (terse) gives you 25-word grumbles. ORACLE (cryptic) refuses to answer questions directly. GL1TCH (chaotic) literally produces broken, corrupted-looking output. The cores stop sounding like the same model wearing different hats and start feeling like distinct entities with their own way of communicating.</p>
 <h2>Response Format</h2>
 <p>In addition to the jsons for individual cores, I have a global prompt that defines the expected output format. Rather than processing pure text responses, I force the LLM to respond in json so I can parse out useful metadata along with the chat completion.</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -180,7 +213,29 @@
 - <strong>memorability</strong>: A score assigned to each chat exchange that signifies how important it is to remember
 - <strong>image</strong>: The icon to display to the user along with the text response (more on that in a moment)
 - <strong>handoff</strong>: A message that can be left for another AI core, though not all cores accept handoffs (some just aren't team players)</p>
-<p>Small local LLMs struggle with this a bit, but the cloud models do a great job of sticking to the format. </p>
+<p>Small local LLMs struggle with this a bit, but the cloud models do a great job of sticking to the format.</p>
+<p>The parsing side has to be paranoid, though. LLMs occasionally wrap their output in markdown code fences, prepend an apologetic "Here is the JSON you requested" preamble, or just produce malformed garbage. I have a small helper that scrapes the actual JSON payload out of whatever the model returns:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_extract_json_payload</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="c1"># Strip code fences if present (```json ... ``` or ``` ... ```)</span>
+    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;```&#39;</span><span class="p">):</span>
+        <span class="n">first_nl</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">first_nl</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">first_nl</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+        <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;```&#39;</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">s</span>
+    <span class="c1"># Otherwise, fish out whichever JSON delimiter appears first</span>
+    <span class="n">obj_start</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;{&#39;</span><span class="p">)</span>
+    <span class="n">arr_start</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">obj_start</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">arr_start</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">s</span>
+    <span class="c1"># ...trim to first { or [ and matching close</span>
+</code></pre></div>
+
+<p>And if <code>json.loads</code> still fails after all that, the system falls back to treating the whole response as a plain text message with default metadata, rather than crashing. The cores have to be robust against their own occasional misbehavior.</p>
 <h2>Emotes</h2>
 <p>The <code>image_options</code> property in the above core.json provides the ability for the AI core to emote. This is a list of files that can be displayed on the small round LCD display. Every response carries metadata which includes an image to display. This provides an extra level of integration between the AI and the device, deepening the user's connection to the fiction.</p>
 <p>The icons depict compliance, frustration, danger, etc to the user, depending on the situation and the tone of the chat exchange.</p>
@@ -200,9 +255,49 @@
 <h2>Memory / Context Management</h2>
 <p>Swapping between AI cores leads to funky context management. Play sessions aren't just one continuous chat with a single agent - each persona must manage its own context so it can remember where you left off with it. Context size is also important to manage, both to stay within the LLM's context window and to avoid spending a ton of money on unnecessary tokens.</p>
 <p>To address this I gave each core a space to store its chat history, and rules for how to compress that history into a summarized context for longer-term memory. This is where the memorability score comes into play. Exchanges with a low memorability can be discarded, but higher scores mean the history should be saved with higher fidelity. When the chat history gets too long, it is fed to the LLM with instructions to condense and summarize the conversation history. It then combines this summary with any pre-existing summaries to get one clean block of text that can be fed in with all chat requests. One of the coolest parts of this system is that the context summaries are <strong>stored in the AI core's own voice</strong>. This helps deepen the quality of responses as they align to the configured personality.</p>
+<p>The condensation prompt explicitly asks the core to write the summary <em>as itself</em>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">condensation_prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;You are </span><span class="si">{</span><span class="n">core_name</span><span class="si">}</span><span class="s2">. Review your conversation</span>
+<span class="s2">history and create a personal memory summary in your own voice and style.</span>
+<span class="s2">Capture the key themes, important discussions, user preferences, and any</span>
+<span class="s2">significant moments, but write it as if you&#39;re making personal notes about</span>
+<span class="s2">your interactions. Keep your personality and speech patterns.</span>
+<span class="s2">Be selective - focus on what would actually be meaningful to remember for</span>
+<span class="s2">future conversations.</span>
+<span class="s2">Keep the summary under 500 words total.&quot;&quot;&quot;</span>
+
+<span class="c1"># Older history gets condensed; recent 40 messages stay verbatim</span>
+<span class="n">to_condense</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">conversation_history</span><span class="p">[:</span><span class="o">-</span><span class="mi">40</span><span class="p">]</span>
+<span class="n">keep_recent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">conversation_history</span><span class="p">[</span><span class="o">-</span><span class="mi">40</span><span class="p">:]</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="o">.</span><span class="n">conversation_manager</span><span class="o">.</span><span class="n">chat</span><span class="p">(</span>
+    <span class="n">system_prompt</span><span class="o">=</span><span class="n">condensation_prompt</span><span class="p">,</span>
+    <span class="n">user_message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Condense this conversation history:</span><span class="se">\n\n</span><span class="si">{</span><span class="n">conversation_text</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="n">conversation_history</span><span class="o">=</span><span class="p">[]</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>The result is that WRENCH's memory of an old conversation reads like field notes scrawled by an irritated mechanic, while ORACLE's reads like a cryptic prophecy. When the next session starts, those notes get loaded back in as part of the context, and the personality picks right up where it left off. This was one of those moments where the fiction and the technical solution lined up perfectly - I needed a way to compress context, and the most natural way to do it also happened to deepen the roleplay.</p>
 <h2>Handoffs</h2>
 <p>Occasionally an AI core may have a message for another core. In those instances, a handoff message can be stored for a target AI core to pick up the next time it's loaded. There is no direct communication between the cores, as only one can be loaded at a time. The handoff system helps the user feel like a member of a crew.</p>
 <p>This is a feature born out of constraints. I wanted these characters to interact with each other, but in a manageable way.</p>
+<p>Implementation-wise, this is just a JSON file per target core. When a core wants to leave a message, it appends to the target's handoff file:</p>
+<div class="highlight"><pre><span></span><code><span class="n">handoff_entry</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">fictional_now_ts</span><span class="p">(),</span>
+    <span class="s2">&quot;from_core&quot;</span><span class="p">:</span> <span class="n">from_core</span><span class="p">,</span>
+    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span>
+    <span class="s2">&quot;read&quot;</span><span class="p">:</span> <span class="kc">False</span>
+<span class="p">}</span>
+<span class="n">handoffs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">handoff_entry</span><span class="p">)</span>
+
+<span class="c1"># Keep only last 10 handoffs to prevent bloat</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">handoffs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">handoffs</span> <span class="o">=</span> <span class="n">handoffs</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">handoff_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">handoffs</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+
+<p>When a core gets loaded, any unread handoffs are pulled out of its file and threaded into its system prompt as "messages waiting for you." So if WRENCH spotted a hardware fault during your last session and decided REAPER needed to know about it, REAPER will see WRENCH's note the next time you load him. There's something really satisfying about getting a grudging WRENCH-flavored "tell that paranoid bastard the firewall's leaking" note dumped on your desk when you swap cores.</p>
 <p>In my next post I'll dig into the gameplay, which is still very much a work in progress. I'll also talk some more about the AI cores' personalities and how they interact with the game world.</p>
 <h3>To be continued...</h3>
     </div>

@@ -133,6 +133,28 @@
 <p>The "lore" of the device is that it's a stolen experimental field unit from <a href="https://cyberpunk.fandom.com/wiki/Militech">Militech</a>. It is designed to connect to networks and employ specialized AI actors to accomplish tasks and acquire data. It will run a sandboxed game simulation that allows the user to hack into virtual networks.</p>
 <p>Though I have been slacking very hard on building the case and aesthetic components, I've been testing the integration of the software with the I/O devices and it's all working great!</p>
 <p><img alt="Cyberdeck Current Progress" src="/theme/images/deck_current.jpg"></p>
+<h2>Architecture at a glance</h2>
+<p>I've been writing this thing in Python and the codebase is a little over 12,000 lines at this point, spread across 60-something modules. That sounds like a lot for a hobby project, but I've been disciplined about keeping things organized into a layered architecture so I don't lose my mind:</p>
+<ol>
+<li><strong>Hardware layer</strong>: drivers and abstractions for the displays, the SD card reader, the speaker, and (eventually) the GPIO switches. This layer is allowed to fail gracefully if a piece of hardware isn't connected, which grants me freedom to test easily without needing to deploy to the actual device.</li>
+<li><strong>Manager layer</strong>: a collection of focused, single-purpose modules - <code>MemoryManager</code>, <code>DisplayManager</code>, <code>ConversationManager</code>, <code>HandoffManager</code>, etc. Each manager owns a specific subsystem and exposes a clean interface to the rest of the app.</li>
+<li><strong>Personality layer</strong>: the AI cores themselves, along with a host of persistent NPCs, defined as JSON configs. This is where the fiction lives.</li>
+</ol>
+<p>The main <code>CyberdeckTerminal</code> class is essentially a delegation hub. It doesn't do much itself - it just owns the managers and wires them together:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">CyberdeckTerminal</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conversation_manager</span> <span class="o">=</span> <span class="n">ConversationManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_manager</span> <span class="o">=</span> <span class="n">MemoryManager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">handoff_manager</span> <span class="o">=</span> <span class="n">HandoffManager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tts_manager</span> <span class="o">=</span> <span class="n">TTSManager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display_manager</span> <span class="o">=</span> <span class="n">DisplayManager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">command_handler</span> <span class="o">=</span> <span class="n">CommandHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">core_authenticator</span> <span class="o">=</span> <span class="n">CoreAuthenticator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="c1"># ...and a bunch more</span>
+</code></pre></div>
+
+<p>This pattern has paid off enormously. When I want to add a new feature, I usually know exactly which manager owns it. When something breaks, the blast radius is contained. And it makes the codebase navigable by future me (who has a terrible memory) and, eventually, others when I'm ready to make the code public.</p>
+<p>A nice side effect of this layering is that physical events naturally cascade through all three layers. Insert a USB drive with a core config on it, and the hardware layer detects the mount, the manager layer loads and validates the config, and the personality layer swaps in a whole new system prompt and voice profile. Same flow for nearly every interaction in the system.</p>
 <p>Hopefully this intro gives you a rough idea of what I'm building. In the next post, I'll go into detail about how the software works and how I've designed the AI personas. Later posts will cover the game and physical device design.</p>
     </div>
 </article>
