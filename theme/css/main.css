@@ -377,7 +377,7 @@
 
 /* BASE */
 body {
-  background-color: var(--body-bg, var(--bg-color));
+  background-color: var(--bg-color);
   color: var(--body-text);
   font-family: 'Space Mono', monospace;
   margin: 20px auto;
@@ -414,7 +414,8 @@ body {
   -webkit-mask-image: radial-gradient(ellipse 1000px 1500px at center, transparent 0%, transparent 25%, black 65%);
 }
 
-/* Themed full-viewport background images (mirrors outrun-bg pattern) */
+/* Themed full-viewport background images. z-index: -1 so the body's solid bg
+   covers the image inside the terminal frame; image shows only in the margins. */
 #theme-bg {
   display: none;
   position: fixed;
@@ -422,7 +423,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: -1;
   pointer-events: none;
   background-size: cover;
   background-position: center;
@@ -449,13 +450,6 @@ body:not([data-theme]) #theme-bg {
   display: block;
   background-image: url("../fallout.png");
 }
-
-/* Translucent body fill for themes that show a bg image — lets it bleed through */
-body:not([data-theme])             { --body-bg: rgba(10, 14, 39, 0.78); }
-body[data-theme="vaporwave"]       { --body-bg: rgba(1, 1, 43, 0.78); }
-body[data-theme="arasaka"]         { --body-bg: rgba(13, 2, 8, 0.80); }
-body[data-theme="neuromancer"]     { --body-bg: rgba(0, 8, 20, 0.80); }
-body[data-theme="fallout"]         { --body-bg: rgba(0, 0, 0, 0.78); }
 
 /* CRT Scanlines effect - multiple moving lines */
 body::before {
@@ -722,17 +716,17 @@ ul :not(.menu) > ul > li:before {
 
 /* Snow Crash - Bitmap virus TV static */
 body[data-theme="snowcrash"]::before {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 2 -0.3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 1.2 -0.1'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size: 220px 220px;
-  opacity: 0.45;
+  opacity: 0.22;
   mix-blend-mode: multiply;
   animation: snowcrash-static 0.12s steps(4) infinite;
 }
 
 body[data-theme="snowcrash"]::after {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' stitchTiles='stitch' seed='5'/><feColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 1.8 -0.2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch' seed='5'/><feColorMatrix values='0 0 0 0 0   0 0 0 0 0   0 0 0 0 0   0 0 0 1 -0.05'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   background-size: 180px 180px;
-  opacity: 0.3;
+  opacity: 0.14;
   mix-blend-mode: multiply;
   animation: snowcrash-static-fast 0.07s steps(3) infinite reverse;
 }
@@ -1015,12 +1009,13 @@ body[data-theme="militech"]::after {
   width: 100%;
   height: 100%;
   background:
-    /* target contacts */
-    radial-gradient(circle at 18% 22%, rgba(255, 0, 0, 0.85) 1.5px, transparent 4px),
-    radial-gradient(circle at 73% 31%, rgba(255, 0, 0, 0.85) 1.5px, transparent 4px),
-    radial-gradient(circle at 41% 64%, rgba(255, 0, 0, 0.85) 1.5px, transparent 4px),
-    radial-gradient(circle at 86% 78%, rgba(255, 0, 0, 0.85) 1.5px, transparent 4px),
-    radial-gradient(circle at 12% 81%, rgba(255, 0, 0, 0.85) 1.5px, transparent 4px),
+    /* target contacts (positioned in the page margins, outside the terminal frame) */
+    radial-gradient(circle at 2% 18%, rgba(255, 0, 0, 0.9) 1.5px, transparent 4px),
+    radial-gradient(circle at 98% 28%, rgba(255, 0, 0, 0.9) 1.5px, transparent 4px),
+    radial-gradient(circle at 1% 55%, rgba(255, 0, 0, 0.9) 1.5px, transparent 4px),
+    radial-gradient(circle at 99% 68%, rgba(255, 0, 0, 0.9) 1.5px, transparent 4px),
+    radial-gradient(circle at 3% 88%, rgba(255, 0, 0, 0.9) 1.5px, transparent 4px),
+    radial-gradient(circle at 97% 92%, rgba(255, 0, 0, 0.9) 1.5px, transparent 4px),
     /* tactical grid */
     repeating-linear-gradient(
       0deg,
@@ -1044,7 +1039,7 @@ body[data-theme="militech"]::after {
 
 @keyframes militech-radar-sweep {
   from { transform: translate(-50%, -50%) rotate(0deg); }
-  to   { transform: translate(-50%, -50%) rotate(360deg); }
+  to   { transform: translate(-50%, -50%) rotate(-360deg); }
 }
 
 @keyframes militech-target-pulse {
@@ -1175,7 +1170,7 @@ body[data-theme="wargames"]::after {
       transparent 60px
     );
   background-size: 22px 22px, 22px 22px, 22px 22px, 22px 22px, auto, auto;
-  background-position: 23% 38%, 64% 27%, 81% 71%, 35% 80%, 0 0, 0 0;
+  background-position: 2% 30%, 2% 75%, 98% 35%, 98% 80%, 0 0, 0 0;
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat;
   pointer-events: none;
   z-index: 9998;
