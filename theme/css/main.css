@@ -626,6 +626,19 @@ img:not(.entry-content img) {
   height: auto;
 }
 
+/* ls -la style listing for the cyberdeck build journal */
+.ls-listing {
+  white-space: pre;
+}
+
+.ls-listing .ls-prompt {
+  color: var(--prompt-color);
+  font-weight: bold;
+  text-shadow:
+    0 0 5px var(--glow-primary),
+    0 0 10px var(--glow-primary);
+}
+
 img.headshot {
   float: left;
   width: 128px;
