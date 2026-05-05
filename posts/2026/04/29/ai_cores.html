@@ -483,6 +483,20 @@
                     this.classList.toggle('expanded');
                 });
             });
+
+            // Reassemble obfuscated email links so the address never appears verbatim in source.
+            // Parts are stored ROT13-encoded; decode and join with @ at runtime.
+            const rot13 = s => s.replace(/[a-zA-Z]/g, c => {
+                const base = c <= 'Z' ? 65 : 97;
+                return String.fromCharCode((c.charCodeAt(0) - base + 13) % 26 + base);
+            });
+            document.querySelectorAll('[data-email-user][data-email-host]').forEach(el => {
+                const addr = rot13(el.dataset.emailUser) + '@' + rot13(el.dataset.emailHost);
+                const link = document.createElement('a');
+                link.href = 'mailto:' + addr;
+                link.textContent = addr;
+                el.replaceWith(link);
+            });
         });
     </script>
 
