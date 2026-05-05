@@ -622,6 +622,16 @@ img:not(.entry-content img) {
   height: auto;
 }
 
+img.headshot {
+  float: left;
+  width: 180px;
+  height: auto;
+  margin: 4px 24px 12px 0;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--glow-primary);
+}
+
 /* LISTS */
 :not(.menu) > ul { 
   list-style: none; 
