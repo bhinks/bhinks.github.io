@@ -762,7 +762,7 @@ body[data-theme="outrun"]::after {
   bottom: 0;
   left: -50%;
   width: 200%;
-  height: 100%;
+  height: 200%;
   background:
     repeating-linear-gradient(
       0deg,
@@ -774,19 +774,37 @@ body[data-theme="outrun"]::after {
     repeating-linear-gradient(
       90deg,
       transparent 0px,
-      rgba(58, 134, 255, 0.8) 6px,
+      rgba(255, 0, 110, 0.9) 6px,
       transparent 8px,
       transparent 120px
     );
-  transform: perspective(400px) rotateX(65deg) translateY(-20%);
+  transform: perspective(600px) rotateX(55deg);
   transform-origin: bottom center;
   opacity: 1;
   pointer-events: none;
   z-index: 1;
-  filter: drop-shadow(0 0 8px rgba(255, 0, 110, 0.6))
-          drop-shadow(0 0 4px rgba(58, 134, 255, 0.4));
-  mask-image: linear-gradient(to top, black 0%, black 40%, transparent 80%);
-  -webkit-mask-image: linear-gradient(to top, black 0%, black 40%, transparent 80%);
+  will-change: background-position;
+  animation: outrun-grid-rush 2s linear infinite;
+}
+
+@keyframes outrun-grid-rush {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 0 120px, 0 0;
+  }
+}
+
+[data-theme="outrun"] main,
+[data-theme="outrun"] .ascii-header,
+[data-theme="outrun"] footer,
+[data-theme="outrun"] header {
+  background-color: var(--bg-color);
+}
+
+[data-theme="outrun"] #matrix-rain {
+  display: none;
 }
 
 /* Arasaka - Corporate data streams */
