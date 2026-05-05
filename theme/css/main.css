@@ -630,6 +630,20 @@ img.headshot {
   border: 2px solid var(--border-color);
   border-radius: 4px;
   box-shadow: 0 0 10px var(--glow-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+img.headshot.expanded {
+  float: none;
+  display: block;
+  width: auto;
+  max-width: 95%;
+  margin: 20px auto;
+  cursor: zoom-out;
+  box-shadow: 0 0 50px var(--glow-primary);
+  position: relative;
+  z-index: 1000;
 }
 
 /* LISTS */

@@ -354,7 +354,7 @@ mean to look for context in the appropriate vault location.
 
         // Image Click to Enlarge
         document.addEventListener('DOMContentLoaded', () => {
-            const images = document.querySelectorAll('.entry-content img');
+            const images = document.querySelectorAll('.entry-content img, img.headshot');
             images.forEach(img => {
                 img.addEventListener('click', function() {
                     this.classList.toggle('expanded');
