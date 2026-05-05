@@ -414,43 +414,6 @@ body {
   -webkit-mask-image: radial-gradient(ellipse 1000px 1500px at center, transparent 0%, transparent 25%, black 65%);
 }
 
-/* Themed full-viewport background images. z-index: -1 so the body's solid bg
-   covers the image inside the terminal frame; image shows only in the margins. */
-#theme-bg {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-body:not([data-theme]) #theme-bg {
-  display: block;
-  background-image: url("../neon.jpg");
-}
-[data-theme="vaporwave"] #theme-bg {
-  display: block;
-  background-image: url("../vaporwave.jpg");
-}
-[data-theme="arasaka"] #theme-bg {
-  display: block;
-  background-image: url("../arasaka.jpg");
-}
-[data-theme="neuromancer"] #theme-bg {
-  display: block;
-  background-image: url("../neuromancer.jpg");
-}
-[data-theme="fallout"] #theme-bg {
-  display: block;
-  background-image: url("../fallout.png");
-}
-
 /* CRT Scanlines effect - multiple moving lines */
 body::before {
   content: '';
