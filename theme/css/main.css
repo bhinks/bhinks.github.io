@@ -624,9 +624,9 @@ img:not(.entry-content img) {
 
 img.headshot {
   float: left;
-  width: 180px;
+  width: 100px;
   height: auto;
-  margin: 4px 24px 12px 0;
+  margin: 4px 18px 8px 0;
   border: 2px solid var(--border-color);
   border-radius: 4px;
   box-shadow: 0 0 10px var(--glow-primary);
