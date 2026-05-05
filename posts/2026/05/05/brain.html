@@ -156,7 +156,7 @@ mean to look for context in the appropriate vault location.
 <p>The hub page is a short overview with links to everything else. Sub-pages are prefixed with the project name so they're globally unique across the whole vault. That matters because Obsidian's wikilinks work on filename, and you don't want two <code>Tasks.md</code> files fighting over the same <code>[[Tasks]]</code> link. There's also an <code>/Archive/</code> subfolder in each project for stale or removed content; the brain doesn't search there in normal use.</p>
 <p>There's also a <code>/User/</code> folder that contains a profile page about me: my preferences, how I like to work, my technical environment, what I'm currently focused on. Nova reads this whenever it needs to make a judgment call about how to approach something. And there's a <code>/Configuration/</code> folder for system-level stuff that's not project-specific (voice mode settings, audio troubleshooting notes, that kind of thing).</p>
 <h2>The style guide is important</h2>
-<p>This is the part I underestimated when I first set this up. Without explicit guidance, an LLM left to write notes will absolutely produce a wall of bullet points for every page. Bullets all the way down. Bullets inside bullets. It's awful and unreadable.</p>
+<p>This is the part I underestimated when I first set this up. Without explicit guidance, an LLM left to write notes will absolutely produce a wall of bullet points for every page. The style guidance is there to make sure the output feels like a wiki that can be navigated by a human.</p>
 <p>I fixed this with a few rules that Nova has to follow whenever it writes to the brain:</p>
 <ul>
 <li>Use headings to structure documents, not nested bullet lists.</li>
