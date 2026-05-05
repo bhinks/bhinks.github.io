@@ -1296,6 +1296,60 @@ body[data-theme="screamsheet"]::before {
   border-top: 3px double #000000;
 }
 
+/* Default post-list divider — matches the look of the previous inline-styled hr */
+.post-divider {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 30px 0;
+}
+
+/* Screamsheet - multi-column newspaper layout for the index */
+[data-theme="screamsheet"] .post-list {
+  column-count: 2;
+  column-gap: 36px;
+  column-rule: 1px solid #000;
+}
+
+[data-theme="screamsheet"] .post-list > article {
+  break-inside: avoid;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="screamsheet"] .post-list > article:last-of-type {
+  border-bottom: none;
+}
+
+/* First article runs as a full-width lede above the columns */
+[data-theme="screamsheet"] .post-list > article:first-child {
+  column-span: all;
+  padding-bottom: 22px;
+  margin-bottom: 26px;
+  border-bottom: 3px double #000;
+}
+
+[data-theme="screamsheet"] .post-list > article:first-child .entry-title {
+  font-size: 2em;
+  letter-spacing: 2px;
+}
+
+/* Hide the textual hr separators — columns and per-article rules carry the structure */
+[data-theme="screamsheet"] .post-list .post-divider {
+  display: none;
+}
+
+/* Tighten meta + summary inside columns so articles read like clipped stories */
+[data-theme="screamsheet"] .post-list .entry-meta {
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+[data-theme="screamsheet"] .post-list .entry-summary {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .menu ul {
   margin-top: 12px;
   margin-bottom: 12px;
