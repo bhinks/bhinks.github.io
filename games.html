@@ -208,10 +208,7 @@
         viewRows = allRows.filter(r => {
             if (p && r.platform !== p) return false;
             if (g && r.genre !== g) return false;
-            if (q) {
-                const hay = (r.title + '|' + r.developer + '|' + r.publisher).toLowerCase();
-                if (!hay.includes(q)) return false;
-            }
+            if (q && !r._search.includes(q)) return false;
             return true;
         });
         sortRows();
@@ -220,14 +217,22 @@
 
     function sortRows() {
         const dir = sortDir;
-        const col = sortCol;
+        const lcKey = '_lc_' + sortCol;
         viewRows.sort((a, b) => {
-            const av = a[col].toLowerCase();
-            const bv = b[col].toLowerCase();
+            const av = a[lcKey];
+            const bv = b[lcKey];
             if (av < bv) return -1 * dir;
             if (av > bv) return 1 * dir;
             return 0;
         });
+    }
+
+    function debounce(fn, ms) {
+        let t;
+        return function () {
+            clearTimeout(t);
+            t = setTimeout(fn, ms);
+        };
     }
 
     function render() {
@@ -266,6 +271,8 @@
             const r = {};
             COLS.forEach(c => { r[c] = (raw[idx[c]] || '').trim(); });
             if (!r.title) continue;
+            COLS.forEach(c => { r['_lc_' + c] = r[c].toLowerCase(); });
+            r._search = r._lc_title + '|' + r._lc_developer + '|' + r._lc_publisher;
             allRows.push(r);
             if (r.platform) platforms.add(r.platform);
             if (r.genre) genres.add(r.genre);
@@ -278,7 +285,7 @@
         sortRows();
         render();
 
-        els.search.addEventListener('input', applyFilters);
+        els.search.addEventListener('input', debounce(applyFilters, 150));
         els.platform.addEventListener('change', applyFilters);
         els.genre.addEventListener('change', applyFilters);
         els.reset.addEventListener('click', () => {

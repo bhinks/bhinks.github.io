@@ -2269,6 +2269,11 @@ code {
   color: var(--pop-color);
 }
 
+.games-table tbody tr {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 32px;
+}
+
 .games-table tbody td {
   padding: 5px 10px;
   border-bottom: 1px dashed var(--light-alt-color);
