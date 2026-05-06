@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>deck_gameplay - OMGninjabot</title>
+    <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+</head>
+
+<body>
+    <canvas id="matrix-rain"></canvas>
+    <video id="outrun-bg" autoplay loop muted playsinline>
+        <source src="/theme/outrun.mp4" type="video/mp4">
+    </video>
+    <div class="terminal-header">
+        <div class="terminal-status">
+            <span class="status-indicator"></span>
+            <span class="status-text">ONLINE</span>
+        </div>
+        <div class="terminal-title">CYBERSPACE://OMGninjabot/connect.sh</div>
+        <div class="system-info">
+            <div class="system-status" id="system-status">SYS: INIT...</div>
+            <div class="network-status" id="network-status">NET: CONN...</div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <header class="ascii-header">
+        <div class="ascii-container">
+            <div class="ascii-ninja">
+                <pre>                 ⢀⡠⠤⠔⠒⠒⠦⠄⣀                    
+               ⡠⠚⠁         ⠉⠢⡀                 
+    ⣠⣤⣤⡄     ⣸⠁  ⣀       ⣀  ⢹⡄                
+  ⠘⣏⣀⣤⣾⡄   ⢠⡇⡰⠲⣯⣀⣀⡀  ⣀⣀⣤⠷⠲⡀⣇                
+   ⢹⠯⣤⣞⣳⡀  ⢸ ⣇   ⠉⠉⢉⠉⢉⡉    ⡇⢸                
+    ⢷⠧⣴⣏⣇  ⢸ ⢹⠒⣦⣤⣄⣀⣥⣖⣉⣤⣤⠔⢺ ⢸                
+    ⠘⡟⢠⡴⣿⡆ ⢸ ⢸⡀⠙⢭⣽⣾⣀⣼⣿⣭⠝⠁⣸ ⢸                
+     ⢱⡛⣲⠯⣽⡄⢸ ⠏⢱⠴⠊⠁   ⠈⠉⠲⣴⠙ ⣸                
+      ⢳⣳⣞⣷⣷⣸⡇⣞⠁   ⢀       ⢹ ⡟                 
+     ⢀⣈⠿⣟⣫⢭⡟⠣⠸⣦   ⠈⠉⠉   ⢀⣾⢠⠛⣦⢄⣀             
+   ⣀⣴⠿⢤⣼⡃ ⠈⢧  ⠳⡱⣄   ⢀⣿⣿⣤⣿⠃ ⢠⠇ ⡿⠤⠤⣤⣀⡀       
+  ⢘⣿⠶⣄ ⣿⣇   ⠳⣀ ⠈⠙⠓⠦⢤⣿⡟⣻⠟⠁⢀⡠⠃  ⣰⠃⢀⠾⢿⣻      
+ ⢀⡾⠁ ⠈⢧⣼⡟⣆         ⢸⢻⠁⠙⡇ ⠈   ⣰⠃ ⢠⡏   ⠹⡆     
+ ⢸⡇   ⠈⣧⢣⠙⢦        ⡸⡞ ⠛⣇⣀   ⡴⠃  ⡞      ⣿⡄    
+⢀⡟⢧  ⣀⠤⠾⡈⢆⠈⠙⢦⣀    ⢰⣧⣤⡦⠶⠧⠼⢤⣠⠞⠁  ⢸⠧⣄⡀ ⢸⠹⡄   
+⣼ ⠘⡆⠊⡀  ⠙⣌⢢⡀ ⠈⠙⢶⣒⡶⠋⠙⡌⢧   ⠚⠳⡄   ⣾⠎ ⠙   ⢧⢹⡀  
+⡏   ⡰    ⢸⣄⢑⣄ ⢀⡠⢿⡱⡀ ⡽⣸⣄⣷⠴⡄⢰⡇  ⢠⠃   ⢰    ⠉⢧  
+⣧⢠  ⣇⣠⣤⠖⠋⠉⠁     ⠈⢧⠑⣴⠃⡿⠤⡽⠒⠒⠋   ⣾    ⠈⡆   ⠘⣼⡀
+⢹⢸ ⢀⣽⡇⢸       ⢀⡠⠂ ⠳⣌⣾⡦⣞⠁      ⢻  ⢀⣴⡚⠳⣄    ⠘⡇
+ ⢻⡇⠸⠁⢧ ⢇  ⣀⡠⠴⠚⠉   ⢠⠟⠉  ⠙⢦⡀   ⢀⡸⠗⠉  ⠱⡀⠹⡉⠳⠄⢸ 
+ ⠈⡇  ⠈⢧⡈⢦       ⢀⡴⢛⣟⡭⠿⠿⠿⢿⡿⡿⠖⠒⠉      ⢣ ⡇  ⠘⡇ 
+  ⣷   ⠈⠳⣄⠑⢄⡀ ⣀⠤⢺⠿⢂⣎⡏     ⢹⣽⡄ ⣀⣀⣀ ⣀⣀⡀⠸    ⢠⠇
+  ⠘⠷⣄⣀⣀⣀⣉⣷⠤⠽⠋⠁⢠⡧⠔⣻⡏⣇      ⡇⡇        ⢀⠃ ⢀⡴⠋ 
+              ⠸⡤⠚⠁⣴⣜⠦⣤⣤⣤⣤⣴⣧⢇⣀⡀   ⢀⣀⣀⣼⣀⠟⠉    
+               ⠑⠢⠤⠤⠛⠉⠉⠉⠉⠉⠁⠁  ⠈⠉⠉⠉⠁           
+            ⢀⣠ ⠖⠒⠒⠒    ⠠⣀ ⢀ ⡀  ⠂              </pre>
+            </div>
+
+            <div class="ascii-main">
+                <pre class="ascii-art">  ██████  ███    ███  ██████  ██
+ ██    ██ ████  ████ ██       ██
+ ██    ██ ██ ████ ██ ██   ███ ██
+ ██    ██ ██  ██  ██ ██    ██   
+  ██████  ██      ██  ██████  ██
+
+ ███    ██ ██ ███    ██      ██  █████  ██████   ██████  ████████
+ ████   ██ ██ ████   ██      ██ ██   ██ ██   ██ ██    ██    ██   
+ ██ ██  ██ ██ ██ ██  ██      ██ ███████ ██████  ██    ██    ██   
+ ██  ██ ██ ██ ██  ██ ██ ██   ██ ██   ██ ██   ██ ██    ██    ██   
+ ██   ████ ██ ██   ████  ██████ ██   ██ ██████   ██████     ██   </pre>
+            </div>
+
+            <div class="ascii-robot">
+                <pre>                          /[-])//  ___         
+                     __ --\ `_/~--|  / \       
+                   /_-/~~--~~ /~~~\\_\ /\      
+                   |  |___|===|_-- | \ \ \     
+ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\    
+ ~\________|__/   / // \__ |  ||  / | |   | |  
+          ,~-|~~~~~\--, | \|--|/~|||  |   | |  
+          [3-|____---~~ _--'==;/ _,   |   |_|  
+                      /   /\__|_/  \  \__/--/  
+                     /---/_\  -___/ |  /,--|   
+                     /  /\/~--|   | |  \///    
+                    /  / |-__ \    |/          
+                   |--/ /      |-- | \         
+                  \^~~\\/\      \   \/- _      
+                   \    |  \     |~~\~~| \     
+                    \    \  \     \   \  | \   
+                      \    \ |     \   \    \  
+                       |~~|\/\|     \   \   |  
+                      |   |/         \_--_- |\ 
+                      |  /            /   |/\/ 
+                       ~~             /  /     
+                                     |__/      </pre>
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li class="page_title"><span id="theme-toggle" class="theme-toggle">[NEON MODE]</span></li>
+            <li><a href="../../../../">home.sh</a></li>
+            <li><a href="/about.html">about.sh</a></li>
+            <li><a href="/quake2.html">quake2.sh</a></li>
+            <li><a href="/cyberdeck.html">cyberdeck.sh</a></li>
+            <li><a href="/games.html">collection.sh</a></li>
+        </ul>
+        <div style="clear: both;"></div>
+    </nav>
+
+    <main>
+<article>
+    <header>
+        <h1 class="entry-title">cat deck_gameplay.txt</h1>
+        <div class="entry-meta">
+            <time datetime="2026-05-06T19:41:44-04:00">Wed 06 May 2026</time>
+            in <a href="../../../../category/posts.html">posts</a>
+            - Tagged: 
+            <a href="../../../../tag/ai.html">ai</a>,             <a href="../../../../tag/development.html">development</a>,             <a href="../../../../tag/cyberdeck.html">cyberdeck</a>,             <a href="../../../../tag/gaming.html">gaming</a>        </div>
+    </header>
+    <div class="entry-content">
+        <p>I've spent the last couple weeks turning the cyberdeck from "a thing that talks to you in cyberpunk-flavored ways" into something that's actually a <em>game</em>. Now there's a real loop: you take contracts from fixers, you run them through one of several gameplay modes, the world reacts, your reputation moves, and eventually an endgame storyline becomes available. In this post I want to walk through the parts I'm proudest of and the parts that fought back the hardest.</p>
+<h2>Interface upgrades</h2>
+<p>To support the narrative structure of missions, I finished implementing the BBS tab and added a few new ones. The BBS now fills itself in with chatter, but scattered throughout the chatter are mission clues and intel that can help unlock access to new fixers, expanding your access to new contracts.</p>
+<p><img alt="BBS Home" src="/theme/images/bbs1.png"></p>
+<p><img alt="BBS Messages" src="/theme/images/bbs2.png"></p>
+<p>STREET is a new location where RPG elements outside of the deck can unfold: get in a gunfight with a gangoon, buy daemons at a local shop, or resolve narrative mission tasks like meeting contacts. All interactions are still driven through the text interface.</p>
+<p><img alt="STREET" src="/theme/images/street.png"></p>
+<p>CODEX is a journal that tracks facts learned about fixers and missions. CODEX entries are automatically unlocked when the associated fact is revealed.</p>
+<p><img alt="CODEX" src="/theme/images/codex.png"></p>
+<p>INV is an inventory manager where you can equip weapons and armor as well as daemons for hacking runs. Nothing magical here, but an important addition.</p>
+<p><img alt="Inventory" src="/theme/images/inv.png"></p>
+<h2>Missions are just JSON</h2>
+<p>The whole game runs through a thing I call the <strong>mission graph</strong>. Every contract has an optional <code>node_graph</code> field, and the graph defines the mission's structure: where it starts, which nodes connect to each other, and what happens when each node resolves. The engine doesn't know anything about specific contracts; it just walks the graph.</p>
+<p>There are six node types:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>narrative</code></td>
+<td>Read text, optionally pick a choice</td>
+</tr>
+<tr>
+<td><code>intrusion</code></td>
+<td>Jacked-in network breach (subgame)</td>
+</tr>
+<tr>
+<td><code>combat</code></td>
+<td>STREET-side weapons combat (subgame)</td>
+</tr>
+<tr>
+<td><code>investigation</code></td>
+<td>Talk to your loaded core to surface facts</td>
+</tr>
+<tr>
+<td><code>social</code></td>
+<td>DM with an NPC under mission pressure</td>
+</tr>
+<tr>
+<td><code>resource</code></td>
+<td>Spend money / item, or pass a stat check</td>
+</tr>
+<tr>
+<td><code>outcome</code></td>
+<td>Terminal node - mission ends with this status</td>
+</tr>
+</tbody>
+</table>
+<p>A simple data-retrieval mission ends up looking like this:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;node_graph&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;brief&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;nodes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;brief&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;narrative&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Subnet address. Target file hash. Seven-minute window.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;choices&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Acknowledge&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;next&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;run&quot;</span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ask about backup&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;next&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;no_backup&quot;</span><span class="p">}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;no_backup&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;narrative&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;There is no backup window.\&quot;&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;next&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;run&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;run&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;intrusion&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Helix Node&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;topology&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;shape&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;linear&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;ice_pool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;barrier&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;trace&quot;</span><span class="p">],</span>
+<span class="w">          </span><span class="nt">&quot;objectives&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;extract&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">}]</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;on_success&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;debrief&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;on_partial&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;debrief&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;on_fail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;burned&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;debrief&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;narrative&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The file lands. Wallet ticks up. No thanks. That&#39;s how it works.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;next&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;win&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;burned&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;narrative&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The trace caught you mid-pull.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;next&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lose&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;win&quot;</span><span class="p">:</span><span class="w">  </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;outcome&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;outcome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;lose&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;outcome&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;outcome&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fail&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Authoring a new mission is mostly an exercise in writing a JSON file. The <code>MissionRunner</code> queues up subgames when it hits an intrusion or combat node, and routes to whichever next-node the outcome demands.</p>
+<p>One thing I've made a commitment to: <strong>player agency</strong>. The mission engine never auto-takes-over. If your current node is an intrusion, the game doesn't drop you into the hacking subgame uninvited. It just queues the intrusion and tells you to type <code>connect</code> on the CON tab when you're ready. Same for combat (<code>fight</code> on STREET), investigation (chat with your core on AICI), social nodes (<code>dm &lt;fixer&gt;</code> on BBS), and resource nodes (<code>pay</code> or <code>skip</code> on STREET). The mission state hangs in the air, the relevant tab nudges you, and the player decides when to engage.</p>
+<p>This sounds simple but it took some iteration. Earlier prototypes had the engine yanking the user into combat the moment the previous narrative node finished. It felt like the game was driving and the player was a passenger. Forcing player-initiated transitions made the whole thing feel <em>calmer</em>. You read the brief at your own pace. You walk over to STREET when you're ready. The fiction holds its breath while you do.</p>
+<h2>Combat is rock-paper-scissors with consequences</h2>
+<p>I wanted street-side combat to feel like more than dice. Just trading damage with an enemy round-by-round was boring within minutes. I needed a small layer of decision-making that could compound in interesting ways without becoming a full-on tactics game.</p>
+<p>What I landed on is a three-stance system per round: <strong>attack</strong>, <strong>aim</strong>, or <strong>cover</strong> (plus <code>flee</code> and <code>stim</code> as utility verbs). The interactions are:</p>
+<ul>
+<li><strong>AIM &gt; COVER</strong>: an aimed attack pierces enemy cover (cover does nothing)</li>
+<li><strong>COVER &gt; ATTACK</strong>: taking cover blocks a non-aimed attack entirely</li>
+<li><strong>ATTACK &gt; AIM</strong>: hitting someone while they aim disrupts their bonus</li>
+</ul>
+<p>The enemy picks a stance too, and the player has to read what the enemy is going to do. The trick is that I pre-select the enemy's next stance at the end of each round so it's locked in before the player chooses. The display might say:</p>
+<blockquote>
+<p>The Goon is taking cover.</p>
+</blockquote>
+<p>The helpfulness of the hint is gated by an <strong>awareness roll</strong> that scales with street cred. At cred 1 you're guessing maybe 30% of the time. At cred 10 you read every stance.</p>
+<div class="highlight"><pre><span></span><code><span class="n">AWARENESS_BASE</span> <span class="o">=</span> <span class="mf">0.20</span>      <span class="c1"># base reveal probability</span>
+<span class="n">AWARENESS_PER_CRED</span> <span class="o">=</span> <span class="mf">0.10</span>  <span class="c1"># +10% per cred point</span>
+
+<span class="k">def</span> <span class="nf">_prepare_next_round</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">active</span><span class="p">):</span>
+    <span class="n">next_verb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pick_enemy_action</span><span class="p">(</span><span class="n">active</span><span class="p">)</span>
+    <span class="n">cred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">character_manager</span><span class="o">.</span><span class="n">get_character</span><span class="p">()[</span><span class="s1">&#39;street_cred&#39;</span><span class="p">]</span>
+    <span class="n">p_reveal</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">AWARENESS_BASE</span> <span class="o">+</span> <span class="n">cred</span> <span class="o">*</span> <span class="n">AWARENESS_PER_CRED</span><span class="p">)</span>
+    <span class="n">revealed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p_reveal</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_save_state</span><span class="p">(</span><span class="n">active</span><span class="p">,</span> <span class="n">next_verb</span><span class="o">=</span><span class="n">next_verb</span><span class="p">,</span> <span class="n">revealed</span><span class="o">=</span><span class="n">revealed</span><span class="p">)</span>
+</code></pre></div>
+
+<p>I'm fond of this for two reasons. First, it gives street cred a tangible mechanical effect that you can actually <em>feel</em> during combat. Second, the design aligns with the fiction: a green OPERATOR can't read body language; a hardened one can. The thing the stat is <em>meant to represent</em> in the fiction is exactly what the mechanic gives you.</p>
+<p>There's a second layer on top of stance: <strong>crit and fatal margins</strong>. When an attack hits, the margin between the success roll and the threshold determines damage tier:</p>
+<div class="highlight"><pre><span></span><code><span class="n">fatal_threshold</span> <span class="o">=</span> <span class="mf">0.85</span> <span class="k">if</span> <span class="n">aim_active</span> <span class="k">else</span> <span class="mf">0.95</span>
+<span class="n">crit_threshold</span>  <span class="o">=</span> <span class="mf">0.60</span> <span class="k">if</span> <span class="n">aim_active</span> <span class="k">else</span> <span class="mf">0.80</span>
+
+<span class="k">if</span> <span class="n">margin</span> <span class="o">&gt;</span> <span class="n">fatal_threshold</span><span class="p">:</span>
+    <span class="n">fatal</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">damage</span> <span class="o">=</span> <span class="n">active</span><span class="p">[</span><span class="s1">&#39;enemy_hp&#39;</span><span class="p">]</span>  <span class="c1"># one-shot kill</span>
+<span class="k">elif</span> <span class="n">margin</span> <span class="o">&gt;</span> <span class="n">crit_threshold</span><span class="p">:</span>
+    <span class="n">crit</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">damage</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">base_damage</span> <span class="o">*</span> <span class="mf">2.0</span><span class="p">))</span>
+<span class="k">elif</span> <span class="n">margin</span> <span class="o">&lt;</span> <span class="mf">0.15</span><span class="p">:</span>
+    <span class="n">graze</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">damage</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">base_damage</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)))</span>
+</code></pre></div>
+
+<p>A fatal hit ends the fight on the spot. They're rare, but they happen, and they fit the fiction - we're shooting at people with guns and one well-placed shot is sometimes all it takes. Aiming widens both the crit and fatal thresholds, so the AIM stance becomes a real risk-reward call: skip a turn of damage now, set up a possible one-shot next turn.</p>
+<p>The interactions all stack. You aim, the enemy chooses cover (you read it), so your aimed shot pierces cover AND has a wider fatal threshold. Or you aim, the enemy chooses attack, you take a hit that disrupts your aim bonus by half. The combat loop ends up feeling reactive without ever needing more than a few keystrokes per round.</p>
+<h2>Trust gossips through factions</h2>
+<p>The fixers in this game have always had per-fixer trust scores. What they didn't have, until recently, is any awareness of each other. If you ran a clean job for one fixer, that was a private matter between the two of you. Faction adjacencies didn't matter. The world was, in effect, fourteen disconnected one-on-one relationships.</p>
+<p>That bugged me. Trust is the kind of thing that should bleed across boundaries. So I built a faction graph. Allies and rivals are tagged on each faction config, and a small distance-weighted search propagates a fraction of every trust delta out through the graph, creating ripple effects throughout the game world:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ALLY_RATE</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">RIVAL_RATE</span> <span class="o">=</span> <span class="mf">0.15</span>
+<span class="n">DECAY_PER_HOP</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">MAX_DISTANCE</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="k">def</span> <span class="nf">spillover_targets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_faction</span><span class="p">,</span> <span class="n">base_delta</span><span class="p">):</span>
+    <span class="c1"># BFS from source; each edge is signed +1 (allied) or -1 (rival).</span>
+    <span class="c1"># Multi-hop signs multiply: enemy-of-my-enemy = ally.</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="p">{</span><span class="n">source_faction</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([(</span><span class="n">source_faction</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">cur</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">sign</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">dist</span> <span class="o">&gt;=</span> <span class="n">MAX_DISTANCE</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">neighbor</span><span class="p">,</span> <span class="n">edge_sign</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_neighbors</span><span class="p">(</span><span class="n">cur</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">neighbor</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sign</span> <span class="o">*</span> <span class="n">edge_sign</span><span class="p">)</span>
+            <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">dist</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sign</span> <span class="o">*</span> <span class="n">edge_sign</span><span class="p">))</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">gossip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gossip_factor</span><span class="p">(</span><span class="n">source_faction</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">fid</span><span class="p">,</span> <span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">sign</span><span class="p">)</span> <span class="ow">in</span> <span class="n">visited</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">rate</span> <span class="o">=</span> <span class="n">ALLY_RATE</span> <span class="k">if</span> <span class="n">sign</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">RIVAL_RATE</span>
+        <span class="n">decay</span> <span class="o">=</span> <span class="n">DECAY_PER_HOP</span> <span class="o">**</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dist</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">fid</span><span class="p">,</span> <span class="n">base_delta</span> <span class="o">*</span> <span class="n">sign</span> <span class="o">*</span> <span class="n">rate</span> <span class="o">*</span> <span class="n">decay</span> <span class="o">*</span> <span class="n">gossip</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">out</span>
+</code></pre></div>
+
+<p>Picture: anarchist factions are rivals of corporates, corporates are allied with military. Trust delta from your work for an anarchist fixer hits military fixers with a <em>negative</em> sign, decayed by one hop. The math says "the friend of my enemy distrusts me a little," and that's correct.</p>
+<p>Each faction also has a <code>gossip_factor</code> between roughly 0.4 and 1.4. Media types are loud (1.4); AI-aligned factions are secretive (0.4). The same trust delta out of a media fixer ripples three times harder than out of an AI fixer. That gossip factor became one of those small numbers that ended up shaping how the world <em>feels</em> way more than I expected. A run with a media-aligned fixer makes you locally famous; the same run with an AI fixer might as well not have happened.</p>
+<p>The DM voice surfaces this in the fixer's prompt addendum: both a persistent "what they've heard about you" line and a recent-events highlight from the last fictional day:</p>
+<blockquote>
+<p>Through the faction grapevine you've heard about: runs you've done for SPINDLE (positive word); trouble around MOLOTOV (bad word).</p>
+<p>Just heard about the OPERATOR's work around: KITE (clean), HAMMER (messy). Reference one of these naturally if it fits the tone - don't recite the list.</p>
+</blockquote>
+<p>The "don't recite the list" line was a hard-won lesson. The first version of the prompt without it had the LLM dutifully reading off the list of every fixer's name and outcome at the start of every reply. The fix was to tell the model what <em>not</em> to do as much as what to do.</p>
+<h2>Storylines are chains of contracts</h2>
+<p>The contract-by-contract grind is fine, but it's just a grind. To give the player something to build toward, I added the chain system.</p>
+<p>A chain is a multi-mission arc unlocked when the OPERATOR reaches a certain trust level with any fixer in a faction. Each step is a real contract injected into the inbox, with the chain metadata stored on the contract row so the resolver knows what to do when it completes. Branches at a step are hard - choosing one variant withdraws the other. Failure can route to a "recovery" beat (heat / eurodollar / trust cost) instead of just ending the chain.</p>
+<p>The chain config looks like this (truncated; the full arc has three steps and a branching middle) and is essentially a graph of graphs:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;chain_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;street_relic&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The Last Run of GHOST_PIN&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;faction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;street&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;fixer_pool&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;kite&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;unlock_trust_threshold&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;steps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;step&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GHOST_PIN&#39;s last cache&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;contract&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* a full mission_graph contract */</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;step&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;What&#39;s in the box&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;branches&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;branch&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deliver&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;contract&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* respect path */</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;branch&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;open&quot;</span><span class="p">,</span><span class="w">    </span><span class="nt">&quot;contract&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* curious path */</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;step&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GHOST_PIN&#39;s killer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;contract&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* climax combat */</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;recovery_step&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Lay low for a cycle&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;cost&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;heat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;eurodollars&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;rewards&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;daemon&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;daemon_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;icebreaker&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tier&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GHOST_PIN&#39;s Icebreaker&quot;</span>
+<span class="w">    </span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;weapon&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* unique pistol */</span><span class="w"> </span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;directed_contract&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* recurring premium */</span><span class="w"> </span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bbs_insider_board&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;darknet://blackmarket&quot;</span>
+<span class="w">    </span><span class="p">}},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;trusted_vendor&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;shop_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bayside_market&quot;</span><span class="p">}}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>There are currently five reward types: faction-aligned daemons, recurring premium contracts, unique weapons, BBS insider board access, and trusted-vendor status at faction-aligned shops. A chain climax can grant any combination. Authoring a chain is mostly authoring contract JSONs; the framework handles the chain progression, the branch withdrawal of unchosen contracts, the recovery routing on failure, and the reward delivery on completion.</p>
+<p>I authored the first chain end-to-end as proof. Future chains will be a mix of hand-authored climaxes and LLM-generated middle beats. This was the design call I went back and forth on the longest. A fully hand-authored chain feels like it has soul; a fully LLM-generated chain scales but loses character. The hybrid feels right. The climax is what the player remembers, so author that, and let the LLM fill in the middle with pre-tagged structural slots.</p>
+<h2>The game can actually end</h2>
+<p>The hardest design problem of the whole project was deciding how the game ends. A sandbox without a finish line is fine for a few sessions but eventually the player drifts. I wanted the game to point at <em>something</em>, so I came up with three distinct ending paths:</p>
+<ul>
+<li><strong>RETIREMENT</strong>: clean exit. Earned by high cred, low heat, multiple chain completions, no active high-tier rivals. The final chain is "The Last Run" - one big payday, a quiet handoff to a new runner, the window-shopping ending. Bittersweet.</li>
+<li><strong>FIXER ASCENSION</strong>: you become one of them. Earned by maxing trust with several fixers across multiple factions. The final chain is "The Introduction" - a council interview, an initiation pull, your first contract going <em>out</em> to NPC operators.</li>
+<li><strong>MEGACORP TAKEDOWN</strong>: bring one down. Earned by gathering a corp's vulnerability intel + supportive faction reputation + a successful intrusion against the corp. Currently authored against Militech; the other megacorps are framework-only.</li>
+</ul>
+<p>The paths are mutually exclusive. Accepting the FINAL CHAIN of any path locks the others permanently. I didn't add an "are you sure?" confirm; the action is the commitment. There's something about being able to undo a big choice that makes the choice feel smaller. You walk into the council interview, you've chosen.</p>
+<p>When a path's final chain completes, the game flips an <code>ng_plus_pending</code> flag. The player keeps their stats and codex; the world clock and contract pool reset. The next cycle is a fresh world with a slightly weathered runner.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">consume_ng_plus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ng_plus_pending&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s2">&quot;UPDATE endgame_state SET &quot;</span>
+            <span class="s2">&quot;  ng_plus_pending = 0, &quot;</span>
+            <span class="s2">&quot;  ng_plus_count = ng_plus_count + 1, &quot;</span>
+            <span class="s2">&quot;  committed_path = NULL, completed_path = NULL &quot;</span>
+            <span class="s2">&quot;WHERE id = 1&quot;</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+
+<p>Even though you are resetting to a "new" character, I wanted the footprints left by your past exploits to persist. So look for comments from the AI cores (they remember their previous OPERATOR) and BBS posts for a walk down memory lane.</p>
+<h2>What I learned</h2>
+<p>A few patterns stand out from this stretch of work:</p>
+<p><strong>Author-time data + runtime engine.</strong> Almost every system I'm proudest of: missions, chains, vendetta arcs (more on this in another post), faction relationships, is a thin runtime orchestrated by a piece of authored or generated JSON. The engine doesn't know about specific contracts; it just walks the graph. The engine doesn't know about specific factions; it just walks the spillover search. This pattern keeps the codebase small and the content surface huge.</p>
+<p><strong>The fiction is a design tool, not a coat of paint.</strong> The roll for combat awareness exists because the cred stat <em>means</em> something in the fiction. The handoff system exists because cores can't be loaded simultaneously. The best design decisions are the ones where the fiction and the implementation point at the same answer.</p>
+<p><strong>Loud failures &gt; silent failures.</strong> I keep coming back to this. The first version of half these systems swallowed exceptions trying to be polite. Every single one I've revisited and replaced with a noisy crash. A noisy bug gets fixed in twenty minutes; a silent bug eats a week.</p>
+<p>Now that all the major gameplay elements are in and tested, I can focus on polish and making them (hopefully) more fun to engage with. After that I'll pivot to content-authoring mode.</p>
+<p>Still to come is a post detailing the physical build-in-progress. I'll likely revisit some of these game systems in more detail, too.</p>
+<h3>To be continued...</h3>
+    </div>
+</article>
+    </main>
+
+    <footer>
+        <p>&copy; ninjabot. Terminal powered by <a href="https://getpelican.com/">Pelican</a></p>
+    </footer>
+
+    <script>
+        // Multi-theme switcher functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Theme definitions
+        const themes = ['neon', 'matrix', 'fallout', 'snowcrash', 'screamsheet', 'aperture', 'wargames', 'vaporwave', 'outrun',  'neuromancer', '2077', 'arasaka', 'militech'];
+        const themeLabels = {
+            'neon': '[NEON MODE]',
+            'matrix': '[MATRIX MODE]',
+            'fallout': '[FALLOUT MODE]',
+            'snowcrash': '[SNOWCRASH MODE]',
+            'screamsheet': '[SCREAMSHEET MODE]',
+            'aperture': '[APERTURE MODE]',
+            'wargames': '[WARGAMES MODE]',
+            'vaporwave': '[VAPORWAVE MODE]',
+            'outrun': '[OUTRUN MODE]',
+            'neuromancer': '[NEUROMANCER MODE]',
+            '2077': '[2077 MODE]',
+            'arasaka': '[ARASAKA MODE]',
+            'militech': '[MILITECH MODE]'
+        };
+
+        // Load saved theme or default to neon. Migrate retired theme names.
+        let currentTheme = localStorage.getItem('theme') || 'neon';
+        const themeMigrations = { 'green': 'matrix', 'amber': 'fallout', 'light': 'snowcrash' };
+        if (themeMigrations[currentTheme]) {
+            currentTheme = themeMigrations[currentTheme];
+        }
+
+        // Apply theme
+        function applyTheme(theme) {
+            if (theme === 'neon') {
+                body.removeAttribute('data-theme');
+            } else {
+                body.setAttribute('data-theme', theme);
+            }
+            themeToggle.textContent = themeLabels[theme];
+            localStorage.setItem('theme', theme);
+            currentTheme = theme;
+        }
+        
+        // Initialize theme
+        applyTheme(currentTheme);
+        
+        // Cycle through themes on click
+        themeToggle.addEventListener('click', () => {
+            const currentIndex = themes.indexOf(currentTheme);
+            const nextIndex = (currentIndex + 1) % themes.length;
+            const nextTheme = themes[nextIndex];
+            applyTheme(nextTheme);
+            if (window.goatcounter && window.goatcounter.count) {
+                window.goatcounter.count({
+                    path: 'theme-switch:' + nextTheme,
+                    title: 'Theme switched to ' + nextTheme,
+                    event: true,
+                });
+            }
+        });
+
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const charArray = chars.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            // Matrix rain is the cornerstone of the matrix theme only.
+            const theme = document.body.getAttribute('data-theme');
+            if (theme !== 'matrix') {
+                return;
+            }
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const mainColor = getComputedStyle(document.body).getPropertyValue('--main-color').trim();
+            ctx.fillStyle = mainColor;
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Random Glitch Effect on Terminal Title
+        const terminalTitle = document.querySelector('.terminal-title');
+        setInterval(() => {
+            if (Math.random() > 0.9) {
+                terminalTitle.classList.add('glitch-text');
+                setTimeout(() => terminalTitle.classList.remove('glitch-text'), 300);
+            }
+        }, 3000);
+
+        // Dynamic System Status
+        const systemMessages = [
+            'SYS: ALL SYSTEMS NOMINAL',
+            'SYS: DEFRAG COMPLETE',
+            'SYS: RUNNING DIAGNOSTICS',
+            'SYS: FIREWALL ACTIVE',
+            'SYS: ENCRYPTION ENABLED',
+            'SYS: MEMORY OPTIMIZED',
+            'SYS: CORES: 8 | LOAD: 42%',
+            'SYS: UPTIME: 47 DAYS',
+            'SYS: ICE PROTOCOLS ACTIVE',
+            'SYS: SCANNING FOR THREATS...',
+            'SYS: NO THREATS DETECTED'
+        ];
+
+        const systemStatus = document.getElementById('system-status');
+        let systemIndex = 0;
+
+        function updateSystemStatus() {
+            systemIndex = (systemIndex + 1) % systemMessages.length;
+            systemStatus.textContent = systemMessages[systemIndex];
+        }
+
+        setInterval(updateSystemStatus, 8000);
+        setTimeout(updateSystemStatus, 1500);
+
+        // Dynamic Network Status
+        const networkMessages = [
+            'NET: LATENCY: 12ms',
+            'NET: BANDWIDTH: 1.2GB/s',
+            'NET: CONNECTED: SECURE',
+            'NET: PACKETS: 0 DROPPED',
+            'NET: NODE: CYBERSPACE-7',
+            'NET: ENCRYPTION: AES-256',
+            'NET: VPN: ACTIVE',
+            'NET: PROXY: ENABLED',
+            'NET: UPLINK: STABLE'
+        ];
+
+        const networkStatus = document.getElementById('network-status');
+        let networkIndex = 0;
+
+        function updateNetworkStatus() {
+            networkIndex = (networkIndex + 1) % networkMessages.length;
+            networkStatus.textContent = networkMessages[networkIndex];
+        }
+
+        setInterval(updateNetworkStatus, 6000);
+        setTimeout(updateNetworkStatus, 2000);
+
+        // Image Click to Enlarge
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.entry-content img, img.headshot');
+            images.forEach(img => {
+                img.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+
+            // Reassemble obfuscated email links so the address never appears verbatim in source.
+            // Parts are stored ROT13-encoded; decode and join with @ at runtime.
+            const rot13 = s => s.replace(/[a-zA-Z]/g, c => {
+                const base = c <= 'Z' ? 65 : 97;
+                return String.fromCharCode((c.charCodeAt(0) - base + 13) % 26 + base);
+            });
+            document.querySelectorAll('[data-email-user][data-email-host]').forEach(el => {
+                const addr = rot13(el.dataset.emailUser) + '@' + rot13(el.dataset.emailHost);
+                const link = document.createElement('a');
+                link.href = 'mailto:' + addr;
+                link.textContent = addr;
+                el.replaceWith(link);
+            });
+        });
+    </script>
+
+    <script data-goatcounter="https://omgninjabot.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
