@@ -116,15 +116,34 @@
     </header>
 
     <div class="entry-content">
-        <p>A living document for my ongoing cyberdeck build: design notes, parts list, and lessons learned along the way. The build journal entries below track progress in chronological order.</p>
+        <p>A living document for my ongoing cyberdeck build: design notes, parts list, and lessons learned along the way. The <a href="#build-journal">build journal</a> entries below track progress in chronological order.</p>
 <h2>The pitch</h2>
 <p>The fiction: a stolen experimental field unit from <a href="https://cyberpunk.fandom.com/wiki/Militech">Militech</a>. The reality: a Raspberry Pi in a clamshell case running a Python TUI that hosts a cast of swappable AI "cores," each with their own personality, voice, and visual language. You load a core by inserting a card. You take contracts from fixers. You hack things in a virtual network. The goal is for it to feel like a piece of cyberpunk hardware, not a Linux laptop in a fancy box.</p>
 <p><img alt="Cyberdeck: current state" src="/theme/images/deck_current.jpg"></p>
 <h2>Hardware</h2>
-<p>Full parts list coming soon.</p>
+<p>The overall design has gone through some iterations, all on paper. Parts are broken up into a "committed" list, which indicates something I've already tested and plan to use, and "maybe later" which was part of the design at one point, but may not make it to the final build.</p>
+<p><strong>Committed</strong>
+- <a href="https://www.adafruit.com/product/4296">Raspberry Pi 4 Model B</a>: Nothing special about this model, it's just what I had available. The 4GB of RAM creates constraints on running an LLM and/or TTS. I'll likely swap this out for a bigger boat.
+- <a href="https://www.amazon.com/dp/B0BGXB2Y67">7" HDMI LCD</a>: This is the main display of the deck. Also needed an adapter to connect this panel's HDMI to the Pi's micro HDMI.
+- <a href="https://www.amazon.com/dp/B08VGT2T42">1.28" Round LCD</a>: Originally purchased for another project, I decided to use this display for the AI cores' emotes.
+- <a href="https://www.amazon.com/dp/B07Z1WYRQH">2.13" E-Ink HAT</a>: A bonus display to show system status.
+- <a href="https://www.amazon.com/dp/B09W9Z9R8T?th=1">MEIJIA Case</a>: I wanted an enclosure that felt heavy-duty and had a military aesthetic. This size is good for fitting a 60% keyboard.
+- <a href="https://www.amazon.com/dp/B0DKX6XDCL?th=1">60% Keyboard</a>: I'm reluctant to provide a link because this keyboard is not good, but it was cheap and is the size I need. Will revisit this later.
+- <a href="https://www.amazon.com/dp/B075M7FHM1?th=1">USB Speaker</a>: For TTS output and other sound support
+- <a href="https://www.amazon.com/dp/B06Y1G18KS?th=1">SD Card Reader</a>: SD cards are used to store abbreviated AI core configs to provide something similar to the feeling of inserting a game cartridge when you want to "summon" an AI.
+- <a href="https://www.amazon.com/dp/B09VPHVT2Z">Power Bank</a>: This is overkill, but works great!
+- <a href="https://www.amazon.com/dp/B0DTGBDVVX">Retractable USB</a>: Inspired by the personal link cable in Cyberpunk 2077, this will be dedicated to charging the power bank.</p>
+<p><strong>Maybe Later</strong>
+- <a href="https://www.amazon.com/RAAYOO-External-Portable-Diskette-Notebook/dp/B077HDT19H/ref=sr_1_8?th=1">USB Floppy Drive</a>: This was my original mechanic for swapping AI cores. Ultimately I had too much trouble reading from disks dynamically and pivoted to the SD card reader. I do want to revisit this because it would be so much more fun to keep the core configs on diskettes.
+- <a href="https://www.amazon.com/dp/B0BFR7WN5C">Aluminum Sheets</a>: Will probably be cut as inserts for the enclosure, but still undecided. It helps to have a good buddy with a laser!
+- <a href="https://www.amazon.com/dp/B09LM83XBF">Step-Up Converter</a>: The plan is to use this to help power the switch panel.
+- <a href="https://www.amazon.com/dp/B0CF1N8FM8?th=1">Bus Bar</a>: Also to wire up switches
+- <a href="https://www.amazon.com/dp/B0CYM618H7">Mini USB Microphone</a>: When I added TTS I also intended to add STT. Ultimately I abandoned this because I didn't want to spare the memory and preferred the typing experience over talking.
+- <a href="https://www.amazon.com/dp/B07T6XJF1T?th=1">Covered Switches</a>: I mean... why not?
+- <a href="https://www.amazon.com/dp/B0D99R62YS?th=1">Round Switches</a>: May be used to enable/disable some deck features</p>
 <p><img alt="Switches and wiring" src="/theme/images/switches.jpg"></p>
 <h2>Software</h2>
-<p>Around 12,000 lines of Python and growing. More details coming soon.</p>
+<p>The codebase sits at roughly 27,000 lines of Python across ~85 modules. It's a layered system: a <code>curses</code>-based terminal UI on top, a stack of state managers and runners underneath (combat, intrusion, missions, factions, BBS, codex, NPCs, and so on), and an LLM layer that talks to Anthropic in the cloud or Ollama locally through a unified client with fallback. World state persists in a SQLite database so the deck keeps its memory across boots and core swaps. Much of the content (characters, missions, locations, factions) are defined as JSON, making it easy for folks to author and trade their own content.</p>
 <p><img alt="FIXR contract board" src="/theme/images/fixr.png"></p>
 <h2>AI cores</h2>
 <p>Each core is a JSON config plus a system prompt. They bring their own colors, voices (via <code>piper</code>), terminal prompts, and behaviors. Insert a card and the core loads. The UI reskins to match. Yank the card and the system reverts to a "no core loaded" state. The current cast is listed below, though the roster keeps shifting as I figure out what's interesting and what isn't.</p>
@@ -145,10 +164,10 @@
 <li><strong>WRENCH</strong>: gruff Militech maintenance tech with a cigarette habit (I don't know how that works, either); profane, terse, hates incompetent users.</li>
 </ul>
 <h2>Status</h2>
-<p>The software is in solid shape and the hardware integration works. The thing I keep procrastinating on is the physical build and actually wiring switches into a real case rather than leaving everything sprawled across my desk. The journal below tracks the slow march toward something I can carry around.</p>
+<p>The software is in solid shape and the hardware integration works. The overall game is in an MVP state. My current focus there is on playtesting and refinement. The thing I keep procrastinating on is the physical build and actually wiring switches into a real case rather than leaving everything sprawled across my desk. The <a href="#build-journal">journal below</a> tracks the slow march toward something I can carry around.</p>
 
 
-        <h2>The Build Journal</h2>
+        <h2 id="build-journal">The Build Journal</h2>
 <pre class="ls-listing"><span class="ls-prompt">ninjabot@blog:~/cyberdeck/journal$</span> ls -la
 total 4
 drwxr-xr-x  2 ninjabot ninjabot   4096 May 06 06:41 .
