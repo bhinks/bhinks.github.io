@@ -122,25 +122,29 @@
 <p><img alt="Cyberdeck: current state" src="/theme/images/deck_current.jpg"></p>
 <h2>Hardware</h2>
 <p>The overall design has gone through some iterations, all on paper. Parts are broken up into a "committed" list, which indicates something I've already tested and plan to use, and "maybe later" which was part of the design at one point, but may not make it to the final build.</p>
-<p><strong>Committed</strong>
-- <a href="https://www.adafruit.com/product/4296">Raspberry Pi 4 Model B</a>: Nothing special about this model, it's just what I had available. The 4GB of RAM creates constraints on running an LLM and/or TTS. I'll likely swap this out for a bigger boat.
-- <a href="https://www.amazon.com/dp/B0BGXB2Y67">7" HDMI LCD</a>: This is the main display of the deck. Also needed an adapter to connect this panel's HDMI to the Pi's micro HDMI.
-- <a href="https://www.amazon.com/dp/B08VGT2T42">1.28" Round LCD</a>: Originally purchased for another project, I decided to use this display for the AI cores' emotes.
-- <a href="https://www.amazon.com/dp/B07Z1WYRQH">2.13" E-Ink HAT</a>: A bonus display to show system status.
-- <a href="https://www.amazon.com/dp/B09W9Z9R8T?th=1">MEIJIA Case</a>: I wanted an enclosure that felt heavy-duty and had a military aesthetic. This size is good for fitting a 60% keyboard.
-- <a href="https://www.amazon.com/dp/B0DKX6XDCL?th=1">60% Keyboard</a>: I'm reluctant to provide a link because this keyboard is not good, but it was cheap and is the size I need. Will revisit this later.
-- <a href="https://www.amazon.com/dp/B075M7FHM1?th=1">USB Speaker</a>: For TTS output and other sound support
-- <a href="https://www.amazon.com/dp/B06Y1G18KS?th=1">SD Card Reader</a>: SD cards are used to store abbreviated AI core configs to provide something similar to the feeling of inserting a game cartridge when you want to "summon" an AI.
-- <a href="https://www.amazon.com/dp/B09VPHVT2Z">Power Bank</a>: This is overkill, but works great!
-- <a href="https://www.amazon.com/dp/B0DTGBDVVX">Retractable USB</a>: Inspired by the personal link cable in Cyberpunk 2077, this will be dedicated to charging the power bank.</p>
-<p><strong>Maybe Later</strong>
-- <a href="https://www.amazon.com/RAAYOO-External-Portable-Diskette-Notebook/dp/B077HDT19H/ref=sr_1_8?th=1">USB Floppy Drive</a>: This was my original mechanic for swapping AI cores. Ultimately I had too much trouble reading from disks dynamically and pivoted to the SD card reader. I do want to revisit this because it would be so much more fun to keep the core configs on diskettes.
-- <a href="https://www.amazon.com/dp/B0BFR7WN5C">Aluminum Sheets</a>: Will probably be cut as inserts for the enclosure, but still undecided. It helps to have a good buddy with a laser!
-- <a href="https://www.amazon.com/dp/B09LM83XBF">Step-Up Converter</a>: The plan is to use this to help power the switch panel.
-- <a href="https://www.amazon.com/dp/B0CF1N8FM8?th=1">Bus Bar</a>: Also to wire up switches
-- <a href="https://www.amazon.com/dp/B0CYM618H7">Mini USB Microphone</a>: When I added TTS I also intended to add STT. Ultimately I abandoned this because I didn't want to spare the memory and preferred the typing experience over talking.
-- <a href="https://www.amazon.com/dp/B07T6XJF1T?th=1">Covered Switches</a>: I mean... why not?
-- <a href="https://www.amazon.com/dp/B0D99R62YS?th=1">Round Switches</a>: May be used to enable/disable some deck features</p>
+<p><strong>Committed</strong></p>
+<ul>
+<li><a href="https://www.adafruit.com/product/4296">Raspberry Pi 4 Model B</a>: Nothing special about this model, it's just what I had available. The 4GB of RAM creates constraints on running an LLM and/or TTS. I'll likely swap this out for a bigger boat.</li>
+<li><a href="https://www.amazon.com/dp/B0BGXB2Y67">7" HDMI LCD</a>: This is the main display of the deck. Also needed an adapter to connect this panel's HDMI to the Pi's micro HDMI.</li>
+<li><a href="https://www.amazon.com/dp/B08VGT2T42">1.28" Round LCD</a>: Originally purchased for another project, I decided to use this display for the AI cores' emotes.</li>
+<li><a href="https://www.amazon.com/dp/B07Z1WYRQH">2.13" E-Ink HAT</a>: A bonus display to show system status.</li>
+<li><a href="https://www.amazon.com/dp/B09W9Z9R8T?th=1">MEIJIA Case</a>: I wanted an enclosure that felt heavy-duty and had a military aesthetic. This size is good for fitting a 60% keyboard.</li>
+<li><a href="https://www.amazon.com/dp/B0DKX6XDCL?th=1">60% Keyboard</a>: I'm reluctant to provide a link because this keyboard is not good, but it was cheap and is the size I need. Will revisit this later.</li>
+<li><a href="https://www.amazon.com/dp/B075M7FHM1?th=1">USB Speaker</a>: For TTS output and other sound support</li>
+<li><a href="https://www.amazon.com/dp/B06Y1G18KS?th=1">SD Card Reader</a>: SD cards are used to store abbreviated AI core configs to provide something similar to the feeling of inserting a game cartridge when you want to "summon" an AI.</li>
+<li><a href="https://www.amazon.com/dp/B09VPHVT2Z">Power Bank</a>: This is overkill, but works great!</li>
+<li><a href="https://www.amazon.com/dp/B0DTGBDVVX">Retractable USB</a>: Inspired by the personal link cable in Cyberpunk 2077, this will be dedicated to charging the power bank.</li>
+</ul>
+<p><strong>Maybe Later</strong></p>
+<ul>
+<li><a href="https://www.amazon.com/RAAYOO-External-Portable-Diskette-Notebook/dp/B077HDT19H/ref=sr_1_8?th=1">USB Floppy Drive</a>: This was my original mechanic for swapping AI cores. Ultimately I had too much trouble reading from disks dynamically and pivoted to the SD card reader. I do want to revisit this because it would be so much more fun to keep the core configs on diskettes.</li>
+<li><a href="https://www.amazon.com/dp/B0BFR7WN5C">Aluminum Sheets</a>: Will probably be cut as inserts for the enclosure, but still undecided. It helps to have a good buddy with a laser!</li>
+<li><a href="https://www.amazon.com/dp/B09LM83XBF">Step-Up Converter</a>: The plan is to use this to help power the switch panel.</li>
+<li><a href="https://www.amazon.com/dp/B0CF1N8FM8?th=1">Bus Bar</a>: Also to wire up switches</li>
+<li><a href="https://www.amazon.com/dp/B0CYM618H7">Mini USB Microphone</a>: When I added TTS I also intended to add STT. Ultimately I abandoned this because I didn't want to spare the memory and preferred the typing experience over talking.</li>
+<li><a href="https://www.amazon.com/dp/B07T6XJF1T?th=1">Covered Switches</a>: I mean... why not?</li>
+<li><a href="https://www.amazon.com/dp/B0D99R62YS?th=1">Round Switches</a>: May be used to enable/disable some deck features</li>
+</ul>
 <p><img alt="Switches and wiring" src="/theme/images/switches.jpg"></p>
 <h2>Software</h2>
 <p>The codebase sits at roughly 27,000 lines of Python across ~85 modules. It's a layered system: a <code>curses</code>-based terminal UI on top, a stack of state managers and runners underneath (combat, intrusion, missions, factions, BBS, codex, NPCs, and so on), and an LLM layer that talks to Anthropic in the cloud or Ollama locally through a unified client with fallback. World state persists in a SQLite database so the deck keeps its memory across boots and core swaps. Much of the content (characters, missions, locations, factions) are defined as JSON, making it easy for folks to author and trade their own content.</p>
@@ -173,8 +177,8 @@ total 4
 drwxr-xr-x  2 ninjabot ninjabot   4096 May 06 06:41 .
 drwxr-xr-x  4 ninjabot ninjabot   4096 May 06 06:41 ..
 -rw-r--r--  1 ninjabot ninjabot   7458 Apr 26 22:34 <a href="./posts/2026/04/26/cyberdeck.html">cyberdeck.txt</a>
--rw-r--r--  1 ninjabot ninjabot  30348 Apr 28 17:27 <a href="./posts/2026/04/28/deck_interface.html">deck_interface.txt</a>
--rw-r--r--  1 ninjabot ninjabot  34921 Apr 29 08:05 <a href="./posts/2026/04/29/ai_cores.html">ai_cores.txt</a>
+-rw-r--r--  1 ninjabot ninjabot  30454 Apr 28 17:27 <a href="./posts/2026/04/28/deck_interface.html">deck_interface.txt</a>
+-rw-r--r--  1 ninjabot ninjabot  34967 Apr 29 08:05 <a href="./posts/2026/04/29/ai_cores.html">ai_cores.txt</a>
 -rw-r--r--  1 ninjabot ninjabot  41523 May 06 06:41 <a href="./posts/2026/05/06/deck_gameplay.html">deck_gameplay.txt</a></pre>
     </div>
 </article>

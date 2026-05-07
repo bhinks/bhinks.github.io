@@ -125,12 +125,14 @@
 <p>This was a fun concept on paper, but got boring pretty quickly. A chat interface on its own isn't exciting, so I started building a game around it. The idea was to let the user accept missions (pre-made and/or randomly generated) and grant different capabilities to each of the AI personas (I call them "cores") that could aid in mission tasks. I'll go into more detail about the game elements in a later post, but for now I'd like to talk about the overall interface.</p>
 <h2>The TUI</h2>
 <p>The main window uses <code>curses</code> to provide the terminal experience. There is currently some jankiness I need to address with the way some output is routed, but each section has its own rules for handling I/O.</p>
-<p>The TUI is split into several tabs:
-- <strong>CON</strong>: The main console interface where commands and system output go
-- <strong>AICI</strong>: The AI Core Interface (name subject to change) is where chats with the AI cores live
-- <strong>FIXR</strong>: The board where missions are posted
-- <strong>BBS</strong>: General NPC chatter, sometimes mission-related
-- <strong>ID</strong>: Your user profile, including street cred, funds, and other stats</p>
+<p>The TUI is split into several tabs:</p>
+<ul>
+<li><strong>CON</strong>: The main console interface where commands and system output go</li>
+<li><strong>AICI</strong>: The AI Core Interface (name subject to change) is where chats with the AI cores live</li>
+<li><strong>FIXR</strong>: The board where missions are posted</li>
+<li><strong>BBS</strong>: General NPC chatter, sometimes mission-related</li>
+<li><strong>ID</strong>: Your user profile, including street cred, funds, and other stats</li>
+</ul>
 <p><img alt="Cyberdeck Console" src="/theme/images/con.png"></p>
 <p>The main console will be used for the majority of the hacking done in the game. This is where the user runs commands and gets system-level outputs. So far I've only built commands for running the deck itself: enable/disable hardware components, load or unload AI cores, etc.</p>
 <p><img alt="Cyberdeck Core Chat" src="/theme/images/aici.png"></p>
@@ -178,14 +180,16 @@
 <p>Another component that I wanted to build in was support for physical switches. I have a covered switch for power, and a handful of others that will control things like screen brightness, muting speakers, and disabling wifi. I thought these would be one of the easier elements to implement, but I was wrong. More on that when I cover the build process in a later post.</p>
 <p><img alt="Cyberdeck Switches" src="/theme/images/switches.jpg"></p>
 <h2>Manager Layer</h2>
-<p>Central to the architecture of this software is the manager layer, where I put all the task-based modules. There are currently seven managers:
-- <strong>CoreManager</strong>: AI core loading and validation
-- <strong>CoreAuthenticator</strong>: USB drive monitoring and physical "authentication"
-- <strong>MemoryManager</strong>: Multi-tier memory with AI context condensation
-- <strong>ConversationManager</strong>: LLM API calls and response handling
-- <strong>TTSManager</strong>: Voice synthesis and profile management
-- <strong>DisplayManager</strong>: Round LCD and e-ink hardware coordination
-- <strong>HandoffManager</strong>: Switching between AI personalities mid-conversation</p>
+<p>Central to the architecture of this software is the manager layer, where I put all the task-based modules. There are currently seven managers:</p>
+<ul>
+<li><strong>CoreManager</strong>: AI core loading and validation</li>
+<li><strong>CoreAuthenticator</strong>: USB drive monitoring and physical "authentication"</li>
+<li><strong>MemoryManager</strong>: Multi-tier memory with AI context condensation</li>
+<li><strong>ConversationManager</strong>: LLM API calls and response handling</li>
+<li><strong>TTSManager</strong>: Voice synthesis and profile management</li>
+<li><strong>DisplayManager</strong>: Round LCD and e-ink hardware coordination</li>
+<li><strong>HandoffManager</strong>: Switching between AI personalities mid-conversation</li>
+</ul>
 <p>The CoreAuthenticator was challenging to build. This is where I first attempted to integrate my floppy drive, but I had a lot of trouble dynamically detecting when a new disk was inserted. I abstracted the hardware interaction to the hardware/driver layer, allowing the CoreAuthenticator to work with virtually any USB data drive. When the media changes, the new AI core is loaded and the UI is updated to match that core's style settings:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Add callback for card insertion/removal events</span>
 <span class="k">def</span> <span class="nf">on_card_change</span><span class="p">(</span><span class="n">card_data</span><span class="p">):</span>

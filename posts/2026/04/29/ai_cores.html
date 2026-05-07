@@ -211,12 +211,14 @@
 <span class="p">}</span>
 </code></pre></div>
 
-<p>For those uninterested in reading that ugly prompt, these are the metadata that I collect:
-- <strong>response</strong>: The text response to the user's chat prompt
-- <strong>to_speak</strong>: A shortened version of the response to send through the TTS pipeline
-- <strong>memorability</strong>: A score assigned to each chat exchange that signifies how important it is to remember
-- <strong>image</strong>: The icon to display to the user along with the text response (more on that in a moment)
-- <strong>handoff</strong>: A message that can be left for another AI core, though not all cores accept handoffs (some just aren't team players)</p>
+<p>For those uninterested in reading that ugly prompt, these are the metadata that I collect:</p>
+<ul>
+<li><strong>response</strong>: The text response to the user's chat prompt</li>
+<li><strong>to_speak</strong>: A shortened version of the response to send through the TTS pipeline</li>
+<li><strong>memorability</strong>: A score assigned to each chat exchange that signifies how important it is to remember</li>
+<li><strong>image</strong>: The icon to display to the user along with the text response (more on that in a moment)</li>
+<li><strong>handoff</strong>: A message that can be left for another AI core, though not all cores accept handoffs (some just aren't team players)</li>
+</ul>
 <p>Small local LLMs struggle with this a bit, but the cloud models do a great job of sticking to the format.</p>
 <p>The parsing side has to be paranoid, though. LLMs occasionally wrap their output in markdown code fences, prepend an apologetic "Here is the JSON you requested" preamble, or just produce malformed garbage. I have a small helper that scrapes the actual JSON payload out of whatever the model returns:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_extract_json_payload</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
