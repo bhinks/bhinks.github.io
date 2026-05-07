@@ -144,10 +144,22 @@
 <li><a href="https://www.amazon.com/dp/B0CYM618H7">Mini USB Microphone</a>: When I added TTS I also intended to add STT. Ultimately I abandoned this because I didn't want to spare the memory and preferred the typing experience over talking.</li>
 <li><a href="https://www.amazon.com/dp/B07T6XJF1T?th=1">Covered Switches</a>: I mean... why not?</li>
 <li><a href="https://www.amazon.com/dp/B0D99R62YS?th=1">Round Switches</a>: May be used to enable/disable some deck features</li>
+<li><a href="https://flipper.net/">Flipper Zero</a>: I'd love to incorporate this device into the hacking game somehow, but nothing has materialized yet.</li>
 </ul>
 <p><img alt="Switches and wiring" src="/theme/images/switches.jpg"></p>
 <h2>Software</h2>
 <p>The codebase sits at roughly 27,000 lines of Python across ~85 modules. It's a layered system: a <code>curses</code>-based terminal UI on top, a stack of state managers and runners underneath (combat, intrusion, missions, factions, BBS, codex, NPCs, and so on), and an LLM layer that talks to Anthropic in the cloud or Ollama locally through a unified client with fallback. World state persists in a SQLite database so the deck keeps its memory across boots and core swaps. Much of the content (characters, missions, locations, factions) are defined as JSON, making it easy for folks to author and trade their own content.</p>
+<p><strong>Major dependencies:</strong></p>
+<ul>
+<li><code>curses</code> for the terminal UI</li>
+<li><code>sqlite3</code> for persistent world state</li>
+<li><code>Pillow</code> and <code>numpy</code> for image rendering and framebuffer math on the round LCD and dossier cards</li>
+<li><code>psutil</code> for system telemetry on the e-ink status panel</li>
+<li><code>requests</code> as the HTTP client for the Anthropic and Ollama LLM backends</li>
+<li><code>gpiozero</code> and <code>spidev</code> for Raspberry Pi GPIO and SPI control of the auxiliary displays</li>
+<li><code>pyserial</code> for USB serial comms with a Flipper Zero scan tool</li>
+<li><code>piper</code> (external CLI) as the local TTS engine, invoked as a subprocess</li>
+</ul>
 <p><img alt="FIXR contract board" src="/theme/images/fixr.png"></p>
 <h2>AI cores</h2>
 <p>Each core is a JSON config plus a system prompt. They bring their own colors, voices (via <code>piper</code>), terminal prompts, and behaviors. Insert a card and the core loads. The UI reskins to match. Yank the card and the system reverts to a "no core loaded" state. The current cast is listed below, though the roster keeps shifting as I figure out what's interesting and what isn't.</p>
