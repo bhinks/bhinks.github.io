@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>living_city - OMGninjabot</title>
+    <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+</head>
+
+<body>
+    <canvas id="matrix-rain"></canvas>
+    <video id="outrun-bg" autoplay loop muted playsinline>
+        <source src="/theme/outrun.mp4" type="video/mp4">
+    </video>
+    <div class="terminal-header">
+        <div class="terminal-status">
+            <span class="status-indicator"></span>
+            <span class="status-text">ONLINE</span>
+        </div>
+        <div class="terminal-title">CYBERSPACE://OMGninjabot/connect.sh</div>
+        <div class="system-info">
+            <div class="system-status" id="system-status">SYS: INIT...</div>
+            <div class="network-status" id="network-status">NET: CONN...</div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <header class="ascii-header">
+        <div class="ascii-container">
+            <div class="ascii-ninja">
+                <pre>                 ⢀⡠⠤⠔⠒⠒⠦⠄⣀                    
+               ⡠⠚⠁         ⠉⠢⡀                 
+    ⣠⣤⣤⡄     ⣸⠁  ⣀       ⣀  ⢹⡄                
+  ⠘⣏⣀⣤⣾⡄   ⢠⡇⡰⠲⣯⣀⣀⡀  ⣀⣀⣤⠷⠲⡀⣇                
+   ⢹⠯⣤⣞⣳⡀  ⢸ ⣇   ⠉⠉⢉⠉⢉⡉    ⡇⢸                
+    ⢷⠧⣴⣏⣇  ⢸ ⢹⠒⣦⣤⣄⣀⣥⣖⣉⣤⣤⠔⢺ ⢸                
+    ⠘⡟⢠⡴⣿⡆ ⢸ ⢸⡀⠙⢭⣽⣾⣀⣼⣿⣭⠝⠁⣸ ⢸                
+     ⢱⡛⣲⠯⣽⡄⢸ ⠏⢱⠴⠊⠁   ⠈⠉⠲⣴⠙ ⣸                
+      ⢳⣳⣞⣷⣷⣸⡇⣞⠁   ⢀       ⢹ ⡟                 
+     ⢀⣈⠿⣟⣫⢭⡟⠣⠸⣦   ⠈⠉⠉   ⢀⣾⢠⠛⣦⢄⣀             
+   ⣀⣴⠿⢤⣼⡃ ⠈⢧  ⠳⡱⣄   ⢀⣿⣿⣤⣿⠃ ⢠⠇ ⡿⠤⠤⣤⣀⡀       
+  ⢘⣿⠶⣄ ⣿⣇   ⠳⣀ ⠈⠙⠓⠦⢤⣿⡟⣻⠟⠁⢀⡠⠃  ⣰⠃⢀⠾⢿⣻      
+ ⢀⡾⠁ ⠈⢧⣼⡟⣆         ⢸⢻⠁⠙⡇ ⠈   ⣰⠃ ⢠⡏   ⠹⡆     
+ ⢸⡇   ⠈⣧⢣⠙⢦        ⡸⡞ ⠛⣇⣀   ⡴⠃  ⡞      ⣿⡄    
+⢀⡟⢧  ⣀⠤⠾⡈⢆⠈⠙⢦⣀    ⢰⣧⣤⡦⠶⠧⠼⢤⣠⠞⠁  ⢸⠧⣄⡀ ⢸⠹⡄   
+⣼ ⠘⡆⠊⡀  ⠙⣌⢢⡀ ⠈⠙⢶⣒⡶⠋⠙⡌⢧   ⠚⠳⡄   ⣾⠎ ⠙   ⢧⢹⡀  
+⡏   ⡰    ⢸⣄⢑⣄ ⢀⡠⢿⡱⡀ ⡽⣸⣄⣷⠴⡄⢰⡇  ⢠⠃   ⢰    ⠉⢧  
+⣧⢠  ⣇⣠⣤⠖⠋⠉⠁     ⠈⢧⠑⣴⠃⡿⠤⡽⠒⠒⠋   ⣾    ⠈⡆   ⠘⣼⡀
+⢹⢸ ⢀⣽⡇⢸       ⢀⡠⠂ ⠳⣌⣾⡦⣞⠁      ⢻  ⢀⣴⡚⠳⣄    ⠘⡇
+ ⢻⡇⠸⠁⢧ ⢇  ⣀⡠⠴⠚⠉   ⢠⠟⠉  ⠙⢦⡀   ⢀⡸⠗⠉  ⠱⡀⠹⡉⠳⠄⢸ 
+ ⠈⡇  ⠈⢧⡈⢦       ⢀⡴⢛⣟⡭⠿⠿⠿⢿⡿⡿⠖⠒⠉      ⢣ ⡇  ⠘⡇ 
+  ⣷   ⠈⠳⣄⠑⢄⡀ ⣀⠤⢺⠿⢂⣎⡏     ⢹⣽⡄ ⣀⣀⣀ ⣀⣀⡀⠸    ⢠⠇
+  ⠘⠷⣄⣀⣀⣀⣉⣷⠤⠽⠋⠁⢠⡧⠔⣻⡏⣇      ⡇⡇        ⢀⠃ ⢀⡴⠋ 
+              ⠸⡤⠚⠁⣴⣜⠦⣤⣤⣤⣤⣴⣧⢇⣀⡀   ⢀⣀⣀⣼⣀⠟⠉    
+               ⠑⠢⠤⠤⠛⠉⠉⠉⠉⠉⠁⠁  ⠈⠉⠉⠉⠁           
+            ⢀⣠ ⠖⠒⠒⠒    ⠠⣀ ⢀ ⡀  ⠂              </pre>
+            </div>
+
+            <div class="ascii-main">
+                <pre class="ascii-art">  ██████  ███    ███  ██████  ██
+ ██    ██ ████  ████ ██       ██
+ ██    ██ ██ ████ ██ ██   ███ ██
+ ██    ██ ██  ██  ██ ██    ██   
+  ██████  ██      ██  ██████  ██
+
+ ███    ██ ██ ███    ██      ██  █████  ██████   ██████  ████████
+ ████   ██ ██ ████   ██      ██ ██   ██ ██   ██ ██    ██    ██   
+ ██ ██  ██ ██ ██ ██  ██      ██ ███████ ██████  ██    ██    ██   
+ ██  ██ ██ ██ ██  ██ ██ ██   ██ ██   ██ ██   ██ ██    ██    ██   
+ ██   ████ ██ ██   ████  ██████ ██   ██ ██████   ██████     ██   </pre>
+            </div>
+
+            <div class="ascii-robot">
+                <pre>                          /[-])//  ___         
+                     __ --\ `_/~--|  / \       
+                   /_-/~~--~~ /~~~\\_\ /\      
+                   |  |___|===|_-- | \ \ \     
+ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\    
+ ~\________|__/   / // \__ |  ||  / | |   | |  
+          ,~-|~~~~~\--, | \|--|/~|||  |   | |  
+          [3-|____---~~ _--'==;/ _,   |   |_|  
+                      /   /\__|_/  \  \__/--/  
+                     /---/_\  -___/ |  /,--|   
+                     /  /\/~--|   | |  \///    
+                    /  / |-__ \    |/          
+                   |--/ /      |-- | \         
+                  \^~~\\/\      \   \/- _      
+                   \    |  \     |~~\~~| \     
+                    \    \  \     \   \  | \   
+                      \    \ |     \   \    \  
+                       |~~|\/\|     \   \   |  
+                      |   |/         \_--_- |\ 
+                      |  /            /   |/\/ 
+                       ~~             /  /     
+                                     |__/      </pre>
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li class="page_title"><span id="theme-toggle" class="theme-toggle">[NEON MODE]</span></li>
+            <li><a href="../../../../">home.sh</a></li>
+            <li><a href="/about.html">about.sh</a></li>
+            <li><a href="/quake2.html">quake2.sh</a></li>
+            <li><a href="/cyberdeck.html">cyberdeck.sh</a></li>
+            <li><a href="/games.html">collection.sh</a></li>
+        </ul>
+        <div style="clear: both;"></div>
+    </nav>
+
+    <main>
+<article>
+    <header>
+        <h1 class="entry-title">cat living_city.txt</h1>
+        <div class="entry-meta">
+            <time datetime="2026-05-10T09:00:00-04:00">2026-05-10 09:00:00</time>
+            in <a href="../../../../category/posts.html">posts</a>
+            - Tagged: 
+            <a href="../../../../tag/ai.html">ai</a>,             <a href="../../../../tag/development.html">development</a>,             <a href="../../../../tag/cyberdeck.html">cyberdeck</a>,             <a href="../../../../tag/gaming.html">gaming</a>        </div>
+    </header>
+    <div class="entry-content">
+        <p>The <a href="/2026-05-06-deck_gameplay.html">last post</a> covered the cyberdeck's gameplay loop: contracts, mission graphs, RPS combat, chain storylines, three-path endgame. With those bones in place I spent the next few days fleshing out the world <em>around</em> them. The OPERATOR isn't just running missions anymore; they're moving through a city that has its own clock, its own moods, and a memory longer than theirs. Here's what shipped.</p>
+<h2>STREET grew a city map</h2>
+<p>The STREET tab used to be a flat list of every shop the OPERATOR had discovered. You clicked a number, paid a flat 50€$ cab fare, and walked into the catalogue. It did the job, but it felt like a vending machine. All the locations existed in some indeterminate space and any one was as close as any other.</p>
+<p>Night City has six districts now. Watson is industrial east. Pacifica is the derelict south where the anarchists run the radio. City Center is corporate plaza, surveillance everywhere. Heywood is mixed residential, Westbrook is nightlife and money, Santo Domingo is the foundries. Each shop is anchored to a specific district, and traveling between districts is the thing that costs you. Once you're in a district, walking to its locations is free.</p>
+<p>The apartment view (idle state) shows your discovered districts:</p>
+<div class="highlight"><pre><span></span><code>DISTRICTS
+
+  1. Watson         calm     50€$  ·  industrial east side, dockworkers and tech junkies
+  2. Pacifica       tense    60€$  ·  derelict south, anarchist cells run the radio   ★ active beat
+  3. Heywood        calm     50€$  ·  mixed residential, cred and family loyalty matter
+  4. Santo Domingo  tense    60€$  ·  industrial belt, foundries and old machine shops
+</code></pre></div>
+
+<p>Each district has a <strong>mood</strong> scalar in <code>[-1.0, 1.0]</code> that drifts in response to faction events, megacorp falls, and the OPERATOR's own actions. Mood translates to a tier (hostile / tense / calm / festive) and the tier feeds two things you actually care about: cab fare and ambush probability.</p>
+<div class="highlight"><pre><span></span><code><span class="n">CAB_FARE_MULT</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;hostile&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;tense&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s1">&#39;calm&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;festive&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">}</span>
+<span class="n">AMBUSH_PROB_MULT</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;hostile&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;tense&#39;</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span> <span class="s1">&#39;calm&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;festive&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">}</span>
+</code></pre></div>
+
+<p>A hostile district is a 50% surcharge on cab fare and 50% more likely to produce a corp ambush at high heat. A festive district is the opposite. The math is small, a bumped-up fare to Pacifica is 75€$ instead of 50€$, but the texture is real, and crucially the player can <em>see</em> it before they commit to the trip.</p>
+<p>Mission narrative beats can now anchor to a specific district. A node in the mission graph just declares <code>"district": "pacifica"</code> and the engine refuses to engage it from anywhere else:</p>
+<blockquote>
+<p>No narrative beats available in this district.</p>
+</blockquote>
+<p>Anchored beats also surface a <code>★ active beat</code> badge on the district row in the cab list, so the OPERATOR knows where they need to go. This was the change I sat on the longest before doing it. The earlier flat-shop-list version was fine, but it was missing <em>place</em>. Missions all felt like they happened "around here, somewhere," and at no point did a player ever cross town to do something. Now they do, and the pacing is different. You read the brief, you see "Pacifica," you grab a cab. The cab fare feels like crossing a threshold instead of paying a tax.</p>
+<h2>The world runs without you</h2>
+<p>The other major shift is that the city now does things on its own.</p>
+<p>There's a <strong>CalendarClock</strong> that tracks hour-of-day in fictional time. Most shops have hours; if you cab to a daemon dealer at 3 AM the door is locked and the screen tells you when they reopen. Trusted-tier vendors are the exception; they'll meet you at the back door because you're not a stranger anymore:</p>
+<div class="highlight"><pre><span></span><code>You walk up to Bayside Market. closed - opens 09:00.
+</code></pre></div>
+
+<p>or, if the OPERATOR has trust:</p>
+<div class="highlight"><pre><span></span><code>Bit pulls the side door open. &quot;You should be sleeping. Come on in.&quot;
+</code></pre></div>
+
+<p>Fixers have schedules too. DM Hammer at 4 AM and you'll get a curt one-liner about calling back during waking hours. The schedule is per-fixer and the prompt addendum just informs the LLM about the time-of-day context; the model handles the tone naturally.</p>
+<p>District moods drift. A successful mission for a street-aligned fixer in Pacifica nudges Pacifica's mood up. A megacorp falling drops the mood across districts where they had heavy presence. The drift drivers are explicit functions: faction events, contract resolutions, calendar anchors, and a cap clamps the scalar so a runaway driver can't pin a district at extreme mood forever.</p>
+<p>The BBS reacts too. Posts are now generated against the world state at the time of generation. A burst of activity in Pacifica produces an uptick of Pacifica-flavored posts. A corp falling produces an uptick of corp-fall posts on every relevant board for the next cycle. The state-aware generation reuses the existing post-generator, we just hand it more context.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_build_post_context</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;district_moods&#39;</span><span class="p">:</span> <span class="p">{</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;district_id&#39;</span><span class="p">]:</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;tier&#39;</span><span class="p">]</span>
+                           <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">district_registry</span><span class="o">.</span><span class="n">list_districts</span><span class="p">()},</span>
+        <span class="s1">&#39;fallen_megacorps&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="s1">&#39;corp_id&#39;</span><span class="p">]</span>
+                              <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">megacorp_registry</span><span class="o">.</span><span class="n">list_fallen</span><span class="p">()],</span>
+        <span class="s1">&#39;recent_chain_completions&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">contract_resolver</span><span class="o">.</span><span class="n">recent_chains</span><span class="p">(),</span>
+        <span class="s1">&#39;rival_state&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rival_roster</span><span class="o">.</span><span class="n">summary</span><span class="p">(),</span>
+    <span class="p">}</span>
+</code></pre></div>
+
+<p>Pulling this together: the city ticks even when the OPERATOR is asleep. You quit, come back the next day, and the moods have drifted, the BBS has new chatter, the fixer who DMed you yesterday at 11 PM has gone quiet because their hours rolled over.</p>
+<h2>Fixers reach out first</h2>
+<p>The DM tab used to be one-directional: the OPERATOR sends a message, the fixer responds. Nobody would ever reach out to the OPERATOR <em>first</em>.</p>
+<p>Now they do. The proactive-contact system sweeps the fixer roster on a low-frequency cadence and, for fixers in a sufficiently warm trust tier, occasionally has them send the OPERATOR an unprompted DM. The DM is generated against the relationship state: what jobs the OPERATOR ran for them recently, how it went, whether there's a directed contract waiting in the inbox. A frequency floor of five real minutes per fixer keeps the inbox from feeling like a notification torrent.</p>
+<div class="highlight"><pre><span></span><code><span class="n">FREQUENCY_FLOOR_SEC</span> <span class="o">=</span> <span class="mf">300.0</span>  <span class="c1"># one DM per fixer per 5 real minutes, max</span>
+</code></pre></div>
+
+<p>The BBS tab gets a <code>[1 new DM]</code> pip when a fixer sends something unprompted. The OPERATOR sees who texted before opening the conversation, which mirrors how it should feel: someone reaches out, you decide if you have time. Hammer texting at 2 AM with "you up?" hits very differently than the OPERATOR cold-DMing Hammer at the same hour.</p>
+<p>I'd been resistant to this for a while because it sounded annoying. The thing that made it work is the trust gate. A first-tier fixer the OPERATOR has barely interacted with will <em>not</em> DM them out of the blue. It takes shared history. By the time you're getting unprompted texts from a fixer, the relationship has earned that intimacy.</p>
+<h2>Old enemies come back</h2>
+<p>The other lateral cut at "world that runs without you" is the <strong>vendetta system</strong>. The OPERATOR makes enemies. Specifically: high-trust fixers get rivals; failing the wrong contract or burning the wrong handshake earns you a recurring antagonist.</p>
+<p>Each faction has a vendetta template: a roster of named rivals with their own backstory, escalation tags, and behavior hooks. When the OPERATOR triggers a faction-level vendetta, the system rolls one up off the template and stamps it with the OPERATOR's specific offense. From then on, when an ambush triggers (heat-driven, in STREET), there's a 40% chance the ambusher is the rival rather than a generic goon. Each appearance escalates: more HP, more damage, sharper dialogue. The dialogue references the original offense.</p>
+<blockquote>
+<p>Hawthorne steps out of the alley. He's not surprised to see you.</p>
+<p>"I got burned after you dumped me from that Arasaka subnet. Time to return the favor."</p>
+</blockquote>
+<p>Killing the rival ends the arc. Letting them flee escalates the next encounter. </p>
+<h2>Time, retuned</h2>
+<p>The last thing I want to mention is a rare <em>negative</em> change: I deleted a system.</p>
+<p>The original cyberdeck had a <code>FICTIONAL_TIME_SCALE</code> of 12, meaning one real minute equals twelve fictional minutes. Cooldowns and intervals were authored in fictional hours. A 24-fictional-hour cooldown was two real hours. A "delivery in three hours" was fifteen real minutes.</p>
+<p>It was a clever knob. It also turned out to be impossible to think about. Every time I authored a cooldown or a calendar event I had to do the conversion in my head, and every time the player encountered one they had no way to know what scale was at play. "Comes back in 2 hours": real or fictional? A scale-of-12 universe doesn't tell you.</p>
+<p>I dropped it. Fictional time is now real time + 60 years; just a year shift on the timestamp, no rate scaling. Every cooldown got retuned in real-world minutes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">HEAT_DECAY_INTERVAL_SEC</span> <span class="o">=</span> <span class="mi">150</span>        <span class="c1"># was 1800 (fictional)</span>
+<span class="n">HEALTH_REGEN_INTERVAL_SEC</span> <span class="o">=</span> <span class="mi">60</span>       <span class="c1"># was 3600 (fictional)</span>
+<span class="n">COOLDOWN_SEC</span> <span class="o">=</span> <span class="mi">90</span> <span class="o">*</span> <span class="mi">60</span>               <span class="c1"># core ability: 90 real minutes</span>
+</code></pre></div>
+
+<p>The fictional date stamps still feel right. A BBS post from 2086 is still a BBS post from 2086, and the cooldowns are now numbers you can predict. "Heat decays every 2.5 minutes" lands. "Heat decays every half a fictional hour at 12x scale" doesn't.</p>
+<p>The lesson generalized. <em>The fiction is a design tool, not a clock.</em> Years can shift; the game's tempo should run at the player's tempo.</p>
+<h2>What's next</h2>
+<p>A lot of the systems above are wired but underutilized. The district mood graph is doing the right things mathematically but only a handful of drivers are pushing it; the BBS reacts to state but only on a few axes; the proactive contact pool only carries a few fixer voices. The next stretch is content. More vendetta templates, more state-aware BBS post types, more proactive-contact moments per fixer. The framework is the part that fights you. Pouring content into a framework that already works is the part that's actually fun.</p>
+<p>I also want to do one more pass on schemas, content validation, and the first-run tutorial (the polish pass) and then I'm going to stop adding things and start playing it. The whole project has been "build the next system" mode for a while. Everything is wired together well on paper, but now it's time for some real playtesting.</p>
+<h3>To be continued...</h3>
+    </div>
+</article>
+    </main>
+
+    <footer>
+        <p>&copy; ninjabot. Terminal powered by <a href="https://getpelican.com/">Pelican</a></p>
+    </footer>
+
+    <script>
+        // Multi-theme switcher functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Theme definitions
+        const themes = ['neon', 'matrix', 'fallout', 'snowcrash', 'screamsheet', 'aperture', 'wargames', 'vaporwave', 'outrun',  'neuromancer', '2077', 'arasaka', 'militech'];
+        const themeLabels = {
+            'neon': '[NEON MODE]',
+            'matrix': '[MATRIX MODE]',
+            'fallout': '[FALLOUT MODE]',
+            'snowcrash': '[SNOWCRASH MODE]',
+            'screamsheet': '[SCREAMSHEET MODE]',
+            'aperture': '[APERTURE MODE]',
+            'wargames': '[WARGAMES MODE]',
+            'vaporwave': '[VAPORWAVE MODE]',
+            'outrun': '[OUTRUN MODE]',
+            'neuromancer': '[NEUROMANCER MODE]',
+            '2077': '[2077 MODE]',
+            'arasaka': '[ARASAKA MODE]',
+            'militech': '[MILITECH MODE]'
+        };
+
+        // Load saved theme or default to neon. Migrate retired theme names.
+        let currentTheme = localStorage.getItem('theme') || 'neon';
+        const themeMigrations = { 'green': 'matrix', 'amber': 'fallout', 'light': 'snowcrash' };
+        if (themeMigrations[currentTheme]) {
+            currentTheme = themeMigrations[currentTheme];
+        }
+
+        // Apply theme
+        function applyTheme(theme) {
+            if (theme === 'neon') {
+                body.removeAttribute('data-theme');
+            } else {
+                body.setAttribute('data-theme', theme);
+            }
+            themeToggle.textContent = themeLabels[theme];
+            localStorage.setItem('theme', theme);
+            currentTheme = theme;
+        }
+        
+        // Initialize theme
+        applyTheme(currentTheme);
+        
+        // Cycle through themes on click
+        themeToggle.addEventListener('click', () => {
+            const currentIndex = themes.indexOf(currentTheme);
+            const nextIndex = (currentIndex + 1) % themes.length;
+            const nextTheme = themes[nextIndex];
+            applyTheme(nextTheme);
+            if (window.goatcounter && window.goatcounter.count) {
+                window.goatcounter.count({
+                    path: 'theme-switch:' + nextTheme,
+                    title: 'Theme switched to ' + nextTheme,
+                    event: true,
+                });
+            }
+        });
+
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const charArray = chars.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            // Matrix rain is the cornerstone of the matrix theme only.
+            const theme = document.body.getAttribute('data-theme');
+            if (theme !== 'matrix') {
+                return;
+            }
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const mainColor = getComputedStyle(document.body).getPropertyValue('--main-color').trim();
+            ctx.fillStyle = mainColor;
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Random Glitch Effect on Terminal Title
+        const terminalTitle = document.querySelector('.terminal-title');
+        setInterval(() => {
+            if (Math.random() > 0.9) {
+                terminalTitle.classList.add('glitch-text');
+                setTimeout(() => terminalTitle.classList.remove('glitch-text'), 300);
+            }
+        }, 3000);
+
+        // Dynamic System Status
+        const systemMessages = [
+            'SYS: ALL SYSTEMS NOMINAL',
+            'SYS: DEFRAG COMPLETE',
+            'SYS: RUNNING DIAGNOSTICS',
+            'SYS: FIREWALL ACTIVE',
+            'SYS: ENCRYPTION ENABLED',
+            'SYS: MEMORY OPTIMIZED',
+            'SYS: CORES: 8 | LOAD: 42%',
+            'SYS: UPTIME: 47 DAYS',
+            'SYS: ICE PROTOCOLS ACTIVE',
+            'SYS: SCANNING FOR THREATS...',
+            'SYS: NO THREATS DETECTED'
+        ];
+
+        const systemStatus = document.getElementById('system-status');
+        let systemIndex = 0;
+
+        function updateSystemStatus() {
+            systemIndex = (systemIndex + 1) % systemMessages.length;
+            systemStatus.textContent = systemMessages[systemIndex];
+        }
+
+        setInterval(updateSystemStatus, 8000);
+        setTimeout(updateSystemStatus, 1500);
+
+        // Dynamic Network Status
+        const networkMessages = [
+            'NET: LATENCY: 12ms',
+            'NET: BANDWIDTH: 1.2GB/s',
+            'NET: CONNECTED: SECURE',
+            'NET: PACKETS: 0 DROPPED',
+            'NET: NODE: CYBERSPACE-7',
+            'NET: ENCRYPTION: AES-256',
+            'NET: VPN: ACTIVE',
+            'NET: PROXY: ENABLED',
+            'NET: UPLINK: STABLE'
+        ];
+
+        const networkStatus = document.getElementById('network-status');
+        let networkIndex = 0;
+
+        function updateNetworkStatus() {
+            networkIndex = (networkIndex + 1) % networkMessages.length;
+            networkStatus.textContent = networkMessages[networkIndex];
+        }
+
+        setInterval(updateNetworkStatus, 6000);
+        setTimeout(updateNetworkStatus, 2000);
+
+        // Image Click to Enlarge
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.entry-content img, img.headshot');
+            images.forEach(img => {
+                img.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+
+            // Reassemble obfuscated email links so the address never appears verbatim in source.
+            // Parts are stored ROT13-encoded; decode and join with @ at runtime.
+            const rot13 = s => s.replace(/[a-zA-Z]/g, c => {
+                const base = c <= 'Z' ? 65 : 97;
+                return String.fromCharCode((c.charCodeAt(0) - base + 13) % 26 + base);
+            });
+            document.querySelectorAll('[data-email-user][data-email-host]').forEach(el => {
+                const addr = rot13(el.dataset.emailUser) + '@' + rot13(el.dataset.emailHost);
+                const link = document.createElement('a');
+                link.href = 'mailto:' + addr;
+                link.textContent = addr;
+                el.replaceWith(link);
+            });
+        });
+    </script>
+
+    <script data-goatcounter="https://omgninjabot.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
