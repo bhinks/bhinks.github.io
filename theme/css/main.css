@@ -2280,6 +2280,76 @@ code {
   vertical-align: top;
 }
 
+.games-table tbody tr.has-cover {
+  cursor: pointer;
+}
+
+.games-modal[hidden] {
+  display: none;
+}
+
+.games-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.games-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.games-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  padding: 20px;
+  background: var(--terminal-header-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 20px var(--glow-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.games-modal-img {
+  max-width: 80vw;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+}
+
+.games-modal-title {
+  font-family: 'Space Mono', monospace;
+  color: var(--main-color);
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 0 5px var(--glow-primary);
+}
+
+.games-modal-close {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: var(--main-color);
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.games-modal-close:hover {
+  color: var(--pop-color);
+  text-shadow: 0 0 5px var(--pop-color);
+}
+
 .games-table tbody tr:hover td {
   background-color: var(--light-alt-color);
   color: var(--main-color);

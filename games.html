@@ -142,6 +142,15 @@
                 <tbody id="games-tbody"></tbody>
             </table>
         </div>
+
+        <div class="games-modal" id="games-modal" hidden>
+            <div class="games-modal-backdrop" id="games-modal-backdrop"></div>
+            <div class="games-modal-content" role="dialog" aria-modal="true" aria-labelledby="games-modal-title">
+                <button type="button" class="games-modal-close" id="games-modal-close" aria-label="Close">&times;</button>
+                <img class="games-modal-img" id="games-modal-img" alt="" />
+                <p class="games-modal-title" id="games-modal-title"></p>
+            </div>
+        </div>
     </div>
 </article>
 
@@ -158,6 +167,11 @@
         status: document.getElementById('games-status'),
         tbody: document.getElementById('games-tbody'),
         table: document.getElementById('games-table'),
+        modal: document.getElementById('games-modal'),
+        modalBackdrop: document.getElementById('games-modal-backdrop'),
+        modalClose: document.getElementById('games-modal-close'),
+        modalImg: document.getElementById('games-modal-img'),
+        modalTitle: document.getElementById('games-modal-title'),
     };
 
     let allRows = [];
@@ -240,6 +254,12 @@
         const frag = document.createDocumentFragment();
         for (const r of viewRows) {
             const tr = document.createElement('tr');
+            if (r.image) {
+                tr.classList.add('has-cover');
+                tr.dataset.image = r.image;
+                tr.dataset.title = r.title;
+                tr.dataset.platform = r.platform;
+            }
             for (const c of COLS) {
                 const td = document.createElement('td');
                 td.textContent = r[c];
@@ -249,13 +269,24 @@
         }
         els.tbody.replaceChildren(frag);
         els.status.textContent = `showing ${viewRows.length} of ${allRows.length} games`;
-        // update header indicators
         els.table.querySelectorAll('th').forEach(th => {
             th.classList.remove('sort-asc', 'sort-desc');
-            if (th.dataset.col === sortCol) {
+            if (th.dataset.col && th.dataset.col === sortCol) {
                 th.classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
             }
         });
+    }
+
+    function openModal(image, title, platform) {
+        els.modalImg.src = image;
+        els.modalImg.alt = title;
+        els.modalTitle.textContent = platform ? `${title} — ${platform}` : title;
+        els.modal.hidden = false;
+    }
+
+    function closeModal() {
+        els.modal.hidden = true;
+        els.modalImg.removeAttribute('src');
     }
 
     function init(rows) {
@@ -263,6 +294,7 @@
         const header = rows[0].map(h => h.trim().toLowerCase());
         const idx = {};
         COLS.forEach(c => { idx[c] = header.indexOf(c); });
+        const imageIdx = header.indexOf('image');
 
         const platforms = new Set();
         const genres = new Set();
@@ -272,6 +304,7 @@
             const r = {};
             COLS.forEach(c => { r[c] = (raw[idx[c]] || '').trim(); });
             if (!r.title) continue;
+            r.image = imageIdx >= 0 ? (raw[imageIdx] || '').trim() : '';
             COLS.forEach(c => { r['_lc_' + c] = r[c].toLowerCase(); });
             r._search = r._lc_title + '|' + r._lc_developer + '|' + r._lc_publisher;
             allRows.push(r);
@@ -298,11 +331,24 @@
         els.table.querySelectorAll('th').forEach(th => {
             th.addEventListener('click', () => {
                 const col = th.dataset.col;
+                if (!col) return;
                 if (sortCol === col) { sortDir = -sortDir; }
                 else { sortCol = col; sortDir = 1; }
                 sortRows();
                 render();
             });
+        });
+
+        // Delegated click: open cover modal for rows that have an image.
+        els.tbody.addEventListener('click', (e) => {
+            const tr = e.target.closest('tr.has-cover');
+            if (!tr) return;
+            openModal(tr.dataset.image, tr.dataset.title, tr.dataset.platform);
+        });
+        els.modalClose.addEventListener('click', closeModal);
+        els.modalBackdrop.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !els.modal.hidden) closeModal();
         });
     }
 
