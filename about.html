@@ -132,10 +132,10 @@
     <main>
   <article>
     <header>
-      <h2>About</h2>
+      <h1 class="entry-title">cat about.txt</h1>
     </header>
-
-    <p><img src="/theme/images/headshot.png" alt="ninjabot" class="headshot"></p>
+    <div class="entry-content">
+      <p><img src="/theme/images/headshot.png" alt="ninjabot" class="headshot"></p>
 <p>A random output stream of questionable value.</p>
 <p>I am ninjabot and I'm addicted to projects. Not finishing them; no, never finishing. But I like to have a lot of them and, on occasion, I like to talk about them. I'm going to use this space to document them and motivate myself to continue working on (but never finishing) my pile of hobby projects, which often reside at the crossroads between AI and game development.</p>
 <p>The site is built on Pelican with a custom theme (yet another project to keep tinkering with.) Click the [MODE] label up in the menu to cycle through a handful of visual modes. Some of them are even readable!</p>
@@ -154,6 +154,7 @@
 <li>Forza Horizon 6!</li>
 <li>Cyberpunk 2077 (5th playthrough)</li>
 </ul>
+    </div>
   </article>
     </main>
 
@@ -332,6 +333,33 @@
 
         // Image Click to Enlarge
         document.addEventListener('DOMContentLoaded', () => {
+            // Wrap standalone content images in <figure> with a caption from alt
+            // text. Pelican emits <p><img></p>; the floated headshot is excluded.
+            document.querySelectorAll('.entry-content p > img:only-child:not(.headshot)').forEach(img => {
+                const p = img.parentNode;
+                const fig = document.createElement('figure');
+                fig.className = 'post-figure';
+                fig.appendChild(img);
+                if (img.alt) {
+                    const cap = document.createElement('figcaption');
+                    cap.textContent = img.alt;
+                    fig.appendChild(cap);
+                }
+                p.replaceWith(fig);
+            });
+
+            // Pair each margin note with its preceding paragraph so the bubble
+            // can be positioned in the gutter beside it.
+            document.querySelectorAll('.entry-content .margin-note').forEach(note => {
+                const p = note.previousElementSibling;
+                if (!p || p.tagName !== 'P' || p.parentNode.classList.contains('noted')) return;
+                const wrap = document.createElement('div');
+                wrap.className = 'noted';
+                p.parentNode.insertBefore(wrap, p);
+                wrap.appendChild(p);
+                wrap.appendChild(note);
+            });
+
             const images = document.querySelectorAll('.entry-content img, img.headshot');
             images.forEach(img => {
                 img.addEventListener('click', function() {

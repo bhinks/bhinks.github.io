@@ -135,9 +135,9 @@
         <h1 class="entry-title">cat questman.txt</h1>
         <div class="entry-meta">
             <time datetime="2026-06-12T08:00:00-04:00">2026-06-12 08:00:00</time>
-            in <a href="../../../../category/posts.html">posts</a>
-            - Tagged: 
-            <a href="../../../../tag/ai.html">ai</a>,             <a href="../../../../tag/development.html">development</a>,             <a href="../../../../tag/adhd.html">adhd</a>        </div>
+            <span class="meta-cat"><a href="../../../../category/posts.html">posts</a></span>
+            <span class="entry-tags"><a href="../../../../tag/ai.html" class="tag">ai</a><a href="../../../../tag/development.html" class="tag">development</a><a href="../../../../tag/adhd.html" class="tag">adhd</a></span>
+        </div>
     </header>
     <div class="entry-content">
         <p>My cyberdeck progress has slowed down dramatically now that I'm working on the physical build. I am new to 3D printing and CAD, but I feel like I'm learning. I'm happy enough with some of the case internals I've printed, but I still have a lot of tweaking to do.</p>
@@ -347,6 +347,33 @@
 
         // Image Click to Enlarge
         document.addEventListener('DOMContentLoaded', () => {
+            // Wrap standalone content images in <figure> with a caption from alt
+            // text. Pelican emits <p><img></p>; the floated headshot is excluded.
+            document.querySelectorAll('.entry-content p > img:only-child:not(.headshot)').forEach(img => {
+                const p = img.parentNode;
+                const fig = document.createElement('figure');
+                fig.className = 'post-figure';
+                fig.appendChild(img);
+                if (img.alt) {
+                    const cap = document.createElement('figcaption');
+                    cap.textContent = img.alt;
+                    fig.appendChild(cap);
+                }
+                p.replaceWith(fig);
+            });
+
+            // Pair each margin note with its preceding paragraph so the bubble
+            // can be positioned in the gutter beside it.
+            document.querySelectorAll('.entry-content .margin-note').forEach(note => {
+                const p = note.previousElementSibling;
+                if (!p || p.tagName !== 'P' || p.parentNode.classList.contains('noted')) return;
+                const wrap = document.createElement('div');
+                wrap.className = 'noted';
+                p.parentNode.insertBefore(wrap, p);
+                wrap.appendChild(p);
+                wrap.appendChild(note);
+            });
+
             const images = document.querySelectorAll('.entry-content img, img.headshot');
             images.forEach(img => {
                 img.addEventListener('click', function() {

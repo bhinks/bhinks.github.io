@@ -311,6 +311,33 @@
 
         // Image Click to Enlarge
         document.addEventListener('DOMContentLoaded', () => {
+            // Wrap standalone content images in <figure> with a caption from alt
+            // text. Pelican emits <p><img></p>; the floated headshot is excluded.
+            document.querySelectorAll('.entry-content p > img:only-child:not(.headshot)').forEach(img => {
+                const p = img.parentNode;
+                const fig = document.createElement('figure');
+                fig.className = 'post-figure';
+                fig.appendChild(img);
+                if (img.alt) {
+                    const cap = document.createElement('figcaption');
+                    cap.textContent = img.alt;
+                    fig.appendChild(cap);
+                }
+                p.replaceWith(fig);
+            });
+
+            // Pair each margin note with its preceding paragraph so the bubble
+            // can be positioned in the gutter beside it.
+            document.querySelectorAll('.entry-content .margin-note').forEach(note => {
+                const p = note.previousElementSibling;
+                if (!p || p.tagName !== 'P' || p.parentNode.classList.contains('noted')) return;
+                const wrap = document.createElement('div');
+                wrap.className = 'noted';
+                p.parentNode.insertBefore(wrap, p);
+                wrap.appendChild(p);
+                wrap.appendChild(note);
+            });
+
             const images = document.querySelectorAll('.entry-content img, img.headshot');
             images.forEach(img => {
                 img.addEventListener('click', function() {

@@ -138,12 +138,13 @@
             </h2>
             <div class="entry-meta">
                 <time datetime="2022-01-17T19:17:15-05:00">2022-01-17 19:17:15</time>
-                in <a href="./category/posts.html">posts</a>
-                - Tagged:
-                <a href="./tag/gaming.html">gaming</a>,                 <a href="./tag/nes.html">nes</a>,                 <a href="./tag/development.html">development</a>            </div>
+                <span class="meta-cat"><a href="./category/posts.html">posts</a></span>
+                <span class="entry-tags"><a href="./tag/gaming.html" class="tag">gaming</a><a href="./tag/nes.html" class="tag">nes</a><a href="./tag/development.html" class="tag">development</a></span>
+            </div>
         </header>
         <div class="entry-summary">
             <p>I've set a new goal for 2022: to build an NES game. As I collect and play more games for the system, I've come to appreciate the amount of effort that goes into engineering software at such a low level. The kinds of challenges that programmers had to overcome while …</p>
+            <a class="read-more" href="./posts/2022/01/17/nes_dev.html">read more <span class="rm-arrow">&rarr;</span></a>
         </div>
     </article>
 
@@ -155,12 +156,13 @@
             </h2>
             <div class="entry-meta">
                 <time datetime="2020-10-28T18:07:01-04:00">2020-10-28 18:07:01</time>
-                in <a href="./category/posts.html">posts</a>
-                - Tagged:
-                <a href="./tag/gaming.html">gaming</a>,                 <a href="./tag/quake.html">quake</a>            </div>
+                <span class="meta-cat"><a href="./category/posts.html">posts</a></span>
+                <span class="entry-tags"><a href="./tag/gaming.html" class="tag">gaming</a><a href="./tag/quake.html" class="tag">quake</a></span>
+            </div>
         </header>
         <div class="entry-summary">
             <p>Rolling around in a giant pile of nostalgia, I decided to dig through files on a pile of old hard drives I had lying around. My chief goal was to find my old Quake 2 installation so I could recover my former collection of player models, skins, maps, and game …</p>
+            <a class="read-more" href="./posts/2020/10/28/quake2.html">read more <span class="rm-arrow">&rarr;</span></a>
         </div>
     </article>
 
@@ -348,6 +350,33 @@
 
         // Image Click to Enlarge
         document.addEventListener('DOMContentLoaded', () => {
+            // Wrap standalone content images in <figure> with a caption from alt
+            // text. Pelican emits <p><img></p>; the floated headshot is excluded.
+            document.querySelectorAll('.entry-content p > img:only-child:not(.headshot)').forEach(img => {
+                const p = img.parentNode;
+                const fig = document.createElement('figure');
+                fig.className = 'post-figure';
+                fig.appendChild(img);
+                if (img.alt) {
+                    const cap = document.createElement('figcaption');
+                    cap.textContent = img.alt;
+                    fig.appendChild(cap);
+                }
+                p.replaceWith(fig);
+            });
+
+            // Pair each margin note with its preceding paragraph so the bubble
+            // can be positioned in the gutter beside it.
+            document.querySelectorAll('.entry-content .margin-note').forEach(note => {
+                const p = note.previousElementSibling;
+                if (!p || p.tagName !== 'P' || p.parentNode.classList.contains('noted')) return;
+                const wrap = document.createElement('div');
+                wrap.className = 'noted';
+                p.parentNode.insertBefore(wrap, p);
+                wrap.appendChild(p);
+                wrap.appendChild(note);
+            });
+
             const images = document.querySelectorAll('.entry-content img, img.headshot');
             images.forEach(img => {
                 img.addEventListener('click', function() {

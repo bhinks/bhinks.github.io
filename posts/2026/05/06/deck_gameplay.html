@@ -135,9 +135,9 @@
         <h1 class="entry-title">cat deck_gameplay.txt</h1>
         <div class="entry-meta">
             <time datetime="2026-05-06T06:41:44-04:00">2026-05-06 06:41:44</time>
-            in <a href="../../../../category/posts.html">posts</a>
-            - Tagged: 
-            <a href="../../../../tag/ai.html">ai</a>,             <a href="../../../../tag/development.html">development</a>,             <a href="../../../../tag/cyberdeck.html">cyberdeck</a>,             <a href="../../../../tag/gaming.html">gaming</a>        </div>
+            <span class="meta-cat"><a href="../../../../category/posts.html">posts</a></span>
+            <span class="entry-tags"><a href="../../../../tag/ai.html" class="tag">ai</a><a href="../../../../tag/development.html" class="tag">development</a><a href="../../../../tag/cyberdeck.html" class="tag">cyberdeck</a><a href="../../../../tag/gaming.html" class="tag">gaming</a></span>
+        </div>
     </header>
     <div class="entry-content">
         <p>I've spent the last couple weeks turning the cyberdeck from "a thing that talks to you in cyberpunk-flavored ways" into something that's actually a <em>game</em>. Now there's a real loop: you take contracts from fixers, you run them through one of several gameplay modes, the world reacts, your reputation moves, and eventually an endgame storyline becomes available. In this post I want to walk through the parts I'm proudest of and the parts that fought back the hardest.</p>
@@ -578,6 +578,33 @@
 
         // Image Click to Enlarge
         document.addEventListener('DOMContentLoaded', () => {
+            // Wrap standalone content images in <figure> with a caption from alt
+            // text. Pelican emits <p><img></p>; the floated headshot is excluded.
+            document.querySelectorAll('.entry-content p > img:only-child:not(.headshot)').forEach(img => {
+                const p = img.parentNode;
+                const fig = document.createElement('figure');
+                fig.className = 'post-figure';
+                fig.appendChild(img);
+                if (img.alt) {
+                    const cap = document.createElement('figcaption');
+                    cap.textContent = img.alt;
+                    fig.appendChild(cap);
+                }
+                p.replaceWith(fig);
+            });
+
+            // Pair each margin note with its preceding paragraph so the bubble
+            // can be positioned in the gutter beside it.
+            document.querySelectorAll('.entry-content .margin-note').forEach(note => {
+                const p = note.previousElementSibling;
+                if (!p || p.tagName !== 'P' || p.parentNode.classList.contains('noted')) return;
+                const wrap = document.createElement('div');
+                wrap.className = 'noted';
+                p.parentNode.insertBefore(wrap, p);
+                wrap.appendChild(p);
+                wrap.appendChild(note);
+            });
+
             const images = document.querySelectorAll('.entry-content img, img.headshot');
             images.forEach(img => {
                 img.addEventListener('click', function() {

@@ -135,9 +135,9 @@
         <h1 class="entry-title">cat collection.txt</h1>
         <div class="entry-meta">
             <time datetime="2026-05-06T02:35:12-04:00">2026-05-06 02:35:12</time>
-            in <a href="../../../../category/posts.html">posts</a>
-            - Tagged: 
-            <a href="../../../../tag/gaming.html">gaming</a>,             <a href="../../../../tag/collection.html">collection</a>        </div>
+            <span class="meta-cat"><a href="../../../../category/posts.html">posts</a></span>
+            <span class="entry-tags"><a href="../../../../tag/gaming.html" class="tag">gaming</a><a href="../../../../tag/collection.html" class="tag">collection</a></span>
+        </div>
     </header>
     <div class="entry-content">
         <p>One of my hobbies is collecting physical copies of games. I've been at it since 2013, but I've slowed down in recent months and am now looking toward downsizing.</p>
@@ -326,6 +326,33 @@
 
         // Image Click to Enlarge
         document.addEventListener('DOMContentLoaded', () => {
+            // Wrap standalone content images in <figure> with a caption from alt
+            // text. Pelican emits <p><img></p>; the floated headshot is excluded.
+            document.querySelectorAll('.entry-content p > img:only-child:not(.headshot)').forEach(img => {
+                const p = img.parentNode;
+                const fig = document.createElement('figure');
+                fig.className = 'post-figure';
+                fig.appendChild(img);
+                if (img.alt) {
+                    const cap = document.createElement('figcaption');
+                    cap.textContent = img.alt;
+                    fig.appendChild(cap);
+                }
+                p.replaceWith(fig);
+            });
+
+            // Pair each margin note with its preceding paragraph so the bubble
+            // can be positioned in the gutter beside it.
+            document.querySelectorAll('.entry-content .margin-note').forEach(note => {
+                const p = note.previousElementSibling;
+                if (!p || p.tagName !== 'P' || p.parentNode.classList.contains('noted')) return;
+                const wrap = document.createElement('div');
+                wrap.className = 'noted';
+                p.parentNode.insertBefore(wrap, p);
+                wrap.appendChild(p);
+                wrap.appendChild(note);
+            });
+
             const images = document.querySelectorAll('.entry-content img, img.headshot');
             images.forEach(img => {
                 img.addEventListener('click', function() {

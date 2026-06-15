@@ -138,12 +138,13 @@
             </h2>
             <div class="entry-meta">
                 <time datetime="2026-05-05T11:32:38-04:00">2026-05-05 11:32:38</time>
-                in <a href="../category/posts.html">posts</a>
-                - Tagged:
-                <a href="../tag/ai.html">ai</a>,                 <a href="../tag/development.html">development</a>,                 <a href="../tag/claude.html">claude</a>            </div>
+                <span class="meta-cat"><a href="../category/posts.html">posts</a></span>
+                <span class="entry-tags"><a href="../tag/ai.html" class="tag">ai</a><a href="../tag/development.html" class="tag">development</a><a href="../tag/claude.html" class="tag">claude</a></span>
+            </div>
         </header>
         <div class="entry-summary">
             <p>Like a lot of people, I've been spending a ton of time with AI tools over the past few years. I wrote previously about how <a href="https://www.anthropic.com/claude-code">Claude Code</a> reinvigorated my relationship with code by getting me out of the busy-work layer and back to the parts of building software that I …</p>
+            <a class="read-more" href="../posts/2026/05/05/brain.html">read more <span class="rm-arrow">&rarr;</span></a>
         </div>
     </article>
 
@@ -155,12 +156,13 @@
             </h2>
             <div class="entry-meta">
                 <time datetime="2025-08-30T09:43:47-04:00">2025-08-30 09:43:47</time>
-                in <a href="../category/posts.html">posts</a>
-                - Tagged:
-                <a href="../tag/ai.html">ai</a>,                 <a href="../tag/development.html">development</a>,                 <a href="../tag/claude.html">claude</a>            </div>
+                <span class="meta-cat"><a href="../category/posts.html">posts</a></span>
+                <span class="entry-tags"><a href="../tag/ai.html" class="tag">ai</a><a href="../tag/development.html" class="tag">development</a><a href="../tag/claude.html" class="tag">claude</a></span>
+            </div>
         </header>
         <div class="entry-summary">
             <p>My relationship with code has changed a lot over the past 30 years. Giving an idea life on a computer screen has always thrilled me, ever since the time of staying up late writing MadLibs programs in QBasic with my friends. I've been writing code professionally for nearly two decades …</p>
+            <a class="read-more" href="../posts/2025/08/30/claude.html">read more <span class="rm-arrow">&rarr;</span></a>
         </div>
     </article>
 
@@ -343,6 +345,33 @@
 
         // Image Click to Enlarge
         document.addEventListener('DOMContentLoaded', () => {
+            // Wrap standalone content images in <figure> with a caption from alt
+            // text. Pelican emits <p><img></p>; the floated headshot is excluded.
+            document.querySelectorAll('.entry-content p > img:only-child:not(.headshot)').forEach(img => {
+                const p = img.parentNode;
+                const fig = document.createElement('figure');
+                fig.className = 'post-figure';
+                fig.appendChild(img);
+                if (img.alt) {
+                    const cap = document.createElement('figcaption');
+                    cap.textContent = img.alt;
+                    fig.appendChild(cap);
+                }
+                p.replaceWith(fig);
+            });
+
+            // Pair each margin note with its preceding paragraph so the bubble
+            // can be positioned in the gutter beside it.
+            document.querySelectorAll('.entry-content .margin-note').forEach(note => {
+                const p = note.previousElementSibling;
+                if (!p || p.tagName !== 'P' || p.parentNode.classList.contains('noted')) return;
+                const wrap = document.createElement('div');
+                wrap.className = 'noted';
+                p.parentNode.insertBefore(wrap, p);
+                wrap.appendChild(p);
+                wrap.appendChild(note);
+            });
+
             const images = document.querySelectorAll('.entry-content img, img.headshot');
             images.forEach(img => {
                 img.addEventListener('click', function() {

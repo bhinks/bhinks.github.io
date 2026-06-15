@@ -135,9 +135,9 @@
         <h1 class="entry-title">cat nes_dev.txt</h1>
         <div class="entry-meta">
             <time datetime="2022-01-17T19:17:15-05:00">2022-01-17 19:17:15</time>
-            in <a href="../../../../category/posts.html">posts</a>
-            - Tagged: 
-            <a href="../../../../tag/gaming.html">gaming</a>,             <a href="../../../../tag/nes.html">nes</a>,             <a href="../../../../tag/development.html">development</a>        </div>
+            <span class="meta-cat"><a href="../../../../category/posts.html">posts</a></span>
+            <span class="entry-tags"><a href="../../../../tag/gaming.html" class="tag">gaming</a><a href="../../../../tag/nes.html" class="tag">nes</a><a href="../../../../tag/development.html" class="tag">development</a></span>
+        </div>
     </header>
     <div class="entry-content">
         <p>I've set a new goal for 2022: to build an NES game. As I collect and play more games for the system, I've come to appreciate the amount of effort that goes into engineering software at such a low level. The kinds of challenges that programmers had to overcome while building these games are so far divorced from modern software problems that I felt compelled to explore the space in more depth. Maybe it'll make me a better programmer. Maybe it'll make me appreciate my game collection that much more. Hopefully it is a fun project and something that I can build on in the future.</p>
@@ -339,6 +339,33 @@
 
         // Image Click to Enlarge
         document.addEventListener('DOMContentLoaded', () => {
+            // Wrap standalone content images in <figure> with a caption from alt
+            // text. Pelican emits <p><img></p>; the floated headshot is excluded.
+            document.querySelectorAll('.entry-content p > img:only-child:not(.headshot)').forEach(img => {
+                const p = img.parentNode;
+                const fig = document.createElement('figure');
+                fig.className = 'post-figure';
+                fig.appendChild(img);
+                if (img.alt) {
+                    const cap = document.createElement('figcaption');
+                    cap.textContent = img.alt;
+                    fig.appendChild(cap);
+                }
+                p.replaceWith(fig);
+            });
+
+            // Pair each margin note with its preceding paragraph so the bubble
+            // can be positioned in the gutter beside it.
+            document.querySelectorAll('.entry-content .margin-note').forEach(note => {
+                const p = note.previousElementSibling;
+                if (!p || p.tagName !== 'P' || p.parentNode.classList.contains('noted')) return;
+                const wrap = document.createElement('div');
+                wrap.className = 'noted';
+                p.parentNode.insertBefore(wrap, p);
+                wrap.appendChild(p);
+                wrap.appendChild(note);
+            });
+
             const images = document.querySelectorAll('.entry-content img, img.headshot');
             images.forEach(img => {
                 img.addEventListener('click', function() {

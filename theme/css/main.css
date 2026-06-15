@@ -9,7 +9,7 @@
   --text-color: #00ffff;
   --body-text: #d0eef2;
   --pop-color: #ff00ff;
-  --alt-color: #bd00ff;
+  --alt-color: #c466ff;
   --light-alt-color: rgba(189, 0, 255, 0.3);
   --prompt-color: #00ffff;
   --command-color: #ffffff;
@@ -29,7 +29,7 @@
   --text-color: #00ff41;
   --body-text: #b8f0c0;
   --pop-color: #00ff88;
-  --alt-color: #008f11;
+  --alt-color: #11a31a;
   --light-alt-color: rgba(0, 255, 65, 0.3);
   --prompt-color: #00ff41;
   --command-color: #ffffff;
@@ -69,16 +69,16 @@
   --text-color: #000000;
   --body-text: #1a1a1a;
   --pop-color: #ff0033;
-  --alt-color: #ff0033;
+  --alt-color: #d10029;
   --light-alt-color: rgba(255, 0, 51, 0.2);
-  --prompt-color: #ff0033;
+  --prompt-color: #d10029;
   --command-color: #000000;
   --border-color: #000000;
   --terminal-header-bg: #f0f0f0;
   --glow-primary: rgba(255, 0, 51, 0.5);
   --glow-secondary: rgba(0, 0, 0, 0.3);
   --glow-tertiary: rgba(255, 0, 51, 0.3);
-  --hover-glow: #ff0033;
+  --hover-glow: #d10029;
 }
 
 /* Vaporwave mode - Aesthetic pink/purple/cyan */
@@ -129,7 +129,7 @@
   --text-color: #ff0040;
   --body-text: #f4c8cc;
   --pop-color: #ff6d00;
-  --alt-color: #dc2f02;
+  --alt-color: #e84a1f;
   --light-alt-color: rgba(255, 0, 64, 0.3);
   --prompt-color: #ff0040;
   --command-color: #ffffff;
@@ -168,7 +168,7 @@
   --terminal-bg: #081c15;
   --text-color: #52b788;
   --body-text: #d0ecdc;
-  --pop-color: #ff0000;
+  --pop-color: #ff2a2a;
   --alt-color: #74c69d;
   --light-alt-color: rgba(82, 183, 136, 0.3);
   --prompt-color: #52b788;
@@ -197,7 +197,7 @@
   --terminal-header-bg: #1a1a00;
   --glow-primary: #fcf300;
   --glow-secondary: #00f0ff;
-  --glow-tertiary: #ff00ff;
+  --glow-tertiary: #00f0ff;
   --hover-glow: #00f0ff;
 }
 
@@ -208,17 +208,17 @@
   --terminal-bg: #ffffff;
   --text-color: #2c2c2c;
   --body-text: #2c2c2c;
-  --pop-color: #4B8BBD;
-  --alt-color: #FF8B00;
+  --pop-color: #2f6f99;
+  --alt-color: #a85a00;
   --light-alt-color: rgba(75, 139, 189, 0.2);
-  --prompt-color: #4B8BBD;
+  --prompt-color: #2f6f99;
   --command-color: #1a1a1a;
-  --border-color: #4B8BBD;
+  --border-color: #2f6f99;
   --terminal-header-bg: #e8e8e8;
   --glow-primary: rgba(75, 139, 189, 0.5);
   --glow-secondary: rgba(255, 139, 0, 0.5);
   --glow-tertiary: rgba(75, 139, 189, 0.3);
-  --hover-glow: #FF8B00;
+  --hover-glow: #a85a00;
 }
 
 /* Wargames mode - WOPR mainframe monochrome */
@@ -279,18 +279,21 @@
   80% { transform: translate(2px, -2px); }
 }
 
+/* Inner (sharp) layers track the element's own text color so the glow never
+   fights the glyph hue (e.g. a cyan halo under magenta neon headings). Outer,
+   blurrier layers keep the per-theme accent colors for richness. */
 @keyframes glow-pulse {
   0%, 100% {
     text-shadow:
-      0 0 5px var(--glow-primary),
-      0 0 10px var(--glow-primary),
+      0 0 5px currentColor,
+      0 0 10px currentColor,
       0 0 20px var(--glow-secondary),
       0 0 40px var(--glow-tertiary);
   }
   50% {
     text-shadow:
-      0 0 2px var(--glow-primary),
-      0 0 5px var(--glow-primary),
+      0 0 2px currentColor,
+      0 0 5px currentColor,
       0 0 10px var(--glow-secondary),
       0 0 20px var(--glow-tertiary);
   }
@@ -309,12 +312,6 @@
 @keyframes cursor-blink {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
-}
-
-.typing-cursor {
-  color: var(--text-color);
-  text-shadow: 0 0 5px var(--text-color);
-  font-weight: bold;
 }
 
 @keyframes neon-flicker {
@@ -509,21 +506,8 @@ a:hover {
   animation: neon-flicker 0.15s infinite;
 }
 
-.primary-text { 
+b, strong {
   color: var(--main-color); 
-}
-
-b, strong { 
-  color: var(--main-color); 
-}
-
-.invert { 
-  color: var(--bg-color); 
-  background-color: var(--main-color); 
-  padding-left: 3px; 
-  padding-right: 3px; 
-  padding-top: 1px; 
-  padding-bottom: 1px; 
 }
 
 /* LAYOUT */
@@ -1272,8 +1256,7 @@ body[data-theme="screamsheet"]::before {
   color: #000000;
 }
 
-[data-theme="screamsheet"] .entry-content pre,
-[data-theme="screamsheet"] .post-content pre {
+[data-theme="screamsheet"] .entry-content pre {
   background-color: #ffffff;
   border: 2px solid #000000;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.15);
@@ -1467,17 +1450,6 @@ body[data-theme="screamsheet"]::before {
   opacity: 0.8;
 }
 
-.terminal-info {
-  flex: 0 0 auto;
-}
-
-.connection-status {
-  color: var(--glow-secondary);
-  font-weight: bold;
-  text-shadow: 0 0 5px var(--glow-secondary);
-  letter-spacing: 1px;
-}
-
 .terminal-prompt {
   color: var(--prompt-color);
   font-weight: bold;
@@ -1494,32 +1466,6 @@ body[data-theme="screamsheet"]::before {
   content: "▋";
   animation: cursor-blink 1s step-end infinite;
   margin-left: 2px;
-}
-
-.command-output {
-  margin-left: 0;
-  white-space: pre-wrap;
-}
-
-.post-command {
-  color: var(--command-color);
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-shadow: 0 0 5px var(--command-color);
-}
-
-.post-command:before {
-  content: "ninjabot@blog:~$ ";
-  color: var(--prompt-color);
-  text-shadow:
-    0 0 5px var(--glow-primary),
-    0 0 10px var(--glow-primary);
-}
-
-.post-content {
-  margin-left: 0;
-  border-left: none;
-  padding-left: 0;
 }
 
 /* ARTICLE STYLING */
@@ -1539,14 +1485,16 @@ body[data-theme="screamsheet"]::before {
     0 0 10px var(--glow-primary);
 }
 
-.entry-content,
-.post-content {
+.entry-content {
   margin-left: auto;
   margin-right: auto;
-  max-width: 110ch;
+  max-width: 74ch;          /* tuned reading measure (Phase 2) */
   border-left: none;
   padding-left: 0;
 }
+/* Data-heavy pages (e.g. the games collection table) opt out of the
+   narrow prose measure and keep a wide column. */
+.entry-content.entry-wide { max-width: 110ch; }
 
 /* Markdown tables (e.g. the Questman config reference). Scoped to
    entry-content and excluding the interactive games collection table. */
@@ -1607,8 +1555,7 @@ code {
   box-shadow: 0 0 5px var(--glow-primary);
 }
 
-.entry-content pre,
-.post-content pre {
+.entry-content pre {
   font-family: 'Space Mono', monospace;
   font-size: 13px;
   line-height: 1.5;
@@ -1629,8 +1576,7 @@ code {
   z-index: 10;
 }
 
-.entry-content pre code,
-.post-content pre code {
+.entry-content pre code {
   background: none;
   border: none;
   box-shadow: none;
@@ -1645,8 +1591,7 @@ code {
   box-shadow: 0 0 5px rgba(255, 0, 51, 0.2);
 }
 
-[data-theme="snowcrash"] .entry-content pre,
-[data-theme="snowcrash"] .post-content pre {
+[data-theme="snowcrash"] .entry-content pre {
   background-color: rgba(0, 0, 0, 0.03);
   border-color: rgba(0, 0, 0, 0.3);
   box-shadow:
@@ -1655,8 +1600,7 @@ code {
 }
 
 /* Amber theme - warmer background tint */
-[data-theme="fallout"] .entry-content pre,
-[data-theme="fallout"] .post-content pre {
+[data-theme="fallout"] .entry-content pre {
   background-color: rgba(0, 0, 0, 0.7);
   box-shadow:
     0 0 10px rgba(255, 170, 0, 0.4),
@@ -1664,8 +1608,7 @@ code {
 }
 
 /* Vaporwave theme - pink/purple tint */
-[data-theme="vaporwave"] .entry-content pre,
-[data-theme="vaporwave"] .post-content pre {
+[data-theme="vaporwave"] .entry-content pre {
   background-color: rgba(1, 1, 43, 0.6);
   box-shadow:
     0 0 10px rgba(255, 113, 206, 0.3),
@@ -1673,8 +1616,7 @@ code {
 }
 
 /* Outrun theme - sunset gradient hint */
-[data-theme="outrun"] .entry-content pre,
-[data-theme="outrun"] .post-content pre {
+[data-theme="outrun"] .entry-content pre {
   background-color: rgba(18, 4, 88, 0.6);
   box-shadow:
     0 0 10px rgba(255, 0, 110, 0.3),
@@ -1682,8 +1624,7 @@ code {
 }
 
 /* Arasaka theme - deep red tint */
-[data-theme="arasaka"] .entry-content pre,
-[data-theme="arasaka"] .post-content pre {
+[data-theme="arasaka"] .entry-content pre {
   background-color: rgba(13, 2, 8, 0.7);
   box-shadow:
     0 0 10px rgba(255, 0, 64, 0.3),
@@ -1691,8 +1632,7 @@ code {
 }
 
 /* Neuromancer theme - ice blue tint */
-[data-theme="neuromancer"] .entry-content pre,
-[data-theme="neuromancer"] .post-content pre {
+[data-theme="neuromancer"] .entry-content pre {
   background-color: rgba(0, 8, 20, 0.7);
   box-shadow:
     0 0 10px rgba(0, 212, 255, 0.3),
@@ -1700,8 +1640,7 @@ code {
 }
 
 /* Militech theme - military green tint */
-[data-theme="militech"] .entry-content pre,
-[data-theme="militech"] .post-content pre {
+[data-theme="militech"] .entry-content pre {
   background-color: rgba(8, 28, 21, 0.7);
   box-shadow:
     0 0 10px rgba(82, 183, 136, 0.3),
@@ -1709,8 +1648,7 @@ code {
 }
 
 /* 2077 theme - yellow glow */
-[data-theme="2077"] .entry-content pre,
-[data-theme="2077"] .post-content pre {
+[data-theme="2077"] .entry-content pre {
   background-color: rgba(0, 0, 0, 0.7);
   box-shadow:
     0 0 10px rgba(252, 243, 0, 0.3),
@@ -1724,8 +1662,7 @@ code {
   box-shadow: 0 0 5px rgba(75, 139, 189, 0.15);
 }
 
-[data-theme="aperture"] .entry-content pre,
-[data-theme="aperture"] .post-content pre {
+[data-theme="aperture"] .entry-content pre {
   background-color: rgba(75, 139, 189, 0.03);
   border-color: rgba(75, 139, 189, 0.4);
   box-shadow:
@@ -2134,11 +2071,6 @@ code {
     margin-top: 5px;
   }
 
-  .system-info {
-    font-size: 6px;
-    gap: 1px;
-  }
-
   .ascii-art {
     font-size: 3px !important;
   }
@@ -2479,6 +2411,341 @@ code {
   .menu { flex-wrap:wrap; gap:10px; }
   .nav-list { gap:14px; } }
 
-/* OPTIONAL — calm the infinite heading-glow pulse (no strong preference):
-.ascii-art,.ascii-ninja pre,.ascii-robot pre,.entry-title,.entry-title a{ animation:none !important; }
-.entry-title a{ text-shadow:0 0 5px var(--glow-primary); }  */
+/* =====================================================================
+   Phase 2 — article reading system: post cards, tuned .entry-content
+   typography, and optional margin notes. All colors come from theme
+   custom properties, so this holds across every data-theme mode.
+   ===================================================================== */
+
+/* ---- Post list: framed terminal "file cards" ---- */
+.entry-meta time { color: var(--main-color); }
+.read-more {
+  text-decoration: none;
+  color: var(--prompt-color, var(--glow-tertiary));
+}
+.read-more .rm-arrow { transition: transform .18s ease; display: inline-block; }
+.read-more:hover { color: var(--hover-glow); text-shadow: 0 0 8px var(--hover-glow); }
+.read-more:hover .rm-arrow { transform: translateX(4px); }
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.post-divider { display: none; }
+
+.post-list > article {
+  position: relative;
+  padding: 20px 24px 22px;
+  border: 1px solid color-mix(in srgb, var(--border-color) 60%, transparent);
+  border-left: 2px solid color-mix(in srgb, var(--main-color) 65%, transparent);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--main-color) 6%, transparent), transparent 55%),
+    rgba(0, 0, 0, 0.22);
+  box-shadow: inset 0 0 26px rgba(0, 0, 0, 0.35);
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.post-list > article:hover {
+  border-color: color-mix(in srgb, var(--main-color) 50%, var(--border-color));
+  border-left-color: var(--main-color);
+  box-shadow: 0 0 18px var(--glow-primary), inset 0 0 26px rgba(0, 0, 0, 0.35);
+  transform: translateX(2px);
+}
+
+.post-list .entry-title { font-size: 16px; margin-bottom: 12px; }
+
+/* meta becomes a header strip: date on the left, chips pushed right */
+.entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 9px;
+  margin: 0 0 14px;
+  padding-bottom: 13px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-color) 45%, transparent);
+  font-size: 12px;
+}
+.entry-meta time { letter-spacing: .3px; white-space: nowrap; }
+.entry-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-left: auto;
+}
+.entry-tags .tag,
+.meta-cat a {
+  display: inline-block;
+  padding: 1px 9px;
+  font-size: 11px;
+  line-height: 1.7;
+  text-decoration: none;
+  text-shadow: none;
+  border: 1px solid color-mix(in srgb, var(--main-color) 28%, transparent);
+  border-radius: 4px;
+  color: color-mix(in srgb, var(--text-color) 88%, var(--main-color));
+  background: color-mix(in srgb, var(--main-color) 7%, transparent);
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+}
+.entry-tags .tag::before { content: "#"; opacity: .55; }
+.meta-cat a::before { content: "./"; opacity: .6; }
+.entry-tags .tag:hover,
+.meta-cat a:hover {
+  border-color: var(--main-color);
+  color: var(--hover-glow);
+  background: color-mix(in srgb, var(--main-color) 16%, transparent);
+}
+.read-more {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* ---- Tuned reading system (the .entry-content body) ---- */
+.entry-content > p {
+  margin: 0 0 1.3em;
+  line-height: 1.75;
+}
+/* lede: the opening paragraph reads a touch larger + brighter */
+.entry-content > p:first-of-type {
+  font-size: 1.06em;
+  color: color-mix(in srgb, var(--text-color) 90%, var(--main-color));
+}
+
+/* headings as terminal section markers */
+.entry-content h1,
+.entry-content h2,
+.entry-content h3 {
+  font-family: 'Space Mono', monospace;
+  line-height: 1.25;
+  scroll-margin-top: 20px;
+}
+.entry-content h1 {
+  font-size: 1.7em;
+  color: var(--command-color);
+  margin: 1.6em 0 .7em;
+  padding-bottom: .4em;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-color) 55%, transparent);
+  text-shadow: 0 0 7px color-mix(in srgb, var(--command-color) 55%, transparent);
+}
+.entry-content h1::before {
+  content: "# ";
+  color: var(--prompt-color);
+  text-shadow: 0 0 6px var(--glow-primary);
+}
+.entry-content h2 {
+  font-size: 1.45em;
+  color: var(--command-color);
+  margin: 2.3em 0 .85em;
+  padding-bottom: .4em;
+  border-bottom: 1px solid color-mix(in srgb, var(--border-color) 55%, transparent);
+  text-shadow: 0 0 6px color-mix(in srgb, var(--command-color) 55%, transparent);
+}
+.entry-content h2::before {
+  content: "## ";
+  color: var(--prompt-color);
+  text-shadow: 0 0 6px var(--glow-primary);
+}
+.entry-content h3 {
+  font-size: 1.12em;
+  color: var(--main-color);
+  margin: 2em 0 .6em;
+}
+.entry-content h3::before {
+  content: "### ";
+  color: var(--prompt-color);
+  opacity: .85;
+}
+
+/* lists: custom markers + monospace bold labels (def-list feel) */
+.entry-content ul {
+  list-style: none;
+  padding-left: .2em;
+  margin: 1.2em 0;
+}
+.entry-content ul li {
+  position: relative;
+  padding-left: 1.7em;
+  margin: .55em 0;
+  line-height: 1.7;
+}
+.entry-content ul li::before {
+  content: "\25B8";
+  position: absolute;
+  left: .25em;
+  top: 0;
+  color: var(--main-color);
+  text-shadow: 0 0 6px var(--glow-primary);
+}
+.entry-content li > strong:first-child {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  color: var(--pop-color);
+  text-shadow: 0 0 5px color-mix(in srgb, var(--pop-color) 45%, transparent);
+}
+
+/* ordered lists — numbered terminal steps */
+.entry-content ol {
+  list-style: none;
+  counter-reset: step;
+  padding-left: .2em;
+  margin: 1.2em 0;
+}
+.entry-content ol > li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 2.4em;
+  margin: .6em 0;
+  line-height: 1.7;
+}
+.entry-content ol > li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  color: var(--pop-color);
+  text-shadow: 0 0 5px color-mix(in srgb, var(--pop-color) 45%, transparent);
+}
+
+/* body links: dashed underline that lights up on hover */
+.entry-content p a,
+.entry-content li a {
+  color: var(--main-color);
+  text-decoration: none;
+  border-bottom: 1px dashed color-mix(in srgb, var(--main-color) 45%, transparent);
+  transition: color .15s ease, border-color .15s ease, text-shadow .15s ease;
+}
+.entry-content p a:hover,
+.entry-content li a:hover {
+  color: var(--hover-glow);
+  border-bottom-color: var(--hover-glow);
+  text-shadow: 0 0 8px var(--hover-glow);
+}
+
+/* figures: framed screenshot + monospace caption from alt text */
+.post-figure { margin: 1.6em 0; text-align: center; }
+.post-figure img { display: block; margin: 0 auto; max-width: 100%; }
+.post-figure figcaption {
+  display: block;
+  margin-top: .7em;
+  font: 11px/1.5 'Space Mono', monospace;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--text-color) 58%, var(--bg-color));
+}
+.post-figure figcaption::before {
+  content: "\258C ";
+  color: var(--main-color);
+}
+
+/* code blocks dressed as terminal windows */
+.entry-content .highlight {
+  margin: 1.7em 0;
+  border: 1px solid color-mix(in srgb, var(--border-color) 75%, transparent);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 16px var(--glow-primary), inset 0 0 30px rgba(0, 0, 0, 0.4);
+}
+.entry-content .highlight::before {
+  content: "\25CF \25CF \25CF";
+  display: block;
+  letter-spacing: .3em;
+  font-size: 11px;
+  color: color-mix(in srgb, var(--main-color) 55%, var(--bg-color));
+  padding: 8px 14px;
+  background: color-mix(in srgb, var(--main-color) 8%, rgba(0, 0, 0, 0.45));
+  border-bottom: 1px solid color-mix(in srgb, var(--border-color) 55%, transparent);
+}
+.entry-content .highlight pre {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* build-journal ls listing (cyberdeck) — same window framing */
+.entry-content .ls-listing {
+  border: 1px solid color-mix(in srgb, var(--border-color) 75%, transparent);
+  border-radius: 8px;
+  box-shadow: 0 0 16px var(--glow-primary), inset 0 0 30px rgba(0, 0, 0, 0.4);
+  padding: 16px 18px;
+  overflow-x: auto;
+}
+.entry-content .ls-listing a {
+  color: var(--main-color);
+  text-decoration: none;
+  border-bottom: 1px dashed color-mix(in srgb, var(--main-color) 45%, transparent);
+}
+.entry-content .ls-listing a:hover {
+  color: var(--hover-glow);
+  border-bottom-color: var(--hover-glow);
+  text-shadow: 0 0 8px var(--hover-glow);
+}
+
+/* ---- Margin notes: retrospective chat bubbles in the right gutter ---- */
+.noted { position: relative; }
+.margin-note {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 232px;
+  margin-left: 2.4rem;
+  font: 12px/1.6 'Space Mono', monospace;
+  color: color-mix(in srgb, var(--text-color) 90%, var(--main-color));
+  background: color-mix(in srgb, var(--main-color) 9%, rgba(0, 0, 0, 0.34));
+  border: 1px solid color-mix(in srgb, var(--main-color) 40%, var(--border-color));
+  border-radius: 12px 12px 12px 4px;
+  padding: 10px 13px 9px;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--glow-primary) 65%, transparent);
+}
+.margin-note::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 15px;
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-right-color: color-mix(in srgb, var(--main-color) 40%, var(--border-color));
+  border-left: 0;
+}
+.margin-note .mn-head {
+  display: block;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .4px;
+  color: var(--main-color);
+  text-shadow: 0 0 6px var(--glow-primary);
+}
+.margin-note .mn-head::before { content: "\258C "; opacity: .7; }
+.margin-note .mn-body { margin: 5px 0 0; }
+.margin-note .mn-date {
+  display: block;
+  margin-top: 8px;
+  text-align: right;
+  font-size: 10px;
+  letter-spacing: .5px;
+  color: color-mix(in srgb, var(--text-color) 52%, var(--bg-color));
+}
+.margin-note .mn-date::before { content: "\2301 "; color: var(--main-color); opacity: .7; }
+
+/* not enough gutter — drop the bubble inline beneath its paragraph */
+@media (max-width: 1240px) {
+  .margin-note {
+    position: static;
+    width: auto;
+    max-width: 100%;
+    margin: .7em 0 1.4em;
+    border-radius: 4px 12px 12px 12px;
+  }
+  .margin-note::before {
+    left: 18px;
+    top: -7px;
+    border: 7px solid transparent;
+    border-bottom-color: color-mix(in srgb, var(--main-color) 40%, var(--border-color));
+    border-top: 0;
+  }
+}

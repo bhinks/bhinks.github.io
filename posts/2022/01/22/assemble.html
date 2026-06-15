@@ -135,9 +135,9 @@
         <h1 class="entry-title">cat assemble.txt</h1>
         <div class="entry-meta">
             <time datetime="2022-01-22T11:08:47-05:00">2022-01-22 11:08:47</time>
-            in <a href="../../../../category/posts.html">posts</a>
-            - Tagged: 
-            <a href="../../../../tag/gaming.html">gaming</a>,             <a href="../../../../tag/nes.html">nes</a>,             <a href="../../../../tag/development.html">development</a>        </div>
+            <span class="meta-cat"><a href="../../../../category/posts.html">posts</a></span>
+            <span class="entry-tags"><a href="../../../../tag/gaming.html" class="tag">gaming</a><a href="../../../../tag/nes.html" class="tag">nes</a><a href="../../../../tag/development.html" class="tag">development</a></span>
+        </div>
     </header>
     <div class="entry-content">
         <p>I've made some pretty decent progress, I think, though at the same time I'm beginning to learn that I have a very long way to go before I can make a real full-featured game. The resource that gave me the biggest jump-start was definitely <a href="https://famicom.party/book/">Famicom Party</a>. Using that book as a resource, I was able to make significant progress on my vertical shooter, titled Space Fight. It helped that a vertical shooter was also used as the working example project in the book. This is where I'm at:</p>
@@ -326,6 +326,33 @@
 
         // Image Click to Enlarge
         document.addEventListener('DOMContentLoaded', () => {
+            // Wrap standalone content images in <figure> with a caption from alt
+            // text. Pelican emits <p><img></p>; the floated headshot is excluded.
+            document.querySelectorAll('.entry-content p > img:only-child:not(.headshot)').forEach(img => {
+                const p = img.parentNode;
+                const fig = document.createElement('figure');
+                fig.className = 'post-figure';
+                fig.appendChild(img);
+                if (img.alt) {
+                    const cap = document.createElement('figcaption');
+                    cap.textContent = img.alt;
+                    fig.appendChild(cap);
+                }
+                p.replaceWith(fig);
+            });
+
+            // Pair each margin note with its preceding paragraph so the bubble
+            // can be positioned in the gutter beside it.
+            document.querySelectorAll('.entry-content .margin-note').forEach(note => {
+                const p = note.previousElementSibling;
+                if (!p || p.tagName !== 'P' || p.parentNode.classList.contains('noted')) return;
+                const wrap = document.createElement('div');
+                wrap.className = 'noted';
+                p.parentNode.insertBefore(wrap, p);
+                wrap.appendChild(p);
+                wrap.appendChild(note);
+            });
+
             const images = document.querySelectorAll('.entry-content img, img.headshot');
             images.forEach(img => {
                 img.addEventListener('click', function() {
