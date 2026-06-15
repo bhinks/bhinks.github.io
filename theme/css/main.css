@@ -1365,11 +1365,11 @@ body[data-theme="screamsheet"]::before {
   transition: all 0.3s ease;
 }
 
-.menu ul li a:before {
+/* .menu ul li a:before {
   content: "./";
   color: var(--prompt-color);
   text-shadow: 0 0 5px var(--prompt-color);
-}
+} */
 
 .menu ul li a:hover {
   text-decoration: none;
