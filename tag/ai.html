@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OMGninjabot - ai tag</title>
+    <meta name="description" content="Cyberdeck build logs, AI experiments, and a game collection." />
+    <meta property="og:title" content="OMGninjabot - ai tag" />
+    <meta property="og:description" content="Cyberdeck build logs, AI experiments, and a game collection." />
+    <meta property="og:type" content="website" />
+    <!-- add a default share image once you have one:
+    <meta property="og:image" content="https://omgninjabot.com/theme/og-default.png" /> -->
     <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
 </head>
 
@@ -18,7 +24,7 @@
             <span class="status-text">ONLINE</span>
         </div>
         <div class="terminal-title">CYBERSPACE://OMGninjabot/connect.sh</div>
-        <div class="system-info">
+        <div class="system-info" aria-hidden="true">
             <div class="system-status" id="system-status">SYS: INIT...</div>
             <div class="network-status" id="network-status">NET: CONN...</div>
         </div>
@@ -27,8 +33,8 @@
 
     <header class="ascii-header">
         <div class="ascii-container">
-            <div class="ascii-ninja">
-                <pre>                 ⢀⡠⠤⠔⠒⠒⠦⠄⣀                    
+            <div class="ascii-ninja" aria-hidden="true">
+                <pre>                 ⢀⡠⠤⠔⠒⠒⠦⠄⣀
                ⡠⠚⠁         ⠉⠢⡀                 
     ⣠⣤⣤⡄     ⣸⠁  ⣀       ⣀  ⢹⡄                
   ⠘⣏⣀⣤⣾⡄   ⢠⡇⡰⠲⣯⣀⣀⡀  ⣀⣀⣤⠷⠲⡀⣇                
@@ -70,8 +76,8 @@
  ██   ████ ██ ██   ████  ██████ ██   ██ ██████   ██████     ██   </pre>
             </div>
 
-            <div class="ascii-robot">
-                <pre>                          /[-])//  ___         
+            <div class="ascii-robot" aria-hidden="true">
+                <pre>                          /[-])//  ___
                      __ --\ `_/~--|  / \       
                    /_-/~~--~~ /~~~\\_\ /\      
                    |  |___|===|_-- | \ \ \     
@@ -98,16 +104,21 @@
     </header>
 
     <nav class="menu">
-        <ul>
-            <li class="page_title"><span id="theme-toggle" class="theme-toggle">[NEON MODE]</span></li>
-            <li><a href="../">home.sh</a></li>
+        <button id="theme-toggle" class="theme-toggle" type="button">[VAPORWAVE MODE]</button>
+        <ul class="nav-list">
+            <li><a href="/">home.sh</a></li>
             <li><a href="/about.html">about.sh</a></li>
-            <li><a href="/quake2.html">quake2.sh</a></li>
             <li><a href="/cyberdeck.html">cyberdeck.sh</a></li>
             <li><a href="/questman.html">questman.sh</a></li>
-            <li><a href="/games.html">collection.sh</a></li>
+            <li class="nav-dir">
+                <button class="nav-dir-toggle" type="button" data-dropdown-toggle
+                        aria-expanded="false" aria-controls="games-menu" aria-haspopup="true">games/<span class="caret"> ▾</span></button>
+                <ul class="nav-dir-menu" id="games-menu" hidden>
+                    <li><a href="/quake2.html">quake2.sh</a></li>
+                    <li><a href="/games.html">collection.sh</a></li>
+                </ul>
+            </li>
         </ul>
-        <div style="clear: both;"></div>
     </nav>
 
     <main>
@@ -225,6 +236,7 @@
         // Multi-theme switcher functionality
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         // Theme definitions
         const themes = ['neon', 'matrix', 'fallout', 'snowcrash', 'screamsheet', 'aperture', 'wargames', 'vaporwave', 'outrun',  'neuromancer', '2077', 'arasaka', 'militech'];
@@ -245,7 +257,7 @@
         };
 
         // Load saved theme or default to neon. Migrate retired theme names.
-        let currentTheme = localStorage.getItem('theme') || 'neon';
+        let currentTheme = localStorage.getItem('theme') || 'vaporwave';
         const themeMigrations = { 'green': 'matrix', 'amber': 'fallout', 'light': 'snowcrash' };
         if (themeMigrations[currentTheme]) {
             currentTheme = themeMigrations[currentTheme];
@@ -319,7 +331,9 @@
             }
         }
 
-        setInterval(drawMatrix, 50);
+        if (!reduceMotion) {
+            setInterval(drawMatrix, 50);
+        }
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
@@ -328,12 +342,14 @@
 
         // Random Glitch Effect on Terminal Title
         const terminalTitle = document.querySelector('.terminal-title');
-        setInterval(() => {
-            if (Math.random() > 0.9) {
-                terminalTitle.classList.add('glitch-text');
-                setTimeout(() => terminalTitle.classList.remove('glitch-text'), 300);
-            }
-        }, 3000);
+        if (!reduceMotion) {
+            setInterval(() => {
+                if (Math.random() > 0.9) {
+                    terminalTitle.classList.add('glitch-text');
+                    setTimeout(() => terminalTitle.classList.remove('glitch-text'), 300);
+                }
+            }, 3000);
+        }
 
         // Dynamic System Status
         const systemMessages = [
@@ -408,6 +424,31 @@
                 el.replaceWith(link);
             });
         });
+
+        // Accessible nav dropdowns: open/close, click-outside, and Esc.
+        function setupDropdowns(){
+            const toggles = Array.from(document.querySelectorAll('[data-dropdown-toggle]'));
+            function closeAll(except){
+                toggles.forEach(tg=>{
+                    if(tg===except) return;
+                    const m=document.getElementById(tg.getAttribute('aria-controls'));
+                    tg.setAttribute('aria-expanded','false'); if(m) m.hidden=true;
+                });
+            }
+            toggles.forEach(tg=>{
+                const menu=document.getElementById(tg.getAttribute('aria-controls'));
+                tg.addEventListener('click',e=>{
+                    e.stopPropagation();
+                    const open=tg.getAttribute('aria-expanded')==='true';
+                    closeAll(tg);
+                    tg.setAttribute('aria-expanded',String(!open));
+                    if(menu) menu.hidden=open;
+                });
+            });
+            document.addEventListener('click',()=>closeAll(null));
+            document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeAll(null); });
+        }
+        document.addEventListener('DOMContentLoaded', setupDropdowns);
     </script>
 
     <script data-goatcounter="https://omgninjabot.goatcounter.com/count"
