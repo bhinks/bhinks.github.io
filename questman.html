@@ -111,17 +111,42 @@
     </nav>
 
     <main>
-  <article>
+<article>
     <header>
-      <h2>Questman</h2>
+        <h2>Questman</h2>
     </header>
 
-    <p>Questman is a self-hosted "life hub" with a cyberpunk skin. It takes the scattered inputs of a day (quests, habits, chores, projects, workouts, vitals, media, finances, and the people you keep meaning to call) and turns them into a single ranked board for the day, wrapped in an XP and currency economy so that doing the work feels a little like playing a game. It is single-user, runs on your own hardware in Docker, and shares nothing with anyone. The name is short for <em>Quest Manager</em>, with a nod to the Walkman.</p>
-<p>This page is the full manual: what it is, how every part works, how to install and run it, and what to do when something breaks. If you just want the quick version, jump to <a href="#install">Install and run</a> or <a href="https://github.com/bhinks/questman">grab the code</a>. The <a href="./posts/2026/06/12/questman.html">blog post that introduced it</a> has the backstory.</p>
-<p><img alt="The Today board" src="/theme/images/qm_today.png"></p>
-<p><strong>Jump to:</strong> <a href="#goals">Goals</a> · <a href="#daily-loop">How the day works</a> · <a href="#today">The Today board</a> · <a href="#focus">Focus Chamber</a> · <a href="#bosses">Bosses</a> · <a href="#life">Life modules</a> · <a href="#vault">The Vault</a> · <a href="#economy">Progression and economy</a> · <a href="#ai">The AI layer</a> · <a href="#install">Install and run</a> · <a href="#config">Configuration</a> · <a href="#access">Accessing it</a> · <a href="#backup">Backup</a> · <a href="#troubleshooting">Troubleshooting</a> · <a href="#roadmap">Current state and roadmap</a></p>
+    <div class="entry-content">
+        <p>Questman is a self-hosted "life hub" with a cyberpunk skin. It takes the scattered inputs of a day (quests, habits, chores, projects, workouts, vitals, media, finances, and the people you keep meaning to call) and turns them into a single ranked board for the day, wrapped in an XP and currency economy so that doing the work feels a little like playing a game. It is single-user, runs on your own hardware in Docker, and shares nothing with anyone. The name is short for <em>Quest Manager</em>, with a nod to the Walkman.</p>
+<p>This page is the full manual. If you just want the quick version, jump to <a href="#install">Install and run</a> or <a href="https://github.com/bhinks/questman">grab the code</a>. The <a href="./posts/2026/06/12/questman.html">blog post that introduced it</a> has the backstory.</p>
+<h2>Contents</h2>
+<p><strong>Overview</strong></p>
+<ul>
+<li><a href="#goals">Goals and philosophy</a></li>
+<li><a href="#daily-loop">How the day works</a></li>
+</ul>
+<p><strong>The features</strong></p>
+<ul>
+<li><a href="#today">The Today board</a></li>
+<li><a href="#focus">The Focus Chamber</a></li>
+<li><a href="#bosses">Bosses</a></li>
+<li><a href="#life">Life modules</a></li>
+<li><a href="#vault">The Vault: finance</a></li>
+<li><a href="#economy">Progression and the economy</a></li>
+<li><a href="#ai">The AI layer</a></li>
+</ul>
+<p><strong>Running it</strong></p>
+<ul>
+<li><a href="#install">Install and run</a></li>
+<li><a href="#config">Configuration</a></li>
+<li><a href="#access">Accessing it</a></li>
+<li><a href="#backup">Backup</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#roadmap">Current state and roadmap</a></li>
+</ul>
 <h2 id="goals">Goals and philosophy</h2>
-<p>I built Questman for myself. I have ADHD, diagnosed as an adult, and I have spent years trying to assemble a toolkit that keeps me organized. Nothing sticks for more than about a week before I drift back to my ad-hoc ways. The thing that always nagged at me is that I can happily grind mundane quests in a video game for hours, but I cannot make myself look at a real-life to-do list. My hypothesis is that the missing piece is not the list, it is credit and rewards. I need a system that confirms I actually did the thing, plus some small earned payoff. So Questman is, plainly, a to-do dashboard disguised as a game to trick my brain into getting things done. The dopamine is superficial, but it is real, and it is the same hit I get from clearing a quest in a game.</p>
+<p>I built Questman for myself. I have ADHD, diagnosed as an adult, and I have spent years trying to assemble a toolkit that keeps me organized. Nothing sticks for more than about a week before I drift back to my ad-hoc ways. The thing that always nagged at me is that I can happily grind mundane quests in a video game for hours, but I cannot make myself look at a real-life to-do list.</p>
+<p>My hypothesis is that the missing piece is not the list, it is credit and rewards. I need a system that confirms I actually did the thing, plus some small earned payoff. So Questman is, plainly, a to-do dashboard disguised as a game to trick my brain into getting things done. The dopamine is superficial, but it is real, and it is the same hit I get from clearing a quest in a game.</p>
 <p>The aim is a one-stop-shop for managing and logging a day. Every domain you care about feeds one ranked "Today" board, so you never open four apps to answer "what should I do right now." The more data you give it, the better its plan gets. A few principles hold the whole thing together:</p>
 <ul>
 <li><strong>The server owns the economy.</strong> XP and the in-app currency are minted only by the server, derived from append-only ledgers that cannot drift. The AI can suggest and theme quests, but it can never mint a reward.</li>
@@ -137,6 +162,7 @@
 <p>The planner suggests <strong>what</strong> to do, never <strong>when</strong>. It produces a ranked list and marks each quest as in the plan (fits today's budget) or a side job (overflow). The default budget is 4 hours on weekdays and 10 on weekends, and if you connect a calendar, your real busy time is subtracted from it.</p>
 <p>The most important idea is the closed loop. You do not check quests off separately from doing the underlying thing. Finishing the real action (logging a habit, completing a project task, paying a bill, pinging a contact) clears its quest and pays out, and clearing the quest writes the underlying action. Either side closes the loop, and the reward lands exactly once.</p>
 <h2 id="today">The Today board</h2>
+<p><img alt="The Today board" src="/theme/images/qm_today.png"></p>
 <p>Today is the hub. Top to bottom, it shows:</p>
 <ul>
 <li><strong>HUD strip.</strong> Your level badge and XP bar, plus tiles for your current streak, eddie balance, and quests cleared today.</li>
@@ -338,7 +364,8 @@ docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"
 </ul>
 <p>A couple of things are deliberately out of scope: direct bank or account integration (I want finance to stay file-upload only) and two-way calendar sync (it stays read-only, because the app should tell you <em>what</em> to do, never <em>when</em>).</p>
 <p>The code is public at <a href="https://github.com/bhinks/questman">github.com/bhinks/questman</a>. Take it, run it, fork it, or tell me what is broken.</p>
-  </article>
+    </div>
+</article>
     </main>
 
     <footer>
