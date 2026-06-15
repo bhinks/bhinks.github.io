@@ -2418,7 +2418,7 @@ code {
 .menu .nav-list li { margin:0; }                 /* override base .menu ul li{margin-left:10px} */
 .nav-list a { text-decoration:none; color:var(--text-color); text-shadow:0 0 5px var(--text-color);
   transition:color .2s,text-shadow .2s; }
-.nav-list a::before { content:"./"; color:var(--glow-tertiary); text-shadow:0 0 5px var(--glow-tertiary); }
+/* .nav-list a::before { content:"./"; color:var(--glow-tertiary); text-shadow:0 0 5px var(--glow-tertiary); } */
 .nav-list a:hover { color:var(--hover-glow);
   text-shadow:0 0 5px var(--hover-glow),0 0 10px var(--hover-glow),0 0 20px var(--hover-glow); }
 
@@ -2427,7 +2427,7 @@ code {
 .nav-dir-toggle { font-family:'Space Mono',monospace; font-size:inherit; background:transparent;
   border:none; cursor:pointer; white-space:nowrap; color:var(--text-color);
   text-shadow:0 0 5px var(--text-color); padding:0; transition:color .2s,text-shadow .2s; }
-.nav-dir-toggle::before { content:"./"; color:var(--glow-tertiary); text-shadow:0 0 5px var(--glow-tertiary); }
+/* .nav-dir-toggle::before { content:"./"; color:var(--glow-tertiary); text-shadow:0 0 5px var(--glow-tertiary); } */
 .nav-dir-toggle:hover { color:var(--hover-glow); text-shadow:0 0 6px var(--hover-glow); }
 .nav-dir-toggle .caret { font-size:.8em; opacity:.8; margin-left:2px; }
 
@@ -2438,7 +2438,7 @@ code {
 .menu .nav-dir-menu li { display:flex; margin:0; }          /* flex kills the phantom line-box */
 .menu .nav-dir-menu li a { display:block; flex:1; padding:6px 16px; line-height:1.45;
   white-space:nowrap; text-decoration:none; color:var(--text-color); text-shadow:0 0 5px var(--text-color); }
-.menu .nav-dir-menu li a::before { content:"./"; color:var(--glow-tertiary); text-shadow:0 0 5px var(--glow-tertiary); }
+/* .menu .nav-dir-menu li a::before { content:"./"; color:var(--glow-tertiary); text-shadow:0 0 5px var(--glow-tertiary); } */
 .menu .nav-dir-menu li a:hover { background:color-mix(in srgb,var(--main-color) 12%,transparent);
   color:var(--hover-glow); text-shadow:0 0 5px var(--hover-glow); }
 .nav-dir-menu[hidden] { display:none; }
