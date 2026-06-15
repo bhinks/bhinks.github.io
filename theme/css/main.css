@@ -665,10 +665,10 @@ ul :not(.menu) > ul {
   margin-right: 9px; 
 }
 
-ul :not(.menu) > ul > li:before { 
+/* ul :not(.menu) > ul > li:before { 
   content: "*";  
   margin-right: 9px; 
-}
+} */
 
 /* NAVIGATION */
 .menu {
