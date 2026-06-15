@@ -1459,7 +1459,7 @@ body[data-theme="screamsheet"]::before {
 }
 
 .terminal-prompt:before {
-  content: "ninjabot@blog:~$ ";
+  content: "ninjabot@ghostdeck:~/log$ ";
 }
 
 .terminal-prompt:after {
@@ -1478,7 +1478,7 @@ body[data-theme="screamsheet"]::before {
 }
 
 .entry-title:before {
-  content: "ninjabot@blog:~$ ";
+  content: "ninjabot@ghostdeck:~/log$ ";
   color: var(--prompt-color);
   text-shadow:
     0 0 5px var(--glow-primary),
@@ -2128,6 +2128,23 @@ code {
   align-items: center;
 }
 
+/* terminal-style "grep" prompt sitting in front of the search box */
+.games-prompt {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--main-color);
+  text-shadow: 0 0 5px var(--glow-primary);
+  white-space: nowrap;
+  align-self: center;
+  cursor: text;
+}
+.games-prompt::before {
+  content: "$ ";
+  color: var(--prompt-color);
+  opacity: .85;
+}
+
 .games-input,
 .games-select,
 .games-reset {
@@ -2282,10 +2299,14 @@ code {
 }
 
 .games-modal-img {
-  max-width: 80vw;
-  max-height: 70vh;
+  max-width: 88vw;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
   object-fit: contain;
   display: block;
+  border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
+  box-shadow: 0 0 18px var(--glow-primary);
 }
 
 .games-modal-title {

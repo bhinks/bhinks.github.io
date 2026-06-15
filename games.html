@@ -132,7 +132,7 @@
     <main>
 <article>
     <header>
-        <h2>Games</h2>
+        <h1 class="entry-title">cat games.txt</h1>
     </header>
 
     <div class="entry-content entry-wide">
@@ -140,6 +140,7 @@
 <p>This is a list of most of the games currently in my physical media collection.</p>
 
         <div class="games-controls">
+            <label class="games-prompt" for="games-search">grep</label>
             <input type="text" id="games-search" class="games-input" placeholder="search titles, developers, publishers..." autocomplete="off" />
             <select id="games-platform" class="games-select"><option value="">all platforms</option></select>
             <select id="games-genre" class="games-select"><option value="">all genres</option></select>
@@ -297,8 +298,16 @@
         });
     }
 
+    // The CSV stores small square thumbnails (GiantBomb's `square_avatar`
+    // scaler size). Swap the size segment for the full-resolution `original`
+    // so the modal shows large box art at its true aspect ratio. Non-GiantBomb
+    // URLs are returned unchanged.
+    function bigCover(url) {
+        return url.replace(/\/a\/uploads\/[^/]+\//, '/a/uploads/original/');
+    }
+
     function openModal(image, title, platform) {
-        els.modalImg.src = image;
+        els.modalImg.src = bigCover(image);
         els.modalImg.alt = title;
         els.modalTitle.textContent = platform ? `${title} — ${platform}` : title;
         els.modal.hidden = false;
