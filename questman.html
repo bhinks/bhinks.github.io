@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OMGninjabot - Questman</title>
+    <link rel="stylesheet" type="text/css" href="/theme/css/main.css" />
+</head>
+
+<body>
+    <canvas id="matrix-rain"></canvas>
+    <video id="outrun-bg" autoplay loop muted playsinline>
+        <source src="/theme/outrun.mp4" type="video/mp4">
+    </video>
+    <div class="terminal-header">
+        <div class="terminal-status">
+            <span class="status-indicator"></span>
+            <span class="status-text">ONLINE</span>
+        </div>
+        <div class="terminal-title">CYBERSPACE://OMGninjabot/connect.sh</div>
+        <div class="system-info">
+            <div class="system-status" id="system-status">SYS: INIT...</div>
+            <div class="network-status" id="network-status">NET: CONN...</div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <header class="ascii-header">
+        <div class="ascii-container">
+            <div class="ascii-ninja">
+                <pre>                 ⢀⡠⠤⠔⠒⠒⠦⠄⣀                    
+               ⡠⠚⠁         ⠉⠢⡀                 
+    ⣠⣤⣤⡄     ⣸⠁  ⣀       ⣀  ⢹⡄                
+  ⠘⣏⣀⣤⣾⡄   ⢠⡇⡰⠲⣯⣀⣀⡀  ⣀⣀⣤⠷⠲⡀⣇                
+   ⢹⠯⣤⣞⣳⡀  ⢸ ⣇   ⠉⠉⢉⠉⢉⡉    ⡇⢸                
+    ⢷⠧⣴⣏⣇  ⢸ ⢹⠒⣦⣤⣄⣀⣥⣖⣉⣤⣤⠔⢺ ⢸                
+    ⠘⡟⢠⡴⣿⡆ ⢸ ⢸⡀⠙⢭⣽⣾⣀⣼⣿⣭⠝⠁⣸ ⢸                
+     ⢱⡛⣲⠯⣽⡄⢸ ⠏⢱⠴⠊⠁   ⠈⠉⠲⣴⠙ ⣸                
+      ⢳⣳⣞⣷⣷⣸⡇⣞⠁   ⢀       ⢹ ⡟                 
+     ⢀⣈⠿⣟⣫⢭⡟⠣⠸⣦   ⠈⠉⠉   ⢀⣾⢠⠛⣦⢄⣀             
+   ⣀⣴⠿⢤⣼⡃ ⠈⢧  ⠳⡱⣄   ⢀⣿⣿⣤⣿⠃ ⢠⠇ ⡿⠤⠤⣤⣀⡀       
+  ⢘⣿⠶⣄ ⣿⣇   ⠳⣀ ⠈⠙⠓⠦⢤⣿⡟⣻⠟⠁⢀⡠⠃  ⣰⠃⢀⠾⢿⣻      
+ ⢀⡾⠁ ⠈⢧⣼⡟⣆         ⢸⢻⠁⠙⡇ ⠈   ⣰⠃ ⢠⡏   ⠹⡆     
+ ⢸⡇   ⠈⣧⢣⠙⢦        ⡸⡞ ⠛⣇⣀   ⡴⠃  ⡞      ⣿⡄    
+⢀⡟⢧  ⣀⠤⠾⡈⢆⠈⠙⢦⣀    ⢰⣧⣤⡦⠶⠧⠼⢤⣠⠞⠁  ⢸⠧⣄⡀ ⢸⠹⡄   
+⣼ ⠘⡆⠊⡀  ⠙⣌⢢⡀ ⠈⠙⢶⣒⡶⠋⠙⡌⢧   ⠚⠳⡄   ⣾⠎ ⠙   ⢧⢹⡀  
+⡏   ⡰    ⢸⣄⢑⣄ ⢀⡠⢿⡱⡀ ⡽⣸⣄⣷⠴⡄⢰⡇  ⢠⠃   ⢰    ⠉⢧  
+⣧⢠  ⣇⣠⣤⠖⠋⠉⠁     ⠈⢧⠑⣴⠃⡿⠤⡽⠒⠒⠋   ⣾    ⠈⡆   ⠘⣼⡀
+⢹⢸ ⢀⣽⡇⢸       ⢀⡠⠂ ⠳⣌⣾⡦⣞⠁      ⢻  ⢀⣴⡚⠳⣄    ⠘⡇
+ ⢻⡇⠸⠁⢧ ⢇  ⣀⡠⠴⠚⠉   ⢠⠟⠉  ⠙⢦⡀   ⢀⡸⠗⠉  ⠱⡀⠹⡉⠳⠄⢸ 
+ ⠈⡇  ⠈⢧⡈⢦       ⢀⡴⢛⣟⡭⠿⠿⠿⢿⡿⡿⠖⠒⠉      ⢣ ⡇  ⠘⡇ 
+  ⣷   ⠈⠳⣄⠑⢄⡀ ⣀⠤⢺⠿⢂⣎⡏     ⢹⣽⡄ ⣀⣀⣀ ⣀⣀⡀⠸    ⢠⠇
+  ⠘⠷⣄⣀⣀⣀⣉⣷⠤⠽⠋⠁⢠⡧⠔⣻⡏⣇      ⡇⡇        ⢀⠃ ⢀⡴⠋ 
+              ⠸⡤⠚⠁⣴⣜⠦⣤⣤⣤⣤⣴⣧⢇⣀⡀   ⢀⣀⣀⣼⣀⠟⠉    
+               ⠑⠢⠤⠤⠛⠉⠉⠉⠉⠉⠁⠁  ⠈⠉⠉⠉⠁           
+            ⢀⣠ ⠖⠒⠒⠒    ⠠⣀ ⢀ ⡀  ⠂              </pre>
+            </div>
+
+            <div class="ascii-main">
+                <pre class="ascii-art">  ██████  ███    ███  ██████  ██
+ ██    ██ ████  ████ ██       ██
+ ██    ██ ██ ████ ██ ██   ███ ██
+ ██    ██ ██  ██  ██ ██    ██   
+  ██████  ██      ██  ██████  ██
+
+ ███    ██ ██ ███    ██      ██  █████  ██████   ██████  ████████
+ ████   ██ ██ ████   ██      ██ ██   ██ ██   ██ ██    ██    ██   
+ ██ ██  ██ ██ ██ ██  ██      ██ ███████ ██████  ██    ██    ██   
+ ██  ██ ██ ██ ██  ██ ██ ██   ██ ██   ██ ██   ██ ██    ██    ██   
+ ██   ████ ██ ██   ████  ██████ ██   ██ ██████   ██████     ██   </pre>
+            </div>
+
+            <div class="ascii-robot">
+                <pre>                          /[-])//  ___         
+                     __ --\ `_/~--|  / \       
+                   /_-/~~--~~ /~~~\\_\ /\      
+                   |  |___|===|_-- | \ \ \     
+ _/~~~~~~~~|~~\,   ---|---\___/----|  \/\-\    
+ ~\________|__/   / // \__ |  ||  / | |   | |  
+          ,~-|~~~~~\--, | \|--|/~|||  |   | |  
+          [3-|____---~~ _--'==;/ _,   |   |_|  
+                      /   /\__|_/  \  \__/--/  
+                     /---/_\  -___/ |  /,--|   
+                     /  /\/~--|   | |  \///    
+                    /  / |-__ \    |/          
+                   |--/ /      |-- | \         
+                  \^~~\\/\      \   \/- _      
+                   \    |  \     |~~\~~| \     
+                    \    \  \     \   \  | \   
+                      \    \ |     \   \    \  
+                       |~~|\/\|     \   \   |  
+                      |   |/         \_--_- |\ 
+                      |  /            /   |/\/ 
+                       ~~             /  /     
+                                     |__/      </pre>
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu">
+        <ul>
+            <li class="page_title"><span id="theme-toggle" class="theme-toggle">[NEON MODE]</span></li>
+            <li><a href="./">home.sh</a></li>
+            <li><a href="/about.html">about.sh</a></li>
+            <li><a href="/quake2.html">quake2.sh</a></li>
+            <li><a href="/cyberdeck.html">cyberdeck.sh</a></li>
+            <li><a href="/questman.html">questman.sh</a></li>
+            <li><a href="/games.html">collection.sh</a></li>
+        </ul>
+        <div style="clear: both;"></div>
+    </nav>
+
+    <main>
+  <article>
+    <header>
+      <h2>Questman</h2>
+    </header>
+
+    <p>Questman is a self-hosted "life hub" with a cyberpunk skin. It takes the scattered inputs of a day (quests, habits, chores, projects, workouts, vitals, media, finances, and the people you keep meaning to call) and turns them into a single ranked board for the day, wrapped in an XP and currency economy so that doing the work feels a little like playing a game. It is single-user, runs on your own hardware in Docker, and shares nothing with anyone. The name is short for <em>Quest Manager</em>, with a nod to the Walkman.</p>
+<p>This page is the full manual: what it is, how every part works, how to install and run it, and what to do when something breaks. If you just want the quick version, jump to <a href="#install">Install and run</a> or <a href="https://github.com/bhinks/questman">grab the code</a>. The <a href="./posts/2026/06/12/questman.html">blog post that introduced it</a> has the backstory.</p>
+<p><img alt="The Today board" src="/theme/images/qm_today.png"></p>
+<p><strong>Jump to:</strong> <a href="#goals">Goals</a> · <a href="#daily-loop">How the day works</a> · <a href="#today">The Today board</a> · <a href="#focus">Focus Chamber</a> · <a href="#bosses">Bosses</a> · <a href="#life">Life modules</a> · <a href="#vault">The Vault</a> · <a href="#economy">Progression and economy</a> · <a href="#ai">The AI layer</a> · <a href="#install">Install and run</a> · <a href="#config">Configuration</a> · <a href="#access">Accessing it</a> · <a href="#backup">Backup</a> · <a href="#troubleshooting">Troubleshooting</a> · <a href="#roadmap">Current state and roadmap</a></p>
+<h2 id="goals">Goals and philosophy</h2>
+<p>I built Questman for myself. I have ADHD, diagnosed as an adult, and I have spent years trying to assemble a toolkit that keeps me organized. Nothing sticks for more than about a week before I drift back to my ad-hoc ways. The thing that always nagged at me is that I can happily grind mundane quests in a video game for hours, but I cannot make myself look at a real-life to-do list. My hypothesis is that the missing piece is not the list, it is credit and rewards. I need a system that confirms I actually did the thing, plus some small earned payoff. So Questman is, plainly, a to-do dashboard disguised as a game to trick my brain into getting things done. The dopamine is superficial, but it is real, and it is the same hit I get from clearing a quest in a game.</p>
+<p>The aim is a one-stop-shop for managing and logging a day. Every domain you care about feeds one ranked "Today" board, so you never open four apps to answer "what should I do right now." The more data you give it, the better its plan gets. A few principles hold the whole thing together:</p>
+<ul>
+<li><strong>The server owns the economy.</strong> XP and the in-app currency are minted only by the server, derived from append-only ledgers that cannot drift. The AI can suggest and theme quests, but it can never mint a reward.</li>
+<li><strong>AI is optional color, never the core.</strong> Every AI feature is opt-in and off by default. With nothing configured, the rules-based engine still builds a perfectly good day. You can also point it at a local model so no data leaves your network.</li>
+<li><strong>Self-hosted and private.</strong> One user, one SQLite file, on your own box. No telemetry, no analytics. No bank or account integration; finance data comes in by file upload only.</li>
+<li><strong>The cyberpunk look is non-negotiable.</strong> Clipped panels, neon, CRT scanlines, hex badges. It is a battle station, not a reskinned admin panel.</li>
+<li><strong>Closed-loop by design.</strong> Doing the real thing clears the matching quest and pays out automatically. Log the workout, check the habit, advance the project, pay the bill, and the quest closes itself. The loops are guarded so a double-tap or a check-then-undo never double-pays.</li>
+</ul>
+<p>I will be honest that this was built primarily for me, and that I am still figuring out whether the trick holds up over time. It feels good now. Ask me again in a month. But I figured other people fight similar battles, so the code is public and anyone can run or extend it.</p>
+<p>Questman was built largely in a single day using Claude Code and Claude Design, both running on Fable 5. It started life as FinDash, a cyberpunk finance dashboard, and pivoted into a full life hub; the finance views still ship as one module among many.</p>
+<h2 id="daily-loop">How the day works</h2>
+<p>The loop is the same every day. You open the app and the engine has already built your day: every domain you track feeds candidate quests into one <strong>day planner</strong>, which ranks them and fits them to a time budget. You complete, advance, skip, or reroll quests, and you can drop into the <strong>Focus Chamber</strong> for a distraction-free timer. Completing work earns <strong>XP</strong> (permanent progression) and <strong>eddies</strong> (€$, a currency you spend in the shop). A full-clear day ramps a multiplier and banks downtime credits; a missed day cools it.</p>
+<p>The planner suggests <strong>what</strong> to do, never <strong>when</strong>. It produces a ranked list and marks each quest as in the plan (fits today's budget) or a side job (overflow). The default budget is 4 hours on weekdays and 10 on weekends, and if you connect a calendar, your real busy time is subtracted from it.</p>
+<p>The most important idea is the closed loop. You do not check quests off separately from doing the underlying thing. Finishing the real action (logging a habit, completing a project task, paying a bill, pinging a contact) clears its quest and pays out, and clearing the quest writes the underlying action. Either side closes the loop, and the reward lands exactly once.</p>
+<h2 id="today">The Today board</h2>
+<p>Today is the hub. Top to bottom, it shows:</p>
+<ul>
+<li><strong>HUD strip.</strong> Your level badge and XP bar, plus tiles for your current streak, eddie balance, and quests cleared today.</li>
+<li><strong>Handler card.</strong> The AI Handler's latest line, in the voice of whichever persona you have equipped. Only appears when the AI Handler is enabled. Dismiss it and a fresh line brings it back.</li>
+<li><strong>Focus Chamber strip.</strong> A full-width <strong>JACK IN</strong> button with today's run count, minutes in the chamber, and your best run. The chamber belongs to the whole day, not one task.</li>
+<li><strong>Priority Contract.</strong> The single top-ranked quest, rendered large. Stamps flag it as must-do, or as an outdoor task on its last clear day before the weather turns. Its action is <strong>COMPLETE</strong>, with small <strong>SKIP</strong> and <strong>RR</strong> (reroll) buttons.</li>
+<li><strong>Contract Ledger.</strong> The rest of the in-plan quests, plus the day's cleared and skipped rows. Counter quests show pips and a <code>+1</code> button; one-shot quests show a check, skip, and reroll. A carried quest wears a <code>CARRIED ×Nd</code> tag.</li>
+<li><strong>Right rail.</strong> A date/runway panel, a weather scan (high, low, rain, wind, best outdoor window, tomorrow's outlook), the Power Cell energy tile, your side jobs (quests that did not fit the budget but are still actionable), and a terminal-style session log of the day's XP grants and focus runs.</li>
+<li><strong>City Feed.</strong> On wide screens, a third column of self-hiding panels: today's calendar agenda, active boss HP bars, new pattern insights with inline accept/dismiss, and cold contacts with a one-tap ping.</li>
+</ul>
+<h3>Working a quest</h3>
+<ul>
+<li><strong>Complete.</strong> Marks the quest done, runs the closed-loop side effects, and pays XP plus eddies. Completing twice still pays once.</li>
+<li><strong>Advance (+1).</strong> For counter quests with a target above 1. XP drips proportionally per check-in; reaching the target completes it and pays the remainder plus a 20% bonus.</li>
+<li><strong>Skip.</strong> Drops a quest with no penalty and no XP. Costs one <strong>skip token</strong>. A skip is neutral, so it does not break your streak.</li>
+<li><strong>Reroll (RR).</strong> Swaps the quest for a different candidate that is not already on the board. Costs one <strong>reroll token</strong>, but only if a fresh alternative actually exists; otherwise the token is preserved.</li>
+</ul>
+<p>Tokens refill once per week (three skip, one reroll, with caps), and you can buy more in the shop. At the first app-open each day, must-do and carry-over quests (chores) roll forward; daily habits do not carry, because a missed day is a missed day.</p>
+<h2 id="focus">The Focus Chamber</h2>
+<p>JACK IN opens a dedicated, distraction-free page: one huge clock, no nav, no feeds. You can leave it counting up, or set a 15, 25, 40, or 55 minute limit (or a custom one) to count down. Pick what you are working on, or let it inherit the priority contract.</p>
+<p><img alt="The Focus Chamber" src="/theme/images/qm_focus.png"></p>
+<p>A countdown does not auto-stop at zero. Past the limit it flips to a red overtime counter and keeps going, because stopping the timer is not the same as stopping the work. Jacking out always logs the real minutes elapsed. Focus time mints no XP on its own; it is informational, and when the target is a quest, the minutes feed that quest's estimate accuracy so the planner gets smarter about your real pace. An in-progress run is mirrored to local storage, so an accidental reload drops you straight back in with the clock intact.</p>
+<h2 id="bosses">Bosses</h2>
+<p>Big goals become bosses with a segmented HP bar. There are two directions: <strong>grind down</strong> (HP starts full and drains toward zero, for debt, projects, or challenges) and <strong>charge up</strong> (starts empty and fills toward a target, for savings). You deal damage with manual hits (log a payment, a contribution, or progress), and a boss linked to a project also takes automatic damage each time you clear one of that project's milestones.</p>
+<p>Every boss has a <strong>PAYMENT / BALANCE</strong> toggle. In payment mode you enter the amount you paid or contributed; in balance mode you enter the new absolute value and the server works out the change, which is handy when it is just easier to type in your current debt balance. Hits never award anything. The reward is server-owned and pays out only on defeat, exactly once ever, so reviving and re-killing a boss will not re-pay you.</p>
+<h2 id="life">Life modules</h2>
+<p>The "life" side of the app is where you define the real things you want to track. Each module stores your data and feeds the quest generator.</p>
+<h3>Habits and anti-goals</h3>
+<p>The <strong>Habits</strong> screen holds two kinds of recurring trackable, stacked on one page.</p>
+<p><strong>Daemons</strong> are good habits running in the background. Each has a cadence (daily, weekly, custom days, or one-off), a difficulty that auto-fills an XP value, an optional time estimate, and an optional "minimum days between" throttle so it will not nag you again too soon. Mark one outdoor and you can set weather thresholds (dry days required, max rain, temperature band, max wind), so it only surfaces as a quest when conditions fit. Checking a daemon awards XP and eddies, bumps the streak, and clears any pending quest tied to it. Unchecking reverses the exact amount that was banked.</p>
+<p><strong>ICE</strong> entries (anti-goals) are things to avoid, and they work the opposite way: days are clean by default. You do nothing to succeed, and the avoidance streak and its reward are credited automatically each night. When you slip, you press <strong>BREACH</strong>, which resets the streak to zero and pays nothing. The red breach marker is the only sting, which is plenty.</p>
+<h3>Operations</h3>
+<p><strong>Operations</strong> consolidates projects and chores. A project holds objectives (one-off tasks), recurring chores attached to it, and milestones (which pay a bonus once, ever, and damage any linked boss). Turn on <strong>SEQUENCED</strong> mode and the objectives become a step track where only the current step is actionable and later steps stay locked until you get to them. Completing a project quest from the Today board checks the underlying task, and checking the task here completes the quest; the XP is paid once by whichever side fires first. Loose chores with no project live in an Uncategorized bucket, and an overdue recurring chore picks up a "rotation slipping" nudge.</p>
+<h3>Health (Biomonitor)</h3>
+<p>The <strong>Health</strong> screen combines daily vitals and workouts. You log a configurable set of metrics each day (weight, sleep, mood, water, steps, blood pressure, resting heart rate, and any custom ones), and submitting the log clears the day's check-in quest. Trend charts cover any window from a week to all-time, with healthy-range bands. Workouts log with a type, intensity, duration, and optional per-exercise sets, and pay XP immediately. The <strong>Weekly Protocol</strong> strip lets you schedule training by day of week; each planned slot becomes a "scheduled workout" quest, and logging any session clears it. If you wire up phone health sync, a <strong>SYNC PHONE</strong> button appears and prefills today's vitals from your watch.</p>
+<h3>Media (Braindance)</h3>
+<p><strong>Braindance</strong> is a planner-first backlog of books, movies, shows, and games. Add a title and hit <strong>AUTO-ESTIMATE</strong> to pull its length (page counts from Open Library, runtimes and episode counts from TMDb, game length from IGDB), or set it by hand. The <strong>WHAT NOW</strong> planner answers "what fits in N minutes" with concrete, medium-specific suggestions ("watch two episodes," "read about 30 pages," "play a 45 minute session"), each with a JACK IN button into the focus timer. It tracks your real reading and watching pace over time to sharpen the estimates.</p>
+<p>Media is gated by the downtime economy: a backlog item is not on your plate until you spend an <strong>R&amp;R credit</strong> to pull it onto the active shelf, and credits are earned by clearing a full day. Logging time past your daily downtime budget spends a credit; if you are out, it still lets you log, but records a breach against an anti-goal of your choosing. Earn your leisure.</p>
+<h3>Social (Crew)</h3>
+<p><strong>Crew</strong> tracks the people you want to stay in touch with. Give a contact a cadence (weekly, monthly, quarterly, yearly, or none) and the app watches the time since you last connected, fading the signal from green to amber to red as they go cold. When anyone is overdue, the day gets one gentle "reach out to someone" nudge that names the most-neglected person. A one-tap <strong>REACHED OUT</strong> button, or a fuller log entry (channel, who reached out, a note), advances their clock and clears the quest.</p>
+<h2 id="vault">The Vault (finance)</h2>
+<p>The Vault is a finance hub by way of a manual ledger. There is no bank integration on purpose. You import statements, clean them up, and the system turns the picture into budgets, bill tracking, savings missions, and quests.</p>
+<p><img alt="The Vault" src="/theme/images/qm_finance.png"></p>
+<ul>
+<li><strong>Import.</strong> Drag a CSV or Excel file onto the Finance Terminal. It auto-detects the date, description, amount, and account columns by header name; positive amounts are income, negative are expenses. Uncategorized rows are auto-classified by your rules first, then by matching against your own history, then by keyword as a last resort. A category you set by hand is never overwritten.</li>
+<li><strong>The transaction log.</strong> Filter by account, search, or by clicking a month or category in the charts above. Multi-select gives you a bulk bar to recategorize, mark transfers as excluded, link rows to a project or chore, or delete. Excluding is non-destructive: the row stays visible but greyed, and drops out of every total, budget, and chart. This is how you net out transfers between your own accounts without deleting anything.</li>
+<li><strong>Budgets and envelopes.</strong> Give a category a monthly cap and it becomes an envelope with spend-to-date, remaining, and a status. The board ranks categories most-under-budget first, so coming in under cap is a competition you can win, and a track-record grid shows how often you land under each one. The worst category over 90% of its cap spawns a "budget breach" quest.</li>
+<li><strong>Bills and subscriptions.</strong> An auto-detector scans your history, groups recurring charges, classifies them weekly or monthly, and ranks them by annual cost. You confirm the ones to track. A monthly bill due soon spawns a "pay this" reminder quest that stamps the bill paid when you complete it. A subscription audit lists everything you are paying for with a one-click cancel, framed as killing running processes.</li>
+<li><strong>Savings missions.</strong> A read-only view derived from your budgets and subscriptions, showing the real surplus you are preserving each month.</li>
+</ul>
+<h2 id="economy">Progression and the economy</h2>
+<p>Questman runs on two currencies, both earned only by doing real things, both minted only by the server, and both derived from append-only ledgers that are the actual source of truth.</p>
+<p><img alt="Street Cred" src="/theme/images/qm_progress.png"></p>
+<ul>
+<li><strong>XP</strong> is permanent progression. It drives your level on a curve where early levels come fast and late ones stretch out. You earn it but never spend it.</li>
+<li><strong>Eddies (€$)</strong> are spendable. A cleared reward pays eddies alongside its XP, plus a small bonus for harder tasks.</li>
+<li><strong>Overclock</strong> is a multiplier that rewards consistency. Each full-clear day ramps it (boosting eddie earns only, never XP, capped at double) and banks a downtime credit; a missed day cools it back down.</li>
+<li><strong>Tokens and credits.</strong> Skip and reroll tokens refill weekly and are buyable. R&amp;R credits, earned by clearing full days, pay for guilt-free media downtime. A bought <strong>Streak Shield</strong> auto-fires to forgive a single missed day.</li>
+</ul>
+<p>The <strong>Street Cred</strong> page is the command center: an achievements wall (tiered badges that unlock automatically as you hit milestones), an XP velocity chart, per-module XP, a GitHub-style activity heat grid, and the immutable data-shard ledger of every grant. Crossing a level throws up a short ceremony showing where your XP came from.</p>
+<p>The <strong>Night Market</strong> is the shop and the main place eddies go. It is the eddie sink: neon skins that recolor the entire interface live, deeper OS shells, stackable ambient effects, focus-timer faces, alternate Handler personas, cosmetic data pets, vanity titles, and consumable supply (token packs, the streak shield, an eddie-doubling chip, loot crates). Skins, shells, and gear auto-equip when you buy them; visual effects stack and toggle freely.</p>
+<p><img alt="Buying gear in the Night Market" src="/theme/images/qm_shop.png"></p>
+<p>Equipping a skin remaps the whole HUD's accent palette instantly. Here is the Today board under the Synthwave skin:</p>
+<p><img alt="The Today board reskinned with Synthwave" src="/theme/images/qm_synthwave.png"></p>
+<h2 id="ai">The AI layer</h2>
+<p>Everything AI in Questman is opt-in and off by default. A fresh install makes zero model calls and shares zero data. You turn it on in layers, in <strong>SYS // CALIBRATION → AI Calibration</strong>:</p>
+<ol>
+<li>Flip the <strong>AI SYSTEMS</strong> master breaker on.</li>
+<li>Enable the features you want: <strong>Quest Synthesis</strong> (themes and names your daily missions) and <strong>Handler Uplink</strong> (the daily rundown and weekly debrief).</li>
+<li>Open the per-domain <strong>data-access grants</strong> you are comfortable with. All four start sealed.</li>
+</ol>
+<p>The privacy guarantee is the point here. Sealed domains are never sent to any model. Even when a grant is open, the model receives only server-computed summaries, never raw tables, files, or history. And it can never touch the economy.</p>
+<table>
+<thead>
+<tr>
+<th>Grant</th>
+<th>When open, the model may see</th>
+<th>Never</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Vault</strong> (finance)</td>
+<td>weekly spend total, top categories, budget-running-hot and wasteful-pattern summaries</td>
+<td>raw transactions</td>
+</tr>
+<tr>
+<td><strong>Biometrics</strong> (health)</td>
+<td>energy tier, weekly sleep and mood averages, weight delta, workout count</td>
+<td>full history</td>
+</tr>
+<tr>
+<td><strong>Contacts</strong> (social)</td>
+<td>the single most-neglected contact and days since contact</td>
+<td>the full roster</td>
+</tr>
+<tr>
+<td><strong>Grid Schedule</strong> (calendar)</td>
+<td>commitment count, next start time, free/busy minutes</td>
+<td>event titles, ever</td>
+</tr>
+</tbody>
+</table>
+<p>The AI only ever narrates. The server computes the facts; the model phrases them in character. The <strong>Handler</strong> is a persistent narrator with selectable personas (the free default is a sardonic rogue AI) that produces a short daily rundown and a weekly after-action debrief, and nothing else. A separate, fully deterministic <strong>insights</strong> engine (no model needed) surfaces conservative "possible pattern" findings over your recent data, like spend climbing on low-sleep days, which you can accept (spawning one small quest) or dismiss.</p>
+<p>For the provider, you can use the Anthropic cloud (your API key makes it <em>available</em>, but you still flip the in-app switches) or point at a local <strong>Ollama</strong> node for zero cloud egress. A daily token cap, with a live "burned today" meter, backstops cost; once you hit it, the app falls back to its rule-based mode until midnight.</p>
+<h2 id="install">Install and run</h2>
+<p>Questman ships as a Docker Compose stack today. That is the only supported install path for now (see <a href="#roadmap">the roadmap</a> for where packaging is headed).</p>
+<p><strong>You will need</strong> Docker with the Compose plugin, and the code:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/bhinks/questman
+<span class="nb">cd</span><span class="w"> </span>questman
+</code></pre></div>
+
+<p><strong>Quick start:</strong></p>
+<ol>
+<li>Copy the environment template: <code>cp .env.example .env</code></li>
+<li>Edit <code>.env</code> and set the three required values:</li>
+<li><code>JWT_SECRET</code> (generate one with <code>openssl rand -base64 48</code>)</li>
+<li><code>HUB_USER_EMAIL</code>, <code>HUB_USER_PASSWORD</code>, <code>HUB_USER_NAME</code> (your login, provisioned on first boot)</li>
+<li><code>TZ</code> (your real timezone, e.g. <code>America/New_York</code>, so the day rolls over at local midnight)</li>
+<li>Build and start it: <code>docker compose up -d --build</code></li>
+<li>Open <code>http://localhost:8080</code> and click <strong>JACK IN</strong> with your credentials.</li>
+</ol>
+<p>Everything beyond those three values is optional and degrades gracefully. If you just want to look around first, a seeded demo account (<code>demo@questman.app</code> / <code>demo123</code>) always exists, and the login screen has a <strong>DEMO</strong> button that drops you into a fresh sandbox with no account.</p>
+<h3>Operating it</h3>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--build<span class="w">      </span><span class="c1"># start, or rebuild after a code or .env change</span>
+docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>backend<span class="w">    </span><span class="c1"># tail the backend logs</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w">               </span><span class="c1"># stop (your data is preserved)</span>
+docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v<span class="w">            </span><span class="c1"># stop and WIPE the data volume (fresh slate)</span>
+</code></pre></div>
+
+<p>After you edit <code>.env</code> (especially <code>TZ</code>), re-run <code>docker compose up -d --build</code> so the change takes effect.</p>
+<p>To hack on it without Docker, run <code>npm run dev</code> in both <code>backend/</code> and <code>web/</code> (backend on <code>:3001</code>, the Vite dev server on <code>:5173</code>), and <code>npm run db:seed</code> in <code>backend/</code> to recreate the demo account.</p>
+<h2 id="config">Configuration</h2>
+<p>All settings live in <code>.env</code>, copied from <code>.env.example</code>, where every variable is documented inline. Unset optional variables simply turn their feature off; the app never blocks on a missing one.</p>
+<h3>Required</h3>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>What to set</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>JWT_SECRET</code></td>
+<td>32+ random characters: <code>openssl rand -base64 48</code>. Sign-in tokens are signed with it.</td>
+</tr>
+<tr>
+<td><code>HUB_USER_EMAIL</code> / <code>HUB_USER_PASSWORD</code> / <code>HUB_USER_NAME</code></td>
+<td>Your login. Created on first boot; re-runs do not reset the password.</td>
+</tr>
+<tr>
+<td><code>TZ</code></td>
+<td>Your IANA timezone. Defaults to <code>UTC</code>. A wrong value rolls the day over at the wrong time.</td>
+</tr>
+</tbody>
+</table>
+<h3>Optional, by feature</h3>
+<p><strong>AI.</strong> <code>ANTHROPIC_API_KEY</code> (from <a href="https://platform.claude.com/">the Anthropic console</a>; the key alone enables nothing, you still flip the in-app breakers), <code>ANTHROPIC_MODEL</code> (defaults to <code>claude-opus-4-8</code>; <code>claude-sonnet-4-6</code> or <code>claude-haiku-4-5</code> for lighter use), and <code>AI_QUESTS</code> (set <code>false</code> to force rule-based mode even with a key). Prefer fully local AI? Skip the key and point at an Ollama node inside the AI Calibration panel.</p>
+<p><strong>Weather-aware chores.</strong> <code>HUB_LAT</code> and <code>HUB_LON</code> (decimal degrees, both required). Uses Open-Meteo, no key. Outdoor chores then only surface when their weather rule passes, and the planner picks the best window.</p>
+<p><strong>Calendar.</strong> <code>CALENDAR_ICS_URL</code>, one or more comma-separated private ICS feed URLs. Read-only. It shrinks the planner's budget by your real busy time and shows a schedule agenda. For Google Calendar, use the "Secret address in iCal format" and treat it like a password.</p>
+<p><strong>Health sync.</strong> Pairs with the <a href="https://github.com/mcnaveen/health-connect-webhook">health-connect-webhook</a> Android app. Pull mode is recommended for a plain-HTTP hub: set <code>HEALTH_PULL_URL</code> to the phone's address (enable the app's Local HTTP Server), plus optionally <code>HEALTH_PULL_TOKEN</code>, <code>HEALTH_PULL_MINUTES</code>, and <code>HEALTH_BACKFILL_DAYS</code>. Use <code>INGEST_TOKEN</code> for the push endpoints if your hub is HTTPS. Steps, sleep, heart rate, weight, blood pressure, and hydration map onto your daily vitals.</p>
+<p><strong>Media estimation.</strong> Books work keyless via Open Library. Set <code>TMDB_API_KEY</code> for movies and shows, and <code>TWITCH_CLIENT_ID</code> plus <code>TWITCH_CLIENT_SECRET</code> (a free Twitch app, for IGDB) for games. Each falls back to manual entry when unset.</p>
+<p><strong>Networking.</strong> <code>WEB_PORT</code> (default <code>8080</code>, change it if that port is taken) and <code>JWT_EXPIRES_IN</code> (default <code>30d</code>).</p>
+<h2 id="access">Accessing it</h2>
+<ul>
+<li><strong>Locally</strong>, at <code>http://localhost:8080</code> (or your <code>WEB_PORT</code>).</li>
+<li><strong>From your phone on the same network</strong>, browse to <code>http://&lt;hub-machine-ip&gt;:8080</code>. The interface is mobile-shaped, with a bottom nav bar and a slide-up <strong>MORE</strong> sheet for the screens that do not fit it.</li>
+<li><strong>Remember me</strong> issues a token lasting <code>JWT_EXPIRES_IN</code> (30 days by default), so you stay signed in across visits.</li>
+</ul>
+<p>For access from outside your home, the intended path is a mesh VPN like Tailscale rather than exposing the hub to the open internet. There is one writable database, and it stays on your hardware.</p>
+<h2 id="backup">Backup</h2>
+<p>All of your data is a single SQLite file (<code>questman.db</code>) on the Docker named volume <code>questman-data</code>. Backing up means copying that file. With the stack stopped, you can pull it out of the volume like this:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span>questman-data:/data<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">&quot;</span>:/backup<span class="w"> </span>alpine<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>cp<span class="w"> </span>/data/questman.db<span class="w"> </span>/backup/
+</code></pre></div>
+
+<p>Note that <code>docker compose down -v</code> deletes the volume and everything in it, so take a backup before you do that.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li><strong>The day rolls over at the wrong time, or quests look off by a day.</strong> <code>TZ</code> is not set to your real timezone (the Docker default is <code>UTC</code>). Fix it in <code>.env</code> and rebuild.</li>
+<li><strong>The health webhook fails with "CLEARTEXT not permitted" on Android.</strong> Android blocks the app from posting to a plain-HTTP hub. Switch to pull mode: enable the phone app's Local HTTP Server and set <code>HEALTH_PULL_URL</code>. The backend polls the phone, which has no such restriction.</li>
+<li><strong>AI still seems off after adding an API key.</strong> The key alone enables nothing. Open SYS // CALIBRATION, flip the AI master breaker on, enable Quest Synthesis and Handler Uplink, then open the data grants you want.</li>
+<li><strong>AI quietly stopped and quests look generic.</strong> You probably hit the daily token cap, so it fell back to rule-based mode until midnight. Raise the cap in the AI Calibration panel.</li>
+<li><strong>Port 8080 is already in use.</strong> Set <code>WEB_PORT</code> to a free port and rebuild.</li>
+<li><strong>Health pull stops working after a while.</strong> Your phone's LAN IP changed. Give it a DHCP reservation in your router and point <code>HEALTH_PULL_URL</code> at the fixed address. If the phone server has auth on, set <code>HEALTH_PULL_TOKEN</code> to match.</li>
+<li><strong>The first few days feel empty.</strong> That is expected. Insights need about two weeks of data and the weekly debrief needs a full week before they have anything to say.</li>
+<li><strong>"Too many requests" on login.</strong> The auth and ingest endpoints are rate-limited; wait a moment and retry.</li>
+</ul>
+<h2 id="roadmap">Current state and roadmap</h2>
+<p>Questman is functional and feature-rich, not a prototype. I use it daily, and nearly the entire original vision is built: the daily loop and planner, every life module, the two-currency economy with overclock and shop, boss fights, the finance depth, and the opt-in AI layer. It is still actively iterated, and it is not yet turnkey for someone who has never touched Docker.</p>
+<p>Planned, but not shipped yet:</p>
+<ul>
+<li><strong>Easier packaging.</strong> The big one. The plan keeps Docker but adds a thin PWA and a desktop app that bundles the whole hub via Electron, with mobile as a thin client. Right now, setup takes a little elbow grease.</li>
+<li><strong>Backup and export.</strong> A one-button portable export and scheduled snapshots are designed but not built.</li>
+<li><strong>Push notifications</strong> for best-window and bill-due nudges.</li>
+<li><strong>Quick capture.</strong> The app is strong at executing a pre-built day and weaker at capturing new input on the fly. A fast "add to today" affordance is the top usability gap on my list.</li>
+<li><strong>Data pets and avatars</strong>, which are waiting on an image model to generate them.</li>
+</ul>
+<p>A couple of things are deliberately out of scope: direct bank or account integration (I want finance to stay file-upload only) and two-way calendar sync (it stays read-only, because the app should tell you <em>what</em> to do, never <em>when</em>).</p>
+<p>The code is public at <a href="https://github.com/bhinks/questman">github.com/bhinks/questman</a>. Take it, run it, fork it, or tell me what is broken.</p>
+  </article>
+    </main>
+
+    <footer>
+        <p>&copy; ninjabot. Terminal powered by <a href="https://getpelican.com/">Pelican</a></p>
+    </footer>
+
+    <script>
+        // Multi-theme switcher functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Theme definitions
+        const themes = ['neon', 'matrix', 'fallout', 'snowcrash', 'screamsheet', 'aperture', 'wargames', 'vaporwave', 'outrun',  'neuromancer', '2077', 'arasaka', 'militech'];
+        const themeLabels = {
+            'neon': '[NEON MODE]',
+            'matrix': '[MATRIX MODE]',
+            'fallout': '[FALLOUT MODE]',
+            'snowcrash': '[SNOWCRASH MODE]',
+            'screamsheet': '[SCREAMSHEET MODE]',
+            'aperture': '[APERTURE MODE]',
+            'wargames': '[WARGAMES MODE]',
+            'vaporwave': '[VAPORWAVE MODE]',
+            'outrun': '[OUTRUN MODE]',
+            'neuromancer': '[NEUROMANCER MODE]',
+            '2077': '[2077 MODE]',
+            'arasaka': '[ARASAKA MODE]',
+            'militech': '[MILITECH MODE]'
+        };
+
+        // Load saved theme or default to neon. Migrate retired theme names.
+        let currentTheme = localStorage.getItem('theme') || 'neon';
+        const themeMigrations = { 'green': 'matrix', 'amber': 'fallout', 'light': 'snowcrash' };
+        if (themeMigrations[currentTheme]) {
+            currentTheme = themeMigrations[currentTheme];
+        }
+
+        // Apply theme
+        function applyTheme(theme) {
+            if (theme === 'neon') {
+                body.removeAttribute('data-theme');
+            } else {
+                body.setAttribute('data-theme', theme);
+            }
+            themeToggle.textContent = themeLabels[theme];
+            localStorage.setItem('theme', theme);
+            currentTheme = theme;
+        }
+        
+        // Initialize theme
+        applyTheme(currentTheme);
+        
+        // Cycle through themes on click
+        themeToggle.addEventListener('click', () => {
+            const currentIndex = themes.indexOf(currentTheme);
+            const nextIndex = (currentIndex + 1) % themes.length;
+            const nextTheme = themes[nextIndex];
+            applyTheme(nextTheme);
+            if (window.goatcounter && window.goatcounter.count) {
+                window.goatcounter.count({
+                    path: 'theme-switch:' + nextTheme,
+                    title: 'Theme switched to ' + nextTheme,
+                    event: true,
+                });
+            }
+        });
+
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = 'ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const charArray = chars.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            // Matrix rain is the cornerstone of the matrix theme only.
+            const theme = document.body.getAttribute('data-theme');
+            if (theme !== 'matrix') {
+                return;
+            }
+
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const mainColor = getComputedStyle(document.body).getPropertyValue('--main-color').trim();
+            ctx.fillStyle = mainColor;
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = charArray[Math.floor(Math.random() * charArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Random Glitch Effect on Terminal Title
+        const terminalTitle = document.querySelector('.terminal-title');
+        setInterval(() => {
+            if (Math.random() > 0.9) {
+                terminalTitle.classList.add('glitch-text');
+                setTimeout(() => terminalTitle.classList.remove('glitch-text'), 300);
+            }
+        }, 3000);
+
+        // Dynamic System Status
+        const systemMessages = [
+            'SYS: ALL SYSTEMS NOMINAL',
+            'SYS: DEFRAG COMPLETE',
+            'SYS: RUNNING DIAGNOSTICS',
+            'SYS: FIREWALL ACTIVE',
+            'SYS: ENCRYPTION ENABLED',
+            'SYS: MEMORY OPTIMIZED',
+            'SYS: CORES: 8 | LOAD: 42%',
+            'SYS: UPTIME: 47 DAYS',
+            'SYS: ICE PROTOCOLS ACTIVE',
+            'SYS: SCANNING FOR THREATS...',
+            'SYS: NO THREATS DETECTED'
+        ];
+
+        const systemStatus = document.getElementById('system-status');
+        let systemIndex = 0;
+
+        function updateSystemStatus() {
+            systemIndex = (systemIndex + 1) % systemMessages.length;
+            systemStatus.textContent = systemMessages[systemIndex];
+        }
+
+        setInterval(updateSystemStatus, 8000);
+        setTimeout(updateSystemStatus, 1500);
+
+        // Dynamic Network Status
+        const networkMessages = [
+            'NET: LATENCY: 12ms',
+            'NET: BANDWIDTH: 1.2GB/s',
+            'NET: CONNECTED: SECURE',
+            'NET: PACKETS: 0 DROPPED',
+            'NET: NODE: CYBERSPACE-7',
+            'NET: ENCRYPTION: AES-256',
+            'NET: VPN: ACTIVE',
+            'NET: PROXY: ENABLED',
+            'NET: UPLINK: STABLE'
+        ];
+
+        const networkStatus = document.getElementById('network-status');
+        let networkIndex = 0;
+
+        function updateNetworkStatus() {
+            networkIndex = (networkIndex + 1) % networkMessages.length;
+            networkStatus.textContent = networkMessages[networkIndex];
+        }
+
+        setInterval(updateNetworkStatus, 6000);
+        setTimeout(updateNetworkStatus, 2000);
+
+        // Image Click to Enlarge
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.entry-content img, img.headshot');
+            images.forEach(img => {
+                img.addEventListener('click', function() {
+                    this.classList.toggle('expanded');
+                });
+            });
+
+            // Reassemble obfuscated email links so the address never appears verbatim in source.
+            // Parts are stored ROT13-encoded; decode and join with @ at runtime.
+            const rot13 = s => s.replace(/[a-zA-Z]/g, c => {
+                const base = c <= 'Z' ? 65 : 97;
+                return String.fromCharCode((c.charCodeAt(0) - base + 13) % 26 + base);
+            });
+            document.querySelectorAll('[data-email-user][data-email-host]').forEach(el => {
+                const addr = rot13(el.dataset.emailUser) + '@' + rot13(el.dataset.emailHost);
+                const link = document.createElement('a');
+                link.href = 'mailto:' + addr;
+                link.textContent = addr;
+                el.replaceWith(link);
+            });
+        });
+    </script>
+
+    <script data-goatcounter="https://omgninjabot.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
