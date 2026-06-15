@@ -108,8 +108,14 @@
         <ul class="nav-list">
             <li><a href="/">home.sh</a></li>
             <li><a href="/about.html">about.sh</a></li>
-            <li><a href="/cyberdeck.html">cyberdeck.sh</a></li>
-            <li><a href="/questman.html">questman.sh</a></li>
+            <li class="nav-dir">
+                <button class="nav-dir-toggle" type="button" data-dropdown-toggle
+                        aria-expanded="false" aria-controls="projects-menu" aria-haspopup="true">projects/<span class="caret"> ▾</span></button>
+                <ul class="nav-dir-menu" id="projects-menu" hidden>
+                    <li><a href="/cyberdeck.html">cyberdeck.sh</a></li>
+                    <li><a href="/questman.html">questman.sh</a></li>
+                </ul>
+            </li>
             <li class="nav-dir">
                 <button class="nav-dir-toggle" type="button" data-dropdown-toggle
                         aria-expanded="false" aria-controls="games-menu" aria-haspopup="true">games/<span class="caret"> ▾</span></button>
