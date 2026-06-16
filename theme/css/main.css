@@ -1450,9 +1450,11 @@ body[data-theme="screamsheet"]::before {
   text-shadow: 0 0 5px var(--command-color);
 }
 
-.entry-title:before {
-  content: "ninjabot@ghostdeck:~/log$ ";
+/* Terminal prompt prefix on post/page titles. The username comes from the
+   post's Author (rendered in the template), so it is no longer hardcoded here. */
+.entry-prompt {
   color: var(--prompt-color);
+  font-weight: bold;
   text-shadow:
     0 0 5px var(--glow-primary),
     0 0 10px var(--glow-primary);
