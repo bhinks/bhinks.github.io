@@ -2681,32 +2681,36 @@ code {
   text-shadow: 0 0 8px var(--hover-glow);
 }
 
-/* ---- Margin notes: retrospective chat bubbles in the right gutter ---- */
-.noted { position: relative; }
+/* ---- Margin notes: retrospective chat bubbles ----
+   Default layout is inline, in the flow beneath the paragraph they follow, so
+   they degrade gracefully and never overflow. When the column has a wide enough
+   right gutter, JS adds .mn-gutter to .entry-content and floats each bubble into
+   that gutter, stacking them so adjacent bubbles never collide (see base.html). */
 .margin-note {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 232px;
-  margin-left: 2.4rem;
+  position: relative;             /* positioning context for the ::before tail */
+  display: block;
+  width: auto;
+  max-width: 100%;
+  margin: .9em 0 1.5em;
   font: 12px/1.6 'Space Mono', monospace;
   color: color-mix(in srgb, var(--text-color) 90%, var(--main-color));
   background: color-mix(in srgb, var(--main-color) 9%, rgba(0, 0, 0, 0.34));
   border: 1px solid color-mix(in srgb, var(--main-color) 40%, var(--border-color));
-  border-radius: 12px 12px 12px 4px;
+  border-radius: 4px 12px 12px 12px;
   padding: 10px 13px 9px;
   box-shadow: 0 0 14px color-mix(in srgb, var(--glow-primary) 65%, transparent);
 }
+/* inline tail points up toward the paragraph above */
 .margin-note::before {
   content: "";
   position: absolute;
-  left: -7px;
-  top: 15px;
+  left: 18px;
+  top: -7px;
   width: 0;
   height: 0;
   border: 7px solid transparent;
-  border-right-color: color-mix(in srgb, var(--main-color) 40%, var(--border-color));
-  border-left: 0;
+  border-bottom-color: color-mix(in srgb, var(--main-color) 40%, var(--border-color));
+  border-top: 0;
 }
 .margin-note .mn-head {
   display: block;
@@ -2728,20 +2732,27 @@ code {
 }
 .margin-note .mn-date::before { content: "\2301 "; color: var(--main-color); opacity: .7; }
 
-/* not enough gutter — drop the bubble inline beneath its paragraph */
-@media (max-width: 1240px) {
-  .margin-note {
-    position: static;
-    width: auto;
-    max-width: 100%;
-    margin: .7em 0 1.4em;
-    border-radius: 4px 12px 12px 12px;
-  }
-  .margin-note::before {
-    left: 18px;
-    top: -7px;
-    border: 7px solid transparent;
-    border-bottom-color: color-mix(in srgb, var(--main-color) 40%, var(--border-color));
-    border-top: 0;
-  }
+/* Wide layout: float bubbles into the right gutter beside their paragraph.
+   JS sets each bubble's `top` and the container's min-height. */
+.entry-content.mn-gutter { position: relative; }
+.entry-content.mn-gutter .margin-note {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 232px;
+  max-width: none;
+  margin: 0 0 0 14px;
+  border-radius: 12px 12px 12px 4px;
 }
+/* gutter tail points left toward the paragraph beside it */
+.entry-content.mn-gutter .margin-note::before {
+  left: -7px;
+  top: 15px;
+  border: 7px solid transparent;
+  border-right-color: color-mix(in srgb, var(--main-color) 40%, var(--border-color));
+  border-left: 0;
+  border-bottom: 7px solid transparent;
+}
+
+/* Never show margin notes in article-list summaries (homepage, archives, etc.) */
+.entry-summary .margin-note { display: none; }

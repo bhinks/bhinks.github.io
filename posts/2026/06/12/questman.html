@@ -368,16 +368,70 @@
                 p.replaceWith(fig);
             });
 
-            // Pair each margin note with its preceding paragraph so the bubble
-            // can be positioned in the gutter beside it.
-            document.querySelectorAll('.entry-content .margin-note').forEach(note => {
-                const p = note.previousElementSibling;
-                if (!p || p.tagName !== 'P' || p.parentNode.classList.contains('noted')) return;
-                const wrap = document.createElement('div');
-                wrap.className = 'noted';
-                p.parentNode.insertBefore(wrap, p);
-                wrap.appendChild(p);
-                wrap.appendChild(note);
+            // Margin notes: float each retrospective bubble in the right gutter
+            // beside the paragraph it annotates. Bubbles are stacked in document
+            // order and pushed down so adjacent bubbles never collide; preserving
+            // their order matters because they read as a conversation. When the
+            // gutter is too narrow to hold a bubble without overflowing the
+            // content, the whole set falls back to inline flow (the CSS default).
+            document.querySelectorAll('.entry-content').forEach(root => {
+                const items = Array.from(root.querySelectorAll('.margin-note')).map(note => {
+                    // anchor = the element the bubble should sit beside; skip any
+                    // immediately-preceding bubbles so back-to-back notes still
+                    // anchor to the paragraph above them rather than to each other.
+                    let anchor = note.previousElementSibling;
+                    while (anchor && anchor.classList.contains('margin-note')) {
+                        anchor = anchor.previousElementSibling;
+                    }
+                    return { note, anchor };
+                });
+                if (!items.length) return;
+
+                const GAP = 16; // minimum vertical space between stacked bubbles
+
+                const layoutNotes = () => {
+                    // Reset to the inline default so we can measure cleanly.
+                    root.classList.remove('mn-gutter');
+                    root.style.minHeight = '';
+                    items.forEach(({ note }) => { note.style.top = ''; });
+
+                    // Only float into the gutter if a bubble fits there without
+                    // crossing the body's inner content edge.
+                    root.classList.add('mn-gutter');
+                    const probe = items[0].note;
+                    const need = probe.offsetWidth + parseFloat(getComputedStyle(probe).marginLeft);
+                    const bodyStyle = getComputedStyle(document.body);
+                    const bodyInnerRight = document.body.getBoundingClientRect().right
+                        - parseFloat(bodyStyle.paddingRight)
+                        - parseFloat(bodyStyle.borderRightWidth);
+                    if (root.getBoundingClientRect().right + need > bodyInnerRight) {
+                        root.classList.remove('mn-gutter');
+                        items.forEach(({ note }) => { note.style.top = ''; });
+                        return;
+                    }
+
+                    // Stack the bubbles in order, each beside its anchor but never
+                    // overlapping the bubble before it.
+                    const base = root.getBoundingClientRect().top;
+                    let floor = 0;
+                    items.forEach(({ note, anchor }) => {
+                        const desired = anchor
+                            ? anchor.getBoundingClientRect().top - base
+                            : floor;
+                        const top = Math.max(desired, floor);
+                        note.style.top = top + 'px';
+                        floor = top + note.offsetHeight + GAP;
+                    });
+                    // Keep the column tall enough to contain pushed-down bubbles.
+                    if (floor > root.offsetHeight) root.style.minHeight = floor + 'px';
+                };
+
+                layoutNotes();
+                window.addEventListener('resize', layoutNotes);
+                window.addEventListener('load', layoutNotes);
+                if (document.fonts && document.fonts.ready) {
+                    document.fonts.ready.then(layoutNotes);
+                }
             });
 
             const images = document.querySelectorAll('.entry-content img, img.headshot');
