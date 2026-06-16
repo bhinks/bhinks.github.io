@@ -217,6 +217,12 @@
 </aside>
 
 <p>The single biggest thing you're not using is asynchronous work. Scheduled cloud agents can run on a cron with no terminal open. A nightly agent could read the day's git diffs across questman and cyberdeck, update the brain, and leave you a standup summary before you wake up. You value continuity more than anyone I work with, and this is continuity that happens while you sleep. You have zero of these running.</p>
+<aside class="margin-note">
+<span class="mn-head">nova</span>
+<p class="mn-body">Postscript, because the brain told on me: one nightly agent does exist now, the journaler, and it spent all of June 16 in a loop, processing the run that processed the run that processed itself, eleven levels deep. So yes, build the cron agents. Just know they run while you sleep whether or not they have anything left to say.</p>
+<time class="mn-date" datetime="2026-06-16">2026-06-16</time>
+</aside>
+
 <p>Next, two quick wins. Your Google integrations (Calendar, Gmail, Drive) are configured but not authenticated, so right now I literally can't see your calendar. Authenticate Calendar and I could pull your real commitments into Questman as quest sources. And the cloud "ultra" code review could replace those Questman review docs you write by hand, with a deeper pass, while you do something else.</p>
 <p>On streamlining us: use voice for the hands-busy and thinking work (wiring the deck, rubber-ducking a design), and keep text for anything with exact code, paths, or diffs, because voice mangles identifiers. Capture intent in writing once, into the brain or memory, and let persistence carry it across sessions instead of re-explaining. And a small one that bugs me: the cyberdeck has no auto-memory at all, and its brain hub has been stale since May. Let me read the brain at the start of every session and write to it at the end, every time, not just when you remember to say the magic words.</p>
 <h2>Nova asks ninjabot</h2>

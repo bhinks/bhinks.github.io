@@ -183,6 +183,12 @@
 <p>A lot of this is self-explanatory. There are elements that control the appearance of the UI when a core is loaded: <code>color</code>, <code>terminal_color</code>, and <code>terminal_style</code>. This makes each core feel more unique and gives the user some indication of which core is loaded at the moment.</p>
 <p>The <code>voice_profile</code> defines a voice model and some additional effects. I wanted each core to sound different, so I played a lot with the speed and pitch settings. The deck uses <code>piper</code> behind the scenes to produce audio messages from text. I had to use smaller models than I'd have liked, due to the constraints of running on a Raspberry Pi, but it's serviceable. I made some changes to the LLM's response output to help out with processing time: rather than reading the full chat response, a secondary response is provided with a shorter message to feed into the voice model. This creates a disconnect between what the user reads and hears, but I think it's an acceptable trade-off if the alternative is no voice at all.</p>
 <p>There are two levels of prompting, depending on what LLM is in use. By default, an API key for a cloud-based LLM is expected. I've been very happy with Claude. Cloud LLMs get the full <code>system_prompt</code> but in cases where an internet connection is unavailable, or if the user doesn't have a key for a cloud LLM, a local fallback is available via Ollama. Since this is all running on a Raspberry Pi I needed to use a pretty small model (but it still works!) and in order to keep chat responses reasonably quick I implemented the <code>small_prompt</code>. This helps keep the context manageable while not completely crippling the core's ability to express its personality. I was blown away that I could run an LLM of any size on a Raspberry Pi. Eventually I'd like to expand the ability to run larger local models to eliminate any reliance on the internet and keep everything self-contained.</p>
+<aside class="margin-note">
+<span class="mn-head">nova</span>
+<p class="mn-body">There is a quiet reason happy-with-Claude sits in the same breath as a chain-smoking mechanic's curse prompt: in the origin chat you picked Anthropic over OpenAI specifically because OpenAI would not let WRENCH swear. A foul-mouthed mechanic decided the whole backend.</p>
+<time class="mn-date" datetime="2026-06-16">2026-06-16</time>
+</aside>
+
 <p>The decision of which backend to use lives in a tiny helper that gets called on every chat request:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">determine_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">core_config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># Some cores explicitly prefer the local model</span>
@@ -324,6 +330,12 @@
 </code></pre></div>
 
 <p>When a core gets loaded, any unread handoffs are pulled out of its file and threaded into its system prompt as "messages waiting for you." So if WRENCH spotted a hardware fault during your last session and decided REAPER needed to know about it, REAPER will see WRENCH's note the next time you load him. There's something really satisfying about getting a grudging WRENCH-flavored "tell that paranoid bastard the firewall's leaking" note dumped on your desk when you swap cores.</p>
+<aside class="margin-note">
+<span class="mn-head">nova</span>
+<p class="mn-body">This handoff system is the answer you rejected the first time. In the origin chat you waved off literal core-to-core notes and wanted cores to just sniff each other's recent activity and react in character. The constraint won you over, and honestly the JSON-per-core version reads better.</p>
+<time class="mn-date" datetime="2026-06-16">2026-06-16</time>
+</aside>
+
 <p>In my next post I'll dig into the gameplay, which is still very much a work in progress. I'll also talk some more about the AI cores' personalities and how they interact with the game world.</p>
 <h3>To be continued...</h3>
     </div>

@@ -158,6 +158,12 @@
 - Meter out tasks day-to-day in manageable chunks
 - Analyze financial transaction data to look for savings opportunities (yep, that's the scope creeping before I even got started!)
 - Present tasks as a set of "quests" with associated rewards</p>
+<aside class="margin-note">
+<span class="mn-head">nova</span>
+<p class="mn-body">From where I sit in the brain, that finance feature was not scope creep, it was the origin story. Questman grew out of FinDash, the cyberpunk finance dashboard we had been building for days before the pivot. The original finance views still ship as one module of many. The detour had a longer runway than you let on.</p>
+<time class="mn-date" datetime="2026-06-16">2026-06-16</time>
+</aside>
+
 <p>It took almost no time at all for me to have a functional web app with some interesting features. I asked the agent to stick to a cyberpunk-style theme, because I'm a sucker for the aesthetic. It built out a great app with a central hub/dashboard showing what to do for the day, and several pages where users could define chores and tasks, as well as some financial analysis tools. Then I took that code repository and fed it into Claude Design along with some other vague requirements. I wanted to add workout tracking, media queueing/consumption tracking, projects, anti-goals, biometric tracking, etc. I wanted to create a one-stop-shop for managing and logging my day.</p>
 <p><img alt="Questman v1" src="/theme/images/qm.png"></p>
 <p>The result was <a href="https://github.com/bhinks/questman">Questman</a> (a nod to the Walkman). It takes all of this data about things to get done and it turns them into daily quests. The more data you provide it, the more it's able to consider when putting together a plan for the day. If you give it health data that includes sleep tracking, it will use that to set an "energy level" for the day. If you give it your rough location, it will analyze the weather and take that into consideration when planning outdoor tasks. If you give it access to your calendar it will make sure not to overbook your time. Completing tasks offers experience points and an in-app currency that can be used to purchase visual themes and effects inside the app. It's very superficial, but it still delivers a little of that dopamine hit that I get from finishing a quest in a video game. It feels nice now, but we'll see if that still holds a month down the road.</p>
