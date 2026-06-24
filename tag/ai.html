@@ -451,6 +451,87 @@
                 p.replaceWith(fig);
             });
 
+            // Auto table of contents: for any article body with more than four
+            // headings, build a nav of links to each heading and place it in the
+            // left gutter. We wrap the prose in a .article-body grid so the nav
+            // can occupy that gutter; the CSS makes it sticky on wide screens and
+            // snaps it above the content on narrow ones. Headings without an id
+            // (everything but the hand-anchored Questman page) get a slug so the
+            // links resolve. Runs before the margin-note layout below so that code
+            // measures the final, wrapped geometry.
+            document.querySelectorAll('.entry-content').forEach(content => {
+                // Wide, data-heavy pages (the games table) keep their full measure
+                // and have no use for a margin TOC.
+                if (content.classList.contains('entry-wide')) return;
+                const headings = Array.from(content.querySelectorAll('h2, h3'))
+                    .filter(h => !h.closest('.margin-note'));
+                if (headings.length <= 4) return;
+
+                const slugify = text => text.toLowerCase().trim()
+                    .replace(/[^\w\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-');
+                const seen = new Set();
+                headings.forEach(h => {
+                    if (!h.id) {
+                        const base = slugify(h.textContent) || 'section';
+                        let id = base, n = 2;
+                        while (seen.has(id) || document.getElementById(id)) { id = base + '-' + n++; }
+                        h.id = id;
+                    }
+                    seen.add(h.id);
+                });
+
+                const nav = document.createElement('nav');
+                nav.className = 'page-toc';
+                nav.setAttribute('aria-label', 'Table of contents');
+                const head = document.createElement('span');
+                head.className = 'toc-head';
+                head.textContent = 'Contents';
+                nav.appendChild(head);
+                const list = document.createElement('ul');
+                headings.forEach(h => {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = '#' + h.id;
+                    a.textContent = h.textContent;
+                    if (h.tagName === 'H3') a.classList.add('toc-h3');
+                    li.appendChild(a);
+                    list.appendChild(li);
+                });
+                nav.appendChild(list);
+
+                const wrap = document.createElement('div');
+                wrap.className = 'article-body';
+                content.parentNode.insertBefore(wrap, content);
+                wrap.appendChild(nav);
+                wrap.appendChild(content);
+
+                // Scrollspy: highlight the link for the section currently in view.
+                if ('IntersectionObserver' in window) {
+                    const links = new Map();
+                    nav.querySelectorAll('a').forEach(a =>
+                        links.set(a.getAttribute('href').slice(1), a));
+                    const inView = new Set();
+                    let activeId = null;
+                    const observer = new IntersectionObserver(entries => {
+                        entries.forEach(e => {
+                            if (e.isIntersecting) inView.add(e.target.id);
+                            else inView.delete(e.target.id);
+                        });
+                        const current = headings.find(h => inView.has(h.id));
+                        if (current && current.id !== activeId) {
+                            if (activeId && links.get(activeId)) {
+                                links.get(activeId).classList.remove('toc-active');
+                            }
+                            activeId = current.id;
+                            links.get(activeId).classList.add('toc-active');
+                        }
+                    }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+                    headings.forEach(h => observer.observe(h));
+                }
+            });
+
             // Margin notes: float each retrospective bubble in the right gutter
             // beside the paragraph it annotates. Bubbles are stacked in document
             // order and pushed down so adjacent bubbles never collide; preserving

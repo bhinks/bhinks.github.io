@@ -2756,3 +2756,91 @@ code {
 
 /* Never show margin notes in article-list summaries (homepage, archives, etc.) */
 .entry-summary .margin-note { display: none; }
+
+/* ---- Auto table of contents: sticky left-gutter nav ----
+   When a page has more than four headings, JS (see base.html) wraps the prose
+   in .article-body (a three-column grid: left gutter / content / right gutter)
+   and injects .page-toc into the left gutter. The nav sticks in view as you
+   scroll on wide screens; on narrow ones it collapses to a block above the
+   content. Pages without a generated TOC keep the plain centered .entry-content,
+   and the right gutter stays free for margin notes. */
+.article-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  column-gap: 24px;
+}
+.article-body > .entry-content { grid-column: 2; }
+
+.page-toc {
+  grid-column: 1;
+  justify-self: end;
+  box-sizing: border-box;
+  position: sticky;
+  top: 20px;
+  width: 210px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  margin: .3em 0 1.5em;
+  padding: 12px 14px 14px;
+  font: 12px/1.6 'Space Mono', monospace;
+  background: color-mix(in srgb, var(--main-color) 7%, rgba(0, 0, 0, 0.38));
+  border: 1px solid color-mix(in srgb, var(--main-color) 40%, var(--border-color));
+  border-radius: 4px;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--glow-primary) 60%, transparent);
+}
+.page-toc .toc-head {
+  display: block;
+  margin: 0 0 9px;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  color: var(--main-color);
+  text-shadow: 0 0 6px var(--glow-primary);
+}
+.page-toc .toc-head::before { content: "\258C "; opacity: .7; }   /* ▌ */
+.page-toc ul { list-style: none; margin: 0; padding: 0; }
+.page-toc li { margin: 0; }
+.page-toc a {
+  display: block;
+  padding: 3px 7px;
+  color: color-mix(in srgb, var(--text-color) 88%, var(--main-color));
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  border-radius: 0 3px 3px 0;
+  transition: color .15s ease, background .15s ease, border-color .15s ease;
+}
+.page-toc a:hover,
+.page-toc a:focus {
+  color: var(--pop-color);
+  background: color-mix(in srgb, var(--main-color) 12%, transparent);
+  border-left-color: var(--main-color);
+}
+.page-toc a.toc-h3 { padding-left: 22px; font-size: 11px; opacity: .88; }
+.page-toc a.toc-active {
+  color: var(--pop-color);
+  background: color-mix(in srgb, var(--main-color) 15%, transparent);
+  border-left-color: var(--main-color);
+}
+
+/* Headings get breathing room from the viewport top when jumped to via TOC. */
+.entry-content h2,
+.entry-content h3 { scroll-margin-top: 20px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* Below the width where three columns fit (content measure + sticky TOC +
+   a right gutter for margin notes), drop the grid and snap the TOC above. */
+@media only screen and (max-width: 1340px) {
+  .article-body { display: block; }
+  .page-toc {
+    position: static;
+    width: auto;
+    max-width: 74ch;
+    max-height: none;
+    margin: 0 auto 1.8em;
+  }
+}
